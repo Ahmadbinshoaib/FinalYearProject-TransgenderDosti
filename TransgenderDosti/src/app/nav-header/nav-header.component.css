@@ -1,0 +1,108 @@
+a.navbar-brand {
+    padding-left: 65px;
+    font-family: 'Karla', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+
+
+}
+
+nav {
+    background-color: #7281FF;
+
+}
+
+
+/* Add this to your CSS */
+.btn-white-stroke {
+    color: white;
+    /* Set text color to white */
+    border-color: white;
+    /* Set border color to white */
+
+    border-radius: 35px;
+}
+
+/* Optional: Add hover and focus styles */
+.btn-white-stroke:hover,
+.btn-white-stroke:focus {
+    color: rgb(255, 255, 255);
+    background-color: #7281FF;
+    /* Change text color on hover/focus */
+    border-color: rgb(255, 255, 255);
+    /* Change border color on hover/focus */
+}
+
+.fontstyle {
+    font-family: 'Karla', sans-serif;
+    font-size: 13px;
+    font-weight: lighter;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 20px;
+
+}
+
+button.btn.btn-outline-secondary.btn-white-stroke.fontstyle {
+    padding-left: 15px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-right: 10px;
+}
+
+
+
+
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+    a.navbar-brand {
+        padding-left: 10px;
+        /* Adjust the padding for smaller screens */
+    }
+
+    button#\ dropdownMenuButton {
+        padding-left: 0px;
+    }
+
+    button.btn.btn-outline-secondary.btn-white-stroke.fontstyle {
+        margin-bottom: 10px;
+    }
+
+    .fontstyle {
+        margin-left: 10px;
+    }
+}
+
+
+@media (max-width: 992px) {
+    a.navbar-brand {
+        padding-left: 10px;
+        /* Adjust the padding for smaller screens */
+    }
+
+    button#\ dropdownMenuButton {
+        padding-left: 0px;
+    }
+
+    button.btn.btn-outline-secondary.btn-white-stroke.fontstyle {
+        margin-bottom: 10px;
+    }
+
+    .fontstyle {
+        margin-left: 10px;
+    }
+
+}
+
+/* Moving to right */
+.navbar-nav.ml-auto {
+    display: flex;
+    align-items: center;
+}
+
+.content {
+    margin-left: auto;
+    padding-right: 30px;
+}

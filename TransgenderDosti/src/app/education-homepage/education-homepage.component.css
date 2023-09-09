@@ -1,0 +1,234 @@
+.border {
+    background-color: #7281FF;
+}
+
+.herotext {
+    color: #ffffff;
+    font-family: Karla;
+    font-size: 60px;
+    font-weight: 800;
+    line-height: normal;
+
+}
+
+.herocontent {
+
+    color: #ffffff;
+    font-family: Karla;
+    font-size: 17px;
+    font-style: normal;
+    font-weight: lighter;
+    line-height: 0%;
+
+}
+
+.custom-btn {
+    color: black;
+    font-weight: 400;
+    background-color: white;
+    border: 1px solid rgb(255, 255, 255);
+    border-radius: 30px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    padding-left: 25px;
+    padding-right: 25px;
+    /* Adding a border to match the grey background on hover/focus */
+    transition: background-color 0.3s ease;
+    /* Adding a smooth transition effect */
+}
+
+.custom-btn:hover,
+.custom-btn:focus {
+    background-color: rgb(238, 238, 238);
+    border: 1px solid rgb(238, 238, 238);
+}
+
+.image-container {
+    position: relative;
+    display: inline-block;
+    /* Adjust this display value if needed */
+}
+
+.overlay-image {
+    position: absolute;
+    top: 30%;
+    /* Adjust vertical position */
+    left: 40%;
+    /* Adjust horizontal position */
+    transform: translate(-50%, -50%);
+}
+
+.image-container {
+    position: relative;
+    display: inline-block;
+}
+
+.overlay-image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+
+
+
+
+@media (max-width: 1200px) {
+    .herotext {
+
+        font-size: 53px;
+
+
+    }
+
+
+}
+
+@media (max-width: 576px) {
+
+    /* Adjust the breakpoint as needed */
+    .noneed {
+        display: none;
+    }
+
+    .herotext {
+
+        font-size: 40px;
+
+
+    }
+
+    .herocontent {
+
+
+        font-size: 13px;
+
+
+    }
+
+    .custom-btn {
+
+        font-weight: 400;
+        padding-top: 12px;
+        padding-bottom: 12px;
+        padding-left: 18px;
+        padding-right: 18px;
+        /* Adding a border to match the grey background on hover/focus */
+        transition: background-color 0.3s ease;
+        /* Adding a smooth transition effect */
+    }
+}
+
+
+
+
+/* .accordion-button {
+    display: none;
+} */
+
+/* Styling for smaller screens */
+/* @media (max-width: 767px) {
+    .accordion-button {
+        display: block;
+    }
+} */
+
+/* Accordoin CSS */
+.accordion-button {
+    background-color: #7281FF;
+    color: white;
+    font-weight: 600;
+
+}
+
+.no-border {
+    border: none;
+}
+
+/* WHy Trasngender Dosti*/
+.wtd {
+    padding-top: 40px;
+    color: #5D5959;
+    font-family: Karla;
+    font-size: 45px;
+    font-weight: 800;
+    line-height: normal;
+}
+
+.br {
+    border: 1px solid black;
+}
+
+.wtdtext {
+
+    width: 269.476px;
+    height: 34.715px;
+    transform: rotate(4deg);
+    flex-shrink: 0;
+    border-radius: 0px 10px;
+    background: rgba(210, 150, 40, 0.21);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+}
+
+.wtdtext2 {
+
+    width: 269.476px;
+    height: 34.715px;
+    transform: rotate(4deg);
+    flex-shrink: 0;
+    border-radius: 0px 10px;
+    background: rgba(120, 71, 62, 0.21);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+}
+
+.wtdtext3 {
+
+    width: 269.476px;
+    height: 34.715px;
+    transform: rotate(4deg);
+    flex-shrink: 0;
+    border-radius: 0px 10px;
+    background: rgba(145, 20, 33, 0.21);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+}
+
+.wtdtextspan {
+
+    /* Ensure the span wraps the text */
+    transform: rotate(-4deg);
+    /* Counteract the parent div's rotation */
+    color: #5D5959;
+    font-family: Karla;
+    font-size: 19px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    display: block;
+    /* To take full width and center-align text */
+    text-align: center;
+}
+
+.wtdsubtext {
+    color: #787575;
+    text-align: center;
+    font-family: Karla;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 100;
+    line-height: normal;
+}
