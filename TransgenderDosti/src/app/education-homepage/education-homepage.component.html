@@ -204,25 +204,63 @@
         </h2>
         <div [id]="isLargeScreen ? null : 'panelsStayOpen-collapseTwo'"
             [ngClass]="{'accordion-collapse': isLargeScreen, 'collapse': !isLargeScreen, 'show': isLargeScreen}">
-            <div class="accordion-body">
+            <div class="accordion-body" style="border: none;">
 
 
                 <!-- Teacher's section start here -->
 
-                <div class="row">
-                    <div class="col-6">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae quis ipsa provident quidem
-                        repellat a qui necessitatibus excepturi animi nulla? Molestiae commodi, distinctio illo sunt
-                        maxime repellat tenetur similique odit? Corrupti quo voluptatibus provident inventore
-                        dignissimos suscipit laborum deserunt deleniti amet pariatur tenetur hic doloribus adipisci,
-                        recusandae nulla, praesentium ipsum natus quos tempora similique eligendi voluptatem repudiandae
-                        officia possimus. Porro in debitis, similique soluta laudantium unde natus iusto aliquam ut
-                        exercitationem animi ex quo accusamus rerum culpa impedit voluptates itaque odit ducimus,
-                        repellendus dolorum id corporis. Repudiandae porro atque molestiae quos expedita animi voluptas
-                        aut ab obcaecati ut! Accusamus, rerum.
+                <div class="row teach">
+
+                    <div class="col-sm-2 col-md-4 col-lg-6 teacherimg">
+
                     </div>
-                    <div class="col-6">
-                        lior
+
+                    <div class="col-sm-10 col-md-6 col-lg-6 teachertext">
+                        <div class="row">
+                            <span class="ttxt">TEACHERS</span>
+                        </div>
+
+                        <div class="row" style="position: relative; margin-left: 10px; margin-top: 35px;">
+                            <div style="position: absolute; top: 0; left: 0;">
+                                <img src="assets/line1.svg" alt="SVG Image">
+                            </div>
+                            <div style="position: absolute; top: 0; left: 5px;">
+                                <img src="assets/line6.svg" alt="SVG Image">
+                            </div>
+                            <div style="position: absolute; top: 0; left: 0;">
+                                <img src="assets/line8.svg" alt="SVG Image">
+                            </div>
+                            <div style="position: absolute; top: 0; left: 0;">
+                                <img src="assets/line9.svg" alt="SVG Image">
+                            </div>
+                        </div>
+
+                        <div class="row" style="padding-top: 30px; padding-left: 18px;">
+                            <span class="teacherstxt" style="line-height: 0%;"> Guiding Lights </span>
+                            <span class="teacherstxt"> of Transformation </span>
+                        </div>
+
+                        <div class="row">
+                            <img class="timg" src="assets/tline.svg" alt="SVG Image">
+
+                        </div>
+
+                        <div class="row" style="padding-right: 20px; padding-top: 35px; padding-left: 20px;">
+                            <span class="teachercontent">
+                                Teachers stand as beacons of inspiration, shaping a brighter future through dedicated
+                                expertise and education.
+                            </span>
+                        </div>
+
+                        <div style="padding-top: 37px; padding-left: 20px;">
+                            <button type="button" class="btn custombtn2" style="margin-right: 10px; ">Teachers, start
+                                here</button>
+
+                        </div>
+
+
+
+
                     </div>
                 </div>
             </div>
@@ -243,8 +281,106 @@
         <div [id]="isLargeScreen ? null : 'panelsStayOpen-collapseThree'"
             [ngClass]="{'accordion-collapse': isLargeScreen, 'collapse': !isLargeScreen, 'show': isLargeScreen}">
             <div class="accordion-body">
-                <strong>This is the first item's accordion body.</strong> <!-- ... rest of the content ... -->
+                <!--Learners section start here-->
+                <div class="row teach">
+
+
+
+                    <div class="col-sm-10 col-md-6 col-lg-6 learnertext">
+                        <div class="row">
+                            <span class="ttxt">LEARNERS</span>
+                        </div>
+
+                        <div class="row" style="position: relative; margin-left: 10px; margin-top: 35px;">
+                            <div style="position: absolute; top: 0; left: 0;">
+                                <img src="assets/line1.svg" alt="SVG Image">
+                            </div>
+                            <div style="position: absolute; top: 0; left: 5px;">
+                                <img src="assets/line6.svg" alt="SVG Image">
+                            </div>
+                            <div style="position: absolute; top: 0; left: 0;">
+                                <img src="assets/line8.svg" alt="SVG Image">
+                            </div>
+                            <div style="position: absolute; top: 0; left: 0;">
+                                <img src="assets/line9.svg" alt="SVG Image">
+                            </div>
+                        </div>
+
+                        <div class="row" style="padding-top: 30px; padding-left: 18px;">
+                            <span class="teacherstxt" style="line-height: 0%;"> Architects of </span>
+                            <span class="teacherstxt"> Empowerment </span>
+                        </div>
+
+                        <div class="row">
+                            <img class="limg" src="assets/vector10.svg" alt="SVG Image">
+
+                        </div>
+
+                        <div class="row" style="padding-right: 20px; padding-top: 35px; padding-left: 20px;">
+                            <span class="teachercontent">
+                                Teachers stand as beacons of inspiration, shaping a brighter future through dedicated
+                                expertise and education.
+                            </span>
+                        </div>
+
+                        <div style="padding-top: 37px; padding-left: 20px;">
+                            <button type="button" class="btn custombtn3" style="margin-right: 10px; ">Teachers, start
+                                here</button>
+
+                        </div>
+
+
+
+
+
+
+                    </div>
+                    <div class="col-sm-2 col-md-4 col-lg-6 learnerimg">
+
+                    </div>
+                </div>
             </div>
         </div>
+    </div>
+
+
+    <!-- Sign up for transgender dosti updates-->
+    <div class="signUpUpdates">
+
+
+        <div class="row updates">
+            <div class="col-sm-2 col-md-2 col-lg-2">
+                <img class="uimg" src="assets/vector16.svg" alt="SVG Image">
+            </div>
+            <div class="col-sm-7 col-md-7 col-lg-7 text-center">
+                <div class="signupText" style="padding-top: 30px; padding-bottom: 5px;">
+                    Sign Up for
+                </div>
+                <div class="signupText">
+                    Transgender Dosti updates
+                </div>
+
+                <div class="signupContent">
+                    Access our daily updated and get embarked with.
+                </div>
+                <div class="row justify-content-center" style="padding-top: 40px;">
+
+
+                    <div class="custom-input-group" style="width: 250px;">
+                        <input type="text" class="form-control custom-input" placeholder="Type your email...">
+                        <div class="custom-icon">
+                            <i class="fa-solid fa-arrow-right fa-shake"></i>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-sm-3 col-md-3 col-lg-3">
+                <div> <img class="uimg2" src="assets/vector17.svg" alt="SVG Image"> </div>
+            </div>
+
+
+        </div>
+
     </div>
 </div>
