@@ -1,0 +1,117 @@
+.main-container {
+    border-radius: 50px;
+    background: #FFF;
+
+}
+
+.container {
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.image {
+    margin: 17px;
+    width: 526px;
+    height: 530px;
+    flex-shrink: 0;
+    border-radius: 50px;
+    background: url('/assets/authentication.jpg');
+    background-repeat: repeat;
+    background-size: 50% 50%;
+    opacity: 0.7;
+
+}
+
+
+
+.text {
+    color: #606060;
+    font-family: Karla;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    padding-top: 40px;
+    padding-left: 65px;
+}
+
+.text2 {
+    color: #606060;
+    font-family: Karla;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    padding-left: 65px;
+    padding-top: 11px;
+}
+
+.auth {
+    width: 158px;
+    height: 41px;
+    flex-shrink: 0;
+    border-radius: 15px;
+    border: 1px solid #E4E2E2;
+    background: #FFF;
+
+}
+
+.authr {
+    padding-left: 65px;
+    padding-top: 30px;
+}
+
+.liltext {
+    color: #606060;
+    font-family: Karla;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    padding-top: 14px;
+
+
+}
+
+.line {
+    margin-left: 66px;
+    width: 187px;
+    height: 1px;
+    background: #E4E2E2;
+}
+
+
+
+
+
+
+
+@media (max-width: 1200px) {
+    .image {
+        margin: 17px;
+        width: 436px;
+        height: 530px;
+
+    }
+
+}
+
+@media (max-width: 990px) {
+    .image {
+        margin: 17px;
+        width: 315px;
+        height: 530px;
+
+    }
+
+}
+
+@media (max-width: 770px) {
+    .image {
+        margin: 17px;
+        width: 227px;
+        height: 530px;
+
+    }
+
+}

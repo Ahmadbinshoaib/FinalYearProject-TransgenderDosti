@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { EducationHomepageComponent } from './education-homepage/education-homepage.component';
 import { BusinessHomepageComponent } from './business-homepage/business-homepage.component';
+import { UserAuthenticationComponent } from './user-authentication/user-authentication.component';
 
 const routes: Routes = [
 
@@ -15,6 +16,10 @@ const routes: Routes = [
   },
 
   { path: '', redirectTo: '/educationhomepage', pathMatch: 'full' },
+  {
+    path: 'user-authentication', component: UserAuthenticationComponent
+  },
+
 
 
 

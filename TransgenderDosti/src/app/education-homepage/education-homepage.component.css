@@ -414,31 +414,176 @@
     padding-left: 58px;
 }
 
+/* Add this CSS to your stylesheet */
 
+.image-wrap {
+    position: relative;
+    overflow: hidden;
+}
 
+.image {
+    animation: beat 1s infinite alternate ease-in-out;
+    /* Add the beat animation */
+    transform-origin: center;
+}
 
+@keyframes beat {
+    0% {
+        transform: scale(1);
+    }
 
+    100% {
+        transform: scale(1.1);
+        /* Scale up by 10% at the maximum point of the animation */
+    }
+}
 
+/* Add this CSS to your stylesheet */
 
+.fade-in-column {
+    opacity: 0;
+    /* Set initial opacity to 0 (invisible) */
+    animation: fadeIn 2s ease-in-out forwards;
+    /* Apply the fadeIn animation */
+}
 
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
 
+    100% {
+        opacity: 1;
+        /* At the end of the animation, set opacity to 1 (fully visible) */
+    }
+}
 
+/* Add this CSS to your stylesheet */
 
+.beat {
+    animation: beat 1s infinite alternate ease-in-out;
+    /* Add the beat animation */
+    transform-origin: center;
+}
 
+@keyframes beat {
+    0% {
+        transform: scale(1);
+    }
 
+    100% {
+        transform: scale(1.1);
+        /* Scale up by 10% at the maximum point of the animation */
+    }
+}
 
+/* Add this CSS to your stylesheet */
 
+.spin {
+    animation: spin 2s linear infinite;
+    animation-delay: 5s;
+    /* Add the spin animation */
+}
 
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+        /* Start at 0 degrees rotation */
+    }
 
+    100% {
+        transform: rotate(360deg);
+        /* Rotate 360 degrees (one full circle) */
+    }
+}
 
+/* Add this CSS to your stylesheet */
 
+.spin-pause-delay {
+    animation: spinPauseDelay 13s linear infinite;
+    /* Total duration of 13 seconds (3 seconds spin, 5 seconds gap, 5 seconds delay) */
+}
 
+@keyframes spinPauseDelay {
+    0% {
+        transform: rotate(0deg);
+        /* Start at 0 degrees rotation */
+    }
 
+    30% {
+        transform: rotate(360deg);
+        /* Rotate 360 degrees (one full circle) at 30% keyframe (3 seconds) */
+    }
 
+    35% {
+        transform: rotate(360deg);
+        /* Pause for 5 seconds at 35% keyframe (3 seconds spin + 5 seconds pause) */
+    }
 
+    100% {
+        transform: rotate(360deg);
+        /* Stay paused for the remaining 5 seconds */
+    }
+}
 
+.spin-pause-delay {
+    animation-delay: 5s;
+    /* Delay the animation start by 5 seconds */
+}
 
+/* Add this CSS to your stylesheet */
 
+@keyframes swim {
+    0% {
+        transform: translateX(0);
+        /* Start position */
+    }
+
+    50% {
+        transform: translateX(20px);
+        /* Middle position, adjust as needed */
+    }
+
+    100% {
+        transform: translateX(0);
+        /* End position, same as start */
+    }
+}
+
+.swimming-animation {
+    animation: swim 2s linear infinite;
+    /* Adjust the animation duration as needed */
+    display: inline-block;
+    white-space: nowrap;
+    /* Prevent line breaks */
+}
+
+/* Add this CSS to your stylesheet */
+
+@keyframes swim2 {
+    0% {
+        transform: translateX(0);
+        /* Start position */
+    }
+
+    50% {
+        transform: translateX(-20px);
+        /* Middle position, adjust as needed */
+    }
+
+    100% {
+        transform: translateX(0);
+        /* End position, back to start */
+    }
+}
+
+.swimming-animation2 {
+    animation: swim2 2s linear infinite;
+    /* Adjust the animation duration as needed */
+    display: inline-block;
+    white-space: nowrap;
+    /* Prevent line breaks */
+}
 
 
 
