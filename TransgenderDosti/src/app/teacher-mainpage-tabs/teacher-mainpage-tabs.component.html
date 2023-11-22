@@ -1,0 +1,241 @@
+<div class="welcomeUsername">
+    <img src="assets/username.png" alt="Book Image" style="margin-right: 0px;">
+    <span style="padding-top: 10px;">
+        <span class="welcomeusernamecontent">
+            Welcome, username123!
+        </span>
+    </span>
+</div>
+
+
+<ul class="nav nav-tabs mb-3" id="ex1" role="tablist" style="padding-left: 63px;">
+    <li class="nav-item" role="presentation">
+        <a class="nav-link" style="cursor: pointer;" [class.active]="activeTab === 'ex1-tabs-1'"
+            (click)="activeTab = 'ex1-tabs-1'">
+            <span class="tab-label">Courses</span>
+        </a>
+    </li>
+    <li class="nav-item" role="presentation">
+        <a class="nav-link" style="cursor: pointer;" [class.active]="activeTab === 'ex1-tabs-2'"
+            (click)="activeTab = 'ex1-tabs-2'">
+            <span class="tab-label">Students</span>
+        </a>
+    </li>
+    <li class="nav-item" role="presentation">
+        <a class="nav-link" style="cursor: pointer;" [class.active]="activeTab === 'ex1-tabs-3'"
+            (click)="activeTab = 'ex1-tabs-3'">
+            <span class="tab-label">Earnings</span>
+        </a>
+    </li>
+</ul>
+
+
+<div class="tab-content" id="ex1-content" style="padding-left: 52px; padding-top: 15px;">
+
+    <!-- Courses -->
+    <!-- Courses -->
+    <!-- Courses -->
+    <!-- Courses -->
+
+    <div class="tab-pane" [class.active]="activeTab === 'ex1-tabs-1'" id="ex1-tabs-1" role="tabpanel"
+        aria-labelledby="ex1-tab-1">
+
+        <div class="container-fluid">
+            <div class="row">
+                <!-- Left Side -->
+                <!-- Left Side -->
+                <div class="col-sm-12 col-md-6 col-lg-6">
+
+                    <!-- Start and end text -->
+                    <div class="row">
+                        <div class="col-6 text-start">
+                            <!-- Text aligned to the left (start) -->
+                            Your courses
+                        </div>
+                        <div class="col-6 text-end">
+                            <!-- Text aligned to the right (end) -->
+                            Add new course
+                        </div>
+                    </div>
+
+                    <!-- Line -->
+
+                    <div class="line" [ngClass]="{'custom-class': isSmallScreen}"
+                        [ngStyle]="{'width.px': isSmallScreen ? 230 : null}"></div>
+
+
+
+                    <!-- Course Data -->
+                    <div class="row" style="padding-top: 20px;">
+                        <div id="ok" class="col-sm-3 col-md-3 col-lg-2">
+
+                            <img src="assets/Rectangle 42.png" class="course-img" alt="Book Image"
+                                style="margin-right: 0px;">
+
+
+                        </div>
+                        <div class="col-sm-6 col-md-6 col-lg-5">
+                            <div class="row course-content">
+                                <div class="col-sm-6 col-md-6 col-lg-5" style="padding-left: 0px; padding-right: 0px;">
+                                    <span class="course-name">
+                                        Course Name
+                                    </span>
+                                </div>
+                                <div class="col-sm-6 col-md-6 col-lg-6" style="padding-left: 0px;">
+                                    <i class="fa-solid fa-pen-to-square fa-sm"
+                                        style="color: #428f51; padding-left: 0px;"></i>
+                                    <i class="fa-solid fa-trash fa-sm" style="color: #e1143d; padding-left: 5px;"></i>
+                                    <!-- Replace "fa-icon-class" with the actual icon class -->
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <span class="students-no">
+                                    0 Students
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!--Bottom Line-->
+                    <div class="line" [ngClass]="{'custom-class': isSmallScreen}"
+                        [ngStyle]="{'width.px': isSmallScreen ? 230 : null}"></div>
+
+
+
+
+
+
+
+
+
+
+                </div>
+
+
+                <!-- Right Side -->
+                <!-- Right Side -->
+                <div class="col-sm-12 col-md-6 col-lg-6">
+
+                    <!--Hello-->
+                    <!--Hello-->
+
+                    <div class="row hello-row">
+                        <div class="row"
+                            style="padding-right: 0px;margin-right: 0px;margin-left: 0px;padding-left: 0px;">
+                            <img src="assets/hello.jpg" class="helloimg" alt="Book Image">
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-7 col-md-7 col-lg-7">
+                                <div class="row">
+                                    <span class="hello-text" style="padding-top: 40px;">
+                                        Hello
+                                    </span>
+
+                                    <span class="hello-text">
+                                        Welcome to Transgender Dosti.
+                                    </span>
+
+                                    <span class="hello-subtext" style="padding-top: 40px;">
+                                        Teachers stand as beacons of inspiration, shaping a brighter future through
+                                        dedicated expertise and education.
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-sm-5 col-md-5 col-lg-5">
+
+                                <img src="assets/3dicons (5).png" class="star-img" alt="Book Image">
+
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                    <!--Courses-->
+                    <!--Courses-->
+
+                    <div class="row hello-row" style="margin-top: 20px;">
+                        <div class="row"
+                            style="padding-right: 0px;margin-right: 0px;margin-left: 0px;padding-left: 0px;">
+                            <img src="assets/courses.jpg" class="helloimg" alt="Book Image">
+                        </div>
+
+
+
+                        <div class="row">
+                            <div class="col-sm-4 col-md-4 col-lg-4">
+
+                                <img src="assets/3dicons (5).png" class="fire-img" alt="Book Image">
+
+                            </div>
+
+                            <div class="col-sm-7 col-md-7 col-lg-7">
+                                <div class="row">
+                                    <span class="hello-text" style="padding-top: 40px;">
+                                        Hello
+                                    </span>
+
+                                    <span class="hello-text">
+                                        Welcome to Transgender Dosti.
+                                    </span>
+
+                                    <span class="hello-subtext" style="padding-top: 40px;">
+                                        Teachers stand as beacons of inspiration, shaping a brighter future through
+                                        dedicated expertise and education.
+                                    </span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Students -->
+    <!-- Students -->
+    <!-- Students -->
+    <!-- Students -->
+
+
+    <div class="tab-pane" [class.active]="activeTab === 'ex1-tabs-2'" id="ex1-tabs-2" role="tabpanel"
+        aria-labelledby="ex1-tab-2">
+        Tab 2 content
+    </div>
+
+
+    <!-- Earnings -->
+    <!-- Earnings -->
+    <!-- Earnings -->
+    <!-- Earnings -->
+
+    <div class="tab-pane" [class.active]="activeTab === 'ex1-tabs-3'" id="ex1-tabs-3" role="tabpanel"
+        aria-labelledby="ex1-tab-3">
+        Tab 3 content
+    </div>
+</div>
+
+
+<div class="container text-center">
+    <div class="row">
+        <div class="col-sm-8">col-sm-8</div>
+        <div class="col-sm-4">col-sm-4</div>
+    </div>
+    <div class="row">
+        <div class="col-sm">col-sm</div>
+        <div class="col-sm">col-sm</div>
+        <div class="col-sm">col-sm</div>
+    </div>
+</div>

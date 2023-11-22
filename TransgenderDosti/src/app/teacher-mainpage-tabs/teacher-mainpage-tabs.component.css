@@ -1,0 +1,213 @@
+.welcomeUsername {
+
+    height: 62px;
+    flex-shrink: 0;
+    background-color: #7281FF;
+    stroke-width: 1px;
+    stroke: #000;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)) drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    padding-left: 63px;
+    padding-top: 16px;
+}
+
+.welcomeusernamecontent {
+    color: #FFF;
+    font-family: Karla;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 100;
+    line-height: normal;
+}
+
+
+/* Tabs Area */
+/* Red line under active tab name */
+.nav-tabs .nav-link.active {
+    border-bottom: 3px solid #7281FF;
+    color: rgb(66, 62, 62);
+    /* Active tab text color */
+}
+
+/* Default tab text color */
+.nav-tabs .nav-link {
+    color: black;
+    /* Default tab text color */
+}
+
+.tab-label {
+    color: #5D5959;
+    font-family: Karla;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.text-start {
+    color: #5D5959;
+    font-family: Karla;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.text-end {
+    color: #7281FF;
+
+    font-family: Karla;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+}
+
+.line {
+    width: 630px;
+    height: 1px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    background: #E1DCDC;
+}
+
+.course-name {
+    color: #5D5959;
+    font-family: Karla;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.course-content {
+    padding-top: 15px;
+    padding-left: 12px;
+
+}
+
+.students-no {
+    color: #5D5959;
+
+    font-family: Karla;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    padding-left: 0px;
+    padding-left: 12px;
+
+}
+
+.hello-row {
+    border: 1px rgb(164, 160, 160) solid;
+    margin-left: 90px;
+    margin-right: 40px;
+    border-radius: 14px;
+
+}
+
+.helloimg {
+    height: 43px;
+    border-top-left-radius: 14px;
+    border-top-right-radius: 14px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.hello-text {
+    color: #5D5959;
+    font-family: Karla;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.hello-subtext {
+    padding-top: 20px;
+    color: #5D5959;
+    font-family: Karla;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+}
+
+.star-img {
+    height: 222px;
+    padding-top: 10px;
+    padding-left: 17px;
+}
+
+
+
+
+
+
+@media (max-width: 1128px) {
+    .course-name {
+
+        font-size: 12px;
+
+    }
+
+    .students-no {
+
+        font-size: 10px;
+
+
+    }
+
+    .course-img {
+        height: 70px;
+        width: 70px;
+
+    }
+
+
+    .line {
+        width: 500px;
+        height: 1px;
+        margin-top: 5px;
+        margin-bottom: 10px;
+        background: #E1DCDC;
+    }
+
+
+
+
+
+}
+
+@media (max-width: 900px) {
+
+    .line {
+        width: 400px;
+        height: 1px;
+        margin-top: 5px;
+        margin-bottom: 10px;
+        background: #E1DCDC;
+    }
+
+
+}
+
+@media (max-width: 767px) {
+
+    .line {
+        width: 500px;
+        height: 1px;
+        margin-top: 5px;
+        margin-bottom: 10px;
+        background: #E1DCDC;
+    }
+
+
+}
+
+
+@media (max-width: 576px) {
+    .row>* {
+        width: fit-content;
+    }
+}

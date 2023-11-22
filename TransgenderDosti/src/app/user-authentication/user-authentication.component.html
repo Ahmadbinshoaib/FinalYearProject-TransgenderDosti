@@ -3,12 +3,12 @@
 
     <div class="container">
         <div class="row main-container">
-            <div class=" col-6">
+            <div class="col-sm-12 col-md-6  col-lg-6">
 
                 <!--Sign Up-->
 
-                <div>
-                    <div class="row">
+                <div *ngIf="signUp">
+                    <div class=" row">
                         <span class="text">
                             Get Started Now
                         </span>
@@ -20,24 +20,465 @@
                         </span>
                     </div>
 
-                    <div class="row authr">
-                        <span class="auth liltext" style="margin-right: 10px;">
-                            <img src="assets/google.png" alt="Book Image" height="13px" width="13px"
-                                style="margin-right: 13px;">
 
+
+                    <ul class="nav nav-tabs mb-3 nav-pills nav-justified tabsstyle" id="ex1" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" style="cursor: pointer; font-size: 12px;"
+                                [class.active]="activeTab === 'ex1-tabs-1'" (click)="activeTab = 'ex1-tabs-1'">
+                                <span class="tab-label">Teacher</span>
+                            </a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" style="cursor: pointer;  font-size: 12px;"
+                                [class.active]="activeTab === 'ex1-tabs-2'" (click)="activeTab = 'ex1-tabs-2'">
+                                <span class="tab-label">Learner</span>
+                            </a>
+                        </li>
+
+                    </ul>
+
+
+                    <div class="tab-content" id="ex1-content" style="padding-left: 0px; padding-top: 0px;">
+
+
+                        <!--Teacher -->
+                        <!--Teacher -->
+                        <!--Teacher -->
+                        <div class="tab-pane" [class.active]="activeTab === 'ex1-tabs-1'" id="ex1-tabs-1"
+                            role="tabpanel" aria-labelledby="ex1-tab-1">
+
+
+
+
+                            <div class="row authr2">
+                                <div class="auth liltext"
+                                    style="display: flex; align-items: center; margin-right: 10px; padding-top: 1px;">
+
+                                    <asl-google-signin-button size="small"
+                                        style="margin-right: 10px;"></asl-google-signin-button>
+
+                                    <span>Continue with Google</span>
+                                </div>
+
+                                <span class="auth liltext">
+                                    <img src="assets/Facebook.png" alt="Book Image" height="13px" width="13px"
+                                        style="margin-right: 10px;" (click)="signInWithFB()">
+
+
+                                    <span>Continue with Facebook</span>
+
+
+
+                                </span>
+
+                            </div>
+
+                            <div class="container" style="padding-top: 0px;">
+                                <div class="row orrow">
+                                    <div [ngClass]="{'col-5': !isSmallScreen, 'col-4': isSmallScreen}">
+                                        <div class="line1"></div>
+                                    </div>
+                                    <div class="col-1" style="padding-top: 24px;">
+                                        <div class="or">or</div>
+                                    </div>
+
+                                    <div [ngClass]="{'col-5': !isSmallScreen, 'col-4': isSmallScreen}">
+                                        <div class="line2"></div>
+
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="row">
+                                <form #signUpform="ngForm" (ngSubmit)="teacherSignUp(signUpform.value)">
+                                    <div class="row">
+                                        <div class="span content">Teacher's Full Name</div>
+                                    </div>
+                                    <div class="form-group small-input">
+                                        <input type="text" name="fullname" class="form-control form-control-sm"
+                                            placeholder="Enter you name" ngModel required pattern="[a-zA-Z\s]+">
+                                    </div>
+                                    <div class="row">
+                                        <div class="span content">Teacher's Email Address</div>
+                                    </div>
+                                    <div class="form-group small-input">
+                                        <input type="text" name="email" class="form-control form-control-sm"
+                                            placeholder="Enter you email address" ngModel required
+                                            pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}">
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="span content">Password</div>
+                                    </div>
+
+                                    <div class="input-group form-group small-input input-password"
+                                        style="padding-bottom: 0px;">
+                                        <input type="{{ showPassword ? 'text' : 'password' }}" name="password"
+                                            class="form-control form-password" placeholder="Enter your password"
+                                            [(ngModel)]="password" required
+                                            pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()-_+=])[A-Za-z\d!@#$%^&*()-_+=]{8,}$">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text" (click)="togglePasswordVisibility()">
+                                                <i class="fa-solid fa-eye{{ showPassword ? '-slash' : '' }} fa-xs"></i>
+                                                <!-- Use the eye-slash icon when showPassword is true -->
+                                            </span>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-check">
+                                        <input class="form-check-input" name="privacycheckbox" type="checkbox" value=""
+                                            id="flexCheckDefault" style="margin-top: 7px;" ngModel required>
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            I agree to Terms of Service & Privacy Policy
+                                        </label>
+                                    </div>
+
+                                    <div class="btn-signup">
+                                        <button type="submit" class="btn custombtn2" style="margin-right: 10px; "
+                                            [disabled]="!signUpform.valid">Sign
+                                            Up </button>
+
+                                    </div>
+
+                                    <div class="row last">
+                                        <a (click)="openLogin()" style="cursor: pointer;">
+                                            <span class="text3">
+                                                Have an account? <span>
+                                                    Log In
+                                                </span>
+                                            </span>
+                                        </a>
+
+                                    </div>
+
+
+
+
+                                </form>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!--Learners-->
+                        <!--Learners-->
+                        <!--Learners-->
+
+                        <div class="tab-pane" [class.active]="activeTab === 'ex1-tabs-2'" id="ex1-tabs-2"
+                            role="tabpanel" aria-labelledby="ex1-tab-2">
+
+
+                            <div class="row authr2">
+                                <div class="auth liltext"
+                                    style="display: flex; align-items: center; margin-right: 10px; padding-top: 1px;">
+
+                                    <asl-google-signin-button size="small"
+                                        style="margin-right: 10px;"></asl-google-signin-button>
+
+                                    <span>Continue with Google</span>
+                                </div>
+
+                                <span class="auth liltext">
+                                    <img src="assets/Facebook.png" alt="Book Image" height="13px" width="13px"
+                                        style="margin-right: 10px;" (click)="signInWithFB()">
+
+
+                                    <span>Continue with Facebook</span>
+
+
+
+                                </span>
+
+                            </div>
+
+                            <div class="container" style="padding-top: 0px;">
+                                <div class="row orrow">
+                                    <div [ngClass]="{'col-5': !isSmallScreen, 'col-4': isSmallScreen}">
+                                        <div class="line1"></div>
+                                    </div>
+                                    <div class="col-1" style="padding-top: 24px;">
+                                        <div class="or">or</div>
+                                    </div>
+
+                                    <div [ngClass]="{'col-5': !isSmallScreen, 'col-4': isSmallScreen}">
+                                        <div class="line2"></div>
+
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="row">
+                                <form #signUpform2="ngForm" (ngSubmit)="learnerSignUp(signUpform2.value)">
+                                    <div class="row">
+                                        <div class="span content">Learner's Full Name</div>
+                                    </div>
+                                    <div class="form-group small-input">
+                                        <input type="text" name="fullname" class="form-control form-control-sm"
+                                            placeholder="Enter you name" ngModel required pattern="[a-zA-Z\s]+">
+                                    </div>
+                                    <div class="row">
+                                        <div class="span content">Learner's Email Address</div>
+                                    </div>
+                                    <div class="form-group small-input">
+                                        <input type="text" name="email" class="form-control form-control-sm"
+                                            placeholder="Enter you email address" ngModel required
+                                            pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}">
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="span content">Password</div>
+                                    </div>
+
+                                    <div class="input-group form-group small-input input-password"
+                                        style="padding-bottom: 0px;">
+                                        <input type="{{ showPasswordl ? 'text' : 'password' }}" name="password"
+                                            class="form-control form-password" placeholder="Enter your password"
+                                            [(ngModel)]="passwordl" required
+                                            pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()-_+=])[A-Za-z\d!@#$%^&*()-_+=]{8,}$">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text" (click)="togglePasswordVisibilityl()">
+                                                <i class="fa-solid fa-eye{{ showPasswordl ? '-slash' : '' }} fa-xs"></i>
+                                                <!-- Use the eye-slash icon when showPassword is true -->
+                                            </span>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-check">
+                                        <input class="form-check-input" name="privacycheckbox" type="checkbox" value=""
+                                            id="flexCheckDefault" style="margin-top: 7px;" ngModel required>
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            I agree to Terms of Service & Privacy Policy
+                                        </label>
+                                    </div>
+
+                                    <div class="btn-signup">
+                                        <button type="submit" class="btn custombtn2" style="margin-right: 10px; "
+                                            [disabled]="!signUpform2.valid">Sign
+                                            Up </button>
+
+                                    </div>
+
+                                    <div class="row last">
+                                        <a (click)="openLogin()" style="cursor: pointer;">
+                                            <span class="text3">
+                                                Have an account? <span>
+                                                    Log In
+                                                </span>
+                                            </span>
+                                        </a>
+
+                                    </div>
+
+
+
+
+                                </form>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+
+
+
+
+
+
+
+
+                </div>
+
+
+                <!--Sign In-->
+
+
+
+                <div *ngIf="signIn">
+                    <div class=" row">
+                        <span class="text">
+                            Good to see you Again!
+                        </span>
+                    </div>
+
+                    <div class="row">
+                        <span class="text2">
+                            Enter your credentials to login your account
+                        </span>
+                    </div>
+
+
+
+                    <ul class="nav nav-tabs mb-3 nav-pills nav-justified tabsstyle" id="ex1" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" style="cursor: pointer; font-size: 12px;"
+                                [class.active]="activeTab === 'ex1-tabs-1'" (click)="activeTab = 'ex1-tabs-1'">
+                                <span class="tab-label">Teacher</span>
+                            </a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" style="cursor: pointer;  font-size: 12px;"
+                                [class.active]="activeTab === 'ex1-tabs-2'" (click)="activeTab = 'ex1-tabs-2'">
+                                <span class="tab-label">Learner</span>
+                            </a>
+                        </li>
+
+                    </ul>
+
+                    <div class="tab-content" id="ex1-content" style="padding-left: 0px; padding-top: 0px;">
+
+                        <!--Teacher -->
+                        <!--Teacher -->
+                        <!--Teacher -->
+
+                        <div class="tab-pane" [class.active]="activeTab === 'ex1-tabs-1'" id="ex1-tabs-1"
+                            role="tabpanel" aria-labelledby="ex1-tab-1">
+
+                        <div class="row authr">
+                            <div class="auth liltext"
+                                style="display: flex; align-items: center; margin-right: 10px; padding-top: 1px;">
+
+                                <asl-google-signin-button size="small"
+                                    style="margin-right: 10px;"></asl-google-signin-button>
+
+                                <span>Continue with Google</span>
+                            </div>
+
+                            <span class="auth liltext">
+                                <img src="assets/Facebook.png" alt="Book Image" height="13px" width="13px"
+                                    style="margin-right: 10px;" (click)="signInWithFB()">
+
+
+                                <span>Continue with Facebook</span>
+
+
+
+                            </span>
+
+                        </div>
+
+                        <div class="container" style="padding-top: 0px;">
+                            <div class="row orrow">
+                                <div [ngClass]="{'col-5': !isSmallScreen, 'col-4': isSmallScreen}">
+                                    <div class="line1"></div>
+                                </div>
+                                <div class="col-1" style="padding-top: 24px;">
+                                    <div class="or">or</div>
+                                </div>
+
+                                <div [ngClass]="{'col-5': !isSmallScreen, 'col-4': isSmallScreen}">
+                                    <div class="line2"></div>
+
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="row">
+                            <form #signInform="ngForm" (ngSubmit)="SignIn(signInform.value)">
+
+                                <div class="row">
+                                    <div class="span content">Email Address</div>
+                                </div>
+                                <div class="form-group small-input">
+                                    <input type="text" name="email" class="form-control form-control-sm"
+                                        placeholder="Enter you email address" ngModel required
+                                        pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}">
+                                </div>
+
+                                <div class="row">
+                                    <div class="span content">Password</div>
+                                </div>
+
+
+                                <div class="input-group form-group small-input input-password"
+                                    style="padding-bottom: 0px;">
+                                    <input type="{{ showPasswordsi ? 'text' : 'password' }}" name="password"
+                                        class="form-control form-password" placeholder="Enter your password"
+                                        [(ngModel)]="passwordsi" required
+                                        pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()-_+=])[A-Za-z\d!@#$%^&*()-_+=]{8,}$">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text" (click)="togglePasswordVisibilitysi()">
+                                            <i class="fa-solid fa-eye{{ showPasswordsi ? '-slash' : '' }} fa-xs"></i>
+                                            <!-- Use the eye-slash icon when showPassword is true -->
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <span class="forget">
+                                    Forget Password?
+                                </span>
+
+                                <div class="btn-signup">
+                                    <button type="submit" class="btn custombtn2" style="margin-right: 10px; "
+                                        [disabled]="!signInform.valid">Sign In </button>
+
+                                </div>
+
+
+                                <div class="row last">
+                                    <a (click)="openSignUp()" style="cursor: pointer;">
+                                        <span class="text3">
+                                            Create an account? <span>
+                                                Sign Up
+                                            </span>
+                                        </span>
+                                    </a>
+
+                                </div>
+
+
+
+
+                            </form>
+
+                        </div>
+
+                        </div>
+
+
+                         <!--Learner -->
+                        <!--Learner -->
+                        <!--Learner -->
+
+
+                        <div class="tab-pane" [class.active]="activeTab === 'ex1-tabs-2'" id="ex1-tabs-2"
+                        role="tabpanel" aria-labelledby="ex1-tab-2">
+
+                    <div class="row authr">
+                        <div class="auth liltext"
+                            style="display: flex; align-items: center; margin-right: 10px; padding-top: 1px;">
+
+                            <asl-google-signin-button size="small"
+                                style="margin-right: 10px;"></asl-google-signin-button>
 
                             <span>Continue with Google</span>
-
-
-
-                        </span>
+                        </div>
 
                         <span class="auth liltext">
-                            <img src="assets/google.png" alt="Book Image" height="13px" width="13px"
-                                style="margin-right: 13px;">
+                            <img src="assets/Facebook.png" alt="Book Image" height="13px" width="13px"
+                                style="margin-right: 10px;" (click)="signInWithFB()">
 
 
-                            <span>Continue with Google</span>
+                            <span>Continue with Facebook</span>
 
 
 
@@ -45,10 +486,92 @@
 
                     </div>
 
-                    <div class="row">
-                        <div class="line">
+                    <div class="container" style="padding-top: 0px;">
+                        <div class="row orrow">
+                            <div [ngClass]="{'col-5': !isSmallScreen, 'col-4': isSmallScreen}">
+                                <div class="line1"></div>
+                            </div>
+                            <div class="col-1" style="padding-top: 24px;">
+                                <div class="or">or</div>
+                            </div>
+
+                            <div [ngClass]="{'col-5': !isSmallScreen, 'col-4': isSmallScreen}">
+                                <div class="line2"></div>
+
+                            </div>
+
 
                         </div>
+
+                    </div>
+
+
+                    <div class="row">
+                        <form #signInform="ngForm" (ngSubmit)="SignIn(signInform.value)">
+
+                            <div class="row">
+                                <div class="span content">Email Address</div>
+                            </div>
+                            <div class="form-group small-input">
+                                <input type="text" name="email" class="form-control form-control-sm"
+                                    placeholder="Enter you email address" ngModel required
+                                    pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}">
+                            </div>
+
+                            <div class="row">
+                                <div class="span content">Password</div>
+                            </div>
+
+
+                            <div class="input-group form-group small-input input-password"
+                                style="padding-bottom: 0px;">
+                                <input type="{{ showPasswordsi ? 'text' : 'password' }}" name="password"
+                                    class="form-control form-password" placeholder="Enter your password"
+                                    [(ngModel)]="passwordsi" required
+                                    pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()-_+=])[A-Za-z\d!@#$%^&*()-_+=]{8,}$">
+                                <div class="input-group-append">
+                                    <span class="input-group-text" (click)="togglePasswordVisibilitysi()">
+                                        <i class="fa-solid fa-eye{{ showPasswordsi ? '-slash' : '' }} fa-xs"></i>
+                                        <!-- Use the eye-slash icon when showPassword is true -->
+                                    </span>
+                                </div>
+                            </div>
+
+                            <span class="forget">
+                                Forget Password?
+                            </span>
+
+                            <div class="btn-signup">
+                                <button type="submit" class="btn custombtn2" style="margin-right: 10px; "
+                                    [disabled]="!signInform.valid">Sign In </button>
+
+                            </div>
+
+
+                            <div class="row last">
+                                <a (click)="openSignUp()" style="cursor: pointer;">
+                                    <span class="text3">
+                                        Create an account? <span>
+                                            Sign Up
+                                        </span>
+                                    </span>
+                                </a>
+
+                            </div>
+
+
+
+
+                        </form>
+
+                    </div>
+
+                    </div>
+
+
+
+
+
                     </div>
 
 
@@ -57,7 +580,7 @@
                 </div>
 
             </div>
-            <div class=" col-6">
+            <div class="col-sm-6 col-md-6 col-lg-6 img">
                 <div>
                     <div class="image">
 

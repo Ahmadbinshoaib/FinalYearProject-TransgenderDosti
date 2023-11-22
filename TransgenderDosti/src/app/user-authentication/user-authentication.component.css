@@ -12,7 +12,7 @@
 .image {
     margin: 17px;
     width: 526px;
-    height: 530px;
+    height: 588px;
     flex-shrink: 0;
     border-radius: 50px;
     background: url('/assets/authentication.jpg');
@@ -33,6 +33,18 @@
     line-height: normal;
     padding-top: 40px;
     padding-left: 65px;
+}
+
+.content {
+    color: #606060;
+    font-family: Karla;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    padding-left: 67px;
+
 }
 
 .text2 {
@@ -61,6 +73,11 @@
     padding-top: 30px;
 }
 
+.authr2 {
+    padding-left: 65px;
+    padding-top: 0px;
+}
+
 .liltext {
     color: #606060;
     font-family: Karla;
@@ -73,12 +90,175 @@
 
 }
 
-.line {
-    margin-left: 66px;
-    width: 187px;
+.line1 {
+    margin-top: 40px;
+
+    width: 180px;
     height: 1px;
     background: #E4E2E2;
 }
+
+.line2 {
+    margin-top: 40px;
+
+    width: 180px;
+    height: 1px;
+    background: #E4E2E2;
+}
+
+.orrow {
+    padding-left: 44px;
+    padding-right: 50px;
+
+
+}
+
+.or {
+    padding-left: 7px;
+    font-size: 12px;
+    padding-top: 6px;
+}
+
+.small-input {
+    padding-left: 53px;
+    padding-top: 6px;
+
+}
+
+.form-control-sm {
+    border-radius: 25px;
+    font-family: Karla;
+    font-size: 11px;
+    color: #606060;
+    height: 37px;
+    width: 412px;
+    padding-left: 15px;
+
+}
+
+.form-group {
+    padding-bottom: 17px;
+}
+
+.form-password {
+    border-radius: 25px;
+    font-family: Karla;
+    font-size: 11px;
+    color: #606060;
+    height: 37px;
+    border-right-color: white;
+    padding-left: 15px;
+
+}
+
+.input-password {
+    width: 463px;
+}
+
+.input-group-text {
+    HEIGHT: 38px;
+    background-color: white;
+    border-left-color: #ffffff;
+    border-bottom-right-radius: 25px;
+    border-top-right-radius: 25px;
+
+}
+
+.form-check-label {
+
+    font-family: Karla;
+    font-size: 10px;
+    color: #606060;
+
+}
+
+.custombtn2 {
+    color: rgb(255, 255, 255);
+    font-weight: 100;
+    font-size: 14px;
+    font-family: Karla;
+    background: #7281FF;
+    border: 1px solid #7281FF;
+    border-radius: 25px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 12px;
+    margin-left: 33px;
+    padding-right: 12px;
+    /* Adding a border to match the grey background on hover/focus */
+    transition: background-color 0.3s ease;
+    /* Adding a smooth transition effect */
+    width: 407px;
+}
+
+.custombtn2:hover,
+.custombtn2:focus {
+    background-color: rgba(11, 47, 226, 0.406);
+    border: none
+}
+
+.text3 {
+    color: #606060;
+    font-family: Karla;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 100;
+    line-height: normal;
+    padding-left: 67px;
+    padding-top: 6px;
+    margin-bottom: 40px;
+
+}
+
+.text3 span {
+    color: #7281FF;
+
+}
+
+.form-check {
+    padding-left: 77px;
+    padding-top: 13px;
+
+
+}
+
+.btn-signup {
+    padding-top: 25px;
+    padding-left: 20px;
+}
+
+.forget {
+    color: #7281FF;
+    font-family: Karla;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    padding-left: 60px;
+}
+
+.tabsstyle {
+    padding-left: 50px;
+    padding-right: 165px;
+    padding-top: 20px;
+    padding-bottom: 15px;
+}
+
+.nav-link {
+    font-size: 12px;
+    color: rgb(54, 53, 53);
+    background-color: rgba(221, 214, 214, 0.452);
+}
+
+/* Active tab style */
+.nav-link.active {
+    background-color: #7281FF;
+    color: rgb(255, 255, 255);
+}
+
+
+
+
 
 
 
@@ -94,6 +274,31 @@
 
     }
 
+    .line1 {
+
+
+        width: 130px;
+
+    }
+
+    .line2 {
+
+
+        width: 130px;
+
+    }
+
+    .orrow {
+
+        padding-right: 100px;
+
+
+    }
+
+    .or {
+        padding-left: 6px;
+    }
+
 }
 
 @media (max-width: 990px) {
@@ -102,6 +307,67 @@
         width: 315px;
         height: 530px;
 
+    }
+
+    .line1 {
+
+
+        width: 120px;
+
+    }
+
+    .line2 {
+
+
+        width: 120px;
+
+    }
+
+    .orrow {
+        padding-right: 0px;
+    }
+
+    .auth {
+        width: 140px;
+        height: 41px;
+
+
+    }
+
+    .liltext {
+        color: #606060;
+        font-family: Karla;
+        font-size: 8px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        padding-top: 14px;
+
+
+    }
+
+    .or {
+        padding-left: 6px;
+    }
+
+
+    .form-control-sm {
+        border-radius: 25px;
+        font-family: Karla;
+        font-size: 11px;
+        color: #606060;
+        height: 37px;
+        width: 292px;
+        padding-left: 15px;
+
+    }
+
+    .input-password {
+        width: 343px;
+    }
+
+    .custombtn2 {
+        width: 295px;
     }
 
 }
@@ -114,4 +380,96 @@
 
     }
 
+    .img {
+        display: none;
+    }
+
+    .line1 {
+        width: 130px;
+    }
+
+    .line2 {
+        width: 130px;
+    }
+
+    .or {
+        padding-left: 18px;
+
+    }
+
+    .main-container {
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+
+    .form-control-sm {
+        border-radius: 25px;
+        font-family: Karla;
+        font-size: 11px;
+        color: #606060;
+        height: 37px;
+        width: 260px;
+        padding-left: 15px;
+
+    }
+
+    .input-password {
+        width: 288px;
+    }
+
+    .custombtn2 {
+        width: 264px;
+    }
+
+    .text {
+        padding-left: 40px;
+    }
+
+    .text2 {
+        padding-left: 40px;
+    }
+
+    .authr {
+        padding-left: 40px;
+    }
+
+    .orrow {
+        padding-left: 18px;
+    }
+
+    .content {
+        padding-left: 40px;
+    }
+
+    .small-input {
+        padding-left: 26px;
+    }
+
+    .form-check {
+        padding-left: 50px;
+    }
+
+    .btn-signup {
+        padding-top: 23px;
+        padding-left: 0px;
+    }
+
+    .forget {
+
+        padding-left: 30px;
+    }
+
+    .text3 {
+        padding-left: 40px;
+    }
+
+    .last {
+        margin-bottom: 30px;
+    }
+}
+
+/* Form */
+
+input.ng-invalid.ng-touched {
+    border: 1px red solid;
 }
