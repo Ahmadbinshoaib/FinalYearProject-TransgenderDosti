@@ -139,6 +139,13 @@
     padding-left: 17px;
 }
 
+.fire-img {
+    height: 222px;
+    padding-top: 10px;
+    padding-left: 17px;
+}
+
+
 
 
 
@@ -174,6 +181,43 @@
     }
 
 
+
+
+
+}
+
+@media (max-width: 1210px) {
+
+    .star-img {
+        height: 180px;
+        padding-top: 10px;
+        padding-left: 17px;
+    }
+
+    .fire-img {
+        height: 180px;
+        padding-top: 10px;
+        padding-left: 17px;
+    }
+
+
+
+}
+
+
+@media (max-width: 1089px) {
+
+    .star-img {
+        height: 160px;
+        padding-top: 10px;
+        padding-left: 17px;
+    }
+
+    .fire-img {
+        height: 160px;
+        padding-top: 10px;
+        padding-left: 17px;
+    }
 
 
 
