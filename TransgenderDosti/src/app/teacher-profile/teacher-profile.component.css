@@ -393,6 +393,19 @@
     margin-bottom: 10px;
 }
 
+.flag {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    margin-right: 5px;
+    background-size: cover;
+  }
+
+  
+  
+
+
+
 @media (max-width: 1210px) {
 
     .social-profile {

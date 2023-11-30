@@ -20,8 +20,8 @@ import { FormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { provideAnimations } from '@angular/platform-browser/animations';
-
 import { provideToastr } from 'ngx-toastr';
+import { NgSelectModule } from '@ng-select/ng-select';
 import { LearnerMainpageComponent } from './learner-mainpage/learner-mainpage.component';
 import { TeacherProfileComponent } from './teacher-profile/teacher-profile.component';
 
@@ -53,6 +53,7 @@ import { TeacherProfileComponent } from './teacher-profile/teacher-profile.compo
       progressBar: true
     }),
     BrowserAnimationsModule,
+    NgSelectModule,
 
   ],
   providers: [

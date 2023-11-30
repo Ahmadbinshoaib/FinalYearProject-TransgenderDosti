@@ -55,10 +55,29 @@
                             <div class="col-6">
                                 <div class="span content country">Country</div>
 
-                                <div class="form-group small-input">
-                                    <input type="text" name="fullname" class="form-control form-control-sm"
-                                        placeholder="Enter your country" ngModel required>
-                                </div>
+                                <select class="form-select form-group small-input form-control form-control-sm"
+                                    aria-label="Default select example" name="country" style="padding-left: 14px;"
+                                    [(ngModel)]="selectedCountry" (change)="setPhoneCode()">
+                                    <option *ngFor="let country of countries" [ngValue]="country">
+                                        <!-- Add an image to each option -->
+                                        <img [src]="country.flag" alt="{{ country.name }} Flag"
+                                            style="width: 20px; height: auto; margin-right: 5px;" />
+
+                                        {{ country.name }}
+                                    </option>
+                                </select>
+
+
+
+
+
+
+
+
+
+
+
+
 
                             </div>
                         </div>
