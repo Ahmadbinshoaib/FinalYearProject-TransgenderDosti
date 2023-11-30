@@ -1,5 +1,7 @@
 import { Component, HostListener } from '@angular/core';
 import { UserAuthenticationService } from '../Services/user-authentication.service';
+import { ActivatedRoute } from '@angular/router';
+import { TeacherCoursesService } from '../Services/teacher-courses.service';
 
 @Component({
   selector: 'app-teacher-mainpage-tabs',
@@ -9,12 +11,13 @@ import { UserAuthenticationService } from '../Services/user-authentication.servi
 export class TeacherMainpageTabsComponent {
   activeTab: string = 'ex1-tabs-1';
   teacherEmail: string = ''
+  courses: any[] = [];
 
   changeTab(tabId: string) {
     this.activeTab = tabId;
   }
 
-  constructor(private userAuthService: UserAuthenticationService) {
+  constructor(private userAuthService: UserAuthenticationService, private activeRoute: ActivatedRoute, private courseService: TeacherCoursesService) {
 
   }
 
@@ -40,6 +43,33 @@ export class TeacherMainpageTabsComponent {
         console.error('Error parsing teacher data:', error);
       }
     }
+
+    let userId = this.activeRoute.snapshot.paramMap.get('userId')
+    console.warn(userId);
+
+    if (userId) {
+      this.courseService.getCourses(userId).subscribe(
+        (response) => {
+          // Assuming the response structure has a 'courses' property
+          this.courses = response.courses;
+          console.log(this.courses)
+        },
+        (error) => {
+          console.error('Error loading courses', error);
+        }
+      );
+    } else {
+      console.error('UserId is null or undefined');
+    }
+
+
+
+
+
+
+
+
+
   }
 
   @HostListener('window:resize', ['$event'])

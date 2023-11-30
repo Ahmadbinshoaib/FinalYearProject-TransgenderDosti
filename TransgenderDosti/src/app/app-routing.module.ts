@@ -9,6 +9,7 @@ import { TeacherMainpageTabsComponent } from './teacher-mainpage-tabs/teacher-ma
 import { LearnerMainpageComponent } from './learner-mainpage/learner-mainpage.component';
 import { AuthGuard } from './teacherauth-guard.guard';
 import { AuthGuard1 } from './learnerauth-guard.guard';
+import { TeacherProfileComponent } from './teacher-profile/teacher-profile.component';
 
 const routes: Routes = [
 
@@ -24,14 +25,19 @@ const routes: Routes = [
     path: 'user-authentication', component: UserAuthenticationComponent
   },
   {
-    path: 'teacher-mainpage', component: TeacherMainpageTabsComponent,
+    path: 'teacher-mainpage/:userId', component: TeacherMainpageTabsComponent,
     canActivate: [AuthGuard]
 
   },
   {
-    path: 'learner-mainpage', component: LearnerMainpageComponent,
+    path: 'learner-mainpage/:userId', component: LearnerMainpageComponent,
     canActivate: [AuthGuard1]
   },
+  {
+    path: 'teacher-profile', component: TeacherProfileComponent,
+    canActivate: [AuthGuard]
+  },
+
 
 
 

@@ -23,6 +23,7 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 
 import { provideToastr } from 'ngx-toastr';
 import { LearnerMainpageComponent } from './learner-mainpage/learner-mainpage.component';
+import { TeacherProfileComponent } from './teacher-profile/teacher-profile.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { LearnerMainpageComponent } from './learner-mainpage/learner-mainpage.co
     UserAuthenticationComponent,
     TeacherMainpageTabsComponent,
     LearnerMainpageComponent,
+    TeacherProfileComponent,
 
   ],
   imports: [

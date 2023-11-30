@@ -124,6 +124,7 @@ export class UserAuthenticationComponent {
   // }
 
   ngOnInit() {
+    var userId = ''
     const role1 = (this.activeTab === 'ex1-tabs-1') ? 'teacher' : 'learner';
     console.warn('role' + role1)
     this.authService.authState.subscribe((user) => {
@@ -147,14 +148,54 @@ export class UserAuthenticationComponent {
 
             // Check user type and navigate accordingly
             if (response.user_type === 'teacher') {
-              this.router.navigate(['/teacher-mainpage']);
-              console.warn(response.user_type)
+
               localStorage.setItem('teacher', JSON.stringify(response))
+
+              if (localStorage.getItem('teacher')) {
+                const teacherStore = localStorage.getItem('teacher');
+
+                try {
+                  const teacherData = JSON.parse(teacherStore!);
+
+                  if (teacherData && teacherData.user_id) {
+
+                    userId = teacherData.user_id
+                    console.log(userId)
+                  } else {
+                    console.error('Invalid teacher data format or missing email property');
+                  }
+                } catch (error) {
+                  console.error('Error parsing teacher data:', error);
+                }
+              }
+
+              this.router.navigate(['/teacher-mainpage', userId]);
+              console.warn(response.user_type)
 
             } else if (response.user_type === 'learner') {
               console.warn(response.user_type)
-              this.router.navigate(['/learner-mainpage']);
+
               localStorage.setItem('learner', JSON.stringify(response))
+
+              if (localStorage.getItem('learner')) {
+                const learnerStore = localStorage.getItem('learner');
+
+                try {
+                  const learnerData = JSON.parse(learnerStore!);
+
+                  if (learnerData && learnerData.user_id) {
+
+                    userId = learnerData.user_id
+                    console.log(userId)
+                  } else {
+                    console.error('Invalid learner data format or missing email property');
+                  }
+                } catch (error) {
+                  console.error('Error parsing learner data:', error);
+                }
+              }
+
+              this.router.navigate(['/learner-mainpage', userId]);
             }
 
             // Display a success toast
@@ -212,7 +253,7 @@ export class UserAuthenticationComponent {
       (result) => {
         if (result) {
           this.toastr.success('User successfully logged in!', 'Success');
-          this.router.navigate(['learner-mainpage']);
+
         }
       },
       (error) => {

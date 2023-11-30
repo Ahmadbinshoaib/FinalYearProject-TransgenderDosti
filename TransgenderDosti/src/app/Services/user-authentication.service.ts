@@ -32,49 +32,106 @@ export class UserAuthenticationService {
   authenticateUser(idToken: string, role: string): Observable<any> {
     const endpoint = '/authenticate'; // replace with your actual authentication endpoint
     const url = this.serverUrl + endpoint;
-  
+
     const requestBody = {
       idToken,
       role, // Add the role parameter
     };
-  
+
     return this.http.post(url, requestBody);
   }
-  
+
 
   signUpTeacher(data: userTeacher): Observable<any> {
     const endpoint = '/signup';
     const url = this.serverUrl + endpoint;
+    var userId = ''
 
     return this.http.post(url, data, { observe: 'response' }).pipe(
       tap((result) => {
         this.isTeacherLoggedIn.next(true);
         console.warn('linenexttolocal')
         localStorage.setItem('teacher', JSON.stringify(result.body))
-        this.router.navigate(['teacher-mainpage']);
+
+        if (localStorage.getItem('teacher')) {
+          const teacherStore = localStorage.getItem('teacher');
+
+          try {
+            const teacherData = JSON.parse(teacherStore!);
+
+            if (teacherData && teacherData.user_id) {
+
+              userId = teacherData.user_id
+              console.log(userId)
+            } else {
+              console.error('Invalid teacher data format or missing email property');
+            }
+          } catch (error) {
+            console.error('Error parsing teacher data:', error);
+          }
+        }
+
+        this.router.navigate(['teacher-mainpage', userId]);
       })
     );
   }
 
   reloadTeacher() {
+    var userId = ''
     if (localStorage.getItem('teacher')) {
+
+      const teacherStore = localStorage.getItem('teacher');
+
+      try {
+        const teacherData = JSON.parse(teacherStore!);
+
+        if (teacherData && teacherData.user_id) {
+
+          userId = teacherData.user_id
+          console.log(userId)
+        } else {
+          console.error('Invalid teacher data format or missing email property');
+        }
+      } catch (error) {
+        console.error('Error parsing teacher data:', error);
+      }
+
       console.warn('reload')
       this.isTeacherLoggedIn.next(true);
-      this.router.navigate(['teacher-mainpage']);
+      this.router.navigate(['teacher-mainpage', userId]);
 
     }
   }
 
   reloadLearner() {
+    var userId = ''
     if (localStorage.getItem('learner')) {
+
+      const learnerStore = localStorage.getItem('learner');
+
+      try {
+        const learnerData = JSON.parse(learnerStore!);
+
+        if (learnerData && learnerData.user_id) {
+
+          userId = learnerData.user_id
+          console.log(userId)
+        } else {
+          console.error('Invalid learner data format or missing email property');
+        }
+      } catch (error) {
+        console.error('Error parsing learner data:', error);
+      }
+
       console.warn('reload')
       this.isLearnerLoggedIn.next(true);
-      this.router.navigate(['learner-mainpage']);
+      this.router.navigate(['learner-mainpage', userId]);
 
     }
   }
 
   signUpLearner(data: userTeacher) {
+    var userId = ''
     const endpoint = '/signup';
     const url = this.serverUrl + endpoint;
 
@@ -83,7 +140,26 @@ export class UserAuthenticationService {
         this.isLearnerLoggedIn.next(true);
         console.warn('linenexttolocal')
         localStorage.setItem('learner', JSON.stringify(result.body))
-        this.router.navigate(['learner-mainpage']);
+
+        if (localStorage.getItem('learner')) {
+          const learnerStore = localStorage.getItem('learner');
+
+          try {
+            const learnerData = JSON.parse(learnerStore!);
+
+            if (learnerData && learnerData.user_id) {
+
+              userId = learnerData.user_id
+              console.log(userId)
+            } else {
+              console.error('Invalid learner data format or missing email property');
+            }
+          } catch (error) {
+            console.error('Error parsing learner data:', error);
+          }
+        }
+
+        this.router.navigate(['learner-mainpage', userId]);
       })
     );
   }
@@ -92,7 +168,7 @@ export class UserAuthenticationService {
   signInUser(data: signIn) {
     const endpoint = '/signin';
     const url = this.serverUrl + endpoint;
-
+    var userId = ''
     return this.http.post<SignInResponse>(url, data, { observe: 'response' }).pipe(
       tap((result) => {
         const userType = result.body?.user_type;
@@ -102,12 +178,51 @@ export class UserAuthenticationService {
           console.warn('linenexttolocal');
           localStorage.setItem('teacher', JSON.stringify(result.body));
           this.isTeacherLoggedIn.next(true);
-          this.router.navigate(['teacher-mainpage']);
+
+          if (localStorage.getItem('teacher')) {
+            const teacherStore = localStorage.getItem('teacher');
+
+            try {
+              const teacherData = JSON.parse(teacherStore!);
+
+              if (teacherData && teacherData.user_id) {
+
+                userId = teacherData.user_id
+                console.log('userID' + userId)
+              } else {
+                console.error('Invalid teacher data format or missing email property');
+              }
+            } catch (error) {
+              console.error('Error parsing teacher data:', error);
+            }
+          }
+
+          this.router.navigate(['teacher-mainpage/', userId]);
 
         } else if (userType === 'learner') {
           // User is a learner, navigate to learner-mainpage
           localStorage.setItem('learner', JSON.stringify(result.body));
-          this.router.navigate(['learner-mainpage']);
+
+          if (localStorage.getItem('learner')) {
+            const learnerStore = localStorage.getItem('learner');
+
+            try {
+              const learnerData = JSON.parse(learnerStore!);
+
+              if (learnerData && learnerData.user_id) {
+
+                userId = learnerData.user_id
+                console.log(userId)
+              } else {
+                console.error('Invalid learner data format or missing email property');
+              }
+            } catch (error) {
+              console.error('Error parsing learner data:', error);
+            }
+          }
+
+
+          this.router.navigate(['learner-mainpage', userId]);
           this.isLearnerLoggedIn.next(true);
         } else {
           // Handle other cases or errors

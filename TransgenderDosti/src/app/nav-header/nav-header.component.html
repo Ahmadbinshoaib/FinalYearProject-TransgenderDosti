@@ -98,12 +98,12 @@
                                 style="color:white; padding-top: 8px;" id="dropdownMenuButton" data-bs-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
                                 <!-- Add the image with a circular shape -->
-                                <img src="assets/Ellipse 6.png" alt="User Avatar"
+                                <img [src]="profilePictureUrl || 'assets/Ellipse 6.png'" alt="assets/Ellipse 6.png"
                                     style="border-radius: 50%; width: 30px; height: 25px; margin-right: 5px;">
                                 {{teacherEmail}}
                             </button>
                             <div class="dropdown-menu fontstyle" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#">User Profile</a>
+                                <a class="dropdown-item" routerLink="teacher-profile" href="#">User Profile</a>
                                 <a class="dropdown-item" href="#">Settings</a>
                                 <a class="dropdown-item" (click)="teacherLogout()" href="#">Logout</a>
                             </div>
@@ -167,9 +167,9 @@
                                 style="color:white; padding-top: 8px;" id="dropdownMenuButton" data-bs-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
                                 <!-- Add the image with a circular shape -->
-                                <img src="assets/Ellipse 6.png" alt="User Avatar"
+                                <img [src]="profilePictureUrl || 'assets/Ellipse 6.png'" alt="assets/Ellipse 6.png"
                                     style="border-radius: 50%; width: 30px; height: 25px; margin-right: 5px;">
-
+                                {{learnerEmail}}
                             </button>
                             <div class="dropdown-menu fontstyle" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item" href="#">User Profile</a>

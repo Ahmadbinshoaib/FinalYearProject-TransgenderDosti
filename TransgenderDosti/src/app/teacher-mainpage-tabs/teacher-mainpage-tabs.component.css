@@ -145,6 +145,16 @@
     padding-left: 17px;
 }
 
+.nolist {
+    color: #7c7c7c;
+    font-family: Karla;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 100;
+    line-height: normal;
+
+}
+
 
 
 
@@ -203,6 +213,8 @@
 
 
 }
+
+
 
 
 @media (max-width: 1089px) {

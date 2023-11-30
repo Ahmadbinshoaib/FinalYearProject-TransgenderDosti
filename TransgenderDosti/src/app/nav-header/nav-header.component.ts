@@ -9,6 +9,8 @@ import { Route, Router } from '@angular/router';
 export class NavHeaderComponent {
   menuType: String = 'default';
   teacherEmail: String = '';
+  learnerEmail: String = '';
+  profilePictureUrl: string = ''
 
   constructor(private router: Router) {
 
@@ -31,6 +33,12 @@ export class NavHeaderComponent {
               if (teacherData && teacherData.email) {
                 console.log(teacherData.email);
                 this.teacherEmail = teacherData.email.split('@')[0];
+                if (teacherData.profile_picture) {
+
+
+                  this.profilePictureUrl = teacherData.profile_picture
+                }
+
               } else {
                 console.error('Invalid teacher data format or missing email property');
               }
@@ -45,6 +53,28 @@ export class NavHeaderComponent {
         else if (localStorage.getItem('learner') && val.url.includes('learner')) {
           console.warn('in learner area')
           this.menuType = 'learner'
+
+          if (localStorage.getItem('learner')) {
+            const learnerStore = localStorage.getItem('learner');
+
+            try {
+              const learnerData = JSON.parse(learnerStore!);
+
+              if (learnerData && learnerData.email) {
+                console.log(learnerData.email);
+                this.learnerEmail = learnerData.email.split('@')[0];
+                if (learnerData.profile_picture) {
+
+
+                  this.profilePictureUrl = learnerData.profile_picture
+                }
+              } else {
+                console.error('Invalid learner data format or missing email property');
+              }
+            } catch (error) {
+              console.error('Error parsing teacher data:', error);
+            }
+          }
         }
         else {
           console.warn('outside teacher')

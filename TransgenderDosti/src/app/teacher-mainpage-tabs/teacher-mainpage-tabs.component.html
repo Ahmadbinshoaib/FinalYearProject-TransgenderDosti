@@ -66,49 +66,47 @@
 
 
                     <!-- Course Data -->
-                    <div class="row" style="padding-top: 20px;">
-                        <div id="ok" class="col-sm-3 col-md-3 col-lg-2">
-
-                            <img src="assets/Rectangle 42.png" class="course-img" alt="Book Image"
-                                style="margin-right: 0px;">
-
-
-                        </div>
-                        <div class="col-sm-6 col-md-6 col-lg-5">
-                            <div class="row course-content">
-                                <div class="col-sm-6 col-md-6 col-lg-5" style="padding-left: 0px; padding-right: 0px;">
-                                    <span class="course-name">
-                                        Course Name
-                                    </span>
+                    <div *ngIf="courses.length > 0; else noCoursesMessage">
+                        <div *ngFor="let course of courses">
+                            <div class="row" style="padding-top: 20px;">
+                                <div id="ok" class="col-sm-3 col-md-3 col-lg-2">
+                                    <img src="assets/Rectangle 42.png" class="course-img" alt="Book Image"
+                                        style="margin-right: 0px;">
                                 </div>
-                                <div class="col-sm-6 col-md-6 col-lg-6" style="padding-left: 0px;">
-                                    <i class="fa-solid fa-pen-to-square fa-sm"
-                                        style="color: #428f51; padding-left: 0px;"></i>
-                                    <i class="fa-solid fa-trash fa-sm" style="color: #e1143d; padding-left: 5px;"></i>
-                                    <!-- Replace "fa-icon-class" with the actual icon class -->
+                                <div class="col-sm-6 col-md-6 col-lg-5">
+                                    <div class="row course-content">
+                                        <div class="col-sm-6 col-md-6 col-lg-5"
+                                            style="padding-left: 0px; padding-right: 0px;">
+                                            <span class="course-name">
+                                                {{ course.title }}
+                                            </span>
+                                        </div>
+                                        <div class="col-sm-6 col-md-6 col-lg-6" style="padding-left: 0px;">
+                                            <i class="fa-solid fa-pen-to-square fa-sm"
+                                                style="color: #428f51; padding-left: 0px;"></i>
+                                            <i class="fa-solid fa-trash fa-sm"
+                                                style="color: #e1143d; padding-left: 5px;"></i>
+                                            <!-- Replace "fa-icon-class" with the actual icon class -->
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <span class="students-no">
+                                            0 Students
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div class="row">
-                                <span class="students-no">
-                                    0 Students
-                                </span>
-                            </div>
-
+                            <!--Bottom Line-->
+                            <div class="line" [ngClass]="{'custom-class': isSmallScreen}"
+                                [ngStyle]="{'width.px': isSmallScreen ? 230 : null}"></div>
                         </div>
                     </div>
 
-                    <!--Bottom Line-->
-                    <div class="line" [ngClass]="{'custom-class': isSmallScreen}"
-                        [ngStyle]="{'width.px': isSmallScreen ? 230 : null}"></div>
-
-
-
-
-
-
-
-
+                    <ng-template #noCoursesMessage>
+                        <p class="nolist">No courses to display.</p>
+                    </ng-template>
 
 
                 </div>

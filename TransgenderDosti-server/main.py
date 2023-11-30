@@ -145,18 +145,21 @@ def signup():
         if role == 'teacher':
             # If the role is a teacher, insert into the teacher table
             cursor.execute("INSERT INTO teacher (user_id) VALUES (%s)", (user_id,))
-
+            user_type = 'teacher'
         elif role == 'learner':
             # If the role is a learner, insert into the learner table
             cursor.execute("INSERT INTO learner (user_id) VALUES (%s)", (user_id,))
+            user_type = 'learner'
 
         mysql.connection.commit()
         cursor.close()
 
-        return jsonify({'success': True, 'user_id': user_id}), 200
+        # Return user information
+        return jsonify({'success': True, 'user_id': user_id, 'name': full_name, 'email': email, 'user_type': user_type}), 200
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+
 
 
 @app.route('/signin', methods=['POST'])
@@ -175,8 +178,8 @@ def signin():
         if not user:
             return jsonify({'error': 'Invalid credentials'}), 401
 
-        # Get the user_id from the tuple
-        user_id = user[0]
+        # Get user information
+        user_id, user_name, user_email = user[0], user[1], user[2]
 
         # Check if the user is a teacher
         cursor.execute("SELECT * FROM teacher WHERE user_id = %s", (user_id,))
@@ -184,7 +187,7 @@ def signin():
 
         if teacher:
             # User is a teacher
-            return jsonify({'success': True, 'user_type': 'teacher'}), 200
+            return jsonify({'success': True, 'user_type': 'teacher', 'user_id': user_id, 'name': user_name, 'email': user_email}), 200
 
         # Check if the user is a learner
         cursor.execute("SELECT * FROM learner WHERE user_id = %s", (user_id,))
@@ -192,13 +195,61 @@ def signin():
 
         if learner:
             # User is a learner
-            return jsonify({'success': True, 'user_type': 'learner'}), 200
+            return jsonify({'success': True, 'user_type': 'learner', 'user_id': user_id, 'name': user_name, 'email': user_email}), 200
 
         # If the user is not a teacher or learner, return an error
         return jsonify({'error': 'User type not found'}), 500
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+
+
+
+
+    # Courses
+
+@app.route('/get_courses', methods=['GET'])
+def get_courses():
+    try:
+        user_id = request.args.get('user_id')
+
+        cursor = mysql.connection.cursor()
+
+        # Get teacher_id based on user_id
+        cursor.execute("SELECT teacher_id FROM teacher WHERE user_id = %s", (user_id,))
+        teacher_result = cursor.fetchone()
+
+        if not teacher_result:
+            return jsonify({'error': 'Teacher not found for the given user ID'}), 404
+
+        teacher_id = teacher_result[0]
+
+        # Get courses based on teacher_id
+        cursor.execute("SELECT * FROM course WHERE teacher_id = %s", (teacher_id,))
+        courses = cursor.fetchall()
+
+        course_list = []
+        for course in courses:
+            course_data = {
+                'course_id': course[0],
+                'title': course[2],
+                'course_code': course[3],
+                'details': course[4],
+                'course_for': course[5],
+                'course_fee': course[6],
+                'course_duration': course[7],
+                'course_video_url': course[8],
+            }
+            course_list.append(course_data)
+
+        cursor.close()
+
+        return jsonify({'success': True, 'courses': course_list}), 200
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
