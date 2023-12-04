@@ -16,4 +16,8 @@ export interface SignInResponse {
     success: boolean;
     user_type: 'teacher' | 'learner';
 }
+
+export interface TeacherPersonal{
+    
+}
   

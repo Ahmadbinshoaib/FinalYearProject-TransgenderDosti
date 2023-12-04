@@ -10,13 +10,22 @@
             <!-- Bio -->
             <div class="row row-bio">
 
-                <div class="row row-picture " style="display: flex; justify-content: center; align-items: center;">
-                    <img src="assets/Group.png" class="profile-img" alt="Book Image">
+                <!-- teacher-profile.component.html -->
+                <!-- teacher-profile.component.html -->
+                <div class="row row-picture" style="display: flex; justify-content: center; align-items: center;">
+                    <img [src]="imagePath" class="profile-img" alt="Book Image">
 
-                    <div class="circle">
+                    <div class="circle" (click)="showFileInput()">
                         <i class="fas fa-plus"></i>
                     </div>
+
+                    <input #fileInput type="file" accept="image/*" (change)="onFileSelected($event)"
+                        style="display: none;">
                 </div>
+
+
+
+
 
 
                 <div class="row">
@@ -25,61 +34,57 @@
 
 
                 <div class="row">
-                    <form #signUpform2="ngForm">
+                    <form #personalInfo="ngForm" (ngSubmit)="createTeacherProfilePersonal(personalInfo.value)">
 
                         <div class="row">
                             <div class="span content bio">Bio</div>
                         </div>
 
                         <div class="form-group small-input">
-                            <input type="text" name="fullname" class="form-control form-control-sm"
+                            <input type="text" name="bio" class="form-control form-control-sm"
                                 placeholder="Tell Transgender Dosti about yourself in 150 characters or less. Who are you? How are you using Transgender Dosti."
                                 ngModel required>
                         </div>
 
                         <div class="row">
 
-                            <div class="col-6">
 
-                                <div class="span content city">City/Town</div>
-
-                                <div class="form-group small-input">
-                                    <input type="text" name="fullname" class="form-control form-control-sm"
-                                        placeholder="Enter your city" ngModel required>
-                                </div>
-
-                            </div>
 
 
 
                             <div class="col-6">
                                 <div class="span content country">Country</div>
-
                                 <select class="form-select form-group small-input form-control form-control-sm"
                                     aria-label="Default select example" name="country" style="padding-left: 14px;"
-                                    [(ngModel)]="selectedCountry" (change)="setPhoneCode()">
+                                    [(ngModel)]="selectedCountry" (change)="onCountryChange()" ngModel required>
+                                    <option value="" selected>Select a country</option>
                                     <option *ngFor="let country of countries" [ngValue]="country">
-                                        <!-- Add an image to each option -->
-                                        <img [src]="country.flag" alt="{{ country.name }} Flag"
-                                            style="width: 20px; height: auto; margin-right: 5px;" />
 
                                         {{ country.name }}
+
                                     </option>
                                 </select>
 
 
 
+                            </div>
 
+                            <div class="col-6">
 
+                                <div class="span content city">City/Town</div>
 
+                                <select class="form-select form-group small-input form-control form-control-sm"
+                                    aria-label="Default select example" name="city" style="padding-left: 14px;" ngModel
+                                    required>
+                                    <option value="" disabled selected>Select a city</option>
+                                    <option *ngFor=" let city of cities" [ngValue]="city">{{ city }}</option>
 
-
-
-
+                                </select>
 
 
 
                             </div>
+
                         </div>
 
                         <div class="row">
@@ -89,9 +94,26 @@
                                 <div class="span content city">Phone Number</div>
 
                                 <div class="form-group small-input">
-                                    <input type="text" name="fullname" class="form-control form-control-sm"
-                                        placeholder="Enter your phone number" ngModel required>
+                                    <div class="input-group">
+                                        <!-- Wrap input and additions in input-group for styling -->
+                                        <div class="input-group-prepend"
+                                            *ngIf="selectedCountry && countries.indexOf(selectedCountry) !== 0">
+                                            <!-- Add an image or icon here -->
+                                            <span class="input-group-text"
+                                                style="padding-left: 11px; padding-right: 5px;">
+                                                <img [src]="selectedCountry.flag" alt="Country Flag" height="15px"
+                                                    width="17px" style="padding-right: 3px;">
+                                                {{''+ selectedCountry.code }}
+                                            </span>
+                                        </div>
+                                        <!-- Input field with ngModel and required -->
+                                        <input type="number" name="phonenumber" class="form-control form-control-sm"
+                                            placeholder="Enter your phone number" ngModel required>
+                                    </div>
                                 </div>
+
+
+
 
                             </div>
 
@@ -101,11 +123,12 @@
                                 <div class="span content country">Gender</div>
 
                                 <select class="form-select form-group small-input form-control form-control-sm"
-                                    aria-label="Default select example" style="padding-left: 14px;">
-                                    <option selected>Select your gender</option>
-                                    <option value="1">Male</option>
-                                    <option value="2">Female</option>
-                                    <option value="3">Transgender/Others</option>
+                                    aria-label="Default select example" name="gender" style="padding-left: 14px;"
+                                    ngModel required>
+                                    <option value="" disabled selected>Select gender</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Transgender/Others">Transgender/Others</option>
                                 </select>
 
                             </div>
@@ -258,16 +281,19 @@
                             <!-- CNIC -->
                             <div class="col-6">
                                 <div class="row justify-content-end">
-                                    <div class="col-2" style="padding-top: 10px; padding-right: 0px;">
-                                        <div class="circle2">
-                                            <i class="fa-solid fa-upload"></i>
-                                        </div>
+                                  <div class="col-2" style="padding-top: 10px; padding-right: 0px;">
+                                    <div class="circle2" (click)="openFileInput2()">
+                                      <i class="fa-solid fa-upload"></i>
                                     </div>
-                                    <div class="col-4 sf text-right">
-                                        <span class="social-profile">Upload CNIC</span>
-                                    </div>
+                                  </div>
+                                  <div class="col-4 sf text-right">
+                                    <span class="social-profile">Upload CNIC</span>
+                                  </div>
                                 </div>
-                            </div>
+                              </div>
+                              
+                              <input #fileInput2 type="file" accept="image/*" style="display: none;" (change)="onFileSelected2($event)">
+                              
 
                         </div>
 
@@ -276,7 +302,8 @@
 
 
                         <div class="btn-signup" style="display: flex; justify-content: center; align-items: center;">
-                            <button type="submit" class="btn custombtn2" style="margin-right: 10px; ">SAVE </button>
+                            <button type="submit" class="btn custombtn2" style="margin-right: 10px; "
+                                [disabled]="!personalInfo.valid">SAVE </button>
                         </div>
 
                     </form>

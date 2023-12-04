@@ -11,6 +11,7 @@ export class NavHeaderComponent {
   teacherEmail: String = '';
   learnerEmail: String = '';
   profilePictureUrl: string = ''
+  userId:string=''
 
   constructor(private router: Router) {
 
@@ -30,7 +31,8 @@ export class NavHeaderComponent {
             try {
               const teacherData = JSON.parse(teacherStore!);
 
-              if (teacherData && teacherData.email) {
+              if (teacherData && teacherData.email && teacherData.user_id) {
+                this.userId = teacherData.user_id
                 console.log(teacherData.email);
                 this.teacherEmail = teacherData.email.split('@')[0];
                 if (teacherData.profile_picture) {

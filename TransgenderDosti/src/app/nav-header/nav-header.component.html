@@ -103,7 +103,7 @@
                                 {{teacherEmail}}
                             </button>
                             <div class="dropdown-menu fontstyle" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" routerLink="teacher-profile" href="#">User Profile</a>
+                                <a class="dropdown-item" [routerLink]="['/teacher-profile', userId]">User Profile</a>
                                 <a class="dropdown-item" href="#">Settings</a>
                                 <a class="dropdown-item" (click)="teacherLogout()" href="#">Logout</a>
                             </div>

@@ -3,6 +3,7 @@ from flask_mysqldb import MySQL
 from google.oauth2 import id_token
 from google.auth.transport import requests
 from flask_cors import CORS  # Import CORS
+import base64
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes in your app
@@ -250,6 +251,97 @@ def get_courses():
         return jsonify({'error': str(e)}), 500
 
 
+# @app.route('/teacher_profile_personalinfo', methods=['POST'])
+# def teacher_profile_personalinfo():
+#     try:
+#         data = request.json
+#         userid = data.get('user_id')
+#         print('userid')
+#         print(userid)
+#         phone_number = data.get('phonenumber')
+#         bio = data.get('bio')
+#         print(bio)
+#         city_town = data.get('city')
+#         gender = data.get('gender')
+#         cnic_picture = data.get('cnic_picture')  # Assuming this is a file path or base64 encoded image
+#         country = data.get('country')
+#         profile_picture = data.get('profile_picture')  # Assuming this is a file path or base64 encoded image
+#
+#         cursor = mysql.connection.cursor()
+#
+#         # Check if the teacher exists based on the provided user ID
+#         cursor.execute("SELECT * FROM teacher WHERE user_id = %s", (userid,))
+#         teacher = cursor.fetchone()
+#
+#         if not teacher:
+#             return jsonify({'error': 'Teacher not found for the given user ID'}), 404
+#
+#         # Update the teacher's profile personal information
+#         cursor.execute("""
+#             UPDATE teacher
+#             SET phone_number = %s, bio = %s, city_town = %s, gender = %s,
+#                 cnic_picture = %s, country = %s, profile_picture = %s
+#             WHERE user_id = %s
+#         """, (phone_number, bio, city_town, gender, cnic_picture, country, profile_picture, userid))
+#
+#         mysql.connection.commit()
+#         cursor.close()
+#
+#         return jsonify({'success': True, 'message': 'Teacher profile personal information updated successfully'}), 200
+#
+#     except Exception as e:
+#         return jsonify({'error': str(e)}), 500
 
+@app.route('/teacher_profile_personalinfo', methods=['POST', 'OPTIONS'])
+def teacher_profile_personalinfo():
+    if request.method == 'OPTIONS':
+        # Handle OPTIONS request for CORS
+        headers = {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'POST',
+            'Access-Control-Allow-Headers': 'Content-Type',
+        }
+        return ('', 204, headers)
+
+    try:
+        data = request.json
+        userid = data.get('user_id')
+        phone_number = data.get('phonenumber')
+        bio = data.get('bio')
+        city_town = data.get('city')
+        gender = data.get('gender')
+
+        # Get Blob data directly from the request body
+        cnic_picture_blob_data = request.json.get('cnic_picture', '')
+        profile_picture_blob_data = request.json.get('profile_picture', '')
+
+        country = data.get('country')
+
+        cursor = mysql.connection.cursor()
+
+        # Check if the teacher exists based on the provided user ID
+        cursor.execute("SELECT * FROM teacher WHERE user_id = %s", (userid,))
+        teacher = cursor.fetchone()
+
+        if not teacher:
+            return jsonify({'error': 'Teacher not found for the given user ID'}), 404
+
+        # Update the teacher's profile personal information
+        cursor.execute("""
+            UPDATE teacher
+            SET phone_number = %s, bio = %s, city_town = %s, gender = %s,
+                cnic_picture = %s, country = %s, profile_picture = %s
+            WHERE user_id = %s
+        """, (phone_number, bio, city_town, gender, cnic_picture_blob_data, country, profile_picture_blob_data, userid))
+
+        mysql.connection.commit()
+        cursor.close()
+
+        return jsonify({'success': True, 'message': 'Teacher profile personal information updated successfully'}), 200
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+    
 if __name__ == '__main__':
     app.run(debug=True)

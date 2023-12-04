@@ -399,10 +399,19 @@
     display: inline-block;
     margin-right: 5px;
     background-size: cover;
-  }
+}
 
-  
-  
+
+.input-group-prepend .input-group-text {
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    font-family: Karla;
+    font-size: 11px;
+    color: #606060;
+    height: 37px;
+    background-color: white;
+
+}
 
 
 
