@@ -310,7 +310,6 @@ export class TeacherProfileComponent implements OnInit {
           console.warn(this.userIdParam)
           this.loadTeacherEducationInfo(this.userIdParam)
 
-
         }
 
 

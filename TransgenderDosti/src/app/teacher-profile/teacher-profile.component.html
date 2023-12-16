@@ -398,7 +398,7 @@
                                                     <div class="form-group small-input">
                                                         <input type="text" name="degree_name"
                                                             class="form-control form-control-sm"
-                                                            placeholder="Enter your degree name" ngModel required>
+                                                            placeholder="Enter your degree name" ngModel required >
                                                     </div>
 
 
@@ -531,7 +531,7 @@
                                                     <div class="form-group small-input">
                                                         <input type="text" name="degree_name"
                                                             class="form-control form-control-sm"
-                                                            placeholder="Enter your degree name" ngModel required>
+                                                            placeholder="Enter your degree name" [(ngModel)]="educationInfoById.degree_name" required>
                                                     </div>
 
 
@@ -544,7 +544,7 @@
                                                     <div class="form-group small-input">
                                                         <input type="text" name="field_of_study"
                                                             class="form-control form-control-sm"
-                                                            placeholder="Enter your field of study" ngModel required>
+                                                            placeholder="Enter your field of study" [(ngModel)]="educationInfoById.field_of_study" required>
                                                     </div>
 
 
@@ -556,10 +556,11 @@
 
                                                     <div class="row">
                                                         <div class="col-6">
+                                                           
 
                                                             <div class="span edu-content city">Start Date</div>
                                                             <input type="date" name="start_date"
-                                                                class="form-control form-control-sm" ngModel required>
+                                                                class="form-control form-control-sm" [(ngModel)]="educationInfoById.start_date" required>
 
                                                         </div>
                                                         <div class="col-6">
