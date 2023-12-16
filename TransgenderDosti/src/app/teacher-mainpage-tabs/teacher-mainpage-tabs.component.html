@@ -69,9 +69,10 @@
                     <div *ngIf="courses.length > 0; else noCoursesMessage">
                         <div *ngFor="let course of courses">
                             <div class="row" style="padding-top: 20px;">
-                                <div id="ok" class="col-sm-3 col-md-3 col-lg-2">
+                               
+                                <div id="ok" class="col-sm-3 col-md-3 col-lg-2" (click)="navigateToCourseDetails()">
                                     <img src="assets/Rectangle 42.png" class="course-img" alt="Book Image"
-                                        style="margin-right: 0px;">
+                                        style="margin-right: 0px;" >
                                 </div>
                                 <div class="col-sm-6 col-md-6 col-lg-5">
                                     <div class="row course-content">

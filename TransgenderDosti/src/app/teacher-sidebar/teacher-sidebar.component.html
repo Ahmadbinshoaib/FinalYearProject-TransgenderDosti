@@ -1,0 +1,17 @@
+<mat-sidenav-container>
+
+    <mat-sidenav mode="side" id="sidenav" #sidenav [class.menu-open]="isMenuOpen" [class.menu-close]="!isMenuOpen"
+        opened>
+        <i class="fa-solid fa-bars" (click)="onToolbarMenuToggle()"></i>
+        <div class="row course-code">
+            <span>Course Name</span>
+
+        </div>
+        <a routerLink="/teacher-course-details/teacher-course-dashboard">Dashboard</a>
+    </mat-sidenav>
+
+    <mat-sidenav-content [ngStyle]="{'margin-left.px' : contentMargin}">
+
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container>

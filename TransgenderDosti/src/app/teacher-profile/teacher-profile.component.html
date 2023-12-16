@@ -13,7 +13,7 @@
                 <!-- teacher-profile.component.html -->
                 <!-- teacher-profile.component.html -->
                 <div class="row row-picture" style="display: flex; justify-content: center; align-items: center;">
-                    <img [src]="imagePath" class="profile-img" alt="Book Image">
+                    <img [src]="imagePath" class="profile-img" alt="Profile Image">
 
                     <div class="circle" (click)="showFileInput()">
                         <i class="fas fa-plus"></i>
@@ -43,7 +43,7 @@
                         <div class="form-group small-input">
                             <input type="text" name="bio" class="form-control form-control-sm"
                                 placeholder="Tell Transgender Dosti about yourself in 150 characters or less. Who are you? How are you using Transgender Dosti."
-                                ngModel required>
+                                [(ngModel)]="teacherData.bio" required>
                         </div>
 
                         <div class="row">
@@ -56,7 +56,7 @@
                                 <div class="span content country">Country</div>
                                 <select class="form-select form-group small-input form-control form-control-sm"
                                     aria-label="Default select example" name="country" style="padding-left: 14px;"
-                                    [(ngModel)]="selectedCountry" (change)="onCountryChange()" ngModel required>
+                                    [(ngModel)]="selectedCountry" (change)="onCountryChange()" required>
                                     <option value="" selected>Select a country</option>
                                     <option *ngFor="let country of countries" [ngValue]="country">
 
@@ -74,11 +74,11 @@
                                 <div class="span content city">City/Town</div>
 
                                 <select class="form-select form-group small-input form-control form-control-sm"
-                                    aria-label="Default select example" name="city" style="padding-left: 14px;" ngModel
-                                    required>
+                                    aria-label="Default select example" name="city" style="padding-left: 14px;"
+                                    [(ngModel)]="teacherData.city_town" required>
                                     <option value="" disabled selected>Select a city</option>
-                                    <option *ngFor=" let city of cities" [ngValue]="city">{{ city }}</option>
-
+                                    <option *ngFor="let city of selectedCountry?.cities" [ngValue]="city">{{ city }}
+                                    </option>
                                 </select>
 
 
@@ -89,7 +89,7 @@
 
                         <div class="row">
 
-                            <div class="col-sm-12 col-md-12 col-lg-6">
+                            <div class="col-sm-6 col-md-6 col-lg-6">
 
                                 <div class="span content city">Phone Number</div>
 
@@ -108,7 +108,8 @@
                                         </div>
                                         <!-- Input field with ngModel and required -->
                                         <input type="number" name="phonenumber" class="form-control form-control-sm"
-                                            placeholder="Enter your phone number" ngModel required>
+                                            placeholder="Enter your phone number" [(ngModel)]="teacherData.phone_number"
+                                            required>
                                     </div>
                                 </div>
 
@@ -119,12 +120,12 @@
 
 
 
-                            <div class="col-sm-12 col-md-12 col-lg-6">
+                            <div class="col-sm-6 col-md-6 col-lg-6">
                                 <div class="span content country">Gender</div>
 
                                 <select class="form-select form-group small-input form-control form-control-sm"
                                     aria-label="Default select example" name="gender" style="padding-left: 14px;"
-                                    ngModel required>
+                                    [(ngModel)]="teacherData.gender" required>
                                     <option value="" disabled selected>Select gender</option>
                                     <option value="Male">Male</option>
                                     <option value="Female">Female</option>
@@ -281,19 +282,20 @@
                             <!-- CNIC -->
                             <div class="col-6">
                                 <div class="row justify-content-end">
-                                  <div class="col-2" style="padding-top: 10px; padding-right: 0px;">
-                                    <div class="circle2" (click)="openFileInput2()">
-                                      <i class="fa-solid fa-upload"></i>
+                                    <div class="col-2" style="padding-top: 10px; padding-right: 0px;">
+                                        <div class="circle2" (click)="openFileInput2()">
+                                            <i class="fa-solid fa-upload"></i>
+                                        </div>
                                     </div>
-                                  </div>
-                                  <div class="col-4 sf text-right">
-                                    <span class="social-profile">Upload CNIC</span>
-                                  </div>
+                                    <div class="col-4 sf text-right">
+                                        <span class="social-profile">Upload CNIC</span>
+                                    </div>
                                 </div>
-                              </div>
-                              
-                              <input #fileInput2 type="file" accept="image/*" style="display: none;" (change)="onFileSelected2($event)">
-                              
+                            </div>
+
+                            <input #fileInput2 type="file" accept="image/*" style="display: none;"
+                                (change)="onFileSelected2($event)">
+
 
                         </div>
 
@@ -322,7 +324,8 @@
             <!-- Personal -->
             <!-- Personal -->
             <!-- Personal -->
-            <div class="row hello-row" style="background-color: white; position: relative;">
+            <div class="row hello-row" id="main-content" style="background-color: white; position: relative; ">
+
 
                 <div class="row"
                     style="padding-right: 0px; margin-right: 0px; margin-left: 0px; padding-left: 0px; position: relative;">
@@ -331,146 +334,428 @@
                         Professional Information
                     </div>
                 </div>
+                <div class="scrollable-div">
 
-                <!--Educational-->
+                    <!--Educational-->
 
-                <div class="row" style="padding-top: 5px;">
+                    <div class="row" style="padding-top: 5px;">
 
-                    <div class="col-9">
-                        <span class="educational">Add your educational background</span>
-                    </div>
-                    <div class="col-3 d-flex justify-content-end">
-                        <div class="circle3">
-                            <i class="fas fa-plus"></i>
+                        <div class="col-9">
+                            <span class="educational">Add your educational background</span>
                         </div>
-                    </div>
-
-
-
-
-
-                </div>
-
-                <div class="row" style="padding-top: 5px; padding-bottom: 5px;">
-
-                    <div class="col-2 side-bar">
-                        <!-- Content of col-2 goes here -->
-                    </div>
-
-                    <div class="col-10 education-bar d-flex justify-content-between align-items-center">
-                        <div>
-                            <div class="row degree">
-                                Bachelors of Computer Science , Computer Science
-                            </div>
-                            <div class="row institute">
-                                University of Engineering and Technology
-                            </div>
-                            <div class="row institute">
-                                10\2020 - Current
+                        <div class="col-3 d-flex justify-content-end">
+                            <div class="circle3" data-bs-toggle="modal" data-bs-target="#education">
+                                <i class="fas fa-plus"></i>
                             </div>
                         </div>
 
-                        <div class="edit-icon">
-                            <!-- Edit icon goes here, you can use Font Awesome or any other icon library -->
-                            <i class="fas fa-edit"></i>
-                        </div>
-                    </div>
-                </div>
+                        <!--Educational Background Modal-->
+                        <!--Educational Background Modal-->
+                        <!--Educational Background Modal-->
+
+                        <div class="modal modal-lg fade" id="education" #education data-bs-backdrop="static"
+                            data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Educational Background
+                                        </h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+
+                                        <div class="row ed-note">
+                                            Please share your educational background, including the names of
+                                            universities,
+                                            colleges, or institutions you attended. If you did not pursue higher
+                                            education,
+                                            kindly mention your school or any relevant training
+                                        </div>
+
+
+                                        <form #educationForm="ngForm"
+                                            (ngSubmit)="saveTeacherEducationalInfo(educationForm.value)">
+                                            <div class="row">
+
+
+                                                <div class="col-6">
+                                                    <div class="span edu-content country">Institution Name</div>
+                                                    <div class="form-group small-input">
+                                                        <input type="text" name="institution_name"
+                                                            class="form-control form-control-sm"
+                                                            placeholder="Enter your institution name" ngModel required>
+                                                    </div>
 
 
 
-                <!--Job Details-->
+                                                </div>
 
-                <div class="row" style="padding-top: 5px;">
+                                                <div class="col-6">
 
-                    <div class="col-9">
-                        <span class="educational">Add your work experience</span>
-                    </div>
-                    <div class="col-3 d-flex justify-content-end">
-                        <div class="circle3">
-                            <i class="fas fa-plus"></i>
-                        </div>
-                    </div>
+                                                    <div class="span edu-content city">Degree Name</div>
+                                                    <div class="form-group small-input">
+                                                        <input type="text" name="degree_name"
+                                                            class="form-control form-control-sm"
+                                                            placeholder="Enter your degree name" ngModel required>
+                                                    </div>
 
 
 
+                                                </div>
+
+                                                <div class="col-6">
+
+                                                    <div class="span edu-content city">Field of Study</div>
+                                                    <div class="form-group small-input">
+                                                        <input type="text" name="field_of_study"
+                                                            class="form-control form-control-sm"
+                                                            placeholder="Enter your field of study" ngModel required>
+                                                    </div>
 
 
-                </div>
 
-                <div class="row" style="padding-top: 5px; padding-bottom: 5px;">
+                                                </div>
 
-                    <div class="col-2 side-bar">
-                        <!-- Content of col-2 goes here -->
-                    </div>
 
-                    <div class="col-10 education-bar d-flex justify-content-between align-items-center">
-                        <div>
-                            <div class="row degree">
-                                Bachelors of Computer Science , Computer Science
+                                                <div class="col-6" style="padding-left: 15px;">
+
+                                                    <div class="row">
+                                                        <div class="col-6">
+
+                                                            <div class="span edu-content city">Start Date</div>
+                                                            <input type="date" name="start_date"
+                                                                class="form-control form-control-sm" ngModel required>
+
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <div class="row" style="margin-right: 2px;">
+                                                                <div class="span edu-content city">End Date</div>
+                                                                <input type="date" name="end_date" [(ngModel)]="endDate"
+                                                                    [disabled]="isCurrentChecked"
+                                                                    (change)="onEndDateChange()"
+                                                                    class="form-control form-control-sm" ngModel>
+                                                            </div>
+
+                                                            <div class="row">
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" name="is_current"
+                                                                        type="checkbox" value="" id="flexCheckDefault"
+                                                                        style="margin-top: 7px;"
+                                                                        [(ngModel)]="isCurrentChecked"
+                                                                        (change)="onCurrentChange()">
+                                                                    <label class="form-check-label"
+                                                                        for="flexCheckDefault">
+                                                                        Current
+                                                                    </label>
+                                                                </div>
+
+                                                            </div>
+
+
+
+                                                        </div>
+                                                    </div>
+
+
+
+                                                </div>
+
+
+                                            </div>
+
+                                            <div class="modal-footer" style="margin-top: 10px;">
+
+
+                                                <button type="button edbtn" data-bs-dismiss="modal"
+                                                    style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                                                    class="btn btn-danger">Close</button>
+                                                <button type="submit"
+                                                    style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                                                    class="btn btn-success" data-bs-dismiss="modal"
+                                                    [disabled]="!educationForm.valid">Save</button>
+
+
+                                            </div>
+                                        </form>
+
+                                    </div>
+
+                                </div>
                             </div>
-                            <div class="row institute">
-                                University of Engineering and Technology
+                        </div>
+
+                        <div class="modal modal-lg fade" id="editeducation" #editeducation data-bs-backdrop="static"
+                            data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit Educational Background
+                                        </h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+
+                                        <div class="row ed-note">
+                                            Please share your educational background, including the names of
+                                            universities,
+                                            colleges, or institutions you attended. If you did not pursue higher
+                                            education,
+                                            kindly mention your school or any relevant training
+                                        </div>
+
+
+                                        <form #educationForm2="ngForm"
+                                            (ngSubmit)="editTeacherEducationalInfo(educationForm2.value)">
+                                            <div class="row">
+
+
+                                                <div class="col-6">
+                                                    <div class="span edu-content country">Institution Name</div>
+                                                    <div class="form-group small-input">
+                                                        <input  type="text" name="institution_name"
+                                                            class="form-control form-control-sm"
+                                                            placeholder="Enter your institution name" [(ngModel)]="educationInfoById.institution_name" required>
+                                                    </div>
+
+
+
+                                                </div>
+
+                                                <div class="col-6">
+
+                                                    <div class="span edu-content city">Degree Name</div>
+                                                    <div class="form-group small-input">
+                                                        <input type="text" name="degree_name"
+                                                            class="form-control form-control-sm"
+                                                            placeholder="Enter your degree name" ngModel required>
+                                                    </div>
+
+
+
+                                                </div>
+
+                                                <div class="col-6">
+
+                                                    <div class="span edu-content city">Field of Study</div>
+                                                    <div class="form-group small-input">
+                                                        <input type="text" name="field_of_study"
+                                                            class="form-control form-control-sm"
+                                                            placeholder="Enter your field of study" ngModel required>
+                                                    </div>
+
+
+
+                                                </div>
+
+
+                                                <div class="col-6" style="padding-left: 15px;">
+
+                                                    <div class="row">
+                                                        <div class="col-6">
+
+                                                            <div class="span edu-content city">Start Date</div>
+                                                            <input type="date" name="start_date"
+                                                                class="form-control form-control-sm" ngModel required>
+
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <div class="row" style="margin-right: 2px;">
+                                                                <div class="span edu-content city">End Date</div>
+                                                                <input type="date" name="end_date" [(ngModel)]="endDate"
+                                                                    [disabled]="isCurrentChecked"
+                                                                    (change)="onEndDateChange()"
+                                                                    class="form-control form-control-sm" ngModel>
+                                                            </div>
+
+                                                            <div class="row">
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" name="is_current"
+                                                                        type="checkbox" value="" id="flexCheckDefault"
+                                                                        style="margin-top: 7px;"
+                                                                        [(ngModel)]="isCurrentChecked"
+                                                                        (change)="onCurrentChange()">
+                                                                    <label class="form-check-label"
+                                                                        for="flexCheckDefault">
+                                                                        Current
+                                                                    </label>
+                                                                </div>
+
+                                                            </div>
+
+
+
+                                                        </div>
+                                                    </div>
+
+
+
+                                                </div>
+
+
+                                            </div>
+
+                                            <div class="modal-footer" style="margin-top: 10px;">
+
+
+                                                <button type="button edbtn" data-bs-dismiss="modal"
+                                                    style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                                                    class="btn btn-danger">Close</button>
+                                                <button type="submit"
+                                                    style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                                                    class="btn btn-success" data-bs-dismiss="modal"
+                                                    [disabled]="!educationForm2.valid">Edit</button>
+
+
+                                            </div>
+                                        </form>
+
+                                    </div>
+
+                                </div>
                             </div>
-                            <div class="row institute">
-                                10\2020 - Current
+                        </div>
+
+                        <!--Educational Background Modal-->
+                        <!--Educational Background Modal-->
+                        <!--Educational Background Modal-->
+
+
+
+
+
+                    </div>
+
+                    <div class="row" *ngFor="let ed of educationalInfo" style="padding-top: 5px; padding-bottom: 5px;">
+
+                        <div class="col-2 side-bar">
+                            <!-- Content of col-2 goes here -->
+                        </div>
+
+                        <div class="col-10 education-bar d-flex justify-content-between align-items-center">
+                            <div>
+                                <div class="row degree">
+
+                                    {{ ed.degree_name }}
+                                </div>
+                                <div class="row institute">
+                                    {{ ed.institution_name }}
+                                </div>
+                                <div class="row institute">
+                                    {{ formatDate(ed.start_date) }} -
+                                    <ng-container *ngIf="ed.is_current === 1; else endDate">
+                                        Current
+                                    </ng-container>
+                                    <ng-template #endDate>
+                                        {{ formatDate(ed.end_date) }}
+                                    </ng-template>
+                                </div>
+                            </div>
+
+                            <div class="edit-icon" (click)="openEditModal(ed.educational_background_id)" data-bs-toggle="modal" data-bs-target="#editeducation">
+                                <!-- Edit icon goes here, you can use Font Awesome or any other icon library -->
+                                <i class="fas fa-edit"></i>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <!--Job Details-->
+
+                    <div class="row" style="padding-top: 5px;">
+
+                        <div class="col-9">
+                            <span class="educational">Add your work experience</span>
+                        </div>
+                        <div class="col-3 d-flex justify-content-end">
+                            <div class="circle3">
+                                <i class="fas fa-plus"></i>
                             </div>
                         </div>
 
-                        <div class="edit-icon">
-                            <!-- Edit icon goes here, you can use Font Awesome or any other icon library -->
-                            <i class="fas fa-edit"></i>
+
+
+
+
+                    </div>
+
+                    <div class="row" style="padding-top: 5px; padding-bottom: 5px;">
+
+                        <div class="col-2 side-bar">
+                            <!-- Content of col-2 goes here -->
                         </div>
-                    </div>
-                </div>
 
-                <!--Language-->
+                        <div class="col-10 education-bar d-flex justify-content-between align-items-center">
+                            <div>
+                                <div class="row degree">
+                                    Bachelors of Computer Science , Computer Science
+                                </div>
+                                <div class="row institute">
+                                    University of Engineering and Technology
+                                </div>
+                                <div class="row institute">
+                                    10\2020 - Current
+                                </div>
+                            </div>
 
-                <div class="row" style="padding-top: 5px; padding-bottom: 5px;">
-
-                    <div class="col-6">
-                        <span class="educational">Language Proficiency</span>
-                    </div>
-                    <div class="col-6 d-flex justify-content-end">
-                        <div class="circle3">
-                            <i class="fas fa-plus"></i>
-                        </div>
-                    </div>
-
-                    <div class="row" style="padding-top: 6px;">
-
-                        <div class="col-2 lang-border">English</div>
-                        <div class="col-2 lang-border">Urdu</div>
-                    </div>
-
-
-
-
-
-                </div>
-
-
-                <!--Certificates-->
-
-                <div class="row" style="padding-top: 5px; padding-bottom: 5px;">
-
-                    <div class="col-6">
-                        <span class="educational">Additional Certificates</span>
-                    </div>
-                    <div class="col-6 d-flex justify-content-end">
-                        <div class="circle3">
-                            <i class="fas fa-plus"></i>
+                            <div class="edit-icon">
+                                <!-- Edit icon goes here, you can use Font Awesome or any other icon library -->
+                                <i class="fas fa-edit"></i>
+                            </div>
                         </div>
                     </div>
 
+                    <!--Language-->
+
+                    <div class="row" style="padding-top: 5px; padding-bottom: 5px;">
+
+                        <div class="col-6">
+                            <span class="educational">Language Proficiency</span>
+                        </div>
+                        <div class="col-6 d-flex justify-content-end">
+                            <div class="circle3">
+                                <i class="fas fa-plus"></i>
+                            </div>
+                        </div>
+
+                        <div class="row" style="padding-top: 6px;">
+
+                            <div class="col-2 lang-border">English</div>
+                            <div class="col-2 lang-border">Urdu</div>
+                        </div>
+
+
+
+
+
+                    </div>
+
+
+                    <!--Certificates-->
+
+                    <div class="row" style="padding-top: 5px; padding-bottom: 5px;">
+
+                        <div class="col-6">
+                            <span class="educational">Additional Certificates</span>
+                        </div>
+                        <div class="col-6 d-flex justify-content-end">
+                            <div class="circle3">
+                                <i class="fas fa-plus"></i>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="btn-signup2" style="display: flex; justify-content: center; align-items: center;">
+                        <button type="submit" class="btn custombtn2" style="margin-right: 10px; ">SAVE </button>
+                    </div>
+
+
                 </div>
-
-                <div class="btn-signup2" style="display: flex; justify-content: center; align-items: center;">
-                    <button type="submit" class="btn custombtn2" style="margin-right: 10px; ">SAVE </button>
-                </div>
-
-
-
             </div>
 
 

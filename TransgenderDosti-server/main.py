@@ -1,9 +1,13 @@
+import os
+
 from flask import Flask, request, jsonify
 from flask_mysqldb import MySQL
 from google.oauth2 import id_token
 from google.auth.transport import requests
 from flask_cors import CORS  # Import CORS
 import base64
+from io import BytesIO
+from PIL import Image
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes in your app
@@ -20,36 +24,11 @@ mysql = MySQL(app)
 # Specify your Google API client ID
 CLIENT_ID = '874616982007-pvupdujpjic356kk9cmteqjicfvf47f4.apps.googleusercontent.com'
 
-# @app.route('/authenticate', methods=['POST'])
-# def authenticate_user():
-#     token = request.json.get('idToken', None)
-#     print(token)
-#
-#     if token is None:
-#         return jsonify({'error': 'Invalid token'}), 400
-#
-#     try:
-#         idinfo = id_token.verify_oauth2_token(token, requests.Request(), CLIENT_ID)
-#         userid = idinfo['sub']
-#         name = idinfo.get('name', '')
-#         print(userid)
-#         print(name)
-#
-#         # Check if the user is already in your database and establish a session
-#
-#         # Example: Check if the user is in the database by querying the MySQL database
-#         # cursor = mysql.connection.cursor()
-#         # cursor.execute("SELECT * FROM users WHERE google_id = %s", (userid,))
-#         # user = cursor.fetchone()
-#
-#         # If the user is not in the database, create a new user record
-#
-#         # Return a success response
-#         return jsonify({'success': True}), 200
-#
-#     except ValueError as e:
-#         # Invalid token
-#         return jsonify({'error': 'Invalid token'}), 400
+
+
+
+
+
 
 @app.route('/authenticate', methods=['POST'])
 def authenticate_user():
@@ -119,9 +98,6 @@ def authenticate_user():
         return jsonify({'error': 'Invalid token'}), 400
 
 
-
-
-
 @app.route('/signup', methods=['POST'])
 def signup():
     try:
@@ -160,7 +136,6 @@ def signup():
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
-
 
 
 @app.route('/signin', methods=['POST'])
@@ -250,72 +225,21 @@ def get_courses():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-
-# @app.route('/teacher_profile_personalinfo', methods=['POST'])
-# def teacher_profile_personalinfo():
-#     try:
-#         data = request.json
-#         userid = data.get('user_id')
-#         print('userid')
-#         print(userid)
-#         phone_number = data.get('phonenumber')
-#         bio = data.get('bio')
-#         print(bio)
-#         city_town = data.get('city')
-#         gender = data.get('gender')
-#         cnic_picture = data.get('cnic_picture')  # Assuming this is a file path or base64 encoded image
-#         country = data.get('country')
-#         profile_picture = data.get('profile_picture')  # Assuming this is a file path or base64 encoded image
-#
-#         cursor = mysql.connection.cursor()
-#
-#         # Check if the teacher exists based on the provided user ID
-#         cursor.execute("SELECT * FROM teacher WHERE user_id = %s", (userid,))
-#         teacher = cursor.fetchone()
-#
-#         if not teacher:
-#             return jsonify({'error': 'Teacher not found for the given user ID'}), 404
-#
-#         # Update the teacher's profile personal information
-#         cursor.execute("""
-#             UPDATE teacher
-#             SET phone_number = %s, bio = %s, city_town = %s, gender = %s,
-#                 cnic_picture = %s, country = %s, profile_picture = %s
-#             WHERE user_id = %s
-#         """, (phone_number, bio, city_town, gender, cnic_picture, country, profile_picture, userid))
-#
-#         mysql.connection.commit()
-#         cursor.close()
-#
-#         return jsonify({'success': True, 'message': 'Teacher profile personal information updated successfully'}), 200
-#
-#     except Exception as e:
-#         return jsonify({'error': str(e)}), 500
-
-@app.route('/teacher_profile_personalinfo', methods=['POST', 'OPTIONS'])
+@app.route('/teacher_profile_personalinfo', methods=['POST'])
 def teacher_profile_personalinfo():
-    if request.method == 'OPTIONS':
-        # Handle OPTIONS request for CORS
-        headers = {
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': 'POST',
-            'Access-Control-Allow-Headers': 'Content-Type',
-        }
-        return ('', 204, headers)
-
     try:
         data = request.json
         userid = data.get('user_id')
+        print(userid)
         phone_number = data.get('phonenumber')
         bio = data.get('bio')
+        print(bio)
         city_town = data.get('city')
         gender = data.get('gender')
-
-        # Get Blob data directly from the request body
-        cnic_picture_blob_data = request.json.get('cnic_picture', '')
-        profile_picture_blob_data = request.json.get('profile_picture', '')
-
+        cnic_picture = data.get('cnic_picture')  # Assuming this is a file path or base64 encoded image
         country = data.get('country')
+        profile_picture = data.get('profile_picture')  # Assuming this is a file path or base64 encoded image
+        print(profile_picture)
 
         cursor = mysql.connection.cursor()
 
@@ -332,7 +256,7 @@ def teacher_profile_personalinfo():
             SET phone_number = %s, bio = %s, city_town = %s, gender = %s,
                 cnic_picture = %s, country = %s, profile_picture = %s
             WHERE user_id = %s
-        """, (phone_number, bio, city_town, gender, cnic_picture_blob_data, country, profile_picture_blob_data, userid))
+        """, (phone_number, bio, city_town, gender, cnic_picture, country, profile_picture, userid))
 
         mysql.connection.commit()
         cursor.close()
@@ -342,6 +266,159 @@ def teacher_profile_personalinfo():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-    
+@app.route('/get_teacherprofile_personalinfo', methods=['GET'])
+def get_teacher_data():
+    try:
+        user_id = request.args.get('user_id')
+
+        cursor = mysql.connection.cursor()
+
+        # Check if the teacher exists based on the provided user ID
+        cursor.execute("SELECT * FROM teacher WHERE user_id = %s", (user_id,))
+        teacher = cursor.fetchone()
+
+        if not teacher:
+            return jsonify({'error': 'Teacher not found for the given user ID'}), 404
+
+        # Extract teacher data
+        teacher_data = {
+            'teacher_id': teacher[0],
+            'user_id': teacher[1],
+            'phone_number': teacher[2],
+            'bio': teacher[3],
+            'city_town': teacher[4],
+            'gender': teacher[5],
+            'cnic_picture': teacher[6],
+            'country': teacher[7],
+            'profile_picture': teacher[8],
+        }
+
+        cursor.close()
+
+        return jsonify({'success': True, 'teacher_data': teacher_data}), 200
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
+@app.route('/save_educational_info', methods=['POST'])
+def save_educational_info():
+    try:
+        data = request.json
+        user_id = data.get('user_id')
+
+        cursor = mysql.connection.cursor()
+
+        # Get teacher_id based on user_id
+        cursor.execute("SELECT teacher_id FROM teacher WHERE user_id = %s", (user_id,))
+        teacher_result = cursor.fetchone()
+
+        if not teacher_result:
+            return jsonify({'error': 'Teacher not found for the given user ID'}), 404
+
+        teacher_id = teacher_result[0]
+
+        # Extract educational information from the request data
+        institution_name = data.get('institution_name')
+        degree_name = data.get('degree_name')
+        field_of_study = data.get('field_of_study')
+        start_date = data.get('start_date')
+        end_date = data.get('end_date')
+        is_current = data.get('is_current')
+
+        # Save educational information in the education table
+        cursor.execute("""
+            INSERT INTO educationalbackground
+            (teacher_id, institution_name, degree_name, field_of_study, start_date, end_date, is_current)
+            VALUES (%s, %s, %s, %s, %s, %s, %s)
+        """, (teacher_id, institution_name, degree_name, field_of_study, start_date, end_date, is_current))
+
+        mysql.connection.commit()
+        cursor.close()
+
+        return jsonify({'success': True, 'message': 'Educational information saved successfully'}), 200
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/get_educational_info', methods=['GET'])
+def get_educational_info():
+    try:
+        user_id = request.args.get('user_id')
+
+        cursor = mysql.connection.cursor()
+
+        # Get teacher_id based on user_id
+        cursor.execute("SELECT teacher_id FROM teacher WHERE user_id = %s", (user_id,))
+        teacher_result = cursor.fetchone()
+
+        if not teacher_result:
+            return jsonify({'error': 'Teacher not found for the given user ID'}), 404
+
+        teacher_id = teacher_result[0]
+
+        # Get educational information based on teacher_id
+        cursor.execute("""
+            SELECT *
+            FROM educationalbackground
+            WHERE teacher_id = %s
+        """, (teacher_id,))
+        educational_info = cursor.fetchall()
+
+        educational_list = []
+        for edu_row in educational_info:
+            edu_data = {
+                'educational_background_id': edu_row[0],
+                'institution_name': edu_row[2],
+                'degree_name': edu_row[3],
+                'field_of_study': edu_row[4],
+                'start_date': edu_row[5],
+                'end_date': edu_row[6],
+                'is_current': edu_row[7],
+            }
+            educational_list.append(edu_data)
+
+        cursor.close()
+
+        return jsonify({'success': True, 'educational_info': educational_list}), 200
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/get_educational_info_by_id', methods=['GET'])
+def get_educational_info_by_id():
+    try:
+        educational_id = request.args.get('educational_id')
+
+        cursor = mysql.connection.cursor()
+
+        # Get educational information based on educational_id
+        cursor.execute("""
+            SELECT *
+            FROM educationalbackground
+            WHERE educational_background_id = %s
+        """, (educational_id,))
+        educational_info = cursor.fetchone()
+
+        if not educational_info:
+            return jsonify({'error': 'Educational information not found for the given ID'}), 404
+
+        educational_data = {
+            'educational_background_id': educational_info[0],
+            'institution_name': educational_info[2],
+            'degree_name': educational_info[3],
+            'field_of_study': educational_info[4],
+            'start_date': educational_info[5],
+            'end_date': educational_info[6],
+            'is_current': educational_info[7],
+        }
+
+        cursor.close()
+
+        return jsonify({'success': True, 'educational_info': educational_data}), 200
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
 if __name__ == '__main__':
     app.run(debug=True)

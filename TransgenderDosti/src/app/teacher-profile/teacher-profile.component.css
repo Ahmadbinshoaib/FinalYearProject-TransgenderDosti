@@ -96,7 +96,6 @@
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-
     padding-left: 20px;
 
 }
@@ -654,4 +653,86 @@
         /* Adjust as needed */
 
     }
+}
+
+
+/* Educational Background CSS */
+
+.modal-title {
+    color: #606060;
+    font-family: Karla;
+    font-size: 7px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+
+}
+
+.ed-note {
+    color: #606060;
+    font-family: Karla;
+    font-size: 11px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    padding-left: 14px;
+    padding-top: 0px;
+
+}
+
+.edu-content {
+    color: #606060;
+    font-family: Karla;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    padding-left: 5px;
+
+}
+
+.form-check-label {
+
+    font-family: Karla;
+    font-size: 10px;
+    color: #606060;
+
+}
+
+/* Add this CSS to your stylesheets */
+
+/* Style for the scrollable div */
+.scrollable-div {
+    max-height: 300px;
+    /* Set your desired height */
+    overflow-y: auto;
+    /* Add some padding to avoid scrollbar overlapping content */
+    padding-left: 0px;
+    padding-right: -1px;
+    margin-bottom: 18px;
+}
+
+/* Style for the scrollbar */
+.scrollable-div::-webkit-scrollbar {
+    width: 6px;
+    /* Set your desired width for the scrollbar */
+}
+
+/* Style for the scrollbar track */
+.scrollable-div::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+    /* Set the background color of the scrollbar track */
+}
+
+/* Style for the scrollbar handle */
+.scrollable-div::-webkit-scrollbar-thumb {
+    background-color: #888;
+    /* Set the color of the scrollbar handle */
+}
+
+/* Style for the scrollbar handle on hover */
+.scrollable-div::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+    /* Set the color of the scrollbar handle on hover */
 }

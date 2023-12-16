@@ -1,6 +1,6 @@
 import { Component, HostListener } from '@angular/core';
 import { UserAuthenticationService } from '../Services/user-authentication.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TeacherCoursesService } from '../Services/teacher-courses.service';
 
 @Component({
@@ -17,7 +17,7 @@ export class TeacherMainpageTabsComponent {
     this.activeTab = tabId;
   }
 
-  constructor(private userAuthService: UserAuthenticationService, private activeRoute: ActivatedRoute, private courseService: TeacherCoursesService) {
+  constructor(private userAuthService: UserAuthenticationService, private activeRoute: ActivatedRoute, private courseService: TeacherCoursesService, private router: Router) {
 
   }
 
@@ -79,6 +79,10 @@ export class TeacherMainpageTabsComponent {
 
   checkScreenSize() {
     this.isSmallScreen = window.innerWidth < 576;
+  }
+
+  navigateToCourseDetails() {
+    this.router.navigate(['/teacher-course-details']);
   }
 
 

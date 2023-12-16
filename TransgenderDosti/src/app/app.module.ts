@@ -8,8 +8,6 @@ import {
   GoogleLoginProvider,
   FacebookLoginProvider
 } from '@abacritt/angularx-social-login';
-
-
 import { NavHeaderComponent } from './nav-header/nav-header.component';
 import { EducationHomepageComponent } from './education-homepage/education-homepage.component';
 import { BusinessHomepageComponent } from './business-homepage/business-homepage.component';
@@ -24,6 +22,11 @@ import { provideToastr } from 'ngx-toastr';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { LearnerMainpageComponent } from './learner-mainpage/learner-mainpage.component';
 import { TeacherProfileComponent } from './teacher-profile/teacher-profile.component';
+import { TeacherSidebarComponent } from './teacher-sidebar/teacher-sidebar.component';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+import { TeacherCourseDashboardComponent } from './teacher-course-dashboard/teacher-course-dashboard.component';
+
 
 @NgModule({
   declarations: [
@@ -36,6 +39,8 @@ import { TeacherProfileComponent } from './teacher-profile/teacher-profile.compo
     TeacherMainpageTabsComponent,
     LearnerMainpageComponent,
     TeacherProfileComponent,
+    TeacherSidebarComponent,
+    TeacherCourseDashboardComponent,
 
   ],
   imports: [
@@ -54,6 +59,9 @@ import { TeacherProfileComponent } from './teacher-profile/teacher-profile.compo
     }),
     BrowserAnimationsModule,
     NgSelectModule,
+    MatSidenavModule,
+    MatListModule
+
 
   ],
   providers: [

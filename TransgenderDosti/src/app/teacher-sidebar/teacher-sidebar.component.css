@@ -1,0 +1,75 @@
+.mat-sidenav-container {
+    height: calc(250vh - 115vh);
+}
+
+.mat-sidenav {
+    
+    background-color: rgb(255, 255, 255);
+}
+
+.mat-sidenav {
+  transition: width 0.3s; /* Add a smooth transition effect for width */
+}
+
+.menu-close {
+  width: 64px; /* Set the desired width when closed */
+}
+
+.menu-open {
+  width: 250px; /* Set the desired width when opened */
+}
+
+.mat-sidenav i {
+  cursor: pointer;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.row.course-code {
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+
+
+.course-code {
+    color: #5D5959;
+    font-family: Karla;
+    font-size: 1.3rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+
+}
+
+.vertical-div {
+    position: relative;
+    height: 10px;
+    /* Set the desired height */
+    width: 1px;
+    /* Set the width of the vertical line */
+    background-color: #000;
+    /* Set the color of the line */
+}
+
+/* Create a pseudo-element to extend the line to the full height */
+.vertical-div::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 1px;
+    /* Set the same width as the main div */
+    background-color: #000;
+    /* Set the same color as the main div */
+    margin-left: -1px;
+    /* Adjust for the main div's width */
+}
+
+#sidenav.menu-close{
+    width: 70px;
+}
+#sidenav.menu-open{
+    width: 200px;
+}
