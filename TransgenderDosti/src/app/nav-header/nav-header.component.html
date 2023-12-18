@@ -1,3 +1,54 @@
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content">
+            <!-- <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+                <button type="button" class="btn-close1" data-bs-dismiss="modal" aria-label="Close"> </button>
+
+            </div> -->
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="row custom-row3">
+
+                            <div class="col cross" data-bs-dismiss="modal">
+                                <i class="fa-solid fa-xmark fa-shake fa-2xl" style="color: #ffffff;"></i>
+                            </div>
+                        </div>
+
+                        <div class="row custom-row2">
+
+                            <div class="col speechtext">
+                                <span style="padding-right: 5px;">Say </span>
+                                <span style="padding-right: 5px; font-style: oblique; font-weight: 600;"> 'Hi'</span>
+                                <span style="padding-right: 7px;"> to</span>
+                                <span style="color: #73369f;  font-weight: 600"> Flourish</span>
+                            </div>
+                        </div>
+
+                        <div class="row custom-row">
+
+                            <div class="col">
+                                <img src="assets/Flourish.gif" class="img-fluid mx-auto d-block flourish">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+            <!-- <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Understood</button>
+            </div> -->
+        </div>
+    </div>
+</div>
+
+
+
 <nav *ngIf="menuType==='default'" class="navbar navbar-expand-lg navbar-dark ">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">Transgender Dosti.</a>
@@ -31,10 +82,13 @@
 
                     </li>
                     <li class="nav-item">
-                        <button type="button" class="btn btn-outline-secondary btn-white-stroke fontstyle">
+                        <button type="button" class="btn btn-outline-secondary btn-white-stroke fontstyle"
+                            data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                             <i class="fa-solid fa-microphone fa-beat" style="padding-right: 10px;"></i>
                             Say 'Hi'
                         </button>
+
+
 
                     </li>
                     <li class="nav-item" routerLink="user-authentication">
@@ -84,10 +138,12 @@
 
                     <li class="nav-item">
                         <button type="button" class="btn btn-outline-secondary btn-white-stroke fontstyle"
-                            style="margin-right: 2px;">
+                            style="margin-right: 2px;" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                             <i class="fa-solid fa-microphone fa-beat" style="padding-right: 10px;"></i>
                             Say 'Hi'
                         </button>
+
+
 
                     </li>
 

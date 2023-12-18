@@ -164,3 +164,70 @@ body {
     margin-left: auto;
     padding-right: 30px;
 }
+
+/* Set the background color of the modal content to be transparent */
+#staticBackdrop .modal-content {
+    background-color: transparent;
+    border: none;
+
+    box-shadow: none;
+
+}
+
+#staticBackdrop .modal-dialog {
+    /* background: linear-gradient(0deg, rgb(177 185 255) 0%, rgba(114, 129, 255, 0.00) 70%); */
+    background: linear-gradient(1deg, #fff 21%, rgb(114 129 255 / 34%) 70%)
+}
+
+.custom-row3 {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 5vh;
+    align-content: flex-end;
+
+}
+
+
+.custom-row2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 57vh;
+    align-content: flex-end;
+
+}
+
+.custom-row {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 29vh;
+    align-content: flex-end;
+
+}
+
+.flourish {
+    height: 170px;
+    width: 228px;
+}
+
+.speechtext {
+    display: flex;
+    justify-content: center;
+    color: #2d3133ba;
+    font-family: Karla;
+    font-size: 23px;
+
+    font-weight: 500;
+    line-height: normal;
+}
+
+.cross {
+    display: flex;
+    justify-content: flex-end;
+    cursor: pointer;
+
+
+
+}
