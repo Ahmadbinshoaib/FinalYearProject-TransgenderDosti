@@ -58,6 +58,8 @@ export class TeacherProfileComponent implements OnInit {
   @ViewChild('fileInput') fileInput!: ElementRef;
   @ViewChild('fileInput2') fileInput2!: ElementRef;
   @ViewChild('education') edModal!: ElementRef;
+  @ViewChild('education') workModal!: ElementRef;
+
 
   openFileInput2(): void {
     // Trigger click on the file input
@@ -370,7 +372,7 @@ export class TeacherProfileComponent implements OnInit {
 
   }
 
-  private closeModal() {
+  closeModal() {
     // Check if yourModal is defined before attempting to access its nativeElement
     if (this.edModal && this.edModal.nativeElement) {
       this.edModal.nativeElement.style.display = 'none';
