@@ -39,4 +39,17 @@ export interface educationData{
     is_current: string;
 
 }
+export interface workData{
+    work_experience_id: string;
+    job_title: string;
+    company_workplace_name:string;
+    city_town:string;
+    country: string;
+    description: string;
+    start_date: string;
+    end_date: string;
+    is_current: string;
+    relevant_document: string;
+
+}
   

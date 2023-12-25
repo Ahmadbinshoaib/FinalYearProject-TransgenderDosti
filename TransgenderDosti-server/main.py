@@ -341,6 +341,58 @@ def save_educational_info():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
+@app.route('/save_work_info', methods=['POST'])
+def save_work_info():
+    try:
+        data = request.json
+        user_id = data.get('user_id')
+
+        cursor = mysql.connection.cursor()
+
+        # Get teacher_id based on user_id
+        cursor.execute("SELECT teacher_id FROM teacher WHERE user_id = %s", (user_id,))
+        teacher_result = cursor.fetchone()
+
+        if not teacher_result:
+            return jsonify({'error': 'Teacher not found for the given user ID'}), 404
+
+        teacher_id = teacher_result[0]
+
+        # Extract educational information from the request data
+        job_title = data.get('job_title')
+        company_workplace_name = data.get('company_workplace_name')
+        city_town = data.get('city_town')
+        country= data.get('country')
+        description = data.get('description')
+        start_date = data.get('start_date')
+        end_date = data.get('end_date')
+        is_current = data.get('is_current')
+
+        #print (teacher_id,job_title,company_workplace_name,city_town,country,description,start_date,end_date,is_current )
+
+   
+
+
+
+
+        # Save educational information in the education table
+        cursor.execute("""
+            INSERT INTO workexperience
+            (teacher_id, job_title, company_workplace_name, city_town, country,description, start_date, end_date, is_current)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+        """, (teacher_id, job_title, company_workplace_name, city_town,country,description, start_date, end_date, is_current))
+
+        mysql.connection.commit()
+        cursor.close()
+
+        return jsonify({'success': True, 'message': 'Work information saved successfully'}), 200
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
+
+
 @app.route('/get_educational_info', methods=['GET'])
 def get_educational_info():
     try:
@@ -384,6 +436,54 @@ def get_educational_info():
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+    
+
+
+@app.route('/get_work_info', methods=['GET'])
+def get_work_info():
+    try:
+        user_id = request.args.get('user_id')
+
+        cursor = mysql.connection.cursor()
+
+        # Get teacher_id based on user_id
+        cursor.execute("SELECT teacher_id FROM teacher WHERE user_id = %s", (user_id,))
+        teacher_result = cursor.fetchone()
+
+        if not teacher_result:
+            return jsonify({'error': 'Teacher not found for the given user ID'}), 404
+
+        teacher_id = teacher_result[0]
+
+        # Get educational information based on teacher_id
+        cursor.execute("""
+            SELECT *
+            FROM workexperience
+            WHERE teacher_id = %s
+        """, (teacher_id,))
+        work_info = cursor.fetchall()
+
+        work_list = []
+        for work_row in work_info:
+            work_data = {
+                'work_experience_id': work_row[0],
+                'job_title': work_row[2],
+                'company_workplace_name': work_row[3],
+                'city_town': work_row[4],
+                'country': work_row[5],
+                'description': work_row[6],
+                'start_date': work_row[7],
+                'end_date': work_row[8],
+                'is_current': work_row[9],
+            }
+            work_list.append(work_data)
+
+        cursor.close()
+
+        return jsonify({'success': True, 'work_info': work_list}), 200
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 @app.route('/get_educational_info_by_id', methods=['GET'])
 def get_educational_info_by_id():
@@ -419,6 +519,48 @@ def get_educational_info_by_id():
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+    
+
+
+
+@app.route('/get_work_info_by_id', methods=['GET'])
+def get_work_info_by_id():
+    try:
+        work_id = request.args.get('work_id')
+
+        cursor = mysql.connection.cursor()
+
+        # Get educational information based on educational_id
+        cursor.execute("""
+            SELECT *
+            FROM workexperience
+            WHERE work_experience_id = %s
+        """, (work_id,))
+        work_info = cursor.fetchone()
+
+        if not work_info:
+            return jsonify({'error': 'Educational information not found for the given ID'}), 404
+
+        work_data = {
+            'work_experience_id': work_info[0],
+            'job_title': work_info[2],
+            'company_workplace_name': work_info[3],
+            'city_town': work_info[4],
+            'country': work_info[5],
+            'description': work_info[6],
+            'start_date': work_info[7],
+            'end_date': work_info[8],
+            'is_current': work_info[9],
+
+        }
+
+        cursor.close()
+
+        return jsonify({'success': True, 'work_info': work_data}), 200
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { NgbDateStruct, NgbTimeStruct } from '@ng-bootstrap/ng-bootstrap';
 import { TeacherProfileService } from '../Services/teacher-profile.service';
 import { Observable } from 'rxjs/internal/Observable';
-import { TeacherProfileData, educationData } from '../datatypes';
+import { TeacherProfileData, educationData,workData } from '../datatypes';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -21,8 +21,10 @@ export class TeacherProfileComponent implements OnInit {
   isCurrentChecked2: boolean = false;
   editEducationinfo: any 
   educationalInfo: any[] = [];
+  workInfo: any[] = [];
   educationForm: any = {};
   partEducationId: any
+  partWorkId: any
   educationInfoById: educationData ={
     educational_background_id: '',
     institution_name: '',
@@ -31,6 +33,19 @@ export class TeacherProfileComponent implements OnInit {
     start_date: '',
     end_date: '',
     is_current: ''
+  }
+
+  workInfoById: workData ={
+    work_experience_id: '',
+    job_title:'',
+    company_workplace_name:'',
+    city_town:'',
+    country: '',
+    description:'',
+    start_date: '',
+    end_date: '',
+    is_current: '',
+    relevant_document: ''
   }
   countries: any[] = [];
   selectedCountry: any = '';
@@ -155,6 +170,7 @@ export class TeacherProfileComponent implements OnInit {
     if (this.userIdParam) {
 
       this.loadTeacherEducationInfo(this.userIdParam)
+      this.loadTeacherWorkInfo(this.userIdParam)
     }
 
 
@@ -325,6 +341,49 @@ export class TeacherProfileComponent implements OnInit {
   }
 
 
+  saveTeacherWorkInfo(data: any) {
+    // console.log(data)
+
+    const userId = this.activeRoute.snapshot.paramMap.get('userId');
+
+    if (!userId) {
+      console.error('UserId is null or undefined');
+      return;
+    }
+    const requestData = {
+      user_id: userId,
+      job_title	: data.job_title,
+      company_workplace_name: data.companey_name,
+      city_town: data.city_name,
+      country: data.country,
+      description: data.description,
+      start_date: data.start_date,
+      end_date: data.end_date,
+      is_current: data.is_current ? 1 : 0
+
+    };
+    // Make API call using the service
+    this.teacherProfileService.saveTeacherWorkInfo(requestData).subscribe(
+      response => {
+        console.log(this.userIdParam)
+        if (this.userIdParam) {
+          console.warn(this.userIdParam)
+          this.loadTeacherWorkInfo(this.userIdParam)
+
+        }
+
+
+        // console.error('Sucessfully');
+      },
+      error => {
+        console.error('API error:', error);
+        // Handle errors
+      }
+    );
+  }
+
+
+
   loadTeacherData(userId: string): void {
     this.teacherProfileService.getTeacherPersonalProfile(userId).subscribe(
       (response) => {
@@ -372,6 +431,26 @@ export class TeacherProfileComponent implements OnInit {
 
   }
 
+  loadTeacherWorkInfo(userId: string) {
+    console.warn('load')
+    if (userId) {
+      this.teacherProfileService.getTeacherWorkInfo(userId).subscribe(
+        (response) => {
+          // Assuming the response structure has a 'courses' property
+          this.workInfo = response.work_info;
+          console.log(this.workInfo)
+        },
+        (error) => {
+          console.error('Error loading educational info', error);
+        }
+      );
+    } else {
+      console.error('UserId is null or undefined');
+    }
+
+  }
+
+
   closeModal() {
     // Check if yourModal is defined before attempting to access its nativeElement
     if (this.edModal && this.edModal.nativeElement) {
@@ -403,12 +482,34 @@ export class TeacherProfileComponent implements OnInit {
     );
   }
 
+
+  fetchWorkInfo(workId: string) {
+    // Use your data service to fetch educational information based on teacher ID
+    this.teacherProfileService.getTeacherWorkInfoById(workId).subscribe(
+      (data) => {
+        this.workInfoById = data.work_info;
+        
+        console.warn(this.workInfoById)
+      },
+      (error) => {
+        console.error('Error fetching educational information', error);
+      }
+    );
+  }
+
   openEditModal(educationId: string) {
     this.partEducationId = educationId;
     this.fetchEducationalInfo(this.partEducationId);
   }
+  openEditModal1(workId: string) {
+    this.partWorkId = workId;
+    this.fetchWorkInfo(this.partWorkId);
+  }
 
   editTeacherEducationalInfo(data: any){
+
+  }
+  editTeacherWorkInfo(data: any){
 
   }
 
