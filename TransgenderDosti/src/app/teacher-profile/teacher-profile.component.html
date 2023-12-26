@@ -1136,17 +1136,79 @@
                             <span class="educational">Language Proficiency</span>
                         </div>
                         <div class="col-6 d-flex justify-content-end">
-                            <div class="circle3">
+                            <div class="circle3"  data-bs-toggle="modal" data-bs-target="#language">
                                 <i class="fas fa-plus"></i>
                             </div>
                         </div>
+                        
 
-                        <div class="row" style="padding-top: 6px;">
 
-                            <div class="col-2 lang-border">English</div>
-                            <div class="col-2 lang-border">Urdu</div>
+
+                        <div class="modal fade" id="language" #education data-bs-backdrop="static"
+                        data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Language </h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+
+                                    
+
+
+                                    <form #languageForm="ngForm" (ngSubmit)="saveTeacherLanguageInfo(languageForm.value)">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="span edu-content city">Select Language</div>
+                                
+                                                <!-- Create a combo box with options populated from the 'languages' array -->
+                                                <select class="form-select" id="selectedLanguage" name="selectedLanguage" ngModel>
+                                                    <option value="" disabled selected>Select a language</option>
+                                                    <option *ngFor="let language of languages" [value]="language.name">{{ language.name }}</option>
+                                                </select>
+                                            </div>
+                                        
+
+
+                                            
+
+                                        <div class="modal-footer" style="margin-top: 10px;">
+
+
+                                            <button type="button" data-bs-dismiss="modal"
+                                                style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                                                class="btn btn-danger" (click)="closeModal()">Close</button>
+                                            <button type="submit"
+                                                style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                                                class="btn btn-success" data-bs-dismiss="modal"
+                                                [disabled]="!languageForm.valid">Save</button>
+
+
+                                        </div>
+                                        </div>
+                                    </form>
+
+                                </div>
+
+                            </div>
                         </div>
+                    </div>
 
+
+
+
+
+
+
+
+                    <div class="row" style="padding-top: 6px;">
+                        <div *ngFor="let lan of languageInfo" class="col-2 lang-border">{{lan.language}}</div>
+                      </div>
+                      
+  
 
 
 

@@ -21,6 +21,8 @@ export class TeacherProfileComponent implements OnInit {
   isCurrentChecked2: boolean = false;
   editEducationinfo: any 
   educationalInfo: any[] = [];
+  languageInfo: any[] = [];
+  languages: any[] = [];
   workInfo: any[] = [];
   educationForm: any = {};
   partEducationId: any
@@ -171,6 +173,8 @@ export class TeacherProfileComponent implements OnInit {
 
       this.loadTeacherEducationInfo(this.userIdParam)
       this.loadTeacherWorkInfo(this.userIdParam)
+      this.fetchLanguages()
+      this.loadTeacherLanguageInfo(this.userIdParam)
     }
 
 
@@ -209,6 +213,29 @@ export class TeacherProfileComponent implements OnInit {
         }
       );
   }
+
+
+  fetchLanguages() {
+    this.http.get<{ name: string, code: string }[]>('https://list-of-all-countries-and-languages-with-their-codes.p.rapidapi.com/languages', {
+      headers: {
+        'X-RapidAPI-Key': 'c9fdb6a5e9msh20f52f968979b56p12cd15jsn61047f692718',
+        'X-RapidAPI-Host': 'list-of-all-countries-and-languages-with-their-codes.p.rapidapi.com'
+      }
+    }).subscribe(
+      response => {
+        this.languages = response;
+
+        // You can now use the 'languages' array in your template to populate the combo box
+        const languageNames = this.languages.map(language => language.name);
+        
+      },
+      error => {
+        console.error('Error fetching languages:', error);
+      }
+    );
+  }
+
+ 
 
   processCountries(data: any[]) {
 
@@ -384,6 +411,42 @@ export class TeacherProfileComponent implements OnInit {
 
 
 
+  saveTeacherLanguageInfo(data: any) {
+    // console.log(data)
+
+    const userId = this.activeRoute.snapshot.paramMap.get('userId');
+
+    if (!userId) {
+      console.error('UserId is null or undefined');
+      return;
+    }
+    const requestData = {
+      user_id: userId,
+      language	: data.selectedLanguage,
+
+    };
+    // Make API call using the service
+    this.teacherProfileService.saveTeacherLanguageInfo(requestData).subscribe(
+      response => {
+        console.log(this.userIdParam)
+        if (this.userIdParam) {
+          console.warn(this.userIdParam)
+          this.loadTeacherLanguageInfo(this.userIdParam)
+
+        }
+
+
+        // console.error('Sucessfully');
+      },
+      error => {
+        console.error('API error:', error);
+        // Handle errors
+      }
+    );
+  }
+
+
+
   loadTeacherData(userId: string): void {
     this.teacherProfileService.getTeacherPersonalProfile(userId).subscribe(
       (response) => {
@@ -420,6 +483,26 @@ export class TeacherProfileComponent implements OnInit {
           // Assuming the response structure has a 'courses' property
           this.educationalInfo = response.educational_info;
           console.log(this.educationalInfo)
+        },
+        (error) => {
+          console.error('Error loading educational info', error);
+        }
+      );
+    } else {
+      console.error('UserId is null or undefined');
+    }
+
+  }
+
+
+  loadTeacherLanguageInfo(userId: string) {
+    console.warn('load')
+    if (userId) {
+      this.teacherProfileService.getTeacherLanguageInfo(userId).subscribe(
+        (response) => {
+          // Assuming the response structure has a 'courses' property
+          this.languageInfo = response.language_info;
+          console.log(this.languageInfo)
         },
         (error) => {
           console.error('Error loading educational info', error);

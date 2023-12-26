@@ -389,6 +389,52 @@ def save_work_info():
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+    
+
+
+
+
+@app.route('/save_language_info', methods=['POST'])
+def save_language_info():
+    try:
+        data = request.json
+        user_id = data.get('user_id')
+
+        cursor = mysql.connection.cursor()
+
+        # Get teacher_id based on user_id
+        cursor.execute("SELECT teacher_id FROM teacher WHERE user_id = %s", (user_id,))
+        teacher_result = cursor.fetchone()
+
+        if not teacher_result:
+            return jsonify({'error': 'Teacher not found for the given user ID'}), 404
+
+        teacher_id = teacher_result[0]
+
+        # Extract educational information from the request data
+        language = data.get('language')
+
+        #print (teacher_id,job_title,company_workplace_name,city_town,country,description,start_date,end_date,is_current )
+
+   
+
+
+
+
+        # Save educational information in the education table
+        cursor.execute("""
+            INSERT INTO languageproficiency
+            (teacher_id, language)
+            VALUES (%s, %s)
+        """, (teacher_id, language))
+
+        mysql.connection.commit()
+        cursor.close()
+
+        return jsonify({'success': True, 'message': 'language information saved successfully'}), 200
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 
 
@@ -481,6 +527,47 @@ def get_work_info():
         cursor.close()
 
         return jsonify({'success': True, 'work_info': work_list}), 200
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+    
+
+
+@app.route('/get_language_info', methods=['GET'])
+def get_language_info():
+    try:
+        user_id = request.args.get('user_id')
+
+        cursor = mysql.connection.cursor()
+
+        # Get teacher_id based on user_id
+        cursor.execute("SELECT teacher_id FROM teacher WHERE user_id = %s", (user_id,))
+        teacher_result = cursor.fetchone()
+
+        if not teacher_result:
+            return jsonify({'error': 'Teacher not found for the given user ID'}), 404
+
+        teacher_id = teacher_result[0]
+
+        # Get educational information based on teacher_id
+        cursor.execute("""
+            SELECT *
+            FROM languageproficiency
+            WHERE teacher_id = %s
+        """, (teacher_id,))
+        language_info = cursor.fetchall()
+
+        language_list = []
+        for language_row in language_info:
+            language_data = {
+                'language_proficiency_id': language_row[0],
+                'language': language_row[2],
+            }
+            language_list.append(language_data)
+
+        cursor.close()
+
+        return jsonify({'success': True, 'language_info': language_list}), 200
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
