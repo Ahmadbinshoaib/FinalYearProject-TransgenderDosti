@@ -603,6 +603,60 @@ export class TeacherProfileComponent implements OnInit {
     );
   }
 
+// Assuming your imports are correctly set up
+
+deleteTeacherEducationInfo(educationalBackgroundId: string) {
+  const userId = this.activeRoute.snapshot.paramMap.get('userId');
+
+  if (!userId) {
+    console.error('UserId is null or undefined');
+    return;
+  }
+  
+
+  this.teacherProfileService.deleteTeacherEducationInfo(userId, educationalBackgroundId).subscribe(
+    (response) => {
+      console.log('Successfully deleted education information');
+      // You can add any additional logic or reload data if needed
+      if (this.userIdParam) {
+        console.warn(this.userIdParam)
+        this.loadTeacherEducationInfo(this.userIdParam)
+  
+      }
+    },
+    (error) => {
+      console.error('API error:', error);
+      // Handle errors
+      console.log(error+"")
+    }
+  );
+}
+
+deleteTeacherWorkInfo(workExperienceId: string) {
+  const userId = this.activeRoute.snapshot.paramMap.get('userId');
+
+  if (!userId) {
+    console.error('UserId is null or undefined');
+    return;
+  }
+
+  this.teacherProfileService.deleteTeacherWorkInfo(userId, workExperienceId).subscribe(
+    (response) => {
+      console.log('Successfully deleted work information');
+      // You can add any additional logic or reload data if needed
+      if (this.userIdParam) {
+        console.warn(this.userIdParam)
+        this.loadTeacherWorkInfo(this.userIdParam)
+  
+      }
+    },
+    (error) => {
+      console.error('API error:', error);
+      // Handle errors
+      console.log(error+"")
+    }
+  );
+}
 
 
 

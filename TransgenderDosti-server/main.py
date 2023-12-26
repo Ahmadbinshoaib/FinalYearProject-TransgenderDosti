@@ -650,5 +650,70 @@ def update_work_info():
         return jsonify({'error': str(e)}), 500
     
 
+@app.route('/delete_educational_info', methods=['DELETE'])
+def delete_educational_info():
+    try:
+        user_id = request.args.get('userId')
+        educational_background_id = request.args.get('educationalBackgroundId')
+
+        cursor = mysql.connection.cursor()
+
+        # Get teacher_id based on user_id
+        cursor.execute("SELECT teacher_id FROM teacher WHERE user_id = %s", (user_id,))
+        teacher_result = cursor.fetchone()
+
+        if not teacher_result:
+            return jsonify({'error': 'Teacher not found for the given user ID'}), 404
+
+        teacher_id = teacher_result[0]
+
+        # Delete educational information from the education table
+        cursor.execute("""
+            DELETE FROM educationalbackground
+            WHERE teacher_id = %s AND educational_background_id = %s
+        """, (teacher_id, educational_background_id))
+
+        mysql.connection.commit()
+        cursor.close()
+
+        return jsonify({'success': True, 'message': 'Educational information deleted successfully'}), 200
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
+@app.route('/delete_work_info', methods=['DELETE'])
+def delete_work_info():
+    try:
+        user_id = request.args.get('userId')
+        work_experience_id = request.args.get('workExperienceId')
+
+        cursor = mysql.connection.cursor()
+
+        # Get teacher_id based on user_id
+        cursor.execute("SELECT teacher_id FROM teacher WHERE user_id = %s", (user_id,))
+        teacher_result = cursor.fetchone()
+
+        if not teacher_result:
+            return jsonify({'error': 'Teacher not found for the given user ID'}), 404
+
+        teacher_id = teacher_result[0]
+
+        # Delete work information from the workexperience table
+        cursor.execute("""
+            DELETE FROM workexperience
+            WHERE teacher_id = %s AND work_experience_id = %s
+        """, (teacher_id, work_experience_id))
+
+        mysql.connection.commit()
+        cursor.close()
+
+        return jsonify({'success': True, 'message': 'Work information deleted successfully'}), 200
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
+
 if __name__ == '__main__':
     app.run(debug=True)

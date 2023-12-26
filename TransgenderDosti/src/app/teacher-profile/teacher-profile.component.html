@@ -572,7 +572,8 @@
                                                         <div class="col-6">
                                                             <div class="row" style="margin-right: 2px;">
                                                                 <div class="span edu-content city">End Date</div>
-                                                                <input type="date" name="end_date" [(ngModel)]="educationInfoById.end_date"
+                                                                <input type="date" name="end_date"
+                                                                    [(ngModel)]="educationInfoById.end_date"
                                                                     [disabled]="educationInfoById.is_current"
                                                                     (change)="onEndDateChange()"
                                                                     class="form-control form-control-sm" ngModel>
@@ -661,6 +662,14 @@
                                     </ng-template>
                                 </div>
                             </div>
+
+                            <div class="edit-icon" (click)="deleteTeacherEducationInfo(ed.educational_background_id)"
+                                data-bs-toggle="modal" data-bs-target="#deleteEducation">
+                                <i class="fas fa-trash"></i>
+                            </div>
+
+
+
 
                             <div class="edit-icon" (click)="openEditModal(ed.educational_background_id)"
                                 data-bs-toggle="modal" data-bs-target="#editeducation">
@@ -973,13 +982,14 @@
                                                             <div class="span edu-content city">Start Date</div>
                                                             <input type="date" name="start_date"
                                                                 class="form-control form-control-sm"
-                                                                 [(ngModel)]="workInfoById.start_date" required>
+                                                                [(ngModel)]="workInfoById.start_date" required>
 
                                                         </div>
                                                         <div class="col-6">
                                                             <div class="row" style="margin-right: 2px;">
                                                                 <div class="span edu-content city">End Date</div>
-                                                                <input type="date" name="end_date" [(ngModel)]="workInfoById.end_date"
+                                                                <input type="date" name="end_date"
+                                                                    [(ngModel)]="workInfoById.end_date"
                                                                     [disabled]="workInfoById.is_current"
                                                                     (change)="onEndDateChange()"
                                                                     class="form-control form-control-sm" ngModel>
@@ -1038,7 +1048,7 @@
 
 
                                             </div>
-                                            
+
                                         </form>
                                     </div>
                                 </div>
@@ -1074,6 +1084,11 @@
                                     </ng-template>
                                 </div>
                             </div>
+
+                            <div class="edit-icon" (click)="deleteTeacherWorkInfo(wk.work_experience_id)"
+                            data-bs-toggle="modal" data-bs-target="#deleteEducation">
+                            <i class="fas fa-trash"></i>
+                           </div>
 
                             <div class="edit-icon" (click)="openEditModal1(wk.work_experience_id )"
                                 data-bs-toggle="modal" data-bs-target="#editwork">

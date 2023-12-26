@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { SignInResponse, signIn, userTeacher } from '../datatypes';
@@ -106,6 +106,25 @@ export class TeacherProfileService {
       'Content-Type': 'application/json',
     };
     return this.http.put(endpoint, data, { headers });
+  }
+
+  
+  deleteTeacherEducationInfo(userId: string, educationalBackgroundId: string): Observable<any> {
+    const endpoint = `${this.serverUrl}/delete_educational_info`;
+    const headers = {
+      'Content-Type': 'application/json',
+    };
+    const params = new HttpParams().set('userId', userId).set('educationalBackgroundId', educationalBackgroundId.toString());
+    return this.http.delete(endpoint, { headers, params });
+  }
+
+  deleteTeacherWorkInfo(userId: string, workExperienceId: string): Observable<any> {
+    const endpoint = `${this.serverUrl}/delete_work_info`;
+    const headers = {
+      'Content-Type': 'application/json',
+    };
+    const params = new HttpParams().set('userId', userId).set('workExperienceId', workExperienceId.toString());
+    return this.http.delete(endpoint, { headers, params });
   }
   
 
