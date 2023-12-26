@@ -562,5 +562,93 @@ def get_work_info_by_id():
         return jsonify({'error': str(e)}), 500
 
 
+@app.route('/update_educational_info', methods=['PUT'])
+def update_educational_info():
+    try:
+        data = request.json
+        user_id = data.get('user_id')
+        educational_background_id = data.get('educational_background_id')
+
+        cursor = mysql.connection.cursor()
+
+        # Get teacher_id based on user_id
+        cursor.execute("SELECT teacher_id FROM teacher WHERE user_id = %s", (user_id,))
+        teacher_result = cursor.fetchone()
+
+        if not teacher_result:
+            return jsonify({'error': 'Teacher not found for the given user ID'}), 404
+
+        teacher_id = teacher_result[0]
+
+        # Extract educational information from the request data
+        institution_name = data.get('institution_name')
+        degree_name = data.get('degree_name')
+        field_of_study = data.get('field_of_study')
+        start_date = data.get('start_date')
+        end_date = data.get('end_date')
+        is_current = data.get('is_current')
+
+        # Update educational information in the education table
+        cursor.execute("""
+            UPDATE educationalbackground
+            SET institution_name = %s, degree_name = %s, field_of_study = %s,
+                start_date = %s, end_date = %s, is_current = %s
+            WHERE teacher_id = %s AND educational_background_id = %s
+        """, (institution_name, degree_name, field_of_study, start_date, end_date, is_current, teacher_id, educational_background_id))
+
+        mysql.connection.commit()
+        cursor.close()
+
+        return jsonify({'success': True, 'message': 'Educational information updated successfully'}), 200
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
+@app.route('/update_work_info', methods=['PUT'])
+def update_work_info():
+    try:
+        data = request.json
+        user_id = data.get('user_id')
+        work_experience_id = data.get('work_experience_id')
+
+        cursor = mysql.connection.cursor()
+
+        # Get teacher_id based on user_id
+        cursor.execute("SELECT teacher_id FROM teacher WHERE user_id = %s", (user_id,))
+        teacher_result = cursor.fetchone()
+
+        if not teacher_result:
+            return jsonify({'error': 'Teacher not found for the given user ID'}), 404
+
+        teacher_id = teacher_result[0]
+
+        # Extract work information from the request data
+        job_title = data.get('job_title')
+        company_workplace_name = data.get('company_workplace_name')
+        city_town = data.get('city_town')
+        country = data.get('country')
+        description = data.get('description')
+        start_date = data.get('start_date')
+        end_date = data.get('end_date')
+        is_current = data.get('is_current')
+
+        # Update work information in the workexperience table
+        cursor.execute("""
+            UPDATE workexperience
+            SET job_title = %s, company_workplace_name = %s, city_town = %s, country = %s,
+                description = %s, start_date = %s, end_date = %s, is_current = %s
+            WHERE teacher_id = %s AND work_experience_id = %s
+        """, (job_title, company_workplace_name, city_town, country, description, start_date, end_date, is_current, teacher_id, work_experience_id))
+
+        mysql.connection.commit()
+        cursor.close()
+
+        return jsonify({'success': True, 'message': 'Work information updated successfully'}), 200
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+    
+
 if __name__ == '__main__':
     app.run(debug=True)

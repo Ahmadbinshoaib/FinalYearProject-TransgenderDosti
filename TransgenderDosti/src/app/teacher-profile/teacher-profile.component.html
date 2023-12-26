@@ -511,7 +511,7 @@
 
 
                                         <form #educationForm2="ngForm"
-                                            (ngSubmit)="editTeacherEducationalInfo(educationForm2.value)">
+                                            (ngSubmit)="updateTeacherEducationalInfo(educationForm2.value,educationInfoById.educational_background_id)">
                                             <div class="row">
 
 
@@ -572,8 +572,8 @@
                                                         <div class="col-6">
                                                             <div class="row" style="margin-right: 2px;">
                                                                 <div class="span edu-content city">End Date</div>
-                                                                <input type="date" name="end_date" [(ngModel)]="endDate"
-                                                                    [disabled]="isCurrentChecked"
+                                                                <input type="date" name="end_date" [(ngModel)]="educationInfoById.end_date"
+                                                                    [disabled]="educationInfoById.is_current"
                                                                     (change)="onEndDateChange()"
                                                                     class="form-control form-control-sm" ngModel>
                                                             </div>
@@ -583,7 +583,7 @@
                                                                     <input class="form-check-input" name="is_current"
                                                                         type="checkbox" value="" id="flexCheckDefault"
                                                                         style="margin-top: 7px;"
-                                                                        [(ngModel)]="isCurrentChecked"
+                                                                        [(ngModel)]="educationInfoById.is_current"
                                                                         (change)="onCurrentChange()">
                                                                     <label class="form-check-label"
                                                                         for="flexCheckDefault">
@@ -894,8 +894,8 @@
                                         </div>
 
 
-                                        <form #educationForm2="ngForm"
-                                            (ngSubmit)="editTeacherWorkInfo(educationForm2.value)">
+                                        <form #workForm2="ngForm"
+                                            (ngSubmit)="updateTeacherWorkInfo(workForm2.value,workInfoById.work_experience_id)">
                                             <div class="row">
 
 
@@ -916,7 +916,7 @@
 
                                                     <div class="span edu-content city">Company/Workplace</div>
                                                     <div class="form-group small-input">
-                                                        <input type="text" name="companey_name"
+                                                        <input type="text" name="company_workplace_name"
                                                             class="form-control form-control-sm"
                                                             placeholder="Enter your companey or workplace name"
                                                             [(ngModel)]="workInfoById.company_workplace_name" required>
@@ -972,14 +972,15 @@
 
                                                             <div class="span edu-content city">Start Date</div>
                                                             <input type="date" name="start_date"
-                                                                class="form-control form-control-sm" ngModel required>
+                                                                class="form-control form-control-sm"
+                                                                 [(ngModel)]="workInfoById.start_date" required>
 
                                                         </div>
                                                         <div class="col-6">
                                                             <div class="row" style="margin-right: 2px;">
                                                                 <div class="span edu-content city">End Date</div>
-                                                                <input type="date" name="end_date" [(ngModel)]="endDate"
-                                                                    [disabled]="isCurrentChecked"
+                                                                <input type="date" name="end_date" [(ngModel)]="workInfoById.end_date"
+                                                                    [disabled]="workInfoById.is_current"
                                                                     (change)="onEndDateChange()"
                                                                     class="form-control form-control-sm" ngModel>
                                                             </div>
@@ -989,7 +990,7 @@
                                                                     <input class="form-check-input" name="is_current"
                                                                         type="checkbox" value="" id="flexCheckDefault"
                                                                         style="margin-top: 7px;"
-                                                                        [(ngModel)]="isCurrentChecked"
+                                                                        [(ngModel)]="workInfoById.is_current"
                                                                         (change)="onCurrentChange()">
                                                                     <label class="form-check-label"
                                                                         for="flexCheckDefault">
@@ -1007,6 +1008,20 @@
 
 
                                                 </div>
+                                                <div class="col-6">
+                                                    <div class="row justify-content-end">
+                                                        <div class="col-4 sf text-right">
+                                                            <span class="social-profile">relevant document</span>
+                                                        </div>
+                                                        <div class="col-2"
+                                                            style="padding-top: 10px; padding-right: 0px;">
+                                                            <div class="circle2" (click)="openFileInput2()">
+                                                                <i class="fa-solid fa-upload"></i>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
 
 
                                             </div>
@@ -1019,7 +1034,7 @@
                                                 <button type="submit"
                                                     style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
                                                     class="btn btn-success" data-bs-dismiss="modal"
-                                                    [disabled]="!educationForm2.valid">Edit</button>
+                                                    [disabled]="!workForm2.valid">Edit</button>
 
 
                                             </div>

@@ -93,7 +93,21 @@ export class TeacherProfileService {
     return this.http.get(url);
   }
 
-
+  updateTeacherEducationalInfo(data: any): Observable<any> {
+    const endpoint = `${this.serverUrl}/update_educational_info`;
+    const headers = {
+      'Content-Type': 'application/json',
+    };
+    return this.http.put(endpoint, data, { headers });
+  }
+  updateTeacherWorkInfo(data: any): Observable<any> {
+    const endpoint = `${this.serverUrl}/update_work_info`;
+    const headers = {
+      'Content-Type': 'application/json',
+    };
+    return this.http.put(endpoint, data, { headers });
+  }
+  
 
 
 }
