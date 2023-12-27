@@ -12,6 +12,7 @@ import { TeacherSidebarComponent } from './teacher-sidebar/teacher-sidebar.compo
 import { TeacherCourseDashboardComponent } from './teacher-course-dashboard/teacher-course-dashboard.component';
 import { TeacherCourseMaterialComponent } from './teacher-course-material/teacher-course-material.component';
 import { TeacherCourseAssignmentComponent } from './teacher-course-assignment/teacher-course-assignment.component';
+import { TeacherCourseAssignmentViewresponsesComponent } from './teacher-course-assignment-viewresponses/teacher-course-assignment-viewresponses.component';
 
 const routes: Routes = [
 
@@ -45,9 +46,10 @@ const routes: Routes = [
     
     canActivate: [AuthGuard],
     children: [
-      { path: 'teacher-course-dashboard', component: TeacherCourseDashboardComponent },
+      {path: 'teacher-course-dashboard', component: TeacherCourseDashboardComponent },
       {path: 'teacher-course-assignment', component: TeacherCourseAssignmentComponent},
-      { path: 'teacher-course-material', component: TeacherCourseMaterialComponent }
+      {path: 'teacher-course-material', component: TeacherCourseMaterialComponent },
+      {path:'teacher-course-assignment-viewresponses', component: TeacherCourseAssignmentViewresponsesComponent}
     ]
   },
  

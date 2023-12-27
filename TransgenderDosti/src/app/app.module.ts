@@ -29,6 +29,7 @@ import { TeacherCourseDashboardComponent } from './teacher-course-dashboard/teac
 import { TeacherCourseMaterialComponent } from './teacher-course-material/teacher-course-material.component';
 import { ComponentNameComponent } from './component-name/component-name.component';
 import { TeacherCourseAssignmentComponent } from './teacher-course-assignment/teacher-course-assignment.component';
+import { TeacherCourseAssignmentViewresponsesComponent } from './teacher-course-assignment-viewresponses/teacher-course-assignment-viewresponses.component';
 
 
 @NgModule({
@@ -47,6 +48,7 @@ import { TeacherCourseAssignmentComponent } from './teacher-course-assignment/te
     TeacherCourseMaterialComponent,
     ComponentNameComponent,
     TeacherCourseAssignmentComponent,
+    TeacherCourseAssignmentViewresponsesComponent,
 
   ],
   imports: [
