@@ -58,12 +58,19 @@
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    position: absolute;
-    margin-left: 17vw;
-    padding-right: 30px;
-    padding-left: 30px;
-    padding-top: 15px;
-    padding-bottom: 15px;
+    position: relative;
+    /* Change to relative positioning */
+    margin-left: auto;
+    /* Remove margin-left */
+    margin-right: auto;
+    /* Add margin-right to center the button horizontally */
+    padding: 15px 30px;
+    /* Use shorthand for padding (top/bottom, left/right) */
+
+}
+.cl {
+    padding-right: 25px;
+    text-align: end;
 }
 
 .work {
