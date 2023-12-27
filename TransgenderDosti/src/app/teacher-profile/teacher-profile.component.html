@@ -669,7 +669,8 @@
                                         <i class="fas fa-edit"></i>
                                     </div>
 
-                                    <div class="edit-icon" data-bs-toggle="modal" data-bs-target="#confirmationModal">
+                                    <div class="edit-icon" (click)="openDeleteModal(ed.educational_background_id)"
+                                     data-bs-toggle="modal" data-bs-target="#confirmationModal">
                                         <i class="fas fa-trash"></i>
                                     </div>
                                 </div>
@@ -689,7 +690,7 @@
                                         <div class="modal-body">
 
                                             <form #confermForm="ngForm"
-                                                (ngSubmit)="deleteTeacherEducationInfo(ed.educational_background_id)">
+                                                (ngSubmit)="deleteTeacherEducationInfo(educationInfoById.educational_background_id)">
                                                 <div class="row">
                                                     <div class="col-6">
                                                         <div class="span edu-content city">Delete Educational
@@ -1156,7 +1157,8 @@
                                         <i class="fas fa-edit"></i>
                                     </div>
 
-                                    <div class="edit-icon" data-bs-toggle="modal" data-bs-target="#confirmationModal1">
+                                    <div class="edit-icon" (click)="openDeleteModal1(wk.work_experience_id )"
+                                    data-bs-toggle="modal" data-bs-target="#confirmationModal1">
                                         <i class="fas fa-trash"></i>
                                     </div>
 
@@ -1179,7 +1181,7 @@
                                         <div class="modal-body">
 
                                             <form #confermForm="ngForm"
-                                                (ngSubmit)="deleteTeacherWorkInfo(wk.work_experience_id)">
+                                                (ngSubmit)="deleteTeacherWorkInfo(workInfoById.work_experience_id)">
                                                 <div class="row">
                                                     <div class="col-6">
                                                         <div class="span edu-content city">Delete Work Experience Info ?

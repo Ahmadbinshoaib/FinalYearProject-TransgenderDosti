@@ -607,7 +607,14 @@ export class TeacherProfileComponent implements OnInit {
     this.partWorkId = workId;
     this.fetchWorkInfo(this.partWorkId);
   }
-
+  openDeleteModal(educationId: string) {
+    this.partEducationId = educationId;
+    this.fetchEducationalInfo(this.partEducationId);
+  }
+  openDeleteModal1(workId: string) {
+    this.partWorkId = workId;
+    this.fetchWorkInfo(this.partWorkId);
+  }
 
   updateTeacherEducationalInfo(formData: any, educationalBackgroundId: string) {
     const userId = this.activeRoute.snapshot.paramMap.get('userId');
