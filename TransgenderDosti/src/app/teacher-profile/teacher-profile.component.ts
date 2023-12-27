@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { NgbDateStruct, NgbTimeStruct } from '@ng-bootstrap/ng-bootstrap';
 import { TeacherProfileService } from '../Services/teacher-profile.service';
 import { Observable } from 'rxjs/internal/Observable';
-import { TeacherProfileData, educationData } from '../datatypes';
+import { TeacherProfileData, educationData,workData } from '../datatypes';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -21,8 +21,12 @@ export class TeacherProfileComponent implements OnInit {
   isCurrentChecked2: boolean = false;
   editEducationinfo: any 
   educationalInfo: any[] = [];
+  languageInfo: any[] = [];
+  languages: any[] = [];
+  workInfo: any[] = [];
   educationForm: any = {};
   partEducationId: any
+  partWorkId: any
   educationInfoById: educationData ={
     educational_background_id: '',
     institution_name: '',
@@ -31,6 +35,19 @@ export class TeacherProfileComponent implements OnInit {
     start_date: '',
     end_date: '',
     is_current: ''
+  }
+
+  workInfoById: workData ={
+    work_experience_id: '',
+    job_title:'',
+    company_workplace_name:'',
+    city_town:'',
+    country: '',
+    description:'',
+    start_date: '',
+    end_date: '',
+    is_current: '',
+    relevant_document: ''
   }
   countries: any[] = [];
   selectedCountry: any = '';
@@ -58,6 +75,8 @@ export class TeacherProfileComponent implements OnInit {
   @ViewChild('fileInput') fileInput!: ElementRef;
   @ViewChild('fileInput2') fileInput2!: ElementRef;
   @ViewChild('education') edModal!: ElementRef;
+  @ViewChild('work') workModal!: ElementRef;
+
 
   openFileInput2(): void {
     // Trigger click on the file input
@@ -153,6 +172,9 @@ export class TeacherProfileComponent implements OnInit {
     if (this.userIdParam) {
 
       this.loadTeacherEducationInfo(this.userIdParam)
+      this.loadTeacherWorkInfo(this.userIdParam)
+      this.fetchLanguages()
+      this.loadTeacherLanguageInfo(this.userIdParam)
     }
 
 
@@ -191,6 +213,29 @@ export class TeacherProfileComponent implements OnInit {
         }
       );
   }
+
+
+  fetchLanguages() {
+    this.http.get<{ name: string, code: string }[]>('https://list-of-all-countries-and-languages-with-their-codes.p.rapidapi.com/languages', {
+      headers: {
+        'X-RapidAPI-Key': 'c9fdb6a5e9msh20f52f968979b56p12cd15jsn61047f692718',
+        'X-RapidAPI-Host': 'list-of-all-countries-and-languages-with-their-codes.p.rapidapi.com'
+      }
+    }).subscribe(
+      response => {
+        this.languages = response;
+
+        // You can now use the 'languages' array in your template to populate the combo box
+        const languageNames = this.languages.map(language => language.name);
+        
+      },
+      error => {
+        console.error('Error fetching languages:', error);
+      }
+    );
+  }
+
+ 
 
   processCountries(data: any[]) {
 
@@ -323,6 +368,85 @@ export class TeacherProfileComponent implements OnInit {
   }
 
 
+  saveTeacherWorkInfo(data: any) {
+    // console.log(data)
+
+    const userId = this.activeRoute.snapshot.paramMap.get('userId');
+
+    if (!userId) {
+      console.error('UserId is null or undefined');
+      return;
+    }
+    const requestData = {
+      user_id: userId,
+      job_title	: data.job_title,
+      company_workplace_name: data.companey_name,
+      city_town: data.city_name,
+      country: data.country,
+      description: data.description,
+      start_date: data.start_date,
+      end_date: data.end_date,
+      is_current: data.is_current ? 1 : 0
+
+    };
+    // Make API call using the service
+    this.teacherProfileService.saveTeacherWorkInfo(requestData).subscribe(
+      response => {
+        console.log(this.userIdParam)
+        if (this.userIdParam) {
+          console.warn(this.userIdParam)
+          this.loadTeacherWorkInfo(this.userIdParam)
+
+        }
+
+
+        // console.error('Sucessfully');
+      },
+      error => {
+        console.error('API error:', error);
+        // Handle errors
+      }
+    );
+  }
+
+
+
+  saveTeacherLanguageInfo(data: any) {
+    // console.log(data)
+
+    const userId = this.activeRoute.snapshot.paramMap.get('userId');
+
+    if (!userId) {
+      console.error('UserId is null or undefined');
+      return;
+    }
+    const requestData = {
+      user_id: userId,
+      language	: data.selectedLanguage,
+
+    };
+    // Make API call using the service
+    this.teacherProfileService.saveTeacherLanguageInfo(requestData).subscribe(
+      response => {
+        console.log(this.userIdParam)
+        if (this.userIdParam) {
+          console.warn(this.userIdParam)
+          this.loadTeacherLanguageInfo(this.userIdParam)
+
+        }
+
+
+        // console.error('Sucessfully');
+      },
+      error => {
+        console.error('API error:', error);
+        // Handle errors
+      }
+    );
+  }
+
+
+
   loadTeacherData(userId: string): void {
     this.teacherProfileService.getTeacherPersonalProfile(userId).subscribe(
       (response) => {
@@ -370,7 +494,47 @@ export class TeacherProfileComponent implements OnInit {
 
   }
 
-  private closeModal() {
+
+  loadTeacherLanguageInfo(userId: string) {
+    console.warn('load')
+    if (userId) {
+      this.teacherProfileService.getTeacherLanguageInfo(userId).subscribe(
+        (response) => {
+          // Assuming the response structure has a 'courses' property
+          this.languageInfo = response.language_info;
+          console.log(this.languageInfo)
+        },
+        (error) => {
+          console.error('Error loading educational info', error);
+        }
+      );
+    } else {
+      console.error('UserId is null or undefined');
+    }
+
+  }
+
+  loadTeacherWorkInfo(userId: string) {
+    console.warn('load')
+    if (userId) {
+      this.teacherProfileService.getTeacherWorkInfo(userId).subscribe(
+        (response) => {
+          // Assuming the response structure has a 'courses' property
+          this.workInfo = response.work_info;
+          console.log(this.workInfo)
+        },
+        (error) => {
+          console.error('Error loading educational info', error);
+        }
+      );
+    } else {
+      console.error('UserId is null or undefined');
+    }
+
+  }
+
+
+  closeModal() {
     // Check if yourModal is defined before attempting to access its nativeElement
     if (this.edModal && this.edModal.nativeElement) {
       this.edModal.nativeElement.style.display = 'none';
@@ -392,8 +556,42 @@ export class TeacherProfileComponent implements OnInit {
     this.teacherProfileService.getTeacherEducationalInfoById(educationId).subscribe(
       (data) => {
         this.educationInfoById = data.educational_info;
+
+        // Set start_date
+        if (this.educationInfoById.start_date) {
+          this.educationInfoById.start_date = new Date(this.educationInfoById.start_date).toISOString().split('T')[0];
+        }
+        // Set end_date
+        if (this.educationInfoById.end_date) {
+          this.educationInfoById.end_date = new Date(this.educationInfoById.end_date).toISOString().split('T')[0];
+        }
         
         console.warn(this.educationInfoById)
+      },
+      (error) => {
+        console.error('Error fetching educational information', error);
+      }
+    );
+  }
+
+
+  fetchWorkInfo(workId: string) {
+    // Use your data service to fetch educational information based on teacher ID
+    this.teacherProfileService.getTeacherWorkInfoById(workId).subscribe(
+      (data) => {
+        this.workInfoById = data.work_info;
+
+        // Set start_date
+        if (this.workInfoById.start_date) {
+          this.workInfoById.start_date = new Date(this.workInfoById.start_date).toISOString().split('T')[0];
+        }
+        // Set end_date
+        if (this.workInfoById.end_date) {
+          this.workInfoById.end_date = new Date(this.workInfoById.end_date).toISOString().split('T')[0];
+        }
+        
+        
+        console.warn(this.workInfoById)
       },
       (error) => {
         console.error('Error fetching educational information', error);
@@ -405,12 +603,146 @@ export class TeacherProfileComponent implements OnInit {
     this.partEducationId = educationId;
     this.fetchEducationalInfo(this.partEducationId);
   }
-
-  editTeacherEducationalInfo(data: any){
-
+  openEditModal1(workId: string) {
+    this.partWorkId = workId;
+    this.fetchWorkInfo(this.partWorkId);
   }
 
+  updateTeacherEducationalInfo(formData: any, educationalBackgroundId: string) {
+    const userId = this.activeRoute.snapshot.paramMap.get('userId');
+  
+    if (!userId) {
+      console.error('UserId is null or undefined');
+      return;
+    }
+  
+    const requestData = {
+      user_id: userId,
+      educational_background_id: educationalBackgroundId,
+      institution_name: formData.institution_name,
+      degree_name: formData.degree_name,
+      field_of_study: formData.field_of_study,
+      start_date: formData.start_date,
+      end_date: formData.end_date,
+      is_current: formData.is_current ? 1 : 0,
+    };
+  
+    this.teacherProfileService.updateTeacherEducationalInfo(requestData).subscribe(
+      (response) => {
+        console.log('Successfully updated educational information');
+        if (this.userIdParam) {
+          console.warn(this.userIdParam)
+          this.loadTeacherEducationInfo(this.userIdParam)
+    
+        }
+        // You can add any additional logic or reload data if needed
+      },
+      (error) => {
+        console.error('API error:', error);
+        // Handle errors
+        console.log(error+"")
+      }
+    );
+  }
+  
+  
+  updateTeacherWorkInfo(formData: any, workExperienceId: string) {
+    const userId = this.activeRoute.snapshot.paramMap.get('userId');
+  
+    if (!userId) {
+      console.error('UserId is null or undefined');
+      return;
+    }
+  
+    const requestData = {
+      user_id: userId,
+      work_experience_id: workExperienceId,
+      job_title: formData.job_title,
+      company_workplace_name: formData.company_workplace_name,
+      city_town: formData.city_name,
+      country: formData.country,
+      description: formData.description,
+      start_date: formData.start_date,
+      end_date: formData.end_date,
+      is_current: formData.is_current ? 1 : 0,
+    };
+     console.log("holllll"+requestData.company_workplace_name)
+    this.teacherProfileService.updateTeacherWorkInfo(requestData).subscribe(
+      (response) => {
+        console.log('Successfully updated work information');
+        // You can add any additional logic or reload data if needed
+        if (this.userIdParam) {
+          console.warn(this.userIdParam)
+          this.loadTeacherWorkInfo(this.userIdParam)
+    
+        }
+        
+      },
+      (error) => {
+        console.error('API error:', error);
+        // Handle errors
+        console.log(error+"")
+      }
+    );
+  }
+
+// Assuming your imports are correctly set up
+
+deleteTeacherEducationInfo(educationalBackgroundId: string) {
+  const userId = this.activeRoute.snapshot.paramMap.get('userId');
+
+  if (!userId) {
+    console.error('UserId is null or undefined');
+    return;
+  }
+  
+
+  this.teacherProfileService.deleteTeacherEducationInfo(userId, educationalBackgroundId).subscribe(
+    (response) => {
+      console.log('Successfully deleted education information');
+      // You can add any additional logic or reload data if needed
+      if (this.userIdParam) {
+        console.warn(this.userIdParam)
+        this.loadTeacherEducationInfo(this.userIdParam)
+  
+      }
+    },
+    (error) => {
+      console.error('API error:', error);
+      // Handle errors
+      console.log(error+"")
+    }
+  );
+}
+
+deleteTeacherWorkInfo(workExperienceId: string) {
+  const userId = this.activeRoute.snapshot.paramMap.get('userId');
+
+  if (!userId) {
+    console.error('UserId is null or undefined');
+    return;
+  }
+
+  this.teacherProfileService.deleteTeacherWorkInfo(userId, workExperienceId).subscribe(
+    (response) => {
+      console.log('Successfully deleted work information');
+      // You can add any additional logic or reload data if needed
+      if (this.userIdParam) {
+        console.warn(this.userIdParam)
+        this.loadTeacherWorkInfo(this.userIdParam)
+  
+      }
+    },
+    (error) => {
+      console.error('API error:', error);
+      // Handle errors
+      console.log(error+"")
+    }
+  );
+}
 
 
 
 }
+
+

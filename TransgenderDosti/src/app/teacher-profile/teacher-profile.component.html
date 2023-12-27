@@ -398,7 +398,7 @@
                                                     <div class="form-group small-input">
                                                         <input type="text" name="degree_name"
                                                             class="form-control form-control-sm"
-                                                            placeholder="Enter your degree name" ngModel required >
+                                                            placeholder="Enter your degree name" ngModel required>
                                                     </div>
 
 
@@ -413,8 +413,6 @@
                                                             class="form-control form-control-sm"
                                                             placeholder="Enter your field of study" ngModel required>
                                                     </div>
-
-
 
                                                 </div>
 
@@ -468,9 +466,12 @@
                                             <div class="modal-footer" style="margin-top: 10px;">
 
 
-                                                <button type="button edbtn" data-bs-dismiss="modal"
+
+
+                                                <button type="button" data-bs-dismiss="modal"
                                                     style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
-                                                    class="btn btn-danger">Close</button>
+                                                    class="btn btn-danger" (click)="closeModal()">Close</button>
+
                                                 <button type="submit"
                                                     style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
                                                     class="btn btn-success" data-bs-dismiss="modal"
@@ -492,7 +493,8 @@
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit Educational Background
+                                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit Educational
+                                            Background
                                         </h1>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
@@ -509,16 +511,17 @@
 
 
                                         <form #educationForm2="ngForm"
-                                            (ngSubmit)="editTeacherEducationalInfo(educationForm2.value)">
+                                            (ngSubmit)="updateTeacherEducationalInfo(educationForm2.value,educationInfoById.educational_background_id)">
                                             <div class="row">
 
 
                                                 <div class="col-6">
                                                     <div class="span edu-content country">Institution Name</div>
                                                     <div class="form-group small-input">
-                                                        <input  type="text" name="institution_name"
+                                                        <input type="text" name="institution_name"
                                                             class="form-control form-control-sm"
-                                                            placeholder="Enter your institution name" [(ngModel)]="educationInfoById.institution_name" required>
+                                                            placeholder="Enter your institution name"
+                                                            [(ngModel)]="educationInfoById.institution_name" required>
                                                     </div>
 
 
@@ -531,7 +534,8 @@
                                                     <div class="form-group small-input">
                                                         <input type="text" name="degree_name"
                                                             class="form-control form-control-sm"
-                                                            placeholder="Enter your degree name" [(ngModel)]="educationInfoById.degree_name" required>
+                                                            placeholder="Enter your degree name"
+                                                            [(ngModel)]="educationInfoById.degree_name" required>
                                                     </div>
 
 
@@ -544,7 +548,8 @@
                                                     <div class="form-group small-input">
                                                         <input type="text" name="field_of_study"
                                                             class="form-control form-control-sm"
-                                                            placeholder="Enter your field of study" [(ngModel)]="educationInfoById.field_of_study" required>
+                                                            placeholder="Enter your field of study"
+                                                            [(ngModel)]="educationInfoById.field_of_study" required>
                                                     </div>
 
 
@@ -556,18 +561,20 @@
 
                                                     <div class="row">
                                                         <div class="col-6">
-                                                           
+
 
                                                             <div class="span edu-content city">Start Date</div>
                                                             <input type="date" name="start_date"
-                                                                class="form-control form-control-sm" [(ngModel)]="educationInfoById.start_date" required>
+                                                                class="form-control form-control-sm"
+                                                                [(ngModel)]="educationInfoById.start_date" required>
 
                                                         </div>
                                                         <div class="col-6">
                                                             <div class="row" style="margin-right: 2px;">
                                                                 <div class="span edu-content city">End Date</div>
-                                                                <input type="date" name="end_date" [(ngModel)]="endDate"
-                                                                    [disabled]="isCurrentChecked"
+                                                                <input type="date" name="end_date"
+                                                                    [(ngModel)]="educationInfoById.end_date"
+                                                                    [disabled]="educationInfoById.is_current"
                                                                     (change)="onEndDateChange()"
                                                                     class="form-control form-control-sm" ngModel>
                                                             </div>
@@ -577,7 +584,7 @@
                                                                     <input class="form-check-input" name="is_current"
                                                                         type="checkbox" value="" id="flexCheckDefault"
                                                                         style="margin-top: 7px;"
-                                                                        [(ngModel)]="isCurrentChecked"
+                                                                        [(ngModel)]="educationInfoById.is_current"
                                                                         (change)="onCurrentChange()">
                                                                     <label class="form-check-label"
                                                                         for="flexCheckDefault">
@@ -602,9 +609,9 @@
                                             <div class="modal-footer" style="margin-top: 10px;">
 
 
-                                                <button type="button edbtn" data-bs-dismiss="modal"
+                                                <button type="button" data-bs-dismiss="modal"
                                                     style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
-                                                    class="btn btn-danger">Close</button>
+                                                    class="btn btn-danger" (click)="closeModal()">Close</button>
                                                 <button type="submit"
                                                     style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
                                                     class="btn btn-success" data-bs-dismiss="modal"
@@ -656,7 +663,16 @@
                                 </div>
                             </div>
 
-                            <div class="edit-icon" (click)="openEditModal(ed.educational_background_id)" data-bs-toggle="modal" data-bs-target="#editeducation">
+                            <div class="edit-icon" (click)="deleteTeacherEducationInfo(ed.educational_background_id)"
+                                data-bs-toggle="modal" data-bs-target="#deleteEducation">
+                                <i class="fas fa-trash"></i>
+                            </div>
+
+
+
+
+                            <div class="edit-icon" (click)="openEditModal(ed.educational_background_id)"
+                                data-bs-toggle="modal" data-bs-target="#editeducation">
                                 <!-- Edit icon goes here, you can use Font Awesome or any other icon library -->
                                 <i class="fas fa-edit"></i>
                             </div>
@@ -673,7 +689,7 @@
                             <span class="educational">Add your work experience</span>
                         </div>
                         <div class="col-3 d-flex justify-content-end">
-                            <div class="circle3">
+                            <div class="circle3" data-bs-toggle="modal" data-bs-target="#workexp">
                                 <i class="fas fa-plus"></i>
                             </div>
                         </div>
@@ -682,9 +698,368 @@
 
 
 
+
+
+
+
+                        <!--Work Experience MODEL for CRUD-->
+
+
+                        <!--Work Experience Modal-->
+                        <!--Work Experience Modal-->
+                        <!--Work Experience Modal-->
+
+                        <div class="modal modal-lg fade" id="workexp" #education data-bs-backdrop="static"
+                            data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Work History </h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+
+                                        <div class="row ed-note">
+                                            Please share your work history. Start with your most recent job and work
+                                            backwards
+                                        </div>
+
+
+                                        <form #workForm="ngForm" (ngSubmit)="saveTeacherWorkInfo(workForm.value)">
+                                            <div class="row">
+
+
+                                                <div class="col-6">
+                                                    <div class="span edu-content country">Job Title</div>
+                                                    <div class="form-group small-input">
+                                                        <input type="text" name="job_title"
+                                                            class="form-control form-control-sm"
+                                                            placeholder="Enter your Job Title" ngModel required>
+                                                    </div>
+
+
+
+                                                </div>
+
+                                                <div class="col-6">
+                                                    <div class="span edu-content country">Company/Workplace</div>
+                                                    <div class="form-group small-input">
+                                                        <input type="text" name="companey_name"
+                                                            class="form-control form-control-sm"
+                                                            placeholder="Enter your Companey or Workplace name" ngModel
+                                                            required>
+                                                    </div>
+
+
+
+                                                </div>
+
+                                                <div class="col-6">
+
+                                                    <div class="span edu-content city">City/Town</div>
+                                                    <div class="form-group small-input">
+                                                        <input type="text" name="city_name"
+                                                            class="form-control form-control-sm"
+                                                            placeholder="Enter your City or Town name " ngModel
+                                                            required>
+                                                    </div>
+
+
+
+                                                </div>
+
+                                                <div class="col-6">
+
+                                                    <div class="span edu-content city">Country</div>
+                                                    <div class="form-group small-input">
+                                                        <input type="text" name="country"
+                                                            class="form-control form-control-sm"
+                                                            placeholder="Enter your Country name " ngModel required>
+                                                    </div>
+
+
+
+                                                </div>
+
+
+                                                <div class="col-6">
+                                                    <div class="span edu-content city">Description</div>
+                                                    <div class="form-group small-input">
+                                                        <textarea name="description"
+                                                            class="form-control form-control-sm"
+                                                            placeholder="Write 160 to 200 words description of your experience "
+                                                            ngModel required></textarea>
+                                                    </div>
+                                                </div>
+
+
+
+
+
+
+
+                                                <div class="col-6" style="padding-left: 15px;">
+
+                                                    <div class="row">
+                                                        <div class="col-6">
+
+                                                            <div class="span edu-content city">Start Date</div>
+                                                            <input type="date" name="start_date"
+                                                                class="form-control form-control-sm" ngModel required>
+
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <div class="row" style="margin-right: 2px;">
+                                                                <div class="span edu-content city">End Date</div>
+                                                                <input type="date" name="end_date" [(ngModel)]="endDate"
+                                                                    [disabled]="isCurrentChecked"
+                                                                    (change)="onEndDateChange()"
+                                                                    class="form-control form-control-sm" ngModel>
+                                                            </div>
+
+                                                            <div class="row">
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" name="is_current"
+                                                                        type="checkbox" value="" id="flexCheckDefault"
+                                                                        style="margin-top: 7px;"
+                                                                        [(ngModel)]="isCurrentChecked"
+                                                                        (change)="onCurrentChange()">
+                                                                    <label class="form-check-label"
+                                                                        for="flexCheckDefault">
+                                                                        Current
+                                                                    </label>
+                                                                </div>
+
+                                                            </div>
+
+
+
+                                                        </div>
+                                                    </div>
+
+
+
+                                                </div>
+
+
+                                                <div class="col-6">
+                                                    <div class="row justify-content-end">
+                                                        <div class="col-4 sf text-right">
+                                                            <span class="social-profile">relevant document</span>
+                                                        </div>
+                                                        <div class="col-2"
+                                                            style="padding-top: 10px; padding-right: 0px;">
+                                                            <div class="circle2" (click)="openFileInput2()">
+                                                                <i class="fa-solid fa-upload"></i>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+
+                                            <div class="modal-footer" style="margin-top: 10px;">
+
+
+                                                <button type="button" data-bs-dismiss="modal"
+                                                    style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                                                    class="btn btn-danger" (click)="closeModal()">Close</button>
+                                                <button type="submit"
+                                                    style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                                                    class="btn btn-success" data-bs-dismiss="modal"
+                                                    [disabled]="!workForm.valid">Save</button>
+
+
+                                            </div>
+                                        </form>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!--END of MODEL OF WORK EXPERIENCE-->
+
+
+                        <div class="modal modal-lg fade" id="editwork" #editeducation data-bs-backdrop="static"
+                            data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit Work Experience </h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+
+                                        <div class="row ed-note">
+                                            Please share your work history. Start with your most recent job and work
+                                            backwards
+                                        </div>
+
+
+                                        <form #workForm2="ngForm"
+                                            (ngSubmit)="updateTeacherWorkInfo(workForm2.value,workInfoById.work_experience_id)">
+                                            <div class="row">
+
+
+                                                <div class="col-6">
+                                                    <div class="span edu-content country">Job Title</div>
+                                                    <div class="form-group small-input">
+                                                        <input type="text" name="job_title"
+                                                            class="form-control form-control-sm"
+                                                            placeholder="Enter your job title"
+                                                            [(ngModel)]="workInfoById.job_title" required>
+                                                    </div>
+
+
+
+                                                </div>
+
+                                                <div class="col-6">
+
+                                                    <div class="span edu-content city">Company/Workplace</div>
+                                                    <div class="form-group small-input">
+                                                        <input type="text" name="company_workplace_name"
+                                                            class="form-control form-control-sm"
+                                                            placeholder="Enter your companey or workplace name"
+                                                            [(ngModel)]="workInfoById.company_workplace_name" required>
+                                                    </div>
+
+
+
+                                                </div>
+
+                                                <div class="col-6">
+
+                                                    <div class="span edu-content city">City/Town</div>
+                                                    <div class="form-group small-input">
+                                                        <input type="text" name="city_name"
+                                                            class="form-control form-control-sm"
+                                                            placeholder="Enter your city or town"
+                                                            [(ngModel)]="workInfoById.city_town" required>
+                                                    </div>
+
+
+
+                                                </div>
+
+                                                <div class="col-6">
+
+                                                    <div class="span edu-content city">Country</div>
+                                                    <div class="form-group small-input">
+                                                        <input type="text" name="country"
+                                                            class="form-control form-control-sm"
+                                                            placeholder="Enter your city or town"
+                                                            [(ngModel)]="workInfoById.country" required>
+                                                    </div>
+
+
+
+                                                </div>
+
+                                                <div class="col-6">
+                                                    <div class="span edu-content city">Description</div>
+                                                    <div class="form-group small-input">
+                                                        <textarea name="description"
+                                                            class="form-control form-control-sm"
+                                                            placeholder="Write 160 to 200 words description of your experience "
+                                                            [(ngModel)]="workInfoById.description" required></textarea>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="col-6" style="padding-left: 15px;">
+
+                                                    <div class="row">
+                                                        <div class="col-6">
+
+                                                            <div class="span edu-content city">Start Date</div>
+                                                            <input type="date" name="start_date"
+                                                                class="form-control form-control-sm"
+                                                                [(ngModel)]="workInfoById.start_date" required>
+
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <div class="row" style="margin-right: 2px;">
+                                                                <div class="span edu-content city">End Date</div>
+                                                                <input type="date" name="end_date"
+                                                                    [(ngModel)]="workInfoById.end_date"
+                                                                    [disabled]="workInfoById.is_current"
+                                                                    (change)="onEndDateChange()"
+                                                                    class="form-control form-control-sm" ngModel>
+                                                            </div>
+
+                                                            <div class="row">
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" name="is_current"
+                                                                        type="checkbox" value="" id="flexCheckDefault"
+                                                                        style="margin-top: 7px;"
+                                                                        [(ngModel)]="workInfoById.is_current"
+                                                                        (change)="onCurrentChange()">
+                                                                    <label class="form-check-label"
+                                                                        for="flexCheckDefault">
+                                                                        Current
+                                                                    </label>
+                                                                </div>
+
+                                                            </div>
+
+
+
+                                                        </div>
+                                                    </div>
+
+
+
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="row justify-content-end">
+                                                        <div class="col-4 sf text-right">
+                                                            <span class="social-profile">relevant document</span>
+                                                        </div>
+                                                        <div class="col-2"
+                                                            style="padding-top: 10px; padding-right: 0px;">
+                                                            <div class="circle2" (click)="openFileInput2()">
+                                                                <i class="fa-solid fa-upload"></i>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                            <div class="modal-footer" style="margin-top: 10px;">
+
+
+                                                <button type="button" data-bs-dismiss="modal"
+                                                    style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                                                    class="btn btn-danger" (click)="closeModal()">Close</button>
+                                                <button type="submit"
+                                                    style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                                                    class="btn btn-success" data-bs-dismiss="modal"
+                                                    [disabled]="!workForm2.valid">Edit</button>
+
+
+                                            </div>
+
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
                     </div>
 
-                    <div class="row" style="padding-top: 5px; padding-bottom: 5px;">
+                    <div class="row" *ngFor="let wk of workInfo" style="padding-top: 5px; padding-bottom: 5px;">
 
                         <div class="col-2 side-bar">
                             <!-- Content of col-2 goes here -->
@@ -693,22 +1068,65 @@
                         <div class="col-10 education-bar d-flex justify-content-between align-items-center">
                             <div>
                                 <div class="row degree">
-                                    Bachelors of Computer Science , Computer Science
+                                    {{ wk.job_title }}
+
                                 </div>
                                 <div class="row institute">
-                                    University of Engineering and Technology
+                                    {{ wk.company_workplace_name }}
                                 </div>
                                 <div class="row institute">
-                                    10\2020 - Current
+                                    {{ formatDate(wk.start_date) }} -
+                                    <ng-container *ngIf="wk.is_current === 1; else endDate">
+                                        Current
+                                    </ng-container>
+                                    <ng-template #endDate>
+                                        {{ formatDate(wk.end_date) }}
+                                    </ng-template>
                                 </div>
                             </div>
 
-                            <div class="edit-icon">
+                            <div class="edit-icon" (click)="deleteTeacherWorkInfo(wk.work_experience_id)"
+                            data-bs-toggle="modal" data-bs-target="#deleteEducation">
+                            <i class="fas fa-trash"></i>
+                           </div>
+
+                            <div class="edit-icon" (click)="openEditModal1(wk.work_experience_id )"
+                                data-bs-toggle="modal" data-bs-target="#editwork">
                                 <!-- Edit icon goes here, you can use Font Awesome or any other icon library -->
                                 <i class="fas fa-edit"></i>
                             </div>
                         </div>
                     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                     <!--Language-->
 
@@ -718,17 +1136,79 @@
                             <span class="educational">Language Proficiency</span>
                         </div>
                         <div class="col-6 d-flex justify-content-end">
-                            <div class="circle3">
+                            <div class="circle3"  data-bs-toggle="modal" data-bs-target="#language">
                                 <i class="fas fa-plus"></i>
                             </div>
                         </div>
+                        
 
-                        <div class="row" style="padding-top: 6px;">
 
-                            <div class="col-2 lang-border">English</div>
-                            <div class="col-2 lang-border">Urdu</div>
+
+                        <div class="modal fade" id="language" #education data-bs-backdrop="static"
+                        data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Language </h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+
+                                    
+
+
+                                    <form #languageForm="ngForm" (ngSubmit)="saveTeacherLanguageInfo(languageForm.value)">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="span edu-content city">Select Language</div>
+                                
+                                                <!-- Create a combo box with options populated from the 'languages' array -->
+                                                <select class="form-select" id="selectedLanguage" name="selectedLanguage" ngModel>
+                                                    <option value="" disabled selected>Select a language</option>
+                                                    <option *ngFor="let language of languages" [value]="language.name">{{ language.name }}</option>
+                                                </select>
+                                            </div>
+                                        
+
+
+                                            
+
+                                        <div class="modal-footer" style="margin-top: 10px;">
+
+
+                                            <button type="button" data-bs-dismiss="modal"
+                                                style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                                                class="btn btn-danger" (click)="closeModal()">Close</button>
+                                            <button type="submit"
+                                                style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                                                class="btn btn-success" data-bs-dismiss="modal"
+                                                [disabled]="!languageForm.valid">Save</button>
+
+
+                                        </div>
+                                        </div>
+                                    </form>
+
+                                </div>
+
+                            </div>
                         </div>
+                    </div>
 
+
+
+
+
+
+
+
+                    <div class="row" style="padding-top: 6px;">
+                        <div *ngFor="let lan of languageInfo" class="col-2 lang-border">{{lan.language}}</div>
+                      </div>
+                      
+  
 
 
 
@@ -752,7 +1232,8 @@
                     </div>
 
                     <div class="btn-signup2" style="display: flex; justify-content: center; align-items: center;">
-                        <button type="submit" class="btn custombtn2" style="margin-right: 10px; ">SAVE </button>
+                        <button type="submit" class="btn custombtn2" style="margin-right: 10px; ">SAVE
+                        </button>
                     </div>
 
 
