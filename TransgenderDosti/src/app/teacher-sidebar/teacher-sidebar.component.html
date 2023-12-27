@@ -3,21 +3,120 @@
     <mat-sidenav mode="side" id="sidenav" #sidenav [class.menu-open]="isMenuOpen" [class.menu-close]="!isMenuOpen"
         opened>
         <i class="fa-solid fa-bars" (click)="onToolbarMenuToggle()"></i>
-        <div class="row course-code">
+        <div class="row course-code" [style.display]="isMenuOpen ? 'block' : 'none'">
             <span>Course Name</span>
+        </div>
+
+        <div class="line">
 
         </div>
-        <a routerLink="/teacher-course-details/teacher-course-dashboard">Dashboard</a>
-        <div>
-            <a routerLink="/teacher-course-details/teacher-course-material">Material</a>
+
+        <div class="row tools" [style.display]="isMenuOpen ? 'block' : 'none'">
+            <span>TOOLS</span>
         </div>
+
+
+
         <div>
-            <a routerLink="/teacher-course-details/teacher-course-assignment">Assignment</a>
+            <a routerLink="/teacher-course-details/teacher-course-dashboard"
+                style="text-decoration: none; color: inherit;">
+                <div class="row">
+                    <div class="col-2">
+                        <i class="fa-solid fa-house"></i>
+                    </div>
+                    <div class="col-6 side-text" [style.display]="isMenuOpen ? 'block' : 'none'"
+                        [ngClass]="{ 'bold-text': selectedRoute.includes('/teacher-course-dashboard') }">
+                        Dashboard
+                    </div>
+                </div>
+            </a>
         </div>
-        <div>
-            <a routerLink="/teacher-course-details/teacher-course-assignment-viewresponses">View Responses</a>
-        </div>
+<<<<<<< HEAD
         
+        
+=======
+
+
+
+
+        <div class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
+            data-bs-target="#home-collapse" aria-expanded="false" (click)="toggleChevron()">
+            <div class="row">
+                <div class="col-2" style="padding-left: 0px;">
+                    <i [ngClass]="{'fa-chevron-right': !isChevronDown, 'fa-chevron-down': isChevronDown}"
+                        class="fa-solid"></i>
+                </div>
+                <div class="col-6 side-text">
+                    Classwork
+                </div>
+            </div>
+        </div>
+
+
+        <div class="collapse " [class.close-sidebar-p]="isMenuOpen" [class.open-sidebar-p]="!isMenuOpen"
+            id="home-collapse">
+            <div>
+                <a routerLink="/teacher-course-details/teacher-course-assignment"
+                    style="text-decoration: none; color: inherit;">
+                    <div class="row">
+                        <div class="col-2">
+                            <i class="fa-solid fa-clipboard fa-sm"></i>
+                        </div>
+                        <div class="col-6 side-inner-text" [style.display]="isMenuOpen ? 'block' : 'none'"
+                            [ngClass]="{ 'bold-text': selectedRoute.includes('/teacher-course-assignment') }">
+                            Assignment
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a routerLink="/teacher-course-details/teacher-course-material"
+                    style="text-decoration: none; color: inherit;">
+                    <div class="row">
+                        <div class="col-2">
+                            <i class="fa-solid fa-book-open-reader fa-sm"></i>
+                        </div>
+                        <div class="col-6 side-inner-text" [style.display]="isMenuOpen ? 'block' : 'none'"
+                            [ngClass]="{ 'bold-text': selectedRoute.includes('/teacher-course-material') }">
+                            Quiz Assignment
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div>
+                <a routerLink="/teacher-course-details/teacher-course-material"
+                    style="text-decoration: none; color: inherit;">
+                    <div class="row">
+                        <div class="col-2">
+                            <i class="fa-solid fa-shapes fa-sm"></i>
+                        </div>
+                        <div class="col-6 side-inner-text" [style.display]="isMenuOpen ? 'block' : 'none'"
+                            [ngClass]="{ 'bold-text': selectedRoute.includes('teacher-course-material') }">
+                            Material
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+        </div>
+
+
+        <!-- Material link -->
+        <div>
+            <a [ngClass]="{ 'bold-text': selectedRoute.includes('/teacher-course-material') }">
+                Material
+            </a>
+        </div>
+
+        <!-- Assignment link -->
+        <div>
+            <a [ngClass]="{ 'bold-text': selectedRoute.includes('/teacher-course-assignment') }">
+                Assignment
+            </a>
+        </div>
+
+>>>>>>> 33757f31a12a1e1d52029183949adb4d18d36803
     </mat-sidenav>
 
     <mat-sidenav-content [ngStyle]="{'margin-left.px' : contentMargin}">
