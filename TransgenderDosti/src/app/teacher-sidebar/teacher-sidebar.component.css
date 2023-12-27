@@ -1,22 +1,25 @@
 .mat-sidenav-container {
-    height: calc(250vh - 115vh);
+  height: calc(250vh - 115vh);
 }
 
 .mat-sidenav {
-    
-    background-color: rgb(255, 255, 255);
+
+  background-color: rgb(255, 255, 255);
 }
 
 .mat-sidenav {
-  transition: width 0.3s; /* Add a smooth transition effect for width */
+  transition: width 0.3s;
+  /* Add a smooth transition effect for width */
 }
 
 .menu-close {
-  width: 64px; /* Set the desired width when closed */
+  width: 64px;
+  /* Set the desired width when closed */
 }
 
 .menu-open {
-  width: 250px; /* Set the desired width when opened */
+  width: 300px;
+  /* Set the desired width when opened */
 }
 
 .mat-sidenav i {
@@ -26,50 +29,141 @@
 }
 
 .row.course-code {
-  padding: 16px;
+  padding-left: 7px;
   box-sizing: border-box;
 }
 
 
 
 .course-code {
-    color: #5D5959;
-    font-family: Karla;
-    font-size: 1.3rem;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
+  color: #5D5959;
+  font-family: Karla;
+  font-size: 1.1rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  transition: color 0.3s ease;
+
+
 
 }
 
+.tools {
+  color: #5D5959;
+  font-family: Karla;
+  font-size: 0.8rem;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+  padding-left: 7px;
+  padding-top: 10px;
+  padding-bottom: 20px;
+  transition: color 0.3s ease;
+
+}
+
+.side-text {
+  color: #5D5959;
+  font-family: Karla;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  padding-top: 10px;
+  padding-left: 14px;
+
+
+}
+
+.side-inner-text {
+  color: #5D5959;
+  font-family: Karla;
+  font-size: 0.9rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  padding-top: 4px;
+  padding-left: 14px;
+
+
+}
+
+.col-2 i,
+.side-text {
+  color: #5D5959;
+  transition: color 0.3s ease;
+  /* Add smooth transition for color change */
+}
+
+/* Hover styles */
+a:hover .col-2 i,
+a:hover .side-text {
+  color: #7281FF;
+  /* Your desired hover color */
+  ;
+}
+
+/* Focus styles */
+a:focus .col-2 i,
+a:focus .side-text {
+  outline: none;
+  /* Remove default focus outline */
+  color: #7281FF;
+}
+
+
+
 .vertical-div {
-    position: relative;
-    height: 10px;
-    /* Set the desired height */
-    width: 1px;
-    /* Set the width of the vertical line */
-    background-color: #000;
-    /* Set the color of the line */
+  position: relative;
+  height: 10px;
+  /* Set the desired height */
+  width: 1px;
+  /* Set the width of the vertical line */
+  background-color: #000;
+  /* Set the color of the line */
 }
 
 /* Create a pseudo-element to extend the line to the full height */
 .vertical-div::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    width: 1px;
-    /* Set the same width as the main div */
-    background-color: #000;
-    /* Set the same color as the main div */
-    margin-left: -1px;
-    /* Adjust for the main div's width */
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 1px;
+  /* Set the same width as the main div */
+  background-color: #000;
+  /* Set the same color as the main div */
+  margin-left: -1px;
+  /* Adjust for the main div's width */
 }
 
-#sidenav.menu-close{
-    width: 70px;
+#sidenav.menu-close {
+  width: 33px;
 }
-#sidenav.menu-open{
-    width: 200px;
+
+#sidenav.menu-open {
+  width: 200px;
+}
+
+.line {
+  width: 309px;
+  height: 1px;
+  background: #E1DCDC;
+  margin-top: 10px;
+}
+
+.bold-text {
+  font-weight: 800;
+
+}
+
+.close-sidebar-p {
+  padding-left: 26px;
+}
+
+.open-sidebar-p {
+  padding-left: 0px;
 }
