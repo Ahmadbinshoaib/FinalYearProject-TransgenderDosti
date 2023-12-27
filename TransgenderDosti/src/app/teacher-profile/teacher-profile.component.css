@@ -736,3 +736,13 @@
     background-color: #555;
     /* Set the color of the scrollbar handle on hover */
 }
+
+.nolist {
+    color: #7c7c7c;
+    font-family: Karla;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 100;
+    line-height: normal;
+
+}

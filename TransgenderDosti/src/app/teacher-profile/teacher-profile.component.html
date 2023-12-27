@@ -637,47 +637,55 @@
 
                     </div>
 
-                    <div class="row" *ngFor="let ed of educationalInfo" style="padding-top: 5px; padding-bottom: 5px;">
-
-                        <div class="col-2 side-bar">
-                            <!-- Content of col-2 goes here -->
-                        </div>
-
-                        <div class="col-10 education-bar d-flex justify-content-between align-items-center">
-                            <div>
-                                <div class="row degree">
-
-                                    {{ ed.degree_name }}
-                                </div>
-                                <div class="row institute">
-                                    {{ ed.institution_name }}
-                                </div>
-                                <div class="row institute">
-                                    {{ formatDate(ed.start_date) }} -
-                                    <ng-container *ngIf="ed.is_current === 1; else endDate">
-                                        Current
-                                    </ng-container>
-                                    <ng-template #endDate>
-                                        {{ formatDate(ed.end_date) }}
-                                    </ng-template>
-                                </div>
+                    <div *ngIf="educationalInfo.length > 0; else noDataMessage">
+                        <div class="row" *ngFor="let ed of educationalInfo"
+                            style="padding-top: 5px; padding-bottom: 5px;">
+                            <div class="col-2 side-bar">
+                                <!-- Content of col-2 goes here -->
                             </div>
 
-                            <div class="edit-icon" (click)="deleteTeacherEducationInfo(ed.educational_background_id)"
-                                data-bs-toggle="modal" data-bs-target="#deleteEducation">
-                                <i class="fas fa-trash"></i>
-                            </div>
+                            <div class="col-10 education-bar d-flex justify-content-between align-items-center">
+                                <div>
+                                    <div class="row degree">
+                                        {{ ed.degree_name }}
+                                    </div>
+                                    <div class="row institute">
+                                        {{ ed.institution_name }}
+                                    </div>
+                                    <div class="row institute">
+                                        {{ formatDate(ed.start_date) }} -
+                                        <ng-container *ngIf="ed.is_current === 1; else endDate">
+                                            Current
+                                        </ng-container>
+                                        <ng-template #endDate>
+                                            {{ formatDate(ed.end_date) }}
+                                        </ng-template>
+                                    </div>
+                                </div>
 
+                                <div>
+                                    <div class="edit-icon" (click)="openEditModal(ed.educational_background_id)"
+                                        data-bs-toggle="modal" data-bs-target="#editeducation">
+                                        <i class="fas fa-edit"></i>
+                                    </div>
 
-
-
-                            <div class="edit-icon" (click)="openEditModal(ed.educational_background_id)"
-                                data-bs-toggle="modal" data-bs-target="#editeducation">
-                                <!-- Edit icon goes here, you can use Font Awesome or any other icon library -->
-                                <i class="fas fa-edit"></i>
+                                    <div class="edit-icon"
+                                        (click)="deleteTeacherEducationInfo(ed.educational_background_id)"
+                                        data-bs-toggle="modal" data-bs-target="#deleteEducation">
+                                        <i class="fas fa-trash"></i>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
+
+                    <ng-template #noDataMessage>
+                        <div>
+                            <p class="nolist" style="margin-bottom: 0px; margin-left: 10px;">No educational info to
+                                display.</p>
+                        </div>
+                    </ng-template>
+
 
 
 
@@ -1059,74 +1067,58 @@
 
                     </div>
 
-                    <div class="row" *ngFor="let wk of workInfo" style="padding-top: 5px; padding-bottom: 5px;">
+                    <div *ngIf="workInfo.length > 0; else noWorkMessage">
+                        <div class="row" *ngFor="let wk of workInfo" style="padding-top: 5px; padding-bottom: 5px;">
 
-                        <div class="col-2 side-bar">
-                            <!-- Content of col-2 goes here -->
-                        </div>
-
-                        <div class="col-10 education-bar d-flex justify-content-between align-items-center">
-                            <div>
-                                <div class="row degree">
-                                    {{ wk.job_title }}
-
-                                </div>
-                                <div class="row institute">
-                                    {{ wk.company_workplace_name }}
-                                </div>
-                                <div class="row institute">
-                                    {{ formatDate(wk.start_date) }} -
-                                    <ng-container *ngIf="wk.is_current === 1; else endDate">
-                                        Current
-                                    </ng-container>
-                                    <ng-template #endDate>
-                                        {{ formatDate(wk.end_date) }}
-                                    </ng-template>
-                                </div>
+                            <div class="col-2 side-bar">
+                                <!-- Content of col-2 goes here -->
                             </div>
 
-                            <div class="edit-icon" (click)="deleteTeacherWorkInfo(wk.work_experience_id)"
-                            data-bs-toggle="modal" data-bs-target="#deleteEducation">
-                            <i class="fas fa-trash"></i>
-                           </div>
+                            <div class="col-10 education-bar d-flex justify-content-between align-items-center">
+                                <div>
+                                    <div class="row degree">
+                                        {{ wk.job_title }}
 
-                            <div class="edit-icon" (click)="openEditModal1(wk.work_experience_id )"
-                                data-bs-toggle="modal" data-bs-target="#editwork">
-                                <!-- Edit icon goes here, you can use Font Awesome or any other icon library -->
-                                <i class="fas fa-edit"></i>
+                                    </div>
+                                    <div class="row institute">
+                                        {{ wk.company_workplace_name }}
+                                    </div>
+                                    <div class="row institute">
+                                        {{ formatDate(wk.start_date) }} -
+                                        <ng-container *ngIf="wk.is_current === 1; else endDate">
+                                            Current
+                                        </ng-container>
+                                        <ng-template #endDate>
+                                            {{ formatDate(wk.end_date) }}
+                                        </ng-template>
+                                    </div>
+                                </div>
+
+                                <div>
+
+
+                                    <div class="edit-icon" (click)="deleteTeacherWorkInfo(wk.work_experience_id)"
+                                        data-bs-toggle="modal" data-bs-target="#deleteEducation">
+                                        <i class="fas fa-trash"></i>
+                                    </div>
+
+                                    <div class="edit-icon" (click)="openEditModal1(wk.work_experience_id )"
+                                        data-bs-toggle="modal" data-bs-target="#editwork">
+                                        <!-- Edit icon goes here, you can use Font Awesome or any other icon library -->
+                                        <i class="fas fa-edit"></i>
+                                    </div>
+
+                                </div>
                             </div>
                         </div>
                     </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                    <ng-template #noWorkMessage>
+                        <div>
+                            <p class="nolist" style="margin-bottom: 0px; margin-left: 10px;">No experience info to
+                                display.</p>
+                        </div>
+                    </ng-template>
 
                     <!--Language-->
 
@@ -1136,66 +1128,80 @@
                             <span class="educational">Language Proficiency</span>
                         </div>
                         <div class="col-6 d-flex justify-content-end">
-                            <div class="circle3"  data-bs-toggle="modal" data-bs-target="#language">
+                            <div class="circle3" data-bs-toggle="modal" data-bs-target="#language">
                                 <i class="fas fa-plus"></i>
                             </div>
                         </div>
-                        
+
+
 
 
 
                         <div class="modal fade" id="language" #education data-bs-backdrop="static"
-                        data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
-                        aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Language </h1>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-
-                                    
+                            data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Language </h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
 
 
-                                    <form #languageForm="ngForm" (ngSubmit)="saveTeacherLanguageInfo(languageForm.value)">
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <div class="span edu-content city">Select Language</div>
-                                
-                                                <!-- Create a combo box with options populated from the 'languages' array -->
-                                                <select class="form-select" id="selectedLanguage" name="selectedLanguage" ngModel>
-                                                    <option value="" disabled selected>Select a language</option>
-                                                    <option *ngFor="let language of languages" [value]="language.name">{{ language.name }}</option>
-                                                </select>
+
+
+                                        <form #languageForm="ngForm"
+                                            (ngSubmit)="saveTeacherLanguageInfo(languageForm.value)">
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <div class="span edu-content city">Select Language</div>
+
+                                                    <div class="form-group small-input">
+                                                        <select
+                                                            class="form-select form-group small-input form-control form-control-sm"
+                                                            aria-label="Default select example"
+                                                            style="padding-left: 10px;" id="selectedLanguage"
+                                                            name="selectedLanguage" ngModel>
+                                                            <option value="" disabled selected>Select a language
+                                                            </option>
+                                                            <option *ngFor="let language of languages"
+                                                                [value]="language.name">{{ language.name }}</option>
+
+                                                        </select>
+
+                                                    </div>
+
+                                                    <!-- Create a combo box with options populated from the 'languages' array -->
+
+                                                </div>
+
+
+
+
+
+                                                <div class="modal-footer" style="margin-top: 10px;">
+
+
+                                                    <button type="button" data-bs-dismiss="modal"
+                                                        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                                                        class="btn btn-danger" (click)="closeModal()">Close</button>
+                                                    <button type="submit"
+                                                        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                                                        class="btn btn-success" data-bs-dismiss="modal"
+                                                        [disabled]="!languageForm.valid">Save</button>
+
+
+                                                </div>
                                             </div>
-                                        
+                                        </form>
 
-
-                                            
-
-                                        <div class="modal-footer" style="margin-top: 10px;">
-
-
-                                            <button type="button" data-bs-dismiss="modal"
-                                                style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
-                                                class="btn btn-danger" (click)="closeModal()">Close</button>
-                                            <button type="submit"
-                                                style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
-                                                class="btn btn-success" data-bs-dismiss="modal"
-                                                [disabled]="!languageForm.valid">Save</button>
-
-
-                                        </div>
-                                        </div>
-                                    </form>
+                                    </div>
 
                                 </div>
-
                             </div>
                         </div>
-                    </div>
 
 
 
@@ -1203,12 +1209,32 @@
 
 
 
+                        <div *ngIf="languageInfo.length > 0; else noLanguagekMessage">
+                            <div class="row" style="padding-top: 6px; ">
+                                <div style="margin-bottom: 5px;" *ngFor="let lan of languageInfo"
+                                    class="col-2 lang-border">
+                                    <div class="row">
+                                        <div class="col-8"
+                                            style="padding-left: 6px; padding-top: 4px; padding-bottom: 4px;">
+                                            {{lan.language}}</div>
+                                        <div class="col-4"><i class="fa-solid fa-xmark fa-lg"
+                                                style="color: #ec0909; padding-top: 11px;"></i>
+                                        </div>
+                                    </div>
 
-                    <div class="row" style="padding-top: 6px;">
-                        <div *ngFor="let lan of languageInfo" class="col-2 lang-border">{{lan.language}}</div>
-                      </div>
-                      
-  
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <ng-template #noLanguagekMessage>
+                            <div>
+                                <p class="nolist" style="margin-bottom: 0px; margin-left: 10px;">No experience info to
+                                    display.</p>
+                            </div>
+                        </ng-template>
+
+
 
 
 
@@ -1221,7 +1247,7 @@
                     <div class="row" style="padding-top: 5px; padding-bottom: 5px;">
 
                         <div class="col-6">
-                            <span class="educational">Additional Certificates</span>
+                            <span class="educational">Additional Certificates/Skills</span>
                         </div>
                         <div class="col-6 d-flex justify-content-end">
                             <div class="circle3">
