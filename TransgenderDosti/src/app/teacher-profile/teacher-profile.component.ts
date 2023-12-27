@@ -608,6 +608,7 @@ export class TeacherProfileComponent implements OnInit {
     this.fetchWorkInfo(this.partWorkId);
   }
 
+
   updateTeacherEducationalInfo(formData: any, educationalBackgroundId: string) {
     const userId = this.activeRoute.snapshot.paramMap.get('userId');
   
@@ -740,6 +741,10 @@ deleteTeacherWorkInfo(workExperienceId: string) {
     }
   );
 }
+
+
+
+
 
 
 
