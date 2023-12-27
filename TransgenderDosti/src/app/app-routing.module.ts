@@ -10,6 +10,8 @@ import { AuthGuard1 } from './learnerauth-guard.guard';
 import { TeacherProfileComponent } from './teacher-profile/teacher-profile.component';
 import { TeacherSidebarComponent } from './teacher-sidebar/teacher-sidebar.component';
 import { TeacherCourseDashboardComponent } from './teacher-course-dashboard/teacher-course-dashboard.component';
+import { TeacherCourseMaterialComponent } from './teacher-course-material/teacher-course-material.component';
+import { TeacherCourseAssignmentComponent } from './teacher-course-assignment/teacher-course-assignment.component';
 
 const routes: Routes = [
 
@@ -44,6 +46,8 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       { path: 'teacher-course-dashboard', component: TeacherCourseDashboardComponent },
+      {path: 'teacher-course-assignment', component: TeacherCourseAssignmentComponent},
+      { path: 'teacher-course-material', component: TeacherCourseMaterialComponent }
     ]
   },
  

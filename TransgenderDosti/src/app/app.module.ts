@@ -26,6 +26,9 @@ import { TeacherSidebarComponent } from './teacher-sidebar/teacher-sidebar.compo
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { TeacherCourseDashboardComponent } from './teacher-course-dashboard/teacher-course-dashboard.component';
+import { TeacherCourseMaterialComponent } from './teacher-course-material/teacher-course-material.component';
+import { ComponentNameComponent } from './component-name/component-name.component';
+import { TeacherCourseAssignmentComponent } from './teacher-course-assignment/teacher-course-assignment.component';
 
 
 @NgModule({
@@ -41,6 +44,9 @@ import { TeacherCourseDashboardComponent } from './teacher-course-dashboard/teac
     TeacherProfileComponent,
     TeacherSidebarComponent,
     TeacherCourseDashboardComponent,
+    TeacherCourseMaterialComponent,
+    ComponentNameComponent,
+    TeacherCourseAssignmentComponent,
 
   ],
   imports: [
