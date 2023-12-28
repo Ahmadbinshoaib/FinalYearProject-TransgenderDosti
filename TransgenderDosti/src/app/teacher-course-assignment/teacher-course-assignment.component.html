@@ -3,8 +3,8 @@
         <div class="row text-dashboard">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="/teacher-course-details/teacher-course-assignment-viewresponses">Assignment</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Library</li>
+                    <li class="breadcrumb-item"><a
+                            href="/teacher-course-details/teacher-course-assignment-viewresponses">Assignment</a></li>
                 </ol>
             </nav>
         </div>
@@ -36,9 +36,36 @@
                         <span>Assignments(2)</span>
                     </div>
                     <div class="col-6 heading2">
-                        <span>Create new assignment</span>
+                        <span class="new-assignment" data-bs-toggle="modal" data-bs-target="#newAssignment">Create new
+                            assignment</span>
+                    </div>
+
+                    <!--New Assignment Modal-->
+                    <!--New Assignment Modal-->
+                    <!--New Assignment Modal-->
+                    <div class="modal fade" id="newAssignment" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    ...
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
+                
                 <div class="row text">
                     <div class="col-10">
                         <div class="row detail">
