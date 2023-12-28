@@ -155,7 +155,68 @@
 
 }
 
+.courseModalLeft {
+    background-color: rgba(225, 221, 221, 0.589);
+    padding: 2px;
+    border-radius: 15px;
+    margin-left: 0px;
+    margin-right: 5px;
+    margin-top: 10px;
+}
 
+.courseModalRight {
+    background-color: rgba(225, 221, 221, 0.589);
+    padding: 2px;
+    border-radius: 15px;
+
+    margin-right: 5px;
+    margin-top: 10px;
+}
+
+.form-control-sm {
+    border-radius: 15px;
+    font-family: Karla;
+    font-size: 11px;
+    color: #606060;
+    height: 37px;
+    padding-left: 15px;
+
+}
+
+.form-group {
+    padding-bottom: 8px;
+    padding-left: 5px;
+}
+
+.country {
+    padding-top: 8px;
+    padding-left: 8px;
+    padding-bottom: 6px;
+
+}
+
+.ed-note {
+    color: #606060;
+    font-family: Karla;
+    font-size: 11px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    padding-left: 14px;
+    padding-top: 0px;
+
+}
+
+.edu-content {
+    color: #606060;
+    font-family: Karla;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    padding-left: 5px;
+
+}
 
 
 

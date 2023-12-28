@@ -85,6 +85,10 @@ export class TeacherMainpageTabsComponent {
     this.router.navigate(['/teacher-course-details']);
   }
 
+  saveCourseInfo(data: any){
+
+  }
+
 
 
 }

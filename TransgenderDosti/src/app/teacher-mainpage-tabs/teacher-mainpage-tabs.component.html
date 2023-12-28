@@ -38,171 +38,341 @@
     <!-- Courses -->
 
     <div class="tab-pane" [class.active]="activeTab === 'ex1-tabs-1'" id="ex1-tabs-1" role="tabpanel"
-        aria-labelledby="ex1-tab-1">
+    aria-labelledby="ex1-tab-1">
 
-        <div class="container-fluid">
-            <div class="row">
-                <!-- Left Side -->
-                <!-- Left Side -->
-                <div class="col-sm-12 col-md-6 col-lg-6">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Left Side -->
+            <!-- Left Side -->
+            <div class="col-sm-12 col-md-6 col-lg-6">
 
-                    <!-- Start and end text -->
-                    <div class="row">
-                        <div class="col-6 text-start">
-                            <!-- Text aligned to the left (start) -->
-                            Your courses
-                        </div>
-                        <div class="col-6 text-end">
-                            <!-- Text aligned to the right (end) -->
-                            Add new course
+                <!-- Start and end text -->
+                <div class="row">
+                    <div class="col-6 text-start">
+                        <!-- Text aligned to the left (start) -->
+                        Your courses
+                    </div>
+                    <div class="col-6 text-end" data-bs-toggle="modal" data-bs-target="#addCourse">
+                        <!-- Text aligned to the right (end) -->
+                        Add new course
+                    </div>
+
+                    <div class="modal modal-lg fade" id="addCourse" #addCourse data-bs-backdrop="static"
+                        data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Add new course
+                                    </h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+
+                                    <div class="row ed-note">
+                                        Please share course details to help learners know about your course.
+                                    </div>
+
+
+                                    <form #courseForm="ngForm" (ngSubmit)="saveCourseInfo(courseForm.value)">
+
+                                        <div class="row">
+                                            <div class="col-8">
+                                                <div class="row courseModalLeft">
+
+                                                    <div class="col-6">
+                                                        <div class="span edu-content country">Course Title</div>
+                                                        <div class="form-group small-input">
+                                                            <input type="text" name="course_title"
+                                                                class="form-control form-control-sm"
+                                                                placeholder="Enter your course name" ngModel
+                                                                required>
+                                                        </div>
+
+
+
+                                                    </div>
+
+                                                    <div class="col-6">
+
+                                                        <div class="span edu-content country">Course Category</div>
+                                                        <div class="form-group small-input">
+                                                            <input type="text" name="course_for"
+                                                                class="form-control form-control-sm"
+                                                                placeholder="Enter the category of course" ngModel
+                                                                required>
+                                                        </div>
+
+
+
+                                                    </div>
+
+                                                    <div class="col-6">
+
+                                                        <div class="span edu-content country">Course Fee</div>
+                                                        <div class="form-group small-input">
+                                                            <div class="input-group">
+                                                                <!-- Wrap input and additions in input-group for styling -->
+                                                                <div class="input-group-prepend">
+                                                                    <!-- Add an image or icon here -->
+                                                                    <span class="input-group-text"
+                                                                        style="padding-left: 0px;padding-right: 0px; padding: 0px; border-radius: 15px;">
+                                                                        <select
+                                                                            style="border-top-right-radius: 0px;border-bottom-right-radius: 0px;padding-right: 9px;padding-left: 10px;padding-top: 8px;"
+                                                                            class="form-select form-group small-input form-control form-control-sm"
+                                                                            aria-label="Default select example">
+                                                                            <option selected>USD
+                                                                            </option>
+                                                                            <option value="Months">Monthly</option>
+                                                                            <option value="Weeks">Weekly</option>
+                                                                            <option value="Hours">Hourly
+                                                                            </option>
+                                                                        </select>
+
+
+                                                                    </span>
+                                                                </div>
+                                                                <!-- Input field with ngModel and required -->
+                                                                <input type="text" name="course_fee"
+                                                                    class="form-control form-control-sm"
+                                                                    placeholder="Enter course fee" required>
+                                                            </div>
+                                                        </div>
+
+
+
+                                                    </div>
+
+                                                    <div class="col-6">
+
+                                                        <div class="span edu-content country">Course Duration</div>
+                                                        <div class="row">
+                                                            <div class="col-6" style="padding-right: 0px;">
+                                                                <div class="form-group small-input">
+                                                                    <input type="text" name="course_duration"
+                                                                        class="form-control form-control-sm"
+                                                                        placeholder="Enter your cousre duration"
+                                                                        ngModel required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-6" style="padding-left: 0px;">
+                                                                <div class="form-group small-input">
+                                                                    <select
+                                                                        class="form-select form-group small-input form-control form-control-sm"
+                                                                        aria-label="Default select example"
+                                                                        style="padding-left: 14px;">
+                                                                        <option selected>Select your duration
+                                                                        </option>
+                                                                        <option value="Months">Monthly</option>
+                                                                        <option value="Weeks">Weekly</option>
+                                                                        <option value="Hours">Hourly
+                                                                        </option>
+                                                                    </select>
+
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+
+
+
+
+
+                                                    </div>
+
+                                                    <div class="col-12">
+                                                        <div class="span edu-content country">Course Details</div>
+                                                        <div class="form-group small-input">
+                                                            <textarea name="course_details"
+                                                                class="form-control form-control-sm"
+                                                                placeholder="Write 160 to 200 words description of your course "
+                                                                ngModel required></textarea>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                            <div class="col-4">
+                                                <div class="row courseModalRight">
+
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+
+                                        <div class="modal-footer" style="margin-top: 10px;">
+                                            <button type="button" data-bs-dismiss="modal"
+                                                style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                                                class="btn btn-danger">Close</button>
+
+                                            <button type="submit"
+                                                style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                                                class="btn btn-success" data-bs-dismiss="modal"
+                                                [disabled]="!courseForm.valid">Save</button>
+
+
+                                        </div>
+                                    </form>
+
+                                </div>
+
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Line -->
 
-                    <div class="line" [ngClass]="{'custom-class': isSmallScreen}"
-                        [ngStyle]="{'width.px': isSmallScreen ? 230 : null}"></div>
+                </div>
+
+                <!-- Line -->
+
+                <div class="line" [ngClass]="{'custom-class': isSmallScreen}"
+                    [ngStyle]="{'width.px': isSmallScreen ? 230 : null}"></div>
 
 
 
-                    <!-- Course Data -->
-                    <div *ngIf="courses.length > 0; else noCoursesMessage">
-                        <div *ngFor="let course of courses">
-                            <div class="row" style="padding-top: 20px;">
-                               
-                                <div id="ok" class="col-sm-3 col-md-3 col-lg-2" (click)="navigateToCourseDetails()">
-                                    <img src="assets/Rectangle 42.png" class="course-img" alt="Book Image"
-                                        style="margin-right: 0px;" >
-                                </div>
-                                <div class="col-sm-6 col-md-6 col-lg-5">
-                                    <div class="row course-content">
-                                        <div class="col-sm-6 col-md-6 col-lg-5"
-                                            style="padding-left: 0px; padding-right: 0px;">
-                                            <span class="course-name">
-                                                {{ course.title }}
-                                            </span>
-                                        </div>
-                                        <div class="col-sm-6 col-md-6 col-lg-6" style="padding-left: 0px;">
-                                            <i class="fa-solid fa-pen-to-square fa-sm"
-                                                style="color: #428f51; padding-left: 0px;"></i>
-                                            <i class="fa-solid fa-trash fa-sm"
-                                                style="color: #e1143d; padding-left: 5px;"></i>
-                                            <!-- Replace "fa-icon-class" with the actual icon class -->
-                                        </div>
-                                    </div>
+                <!-- Course Data -->
+                <div *ngIf="courses.length > 0; else noCoursesMessage">
+                    <div *ngFor="let course of courses">
+                        <div class="row" style="padding-top: 20px;">
 
-                                    <div class="row">
-                                        <span class="students-no">
-                                            0 Students
+                            <div id="ok" class="col-sm-3 col-md-3 col-lg-2" (click)="navigateToCourseDetails()">
+                                <img src="assets/Rectangle 42.png" class="course-img" alt="Book Image"
+                                    style="margin-right: 0px;">
+                            </div>
+                            <div class="col-sm-6 col-md-6 col-lg-5">
+                                <div class="row course-content">
+                                    <div class="col-sm-6 col-md-6 col-lg-5"
+                                        style="padding-left: 0px; padding-right: 0px;">
+                                        <span class="course-name">
+                                            {{ course.title }}
                                         </span>
                                     </div>
+                                    <div class="col-sm-6 col-md-6 col-lg-6" style="padding-left: 0px;">
+                                        <i class="fa-solid fa-pen-to-square fa-sm"
+                                            style="color: #428f51; padding-left: 0px;"></i>
+                                        <i class="fa-solid fa-trash fa-sm"
+                                            style="color: #e1143d; padding-left: 5px;"></i>
+                                        <!-- Replace "fa-icon-class" with the actual icon class -->
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <span class="students-no">
+                                        0 Students
+                                    </span>
                                 </div>
                             </div>
-
-                            <!--Bottom Line-->
-                            <div class="line" [ngClass]="{'custom-class': isSmallScreen}"
-                                [ngStyle]="{'width.px': isSmallScreen ? 230 : null}"></div>
                         </div>
+
+                        <!--Bottom Line-->
+                        <div class="line" [ngClass]="{'custom-class': isSmallScreen}"
+                            [ngStyle]="{'width.px': isSmallScreen ? 230 : null}"></div>
+                    </div>
+                </div>
+
+                <ng-template #noCoursesMessage>
+                    <p class="nolist">No courses to display.</p>
+                </ng-template>
+
+
+            </div>
+
+
+            <!-- Right Side -->
+            <!-- Right Side -->
+            <div class="col-sm-12 col-md-6 col-lg-6">
+
+                <!--Hello-->
+                <!--Hello-->
+
+                <div class="row hello-row">
+                    <div class="row"
+                        style="padding-right: 0px;margin-right: 0px;margin-left: 0px;padding-left: 0px;">
+                        <img src="assets/hello.jpg" class="helloimg" alt="Book Image">
                     </div>
 
-                    <ng-template #noCoursesMessage>
-                        <p class="nolist">No courses to display.</p>
-                    </ng-template>
+                    <div class="row">
+                        <div class="col-sm-7 col-md-7 col-lg-7">
+                            <div class="row">
+                                <span class="hello-text" style="padding-top: 40px;">
+                                    Hello
+                                </span>
 
+                                <span class="hello-text">
+                                    Welcome to Transgender Dosti.
+                                </span>
 
+                                <span class="hello-subtext" style="padding-top: 40px;">
+                                    Teachers stand as beacons of inspiration, shaping a brighter future through
+                                    dedicated expertise and education.
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-sm-5 col-md-5 col-lg-5">
+
+                            <img src="assets/3dicons (5).png" class="star-img" alt="Book Image">
+
+                        </div>
+                    </div>
                 </div>
 
 
-                <!-- Right Side -->
-                <!-- Right Side -->
-                <div class="col-sm-12 col-md-6 col-lg-6">
 
-                    <!--Hello-->
-                    <!--Hello-->
 
-                    <div class="row hello-row">
-                        <div class="row"
-                            style="padding-right: 0px;margin-right: 0px;margin-left: 0px;padding-left: 0px;">
-                            <img src="assets/hello.jpg" class="helloimg" alt="Book Image">
-                        </div>
+                <!--Courses-->
+                <!--Courses-->
 
-                        <div class="row">
-                            <div class="col-sm-7 col-md-7 col-lg-7">
-                                <div class="row">
-                                    <span class="hello-text" style="padding-top: 40px;">
-                                        Hello
-                                    </span>
-
-                                    <span class="hello-text">
-                                        Welcome to Transgender Dosti.
-                                    </span>
-
-                                    <span class="hello-subtext" style="padding-top: 40px;">
-                                        Teachers stand as beacons of inspiration, shaping a brighter future through
-                                        dedicated expertise and education.
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="col-sm-5 col-md-5 col-lg-5">
-
-                                <img src="assets/3dicons (5).png" class="star-img" alt="Book Image">
-
-                            </div>
-                        </div>
+                <div class="row hello-row" style="margin-top: 20px;">
+                    <div class="row"
+                        style="padding-right: 0px;margin-right: 0px;margin-left: 0px;padding-left: 0px;">
+                        <img src="assets/courses.jpg" class="helloimg" alt="Book Image">
                     </div>
 
 
 
+                    <div class="row">
 
-                    <!--Courses-->
-                    <!--Courses-->
 
-                    <div class="row hello-row" style="margin-top: 20px;">
-                        <div class="row"
-                            style="padding-right: 0px;margin-right: 0px;margin-left: 0px;padding-left: 0px;">
-                            <img src="assets/courses.jpg" class="helloimg" alt="Book Image">
+                        <div class="col-sm-7 col-md-7 col-lg-7">
+                            <div class="row">
+                                <span class="hello-text" style="padding-top: 40px;">
+                                    Courses in demand
+                                </span>
+
+                                <span class="hello-text">
+                                    Hunt the courses right there.
+                                </span>
+
+                                <span class="hello-subtext" style="padding-top: 40px;">
+                                    Teachers stand as beacons of inspiration, shaping a brighter future through
+                                    dedicated expertise and education.
+                                </span>
+                            </div>
                         </div>
 
+                        <div class="col-sm-4 col-md-4 col-lg-4">
 
-
-                        <div class="row">
-
-
-                            <div class="col-sm-7 col-md-7 col-lg-7">
-                                <div class="row">
-                                    <span class="hello-text" style="padding-top: 40px;">
-                                        Courses in demand
-                                    </span>
-
-                                    <span class="hello-text">
-                                        Hunt the courses right there.
-                                    </span>
-
-                                    <span class="hello-subtext" style="padding-top: 40px;">
-                                        Teachers stand as beacons of inspiration, shaping a brighter future through
-                                        dedicated expertise and education.
-                                    </span>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-4 col-md-4 col-lg-4">
-
-                                <img src="assets/fire.png" class="fire-img" alt="Book Image">
-
-                            </div>
+                            <img src="assets/fire.png" class="fire-img" alt="Book Image">
 
                         </div>
+
                     </div>
-
-
-
-
-
-
                 </div>
+
+
+
+
+
+
             </div>
         </div>
     </div>
+</div>
 
 
     <!-- Students -->

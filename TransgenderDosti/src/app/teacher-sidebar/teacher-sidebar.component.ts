@@ -43,4 +43,9 @@ export class TeacherSidebarComponent implements OnInit {
       this.contentMargin = 195;
     }
   }
+
+  teacherLogout() {
+    localStorage.removeItem('teacher');
+    this.router.navigate(['/'])
+  }
 }

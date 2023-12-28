@@ -39,7 +39,7 @@
                     <i [ngClass]="{'fa-chevron-right': !isChevronDown, 'fa-chevron-down': isChevronDown}"
                         class="fa-solid"></i>
                 </div>
-                <div class="col-6 side-text">
+                <div class="col-6 side-text" [style.display]="isMenuOpen ? 'block' : 'none'">
                     Classwork
                 </div>
             </div>
@@ -113,11 +113,12 @@
 
         </div>
 
-        <div class="row tools" [style.display]="isMenuOpen ? 'block' : 'none'">
+        <div style="margin-bottom: 0px; padding-bottom: 0px;" class="row tools"
+            [style.display]="isMenuOpen ? 'block' : 'none'">
             <span>ADMIN</span>
         </div>
 
-        <div>
+        <div style="padding-top: 20px; margin-bottom: 5px;">
             <a routerLink="/teacher-course-details/teacher-course-dashboard"
                 style="text-decoration: none; color: inherit;">
                 <div class="row">
@@ -132,7 +133,7 @@
             </a>
         </div>
 
-        <div>
+        <div style="margin-bottom: 5px;">
             <a routerLink="/teacher-course-details/teacher-course-dashboard"
                 style="text-decoration: none; color: inherit;">
                 <div class="row">
@@ -147,7 +148,7 @@
             </a>
         </div>
 
-        <div>
+        <div style="margin-bottom: 5px;" (click)="teacherLogout()">
             <a style="text-decoration: none; color: inherit;">
                 <div class="row">
                     <div class="col-2">
