@@ -73,6 +73,7 @@
   line-height: normal;
   padding-top: 10px;
   padding-left: 14px;
+  cursor: pointer;
 
 
 }
@@ -98,6 +99,7 @@
 }
 
 /* Hover styles */
+a:hover .side-inner-text,
 a:hover .col-2 i,
 a:hover .side-text {
   color: #7281FF;
@@ -106,6 +108,7 @@ a:hover .side-text {
 }
 
 /* Focus styles */
+a:hover .side-inner-text,
 a:focus .col-2 i,
 a:focus .side-text {
   outline: none;

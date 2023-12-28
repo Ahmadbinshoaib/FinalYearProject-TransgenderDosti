@@ -31,7 +31,7 @@
                 </div>
             </a>
         </div>
-        
+
         <div class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
             data-bs-target="#home-collapse" aria-expanded="false" (click)="toggleChevron()">
             <div class="row">
@@ -94,20 +94,73 @@
 
         </div>
 
-
-        <!-- Material link -->
         <div>
-            <a [ngClass]="{ 'bold-text': selectedRoute.includes('/teacher-course-material') }">
-                Material
+            <a routerLink="/teacher-course-details/teacher-course-dashboard"
+                style="text-decoration: none; color: inherit;">
+                <div class="row">
+                    <div class="col-2">
+                        <i class="fa-solid fa-comment"></i>
+                    </div>
+                    <div class="col-6 side-text" [style.display]="isMenuOpen ? 'block' : 'none'"
+                        [ngClass]="{ 'bold-text': selectedRoute.includes('/teacher-course-dashboard') }">
+                        Chat
+                    </div>
+                </div>
             </a>
         </div>
 
-        <!-- Assignment link -->
+        <div class="line" style="margin-top: 25px;">
+
+        </div>
+
+        <div class="row tools" [style.display]="isMenuOpen ? 'block' : 'none'">
+            <span>ADMIN</span>
+        </div>
+
         <div>
-            <a [ngClass]="{ 'bold-text': selectedRoute.includes('/teacher-course-assignment') }">
-                Assignment
+            <a routerLink="/teacher-course-details/teacher-course-dashboard"
+                style="text-decoration: none; color: inherit;">
+                <div class="row">
+                    <div class="col-2">
+                        <i class="fa-solid fa-users"></i>
+                    </div>
+                    <div class="col-6 side-text" [style.display]="isMenuOpen ? 'block' : 'none'"
+                        [ngClass]="{ 'bold-text': selectedRoute.includes('/teacher-course-dashboard') }">
+                        Students
+                    </div>
+                </div>
             </a>
         </div>
+
+        <div>
+            <a routerLink="/teacher-course-details/teacher-course-dashboard"
+                style="text-decoration: none; color: inherit;">
+                <div class="row">
+                    <div class="col-2">
+                        <i class="fa-solid fa-gear"></i>
+                    </div>
+                    <div class="col-6 side-text" [style.display]="isMenuOpen ? 'block' : 'none'"
+                        [ngClass]="{ 'bold-text': selectedRoute.includes('/teacher-course-dashboard') }">
+                        Settings
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div>
+            <a style="text-decoration: none; color: inherit;">
+                <div class="row">
+                    <div class="col-2">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                    </div>
+                    <div class="col-6 side-text" [style.display]="isMenuOpen ? 'block' : 'none'">
+                        Log Out
+                    </div>
+                </div>
+            </a>
+        </div>
+
+
     </mat-sidenav>
 
     <mat-sidenav-content [ngStyle]="{'margin-left.px' : contentMargin}">
