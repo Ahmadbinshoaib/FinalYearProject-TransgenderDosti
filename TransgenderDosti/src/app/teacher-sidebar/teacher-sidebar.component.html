@@ -91,6 +91,20 @@
                     </div>
                 </a>
             </div>
+            <div>
+                <a routerLink="/teacher-course-details/teacher-course-assignment-viewresponses"
+                    style="text-decoration: none; color: inherit;">
+                    <div class="row">
+                        <div class="col-2">
+                            <i class="fa-solid fa-shapes fa-sm"></i>
+                        </div>
+                        <div class="col-6 side-inner-text" [style.display]="isMenuOpen ? 'block' : 'none'"
+                            [ngClass]="{ 'bold-text': selectedRoute.includes('teacher-course-assignment-viewresponses') }">
+                            View Responses
+                        </div>
+                    </div>
+                </a>
+            </div>
 
         </div>
 

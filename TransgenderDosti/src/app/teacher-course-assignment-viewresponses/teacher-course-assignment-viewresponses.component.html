@@ -25,74 +25,107 @@
 
             </div>
         </div>
-        <div class="row work">
-            <div class="col-lg-8 col-md-8 col-sm-12">
-                <div class="row announcement">
-                    <span class="announce">Announcements</span>
-                    <span class="for">For</span>
-                    <div class="row">
-                        <div class="col-2 cl">
-                            <div class="form-group small-input">
-                                <select class="form-select form-select-sm" aria-label="Small select example">
-                                    <option selected>All Students</option>
-                                    <option value="1">Roll No 1</option>
-                                    <option value="2">Roll No 2</option>
-                                </select>
+        <div class="row assignment">
+            <div class="row ass">
+                <div class="row data">
+                    <div class="heading">
+                        <span>Student Responses</span>
+                    </div>
+                </div>
+                <div class="row text">
+                    <div class="col-lg-8">
+                        <div class="row search-table">
+                            <div class="input-group">
+                                <i class="fa-solid fa-magnifying-glass input-group-text" id="basic-addon1" style="padding-top: 9px;"></i>
+                                <input type="text" class="form-control" placeholder="Search" aria-label="Username"
+                                    aria-describedby="basic-addon1" style="font-size: 0.8rem;">
                             </div>
+                        </div>
+                        <div class="row">
+                            <div class="table-responsive">
+                                <table class="table custom-table" style="font-size: 0.8rem;">
+                                    <thead>
+                                        <tr>
+                                            <th>Student Name</th>
+                                            <th>Material</th>
+                                            <th>Points (100)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- Repeat this row for each student entry -->
+                                        <tr>
+                                            <td>Student Name</td>
+                                            <td>2020-CS-130.pdf</td>
+                                            <td>80</td>
+                                        </tr>
+                                        <!-- ... other rows ... -->
+                                        <tr>
+                                            <td>Student Name</td>
+                                            <td>2020-CS-130.pdf</td>
+                                            <td>80</td>
+                                        </tr>
+                                        <!-- ... other rows ... -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        
+                        <!-- Pagination or other controls here -->
+                        <div class="pagination-justify-right">
+                            <nav>
+                                <ul class="pagination">
+                                    <li class="page-item disabled"><a class="page-link" href="#">Prev</a></li>
+                                    <!-- ... other page items ... -->
+                                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 response-detail">
+                        <!-- Response Detail section -->
+                        <div class="row response-detail">
+                            <div class="row res-det">
+                                <span>Response Detail</span>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="row std-name">
+                                        <span>Student Name</span>
+                                    </div>
+                                    <div class="row">
+                                        <div class="placeholder mb-3">
+                                            <span>Document Preview</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="row no">
+                                        <span>100/100</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <div class="row">
+                                <div class="col-2">
+                                    <div class="row row-picture" style="display: flex; justify-content: center; align-items: center;">
+                                        <img src="\assets\Group.png" class="profile-img" alt="Profile Image">
+                                    </div>
+                                </div>
+                                <div class="col-10">
+                                    <div class="form-group small-input">
+                                        <input type="text" name="fullname" class="form-control form-control-sm"
+                                            placeholder="Enter your country" ngModel required>
+                                    </div>
+                                </div>
+                               
+                            </div> -->
 
                         </div>
-                    </div>
-                    <div class="row message">
-                        <input type="text" class="form-control form-control-sm" id="exampleFormControlInput1"
-                            placeholder="Announce something to your students!">
-                    </div>
-                    <div class="row icons">
-                        <div class="col-6">
-                            <div class="row">
-                                <div class="col-2 circle">
-                                    <i class="fa-solid fa-upload" style="color: #000000;"></i>
-                                </div>
-                                <div class="col-2 circle">
-                                    <i class="fa-solid fa-link" style="color: #000000;"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="row">
-                                <div class="button-container">
-                                    <button type="submit" class="btn custombtn2">Clear</button>
-                                    <button type="submit" class="btn custombtn1">Post</button>
-                                </div>
-                                
-                            </div>
-                        </div>
+
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-4 col-sm-12">
-                <div class="row">
-                    <div class="row announcement">
-                        <span class="upcoming">Upcoming</span>
-                        <span class="due">No work due</span>
-                        <div class="row view-all">
-                            <div class="button-container">
-                                <button type="submit" class="btn custombtn3">View All</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="row zoom">
-                        <span class="upcoming">Virtual Classroom</span>
-                        <span class="due">Schedule a meeting</span>
-                        <div class="row view-all">
-                            <div class="button-container">
-                                <button type="submit" class="btn custombtn3">Schedule</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
+
         </div>
     </div>
 </div>
