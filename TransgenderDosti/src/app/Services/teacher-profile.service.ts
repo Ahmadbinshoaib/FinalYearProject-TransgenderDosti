@@ -113,6 +113,16 @@ export class TeacherProfileService {
     return this.http.get(url);
   }
 
+  getTeacherLanguageInfoById(languageId: string): Observable<any> {
+    const endpoint = `/get_language_info_by_id?language_id=${languageId}`;
+    const url = this.serverUrl + endpoint;
+
+    // Assume you need to send the userId as a query parameter
+    const params = { languageId };
+
+    return this.http.get(url);
+  }
+  
   updateTeacherEducationalInfo(data: any): Observable<any> {
     const endpoint = `${this.serverUrl}/update_educational_info`;
     const headers = {
@@ -144,6 +154,15 @@ export class TeacherProfileService {
       'Content-Type': 'application/json',
     };
     const params = new HttpParams().set('userId', userId).set('workExperienceId', workExperienceId.toString());
+    return this.http.delete(endpoint, { headers, params });
+  }
+
+  deleteTeacherLanguageInfo(userId: string, languageId: string): Observable<any> {
+    const endpoint = `${this.serverUrl}/delete_language_info`;
+    const headers = {
+      'Content-Type': 'application/json',
+    };
+    const params = new HttpParams().set('userId', userId).set('languageId', languageId.toString());
     return this.http.delete(endpoint, { headers, params });
   }
   

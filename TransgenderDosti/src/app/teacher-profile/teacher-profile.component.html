@@ -670,7 +670,7 @@
                                     </div>
 
                                     <div class="edit-icon" (click)="openDeleteModal(ed.educational_background_id)"
-                                     data-bs-toggle="modal" data-bs-target="#confirmationModal">
+                                        data-bs-toggle="modal" data-bs-target="#confirmationModal">
                                         <i class="fas fa-trash"></i>
                                     </div>
                                 </div>
@@ -1158,7 +1158,7 @@
                                     </div>
 
                                     <div class="edit-icon" (click)="openDeleteModal1(wk.work_experience_id )"
-                                    data-bs-toggle="modal" data-bs-target="#confirmationModal1">
+                                        data-bs-toggle="modal" data-bs-target="#confirmationModal1">
                                         <i class="fas fa-trash"></i>
                                     </div>
 
@@ -1324,22 +1324,88 @@
 
 
                         <div *ngIf="languageInfo.length > 0; else noLanguagekMessage">
-                            <div class="row" style="padding-top: 6px; ">
+                            <div class="row" style="padding-top: 6px;">
                                 <div style="margin-bottom: 5px;" *ngFor="let lan of languageInfo"
                                     class="col-2 lang-border">
                                     <div class="row">
                                         <div class="col-8"
                                             style="padding-left: 6px; padding-top: 4px; padding-bottom: 4px;">
-                                            {{lan.language}}</div>
-                                        <div class="col-4"><i class="fa-solid fa-xmark fa-lg"
-                                                style="color: #ec0909; padding-top: 11px;"></i>
+                                            {{lan.language}}
+                                        </div>
+                                        <div class="col-4">
+                                            <i class="fa-solid fa-xmark fa-lg"
+                                                style="color: #ec0909; padding-top: 11px;"
+                                                (click)="openDeleteModal2(lan.language_proficiency_id)"
+                                                data-bs-toggle="modal" data-bs-target="#deleteLanguage"></i>
                                         </div>
                                     </div>
+                                
 
 
-                                </div>
+
+
+                               
+
+                            </div>
+
+
+
+
+
+
                             </div>
                         </div>
+
+
+                         <!-- Modal for deletion -->
+                         <div class="modal fade" id="deleteLanguage" #education data-bs-backdrop="static"
+                         data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                         aria-hidden="true">
+                         <div class="modal-dialog">
+                             <div class="modal-content">
+                                 <div class="modal-header">
+                                     <h1 class="modal-title fs-5" id="staticBackdropLabel">Confirmation </h1>
+                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                         aria-label="Close"></button>
+                                 </div>
+                                 <div class="modal-body">
+
+                                     <form #confermForm="ngForm"
+                                         (ngSubmit)="deleteLanguageInfo(languageInfoById.language_proficiency_id)">
+                                         <div class="row">
+                                             <div class="col-6">
+                                                 <div class="span edu-content city">Delete Language ?
+                                                 </div>
+
+
+                                             </div>
+
+                                             <div class="modal-footer" style="margin-top: 10px;">
+
+
+                                                 <button type="button" data-bs-dismiss="modal"
+                                                     style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                                                     class="btn btn-danger"
+                                                     (click)="closeModal()">Close</button>
+                                                 <button type="submit"
+                                                     style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                                                     class="btn btn-success" data-bs-dismiss="modal"
+                                                     [disabled]="!languageForm.valid">Delete</button>
+
+
+                                             </div>
+                                         </div>
+                                     </form>
+
+
+
+
+
+                                 </div>
+
+                             </div>
+                         </div>
+                     </div>
 
                         <ng-template #noLanguagekMessage>
                             <div>

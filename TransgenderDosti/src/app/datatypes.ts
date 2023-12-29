@@ -52,4 +52,9 @@ export interface workData{
     relevant_document: string;
 
 }
+export interface languageData{
+    language_proficiency_id: string;
+    language: string;
+
+}
   

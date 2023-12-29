@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { NgbDateStruct, NgbTimeStruct } from '@ng-bootstrap/ng-bootstrap';
 import { TeacherProfileService } from '../Services/teacher-profile.service';
 import { Observable } from 'rxjs/internal/Observable';
-import { TeacherProfileData, educationData,workData } from '../datatypes';
+import { TeacherProfileData, educationData,workData,languageData } from '../datatypes';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -27,6 +27,7 @@ export class TeacherProfileComponent implements OnInit {
   educationForm: any = {};
   partEducationId: any
   partWorkId: any
+  partLanguageId: any
   educationInfoById: educationData ={
     educational_background_id: '',
     institution_name: '',
@@ -49,6 +50,11 @@ export class TeacherProfileComponent implements OnInit {
     is_current: '',
     relevant_document: ''
   }
+  languageInfoById: languageData ={
+    language_proficiency_id: '',
+    language:'',
+  }
+
   countries: any[] = [];
   selectedCountry: any = '';
   selectedCity2: string = '' // Initialize cities to null
@@ -599,6 +605,21 @@ export class TeacherProfileComponent implements OnInit {
     );
   }
 
+  fetcLanguageInfo(languageId: string) {
+    // Use your data service to fetch educational information based on teacher ID
+    this.teacherProfileService.getTeacherLanguageInfoById(languageId).subscribe(
+      (data) => {
+        
+        this.languageInfoById = data.language_info;
+        
+        
+      },
+      (error) => {
+        console.error('Error fetching educational information', error);
+      }
+    );
+  }
+
   openEditModal(educationId: string) {
     this.partEducationId = educationId;
     this.fetchEducationalInfo(this.partEducationId);
@@ -614,6 +635,10 @@ export class TeacherProfileComponent implements OnInit {
   openDeleteModal1(workId: string) {
     this.partWorkId = workId;
     this.fetchWorkInfo(this.partWorkId);
+  }
+  openDeleteModal2(languageId: string) {
+    this.partLanguageId = languageId;
+    this.fetcLanguageInfo(this.partLanguageId);
   }
 
   updateTeacherEducationalInfo(formData: any, educationalBackgroundId: string) {
@@ -738,6 +763,34 @@ deleteTeacherWorkInfo(workExperienceId: string) {
       if (this.userIdParam) {
         console.warn(this.userIdParam)
         this.loadTeacherWorkInfo(this.userIdParam)
+  
+      }
+    },
+    (error) => {
+      console.error('API error:', error);
+      // Handle errors
+      console.log(error+"")
+    }
+  );
+}
+
+
+deleteLanguageInfo(languageId: string) {
+  
+  const userId = this.activeRoute.snapshot.paramMap.get('userId');
+
+  if (!userId) {
+    console.error('UserId is null or undefined');
+    return;
+  }
+  
+  this.teacherProfileService.deleteTeacherLanguageInfo(userId, languageId).subscribe(
+    (response) => {
+      console.log('Successfully deleted language information');
+      // You can add any additional logic or reload data if needed
+      if (this.userIdParam) {
+        console.warn(this.userIdParam)
+        this.loadTeacherLanguageInfo(this.userIdParam)
   
       }
     },

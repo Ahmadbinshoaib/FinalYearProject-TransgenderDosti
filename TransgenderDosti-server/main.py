@@ -530,6 +530,10 @@ def get_work_info():
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+
+
+
+        
     
 
 
@@ -644,6 +648,40 @@ def get_work_info_by_id():
         cursor.close()
 
         return jsonify({'success': True, 'work_info': work_data}), 200
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+    
+
+
+@app.route('/get_language_info_by_id', methods=['GET'])
+def get_language_info_by_id():
+    try:
+        language_proficiency_id = request.args.get('language_id')
+
+        cursor = mysql.connection.cursor()
+
+        # Get educational information based on educational_id
+        cursor.execute("""
+            SELECT *
+            FROM languageproficiency
+            WHERE language_proficiency_id = %s
+        """, (language_proficiency_id,))
+        language_info = cursor.fetchone()
+
+        if not language_info:
+            return jsonify({'error': 'Educational information not found for the given ID'}), 404
+
+        language_data = {
+            'language_proficiency_id': language_info[0],
+            'language': language_info[2],
+
+        }
+
+        cursor.close()
+
+
+        return jsonify({'success': True, 'language_info': language_data}), 200
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
@@ -791,6 +829,39 @@ def delete_work_info():
             DELETE FROM workexperience
             WHERE teacher_id = %s AND work_experience_id = %s
         """, (teacher_id, work_experience_id))
+
+        mysql.connection.commit()
+        cursor.close()
+
+        return jsonify({'success': True, 'message': 'Work information deleted successfully'}), 200
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
+
+@app.route('/delete_language_info', methods=['DELETE'])
+def delete_language_info():
+    try:
+        user_id = request.args.get('userId')
+        language_proficiency_id = request.args.get('languageId')
+
+        cursor = mysql.connection.cursor()
+
+        # Get teacher_id based on user_id
+        cursor.execute("SELECT teacher_id FROM teacher WHERE user_id = %s", (user_id,))
+        teacher_result = cursor.fetchone()
+
+        if not teacher_result:
+            return jsonify({'error': 'Teacher not found for the given user ID'}), 404
+
+        teacher_id = teacher_result[0]
+
+        # Delete work information from the workexperience table
+        cursor.execute("""
+            DELETE FROM languageproficiency
+            WHERE teacher_id = %s AND language_proficiency_id  = %s
+        """, (teacher_id, language_proficiency_id))
 
         mysql.connection.commit()
         cursor.close()
