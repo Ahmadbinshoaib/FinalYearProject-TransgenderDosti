@@ -52,6 +52,16 @@ export class TeacherProfileService {
     return this.http.post(endpoint, data, { headers });
   }
 
+  saveTeacherCertificateInfo(data: any): Observable<any> {
+    const endpoint = `${this.serverUrl}/save_certificate_info`;
+    // Adjust the headers based on your API requirements
+    const headers = {
+      'Content-Type': 'application/json',
+      // Add any other headers if needed
+    };
+    return this.http.post(endpoint, data, { headers });
+  }
+
   saveTeacherLanguageInfo(data: any): Observable<any> {
     const endpoint = `${this.serverUrl}/save_language_info`;
     // Adjust the headers based on your API requirements
@@ -75,6 +85,16 @@ export class TeacherProfileService {
 
   getTeacherWorkInfo(userId: string): Observable<any> {
     const endpoint = `/get_work_info?user_id=${userId}`;
+    const url = this.serverUrl + endpoint;
+
+    // Assume you need to send the userId as a query parameter
+    const params = { userId };
+
+    return this.http.get(url);
+  }
+
+  getTeacherCertificateInfo(userId: string): Observable<any> {
+    const endpoint = `/get_certificate_info?user_id=${userId}`;
     const url = this.serverUrl + endpoint;
 
     // Assume you need to send the userId as a query parameter

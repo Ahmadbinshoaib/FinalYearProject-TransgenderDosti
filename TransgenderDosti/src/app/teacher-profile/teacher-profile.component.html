@@ -1339,14 +1339,14 @@
                                                 data-bs-toggle="modal" data-bs-target="#deleteLanguage"></i>
                                         </div>
                                     </div>
-                                
 
 
 
 
-                               
 
-                            </div>
+
+
+                                </div>
 
 
 
@@ -1357,55 +1357,54 @@
                         </div>
 
 
-                         <!-- Modal for deletion -->
-                         <div class="modal fade" id="deleteLanguage" #education data-bs-backdrop="static"
-                         data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
-                         aria-hidden="true">
-                         <div class="modal-dialog">
-                             <div class="modal-content">
-                                 <div class="modal-header">
-                                     <h1 class="modal-title fs-5" id="staticBackdropLabel">Confirmation </h1>
-                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                         aria-label="Close"></button>
-                                 </div>
-                                 <div class="modal-body">
+                        <!-- Modal for deletion -->
+                        <div class="modal fade" id="deleteLanguage" #education data-bs-backdrop="static"
+                            data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Confirmation </h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
 
-                                     <form #confermForm="ngForm"
-                                         (ngSubmit)="deleteLanguageInfo(languageInfoById.language_proficiency_id)">
-                                         <div class="row">
-                                             <div class="col-6">
-                                                 <div class="span edu-content city">Delete Language ?
-                                                 </div>
-
-
-                                             </div>
-
-                                             <div class="modal-footer" style="margin-top: 10px;">
+                                        <form #confermForm="ngForm"
+                                            (ngSubmit)="deleteLanguageInfo(languageInfoById.language_proficiency_id)">
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <div class="span edu-content city">Delete Language ?
+                                                    </div>
 
 
-                                                 <button type="button" data-bs-dismiss="modal"
-                                                     style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
-                                                     class="btn btn-danger"
-                                                     (click)="closeModal()">Close</button>
-                                                 <button type="submit"
-                                                     style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
-                                                     class="btn btn-success" data-bs-dismiss="modal"
-                                                     [disabled]="!languageForm.valid">Delete</button>
+                                                </div>
+
+                                                <div class="modal-footer" style="margin-top: 10px;">
 
 
-                                             </div>
-                                         </div>
-                                     </form>
+                                                    <button type="button" data-bs-dismiss="modal"
+                                                        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                                                        class="btn btn-danger" (click)="closeModal()">Close</button>
+                                                    <button type="submit"
+                                                        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                                                        class="btn btn-success" data-bs-dismiss="modal"
+                                                        [disabled]="!languageForm.valid">Delete</button>
 
+
+                                                </div>
+                                            </div>
+                                        </form>
 
 
 
 
-                                 </div>
 
-                             </div>
-                         </div>
-                     </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
 
                         <ng-template #noLanguagekMessage>
                             <div>
@@ -1430,12 +1429,264 @@
                             <span class="educational">Additional Certificates/Skills</span>
                         </div>
                         <div class="col-6 d-flex justify-content-end">
-                            <div class="circle3">
+                            <div class="circle3" data-bs-toggle="modal" data-bs-target="#certificate">
                                 <i class="fas fa-plus"></i>
                             </div>
                         </div>
 
-                    </div>
+
+
+
+
+                        <div class="modal modal-lg fade" id="certificate" #education data-bs-backdrop="static"
+                            data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Additional Certificates
+                                        </h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+
+
+
+
+                                        <form #CertificateForm="ngForm"
+                                            (ngSubmit)="saveTeacherCertificateInfo(CertificateForm.value)">
+                                            <div class="row">
+
+
+
+                                                <div class="col-6">
+                                                    <div class="span edu-content country">Certificate</div>
+                                                    <div class="form-group small-input">
+                                                        <input type="text" name="certificate_name"
+                                                            class="form-control form-control-sm"
+                                                            placeholder="Enter your Certificate Title" ngModel required>
+                                                    </div>
+
+
+
+                                                </div>
+
+                                                <div class="col-6">
+                                                    <div class="span edu-content country">Issuing Oranization</div>
+                                                    <div class="form-group small-input">
+                                                        <input type="text" name="issuing_organization"
+                                                            class="form-control form-control-sm"
+                                                            placeholder="Enter name of Oranization " ngModel required>
+                                                    </div>
+
+
+
+                                                </div>
+
+                                                <div class="col-6">
+
+                                                    <div class="span edu-content city">Credential ID</div>
+                                                    <div class="form-group small-input">
+                                                        <input type="text" name="credential_id"
+                                                            class="form-control form-control-sm"
+                                                            placeholder="Enter your Credential ID " ngModel required>
+                                                    </div>
+
+
+
+                                                </div>
+
+                                                <div class="col-6">
+
+                                                    <div class="span edu-content city">Credential URL</div>
+                                                    <div class="form-group small-input">
+                                                        <input type="text" name="credential_url"
+                                                            class="form-control form-control-sm"
+                                                            placeholder="Enter your Credential URL " ngModel required>
+                                                    </div>
+
+
+
+                                                </div>
+
+
+                                                <div class="col-6">
+                                                    <div class="span edu-content city">Description</div>
+                                                    <div class="form-group small-input">
+                                                        <textarea name="description"
+                                                            class="form-control form-control-sm"
+                                                            placeholder="Write 160 to 200 words description of your experience "
+                                                            ngModel required></textarea>
+                                                    </div>
+                                                </div>
+
+
+
+
+
+
+
+                                                <div class="col-6" style="padding-left: 15px;">
+
+                                                    <div class="row">
+                                                        <div class="col-6">
+
+                                                            <div class="span edu-content city">Issue Date</div>
+                                                            <input type="date" name="issue_date"
+                                                                class="form-control form-control-sm" ngModel required>
+
+                                                        </div>
+                                                    </div>
+
+
+
+                                                </div>
+
+
+                                                <div class="col-6">
+                                                    <div class="row justify-content-end">
+                                                        <div class="col-4 sf text-right">
+                                                            <span class="social-profile">relevant document</span>
+                                                        </div>
+                                                        <div class="col-2"
+                                                            style="padding-top: 10px; padding-right: 0px;">
+                                                            <div class="circle2" (click)="openFileInput2()">
+                                                                <i class="fa-solid fa-upload"></i>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+
+
+
+
+
+
+
+
+
+                                                <div class="modal-footer" style="margin-top: 10px;">
+
+
+                                                    <button type="button" data-bs-dismiss="modal"
+                                                        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                                                        class="btn btn-danger" (click)="closeModal()">Close</button>
+                                                    <button type="submit"
+                                                        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                                                        class="btn btn-success" data-bs-dismiss="modal"
+                                                        [disabled]="!CertificateForm.valid">Save</button>
+
+
+                                                </div>
+                                            </div>
+                                        </form>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                                    <div *ngIf="certificateInfo.length > 0; else noCertificateMessage">
+                                        <div class="row" style="padding-top: 6px;">
+                                            <div style="margin-bottom: 5px;" *ngFor="let cer of certificateInfo"
+                                                class="col-2 lang-border">
+                                                <div class="row">
+                                                    <div class="col-8"
+                                                        style="padding-left: 6px; padding-top: 4px; padding-bottom: 4px;">
+                                                        {{cer.certificate_name}}
+                                                    </div>
+                                                    <div class="col-4">
+                                                        <i class="fa-solid fa-xmark fa-lg"
+                                                            style="color: #ec0909; padding-top: 11px;"
+                                                            (click)="openDeleteModal2(cer.language_proficiency_id)"
+                                                            data-bs-toggle="modal" data-bs-target="#deleteCertificate"></i>
+                                                    </div>
+                                                </div>
+
+
+
+
+
+
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+
+
+
+                                    <div class="modal fade" id="deleteCertificate" #education data-bs-backdrop="static"
+                                        data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                                        aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">
+                                                        Confirmation </h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+
+                                                    <form #confermForm="ngForm"
+                                                        (ngSubmit)="deleteLanguageInfo(languageInfoById.language_proficiency_id)">
+                                                        <div class="row">
+                                                            <div class="col-6">
+                                                                <div class="span edu-content city">Delete Certificate Details ?
+                                                                </div>
+
+
+                                                            </div>
+
+                                                            <div class="modal-footer" style="margin-top: 10px;">
+
+
+                                                                <button type="button" data-bs-dismiss="modal"
+                                                                    style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                                                                    class="btn btn-danger"
+                                                                    (click)="closeModal()">Close</button>
+                                                                <button type="submit"
+                                                                    style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                                                                    class="btn btn-success" data-bs-dismiss="modal"
+                                                                    [disabled]="!languageForm.valid">Delete</button>
+
+
+                                                            </div>
+                                                        </div>
+                                                    </form>
+
+
+
+
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+
+
+
+                                    <ng-template #noCertificateMessage>
+                                        <div>
+                                            <p class="nolist" style="margin-bottom: 0px; margin-left: 10px;">No
+                                                experience info to
+                                                display.</p>
+                                        </div>
+                                    </ng-template>
+
+                           
 
                     <div class="btn-signup2" style="display: flex; justify-content: center; align-items: center;">
                         <button type="submit" class="btn custombtn2" style="margin-right: 10px; ">SAVE

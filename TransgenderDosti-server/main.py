@@ -392,6 +392,56 @@ def save_work_info():
     
 
 
+@app.route('/save_certificate_info', methods=['POST'])
+def save_certificate_info():
+    try:
+        data = request.json
+        user_id = data.get('user_id')
+
+        cursor = mysql.connection.cursor()
+
+        # Get teacher_id based on user_id
+        cursor.execute("SELECT teacher_id FROM teacher WHERE user_id = %s", (user_id,))
+        teacher_result = cursor.fetchone()
+
+        if not teacher_result:
+            return jsonify({'error': 'Teacher not found for the given user ID'}), 404
+
+        teacher_id = teacher_result[0]
+
+        # Extract educational information from the request data
+        certificate_name = data.get('certificate_name')
+        description = data.get('description')
+        issuing_organization = data.get('issuing_organization')
+        issue_date= data.get('issue_date')
+        credential_id = data.get('credential_id')
+        credential_url = data.get('credential_url')
+        
+
+        #print (teacher_id,job_title,company_workplace_name,city_town,country,description,start_date,end_date,is_current )
+
+   
+
+
+
+
+        # Save educational information in the education table
+        cursor.execute("""
+            INSERT INTO additionalcertificate
+            (teacher_id, certificate_name, description, issuing_organization, issue_date,credential_id, credential_url)
+            VALUES (%s, %s, %s, %s, %s, %s, %s)
+        """, (teacher_id, certificate_name, description, issuing_organization,issue_date,credential_id, credential_url))
+
+        mysql.connection.commit()
+        cursor.close()
+
+        return jsonify({'success': True, 'message': 'certificate information saved successfully'}), 200
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+    
+
+
 
 
 @app.route('/save_language_info', methods=['POST'])
@@ -527,6 +577,53 @@ def get_work_info():
         cursor.close()
 
         return jsonify({'success': True, 'work_info': work_list}), 200
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
+
+@app.route('/get_certificate_info', methods=['GET'])
+def get_certificate_info():
+    try:
+        user_id = request.args.get('user_id')
+
+        cursor = mysql.connection.cursor()
+
+        # Get teacher_id based on user_id
+        cursor.execute("SELECT teacher_id FROM teacher WHERE user_id = %s", (user_id,))
+        teacher_result = cursor.fetchone()
+
+        if not teacher_result:
+            return jsonify({'error': 'Teacher not found for the given user ID'}), 404
+
+        teacher_id = teacher_result[0]
+
+        # Get educational information based on teacher_id
+        cursor.execute("""
+            SELECT *
+            FROM additionalcertificate
+            WHERE teacher_id = %s
+        """, (teacher_id,))
+        certificate_info = cursor.fetchall()
+
+        certificate_list = []
+        for certificate_row in certificate_info:
+            certificate_data = {
+                'additional_certificate_id': certificate_row[0],
+                'certificate_name': certificate_row[2],
+                'description': certificate_row[3],
+                'issuing_organization': certificate_row[4],
+                'issue_date': certificate_row[5],
+                'credential_id': certificate_row[6],
+                'credential_url': certificate_row[7],
+                
+            }
+            certificate_list.append(certificate_data)
+
+        cursor.close()
+
+        return jsonify({'success': True, 'certificate_info': certificate_list}), 200
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500

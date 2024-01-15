@@ -22,6 +22,7 @@ export class TeacherProfileComponent implements OnInit {
   editEducationinfo: any 
   educationalInfo: any[] = [];
   languageInfo: any[] = [];
+  certificateInfo: any[] = [];
   languages: any[] = [];
   workInfo: any[] = [];
   educationForm: any = {};
@@ -181,6 +182,7 @@ export class TeacherProfileComponent implements OnInit {
       this.loadTeacherWorkInfo(this.userIdParam)
       this.fetchLanguages()
       this.loadTeacherLanguageInfo(this.userIdParam)
+      this.loadTeacherCertificateInfo(this.userIdParam)
     }
 
 
@@ -417,6 +419,50 @@ export class TeacherProfileComponent implements OnInit {
 
 
 
+
+  saveTeacherCertificateInfo(data: any) {
+    // console.log(data)
+
+    const userId = this.activeRoute.snapshot.paramMap.get('userId');
+
+    if (!userId) {
+      console.error('UserId is null or undefined');
+      return;
+    }
+    const requestData = {
+      user_id: userId,
+      certificate_name	: data.certificate_name,
+      description: data.description,
+      issuing_organization: data.issuing_organization,
+      issue_date: data.issue_date,
+      credential_id: data.credential_id,
+      credential_url: data.credential_url,
+      
+     
+
+    };
+    // Make API call using the service
+    this.teacherProfileService.saveTeacherCertificateInfo(requestData).subscribe(
+      response => {
+        console.log(this.userIdParam)
+        if (this.userIdParam) {
+          console.warn(this.userIdParam)
+          this.loadTeacherCertificateInfo(this.userIdParam)
+
+        }
+
+
+        // console.error('Sucessfully');
+      },
+      error => {
+        console.error('API error:', error);
+        // Handle errors
+      }
+    );
+  }
+
+
+
   saveTeacherLanguageInfo(data: any) {
     // console.log(data)
 
@@ -527,6 +573,25 @@ export class TeacherProfileComponent implements OnInit {
         (response) => {
           // Assuming the response structure has a 'courses' property
           this.workInfo = response.work_info;
+          console.log(this.workInfo)
+        },
+        (error) => {
+          console.error('Error loading educational info', error);
+        }
+      );
+    } else {
+      console.error('UserId is null or undefined');
+    }
+
+  }
+
+  loadTeacherCertificateInfo(userId: string) {
+    console.warn('load')
+    if (userId) {
+      this.teacherProfileService.getTeacherCertificateInfo(userId).subscribe(
+        (response) => {
+          // Assuming the response structure has a 'courses' property
+          this.certificateInfo = response.certificate_info;
           console.log(this.workInfo)
         },
         (error) => {
