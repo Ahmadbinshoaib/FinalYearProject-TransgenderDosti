@@ -133,6 +133,17 @@ export class TeacherProfileService {
     return this.http.get(url);
   }
 
+  getTeacherCertificateInfoById(certificateId: string): Observable<any> {
+    console.log("yes commes in api call  3");
+    const endpoint = `/get_certificate_info_by_id?certificate_id=${certificateId}`;
+    const url = this.serverUrl + endpoint;
+
+    // Assume you need to send the userId as a query parameter
+    const params = { certificateId };
+
+    return this.http.get(url);
+  }
+
   getTeacherLanguageInfoById(languageId: string): Observable<any> {
     const endpoint = `/get_language_info_by_id?language_id=${languageId}`;
     const url = this.serverUrl + endpoint;
@@ -174,6 +185,14 @@ export class TeacherProfileService {
       'Content-Type': 'application/json',
     };
     const params = new HttpParams().set('userId', userId).set('workExperienceId', workExperienceId.toString());
+    return this.http.delete(endpoint, { headers, params });
+  }
+  deleteTeacherCertificateInfo(userId: string, certificateId: string): Observable<any> {
+    const endpoint = `${this.serverUrl}/delete_certificate_info`;
+    const headers = {
+      'Content-Type': 'application/json',
+    };
+    const params = new HttpParams().set('userId', userId).set('certificateId', certificateId.toString());
     return this.http.delete(endpoint, { headers, params });
   }
 

@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { NgbDateStruct, NgbTimeStruct } from '@ng-bootstrap/ng-bootstrap';
 import { TeacherProfileService } from '../Services/teacher-profile.service';
 import { Observable } from 'rxjs/internal/Observable';
-import { TeacherProfileData, educationData,workData,languageData } from '../datatypes';
+import { TeacherProfileData, educationData,workData,languageData,certificateData } from '../datatypes';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -29,6 +29,7 @@ export class TeacherProfileComponent implements OnInit {
   partEducationId: any
   partWorkId: any
   partLanguageId: any
+  partCertificateId: any
   educationInfoById: educationData ={
     educational_background_id: '',
     institution_name: '',
@@ -51,6 +52,19 @@ export class TeacherProfileComponent implements OnInit {
     is_current: '',
     relevant_document: ''
   }
+
+
+  certificateInfoById: certificateData ={
+    additional_certificate_id : '',
+    certificate_name:'',
+    description:'',
+    issuing_organization:'',
+    issue_date:'',
+    credential_id: '',
+    credential_url: '',
+    relevant_document: ''
+  }
+
   languageInfoById: languageData ={
     language_proficiency_id: '',
     language:'',
@@ -670,6 +684,28 @@ export class TeacherProfileComponent implements OnInit {
     );
   }
 
+  fetchCertificateInfo(certificateId: string) {
+    console.log("yes commes in fetch function 3");
+    // Use your data service to fetch educational information based on teacher ID
+    this.teacherProfileService.getTeacherCertificateInfoById(certificateId).subscribe(
+      (data) => {
+        this.certificateInfoById = data.certificate_info;
+
+        // Set start_date
+        if (this.certificateInfoById.issue_date) {
+          this.certificateInfoById.issue_date = new Date(this.certificateInfoById.issue_date).toISOString().split('T')[0];
+        }
+        
+        
+        
+        console.warn(this.certificateInfoById)
+      },
+      (error) => {
+        console.error('Error fetching educational information', error);
+      }
+    );
+  }
+
   fetcLanguageInfo(languageId: string) {
     // Use your data service to fetch educational information based on teacher ID
     this.teacherProfileService.getTeacherLanguageInfoById(languageId).subscribe(
@@ -704,6 +740,12 @@ export class TeacherProfileComponent implements OnInit {
   openDeleteModal2(languageId: string) {
     this.partLanguageId = languageId;
     this.fetcLanguageInfo(this.partLanguageId);
+  }
+
+  openDeleteModal3(certificateId: string) {
+    console.log("yes commes in modal 3");
+    this.partCertificateId = certificateId;
+    this.fetchCertificateInfo(this.partCertificateId);
   }
 
   updateTeacherEducationalInfo(formData: any, educationalBackgroundId: string) {
@@ -828,6 +870,33 @@ deleteTeacherWorkInfo(workExperienceId: string) {
       if (this.userIdParam) {
         console.warn(this.userIdParam)
         this.loadTeacherWorkInfo(this.userIdParam)
+  
+      }
+    },
+    (error) => {
+      console.error('API error:', error);
+      // Handle errors
+      console.log(error+"")
+    }
+  );
+}
+
+
+deleteTeacherCertificateInfo(certificateId: string) {
+  const userId = this.activeRoute.snapshot.paramMap.get('userId');
+
+  if (!userId) {
+    console.error('UserId is null or undefined');
+    return;
+  }
+
+  this.teacherProfileService.deleteTeacherCertificateInfo(userId, certificateId).subscribe(
+    (response) => {
+      console.log('Successfully deleted work information');
+      // You can add any additional logic or reload data if needed
+      if (this.userIdParam) {
+        console.warn(this.userIdParam)
+        this.loadTeacherCertificateInfo(this.userIdParam)
   
       }
     },

@@ -1592,84 +1592,20 @@
 
 
 
-                                    <div *ngIf="certificateInfo.length > 0; else noCertificateMessage">
-                                        <div class="row" style="padding-top: 6px;">
-                                            <div style="margin-bottom: 5px;" *ngFor="let cer of certificateInfo"
-                                                class="col-2 lang-border">
-                                                <div class="row">
-                                                    <div class="col-8"
-                                                        style="padding-left: 6px; padding-top: 4px; padding-bottom: 4px;">
-                                                        {{cer.certificate_name}}
-                                                    </div>
-                                                    <div class="col-4">
-                                                        <i class="fa-solid fa-xmark fa-lg"
-                                                            style="color: #ec0909; padding-top: 11px;"
-                                                            (click)="openDeleteModal2(cer.language_proficiency_id)"
-                                                            data-bs-toggle="modal" data-bs-target="#deleteCertificate"></i>
-                                                    </div>
-                                                </div>
-
-
-
-
-
-
-
-                                            </div>
-
+                        <div *ngIf="certificateInfo.length > 0; else noCertificateMessage">
+                            <div class="row" style="padding-top: 6px;">
+                                <div style="margin-bottom: 5px;" *ngFor="let cer of certificateInfo"
+                                    class="col-2 lang-border">
+                                    <div class="row">
+                                        <div class="col-8"
+                                            style="padding-left: 6px; padding-top: 4px; padding-bottom: 4px;">
+                                            {{cer.certificate_name}}
                                         </div>
-                                    </div>
-
-
-
-
-                                    <div class="modal fade" id="deleteCertificate" #education data-bs-backdrop="static"
-                                        data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
-                                        aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">
-                                                        Confirmation </h1>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                        aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-
-                                                    <form #confermForm="ngForm"
-                                                        (ngSubmit)="deleteLanguageInfo(languageInfoById.language_proficiency_id)">
-                                                        <div class="row">
-                                                            <div class="col-6">
-                                                                <div class="span edu-content city">Delete Certificate Details ?
-                                                                </div>
-
-
-                                                            </div>
-
-                                                            <div class="modal-footer" style="margin-top: 10px;">
-
-
-                                                                <button type="button" data-bs-dismiss="modal"
-                                                                    style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
-                                                                    class="btn btn-danger"
-                                                                    (click)="closeModal()">Close</button>
-                                                                <button type="submit"
-                                                                    style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
-                                                                    class="btn btn-success" data-bs-dismiss="modal"
-                                                                    [disabled]="!languageForm.valid">Delete</button>
-
-
-                                                            </div>
-                                                        </div>
-                                                    </form>
-
-
-
-
-
-                                                </div>
-
-                                            </div>
+                                        <div class="col-4">
+                                            <i class="fa-solid fa-xmark fa-lg"
+                                                style="color: #ec0909; padding-top: 11px;"
+                                                (click)="openDeleteModal3(cer.additional_certificate_id)"
+                                                data-bs-toggle="modal" data-bs-target="#deleteCertificate"></i>
                                         </div>
                                     </div>
 
@@ -1678,25 +1614,85 @@
 
 
 
-                                    <ng-template #noCertificateMessage>
-                                        <div>
-                                            <p class="nolist" style="margin-bottom: 0px; margin-left: 10px;">No
-                                                experience info to
-                                                display.</p>
-                                        </div>
-                                    </ng-template>
 
-                           
+                                </div>
 
-                    <div class="btn-signup2" style="display: flex; justify-content: center; align-items: center;">
-                        <button type="submit" class="btn custombtn2" style="margin-right: 10px; ">SAVE
-                        </button>
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="modal fade" id="deleteCertificate" #education data-bs-backdrop="static"
+                            data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="staticBackdropLabel">
+                                            Confirmation </h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+
+                                        <form #confermForm="ngForm"
+                                            (ngSubmit)="deleteTeacherCertificateInfo(certificateInfoById.additional_certificate_id)">
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <div class="span edu-content city">Delete Certificate Details ?
+                                                    </div>
+
+
+                                                </div>
+
+                                                <div class="modal-footer" style="margin-top: 10px;">
+
+
+                                                    <button type="button" data-bs-dismiss="modal"
+                                                        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                                                        class="btn btn-danger" (click)="closeModal()">Close</button>
+                                                    <button type="submit"
+                                                        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                                                        class="btn btn-success" data-bs-dismiss="modal"
+                                                        [disabled]="!languageForm.valid">Delete</button>
+
+
+                                                </div>
+                                            </div>
+                                        </form>
+
+
+
+
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+
+                        <ng-template #noCertificateMessage>
+                            <div>
+                                <p class="nolist" style="margin-bottom: 0px; margin-left: 10px;">No
+                                    experience info to
+                                    display.</p>
+                            </div>
+                        </ng-template>
+
+
+
+
+
+
                     </div>
-
-
                 </div>
             </div>
-
 
 
             <!-- Payment -->

@@ -52,6 +52,18 @@ export interface workData{
     relevant_document: string;
 
 }
+
+export interface certificateData{
+    additional_certificate_id : string;
+    certificate_name: string;
+    description:string;
+    issuing_organization:string;
+    issue_date: string;
+    credential_id: string;
+    credential_url: string;
+    relevant_document: string;
+
+}
 export interface languageData{
     language_proficiency_id: string;
     language: string;

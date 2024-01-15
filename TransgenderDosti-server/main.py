@@ -751,6 +751,46 @@ def get_work_info_by_id():
     
 
 
+
+
+@app.route('/get_certificate_info_by_id', methods=['GET'])
+def get_certificate_info_by_id():
+    try:
+        certificate_id = request.args.get('certificate_id')
+
+        cursor = mysql.connection.cursor()
+
+        # Get educational information based on educational_id
+        cursor.execute("""
+            SELECT *
+            FROM additionalcertificate
+            WHERE additional_certificate_id = %s
+        """, (certificate_id,))
+        certificate_info = cursor.fetchone()
+
+        if not certificate_info:
+            return jsonify({'error': 'Certificate information not found for the given ID'}), 404
+
+        certificate_data = {
+            'additional_certificate_id': certificate_info[0],
+            'certificate_name': certificate_info[2],
+            'description': certificate_info[3],
+            'issuing_organization': certificate_info[4],
+            'issue_date': certificate_info[5],
+            'credential_id': certificate_info[6],
+            'credential_url': certificate_info[7],
+
+        }
+
+        cursor.close()
+
+        return jsonify({'success': True, 'certificate_info': certificate_data}), 200
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+    
+
+
 @app.route('/get_language_info_by_id', methods=['GET'])
 def get_language_info_by_id():
     try:
@@ -931,6 +971,37 @@ def delete_work_info():
         cursor.close()
 
         return jsonify({'success': True, 'message': 'Work information deleted successfully'}), 200
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/delete_certificate_info', methods=['DELETE'])
+def delete_certificate_info():
+    try:
+        user_id = request.args.get('userId')
+        additional_certificate_id = request.args.get('certificateId')
+
+        cursor = mysql.connection.cursor()
+
+        # Get teacher_id based on user_id
+        cursor.execute("SELECT teacher_id FROM teacher WHERE user_id = %s", (user_id,))
+        teacher_result = cursor.fetchone()
+
+        if not teacher_result:
+            return jsonify({'error': 'Teacher not found for the given user ID'}), 404
+
+        teacher_id = teacher_result[0]
+
+        # Delete work information from the workexperience table
+        cursor.execute("""
+            DELETE FROM additionalcertificate
+            WHERE teacher_id = %s AND additional_certificate_id = %s
+        """, (teacher_id, additional_certificate_id))
+
+        mysql.connection.commit()
+        cursor.close()
+
+        return jsonify({'success': True, 'message': 'ertificate information deleted successfully'}), 200
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
