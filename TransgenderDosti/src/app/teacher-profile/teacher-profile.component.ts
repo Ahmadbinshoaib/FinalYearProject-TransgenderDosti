@@ -14,7 +14,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./teacher-profile.component.css']
 })
 export class TeacherProfileComponent implements OnInit {
-
+  public imagePath: string = 'assets/Group.png';
   userIdParam = this.activeRoute.snapshot.paramMap.get('userId')
   endDate!: Date | null;
   isCurrentChecked: boolean = false;
@@ -91,7 +91,7 @@ export class TeacherProfileComponent implements OnInit {
   model!: NgbDateStruct;
 
   constructor(private http: HttpClient, private sanitizer: DomSanitizer, private activeRoute: ActivatedRoute, private teacherProfileService: TeacherProfileService, private modalService: NgbModal, private el: ElementRef, private renderer: Renderer2) { }
-  public imagePath: string = 'assets/Group.png';
+  // public imagePath: string = 'assets/Group.png';
   public cnicimagePath: string = '';
   @ViewChild('fileInput') fileInput!: ElementRef;
   @ViewChild('fileInput2') fileInput2!: ElementRef;

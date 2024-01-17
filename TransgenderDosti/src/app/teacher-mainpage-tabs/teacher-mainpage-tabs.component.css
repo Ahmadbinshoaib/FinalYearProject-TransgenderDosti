@@ -218,6 +218,39 @@
 
 }
 
+.profile-img {
+    margin-top: 10px;
+    height: 116px;
+    width: 144px;
+}
+
+.row-picture {
+    position: relative;
+    display: inline-block;
+    margin-top: 15px;
+}
+
+.circle {
+    position: absolute;
+    bottom: 1%;
+    right: 41%;
+    width: 2vw;
+    height: 2vw;
+    background-color: #ffffff;
+    border: 1px solid gray;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.circle i {
+    color: #303030;
+    /* Choose your desired text color */
+    font-size: 14px;
+}
+
 
 
 
@@ -250,6 +283,8 @@
         margin-bottom: 10px;
         background: #E1DCDC;
     }
+
+
 
 
 
