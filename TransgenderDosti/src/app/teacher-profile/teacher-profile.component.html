@@ -137,7 +137,7 @@
 
                         </div>
 
-
+                        <!--links addition working starts here-->
                         <div class="row">
                             <span class="additional">Additional</span>
                         </div>
@@ -154,13 +154,95 @@
 
                                         <div class="row">
                                             <div class="col-3" style="padding-top: 10px; padding-left: 20px;">
-                                                <div class="circle2">
+                                                <div class="circle2" data-bs-toggle="modal" data-bs-target="#social">
                                                     <i class="fas fa-plus">
 
                                                     </i>
                                                 </div>
 
                                             </div>
+
+                                            <!--creating modal here-->
+
+                                            <div class="modal modal-lg fade" id="social" #education
+                                                data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                                                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h1 class="modal-title fs-5" id="staticBackdropLabel">
+                                                                Social Profile Link
+                                                            </h1>
+                                                            <button type="button" class="btn-close"
+                                                                data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+
+                                                            <form #socialForm="ngForm"
+                                                                (ngSubmit)="saveTeacherEducationalInfo(socialForm.value)">
+                                                                <div class="row">
+
+
+                                                                    <div class="col-6">
+                                                                        <div class="span edu-content country">
+                                                                            Platform Name</div>
+                                                                        <div class="form-group small-input">
+                                                                            <input type="text" name="platform_name"
+                                                                                class="form-control form-control-sm"
+                                                                                placeholder="Enter Social Media Platform"
+                                                                                ngModel required>
+                                                                        </div>
+
+
+
+                                                                    </div>
+
+                                                                    <div class="col-6">
+
+                                                                        <div class="span edu-content city">Profile URL
+                                                                        </div>
+                                                                        <div class="form-group small-input">
+                                                                            <input type="text" name="profile_url"
+                                                                                class="form-control form-control-sm"
+                                                                                placeholder="Enter URL of your Social Profile"
+                                                                                ngModel required>
+                                                                        </div>
+
+
+
+                                                                    </div>
+
+
+
+                                                                </div>
+
+                                                                <div class="modal-footer" style="margin-top: 10px;">
+
+
+
+
+                                                                    <button type="button" data-bs-dismiss="modal"
+                                                                        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                                                                        class="btn btn-danger"
+                                                                        (click)="closeModal()">Close</button>
+
+                                                                    <button type="submit"
+                                                                        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                                                                        class="btn btn-success" data-bs-dismiss="modal"
+                                                                        [disabled]="!educationForm.valid">Save</button>
+
+
+                                                                </div>
+                                                            </form>
+
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+
                                             <div class="col-2 sf">
                                                 <span class="social-profile">Social's</span>
 
@@ -219,13 +301,95 @@
 
                                         <div class="row">
                                             <div class="col-3" style="padding-top: 10px; padding-left: 20px;">
-                                                <div class="circle2">
+                                                <div class="circle2" data-bs-toggle="modal" data-bs-target="#website">
                                                     <i class="fas fa-plus">
 
                                                     </i>
                                                 </div>
 
+
                                             </div>
+
+                                            <!--creating modal here-->
+
+                                            <div class="modal modal-lg fade" id="website" #education
+                                                data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                                                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h1 class="modal-title fs-5" id="staticBackdropLabel">
+                                                                Personal Website
+                                                            </h1>
+                                                            <button type="button" class="btn-close"
+                                                                data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+
+                                                            <form #websiteForm="ngForm"
+                                                                (ngSubmit)="saveTeacherEducationalInfo(websiteForm.value)">
+                                                                <div class="row">
+
+
+                                                                    <div class="col-6">
+                                                                        <div class="span edu-content country">
+                                                                            Website Name</div>
+                                                                        <div class="form-group small-input">
+                                                                            <input type="text" name="website_name"
+                                                                                class="form-control form-control-sm"
+                                                                                placeholder="Enter your Website Name"
+                                                                                ngModel required>
+                                                                        </div>
+
+
+
+                                                                    </div>
+
+                                                                    <div class="col-6">
+
+                                                                        <div class="span edu-content city">Website URL
+                                                                        </div>
+                                                                        <div class="form-group small-input">
+                                                                            <input type="text" name="website_url"
+                                                                                class="form-control form-control-sm"
+                                                                                placeholder="Enter URL of your Website"
+                                                                                ngModel required>
+                                                                        </div>
+
+
+
+                                                                    </div>
+
+
+
+                                                                </div>
+
+                                                                <div class="modal-footer" style="margin-top: 10px;">
+
+
+
+
+                                                                    <button type="button" data-bs-dismiss="modal"
+                                                                        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                                                                        class="btn btn-danger"
+                                                                        (click)="closeModal()">Close</button>
+
+                                                                    <button type="submit"
+                                                                        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                                                                        class="btn btn-success" data-bs-dismiss="modal"
+                                                                        [disabled]="!educationForm.valid">Save</button>
+
+
+                                                                </div>
+                                                            </form>
+
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
                                             <div class="col-2 sf">
                                                 <span class="social-profile">Website</span>
 
