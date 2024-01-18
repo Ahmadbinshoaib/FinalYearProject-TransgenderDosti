@@ -438,6 +438,55 @@ def save_social_info():
     
 
 
+
+@app.route('/save_website_info', methods=['POST'])
+def save_website_info():
+    try:
+        data = request.json
+        user_id = data.get('user_id')
+
+        cursor = mysql.connection.cursor()
+
+        # Get teacher_id based on user_id
+        cursor.execute("SELECT teacher_id FROM teacher WHERE user_id = %s", (user_id,))
+        teacher_result = cursor.fetchone()
+
+        if not teacher_result:
+            return jsonify({'error': 'Teacher not found for the given user ID'}), 404
+
+        teacher_id = teacher_result[0]
+
+        # Extract educational information from the request data
+        website_name = data.get('website_name')
+        website_url = data.get('website_url')
+        
+
+        #print (teacher_id,job_title,company_workplace_name,city_town,country,description,start_date,end_date,is_current )
+
+   
+
+
+
+
+        # Save educational information in the education table
+        cursor.execute("""
+            INSERT INTO teacherwebsite
+            (teacher_id, website_name, website_url)
+            VALUES (%s, %s, %s)
+        """, (teacher_id, website_name, website_url))
+
+        mysql.connection.commit()
+        cursor.close()
+
+        return jsonify({'success': True, 'message': 'Website information saved successfully'}), 200
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+    
+
+
+
+
 @app.route('/save_certificate_info', methods=['POST'])
 def save_certificate_info():
     try:
@@ -665,6 +714,49 @@ def get_social_info():
         cursor.close()
 
         return jsonify({'success': True, 'social_info': social_list}), 200
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+    
+
+
+@app.route('/get_website_info', methods=['GET'])
+def get_website_info():
+    try:
+        user_id = request.args.get('user_id')
+
+        cursor = mysql.connection.cursor()
+
+        # Get teacher_id based on user_id
+        cursor.execute("SELECT teacher_id FROM teacher WHERE user_id = %s", (user_id,))
+        teacher_result = cursor.fetchone()
+
+        if not teacher_result:
+            return jsonify({'error': 'Teacher not found for the given user ID'}), 404
+
+        teacher_id = teacher_result[0]
+
+        # Get educational information based on teacher_id
+        cursor.execute("""
+            SELECT *
+            FROM teacherwebsite
+            WHERE teacher_id = %s
+        """, (teacher_id,))
+        website_info = cursor.fetchall()
+
+        website_list = []
+        for website_row in website_info:
+            website_data = {
+                'website_id': website_row[0],
+                'website_name': website_row[2],
+                'website_url': website_row[3],
+               
+            }
+            website_list.append(website_data)
+
+        cursor.close()
+
+        return jsonify({'success': True, 'website_info': website_list}), 200
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500

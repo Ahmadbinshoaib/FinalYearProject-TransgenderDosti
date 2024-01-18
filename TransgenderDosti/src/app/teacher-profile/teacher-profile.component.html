@@ -299,7 +299,7 @@
 
                                             </div>
 
-                                            <!--creating modal here-->
+                                            <!--creating  Website modal here-->
 
                                             <div class="modal modal-lg fade" id="website" #education
                                                 data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
@@ -316,7 +316,7 @@
                                                         <div class="modal-body">
 
                                                             <form #websiteForm="ngForm"
-                                                                (ngSubmit)="saveTeacherEducationalInfo(websiteForm.value)">
+                                                                (ngSubmit)="saveTeacherWebsiteInfo(websiteForm.value)">
                                                                 <div class="row">
 
 
@@ -366,7 +366,7 @@
                                                                     <button type="submit"
                                                                         style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
                                                                         class="btn btn-success" data-bs-dismiss="modal"
-                                                                        [disabled]="!educationForm.valid">Save</button>
+                                                                        [disabled]="!websiteForm.valid">Save</button>
 
 
                                                                 </div>
@@ -388,14 +388,14 @@
                                         <div class="row">
 
                                             <div class="social-boundary">
-                                                <div *ngIf="socialInfo.length > 0; else noDataMessage">
-                                                    <div class="row" *ngFor="let so of socialInfo">
+                                                <div *ngIf="websiteInfo.length > 0; else noDataMessage">
+                                                    <div class="row" *ngFor="let web of websiteInfo">
                                                         <div class="col-6 overflow-hidden ">
                                                             <div class="truncate-text">
-                                                                {{ so.platform_name}}
+                                                                {{ web.website_name}}
                                                             </div>
                                                             <div class="delete-icon"
-                                                                (click)="openEditModal(so.educational_background_id)"
+                                                                (click)="openEditModal(web.website_id )"
                                                                 data-bs-toggle="modal" data-bs-target="#editeducation">
                                                                 <i class="fas fa-times-circle"></i>
                                                             </div>
