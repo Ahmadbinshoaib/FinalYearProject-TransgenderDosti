@@ -51,6 +51,24 @@ export class TeacherProfileService {
     };
     return this.http.post(endpoint, data, { headers });
   }
+  saveTeacherSocialInfo(data: any): Observable<any> {
+    const endpoint = `${this.serverUrl}/save_social_info`;
+    // Adjust the headers based on your API requirements
+    const headers = {
+      'Content-Type': 'application/json',
+      // Add any other headers if needed
+    };
+    return this.http.post(endpoint, data, { headers });
+  }
+  saveTeacherWebsiteInfo(data: any): Observable<any> {
+    const endpoint = `${this.serverUrl}/save_website_info`;
+    // Adjust the headers based on your API requirements
+    const headers = {
+      'Content-Type': 'application/json',
+      // Add any other headers if needed
+    };
+    return this.http.post(endpoint, data, { headers });
+  }
 
   saveTeacherCertificateInfo(data: any): Observable<any> {
     const endpoint = `${this.serverUrl}/save_certificate_info`;
@@ -92,6 +110,25 @@ export class TeacherProfileService {
 
     return this.http.get(url);
   }
+  getTeacherSocialInfo(userId: string): Observable<any> {
+    const endpoint = `/get_social_info?user_id=${userId}`;
+    const url = this.serverUrl + endpoint;
+
+    // Assume you need to send the userId as a query parameter
+    const params = { userId };
+
+    return this.http.get(url);
+  }
+  getTeacherWebsiteInfo(userId: string): Observable<any> {
+    const endpoint = `/get_website_info?user_id=${userId}`;
+    const url = this.serverUrl + endpoint;
+
+    // Assume you need to send the userId as a query parameter
+    const params = { userId };
+
+    return this.http.get(url);
+  }
+
 
   getTeacherCertificateInfo(userId: string): Observable<any> {
     const endpoint = `/get_certificate_info?user_id=${userId}`;

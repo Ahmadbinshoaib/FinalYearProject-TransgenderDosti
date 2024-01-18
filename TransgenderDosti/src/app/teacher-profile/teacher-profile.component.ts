@@ -21,6 +21,8 @@ export class TeacherProfileComponent implements OnInit {
   isCurrentChecked2: boolean = false;
   editEducationinfo: any 
   educationalInfo: any[] = [];
+  socialInfo: any[] = [];
+  websiteInfo: any[] = [];
   languageInfo: any[] = [];
   certificateInfo: any[] = [];
   languages: any[] = [];
@@ -197,6 +199,8 @@ export class TeacherProfileComponent implements OnInit {
       this.fetchLanguages()
       this.loadTeacherLanguageInfo(this.userIdParam)
       this.loadTeacherCertificateInfo(this.userIdParam)
+      this.loadTeacherSocialInfo(this.userIdParam)
+      this.loadTeacherWebsiteInfo(this.userIdParam)
     }
 
 
@@ -432,6 +436,77 @@ export class TeacherProfileComponent implements OnInit {
   }
 
 
+  saveTeacherSocialInfo(data: any) {
+    // console.log(data)
+
+    const userId = this.activeRoute.snapshot.paramMap.get('userId');
+
+    if (!userId) {
+      console.error('UserId is null or undefined');
+      return;
+    }
+    const requestData = {
+      user_id: userId,
+      platform_name	: data.platform_name,
+      profile_url: data.profile_url,
+      
+    };
+    // Make API call using the service
+    this.teacherProfileService.saveTeacherSocialInfo(requestData).subscribe(
+      response => {
+        console.log(this.userIdParam)
+        if (this.userIdParam) {
+          console.warn(this.userIdParam)
+          this.loadTeacherSocialInfo(this.userIdParam)
+
+        }
+
+
+        // console.error('Sucessfully');
+      },
+      error => {
+        console.error('API error:', error);
+        // Handle errors
+      }
+    );
+  }
+
+  saveTeacherWebsiteInfo(data: any) {
+    // console.log(data)
+
+    const userId = this.activeRoute.snapshot.paramMap.get('userId');
+
+    if (!userId) {
+      console.error('UserId is null or undefined');
+      return;
+    }
+    const requestData = {
+      user_id: userId,
+      website_name	: data.website_name,
+      website_url: data.website_url,
+      
+    };
+    // Make API call using the service
+    this.teacherProfileService.saveTeacherWebsiteInfo(requestData).subscribe(
+      response => {
+        console.log(this.userIdParam)
+        if (this.userIdParam) {
+          console.warn(this.userIdParam)
+          this.loadTeacherWebsiteInfo(this.userIdParam)
+
+        }
+
+
+        // console.error('Sucessfully');
+      },
+      error => {
+        console.error('API error:', error);
+        // Handle errors
+      }
+    );
+  }
+
+
 
 
   saveTeacherCertificateInfo(data: any) {
@@ -588,6 +663,44 @@ export class TeacherProfileComponent implements OnInit {
           // Assuming the response structure has a 'courses' property
           this.workInfo = response.work_info;
           console.log(this.workInfo)
+        },
+        (error) => {
+          console.error('Error loading educational info', error);
+        }
+      );
+    } else {
+      console.error('UserId is null or undefined');
+    }
+
+  }
+
+  loadTeacherSocialInfo(userId: string) {
+    console.warn('load')
+    if (userId) {
+      this.teacherProfileService.getTeacherSocialInfo(userId).subscribe(
+        (response) => {
+          // Assuming the response structure has a 'courses' property
+          this.socialInfo = response.social_info;
+          console.log(this.socialInfo)
+        },
+        (error) => {
+          console.error('Error loading educational info', error);
+        }
+      );
+    } else {
+      console.error('UserId is null or undefined');
+    }
+
+  }
+
+  loadTeacherWebsiteInfo(userId: string) {
+    console.warn('load')
+    if (userId) {
+      this.teacherProfileService.getTeacherWebsiteInfo(userId).subscribe(
+        (response) => {
+          // Assuming the response structure has a 'courses' property
+          this.websiteInfo = response.website_info;
+          console.log(this.websiteInfo)
         },
         (error) => {
           console.error('Error loading educational info', error);
