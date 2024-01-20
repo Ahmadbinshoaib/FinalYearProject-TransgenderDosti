@@ -289,8 +289,8 @@
                                                                 <div class="row">
                                                                     <div class="col-6">
                                                                         <div class="span edu-content city">Delete
-                                                                            Social Media 
-                                                                            Link ?</div>
+                                                                            Social Media <b>" {{ socialInfoById.platform_name}} "</b> 
+                                                                            ?</div>
 
 
                                                                     </div>
@@ -478,8 +478,8 @@
                                                                 <div class="row">
                                                                     <div class="col-6">
                                                                         <div class="span edu-content city">Delete
-                                                                            Website  
-                                                                            Link ?</div>
+                                                                            Website  <b>" {{ websiteInfoById.website_name}} "</b>
+                                                                            ?</div>
 
 
                                                                     </div>
@@ -918,14 +918,14 @@
                                     </div>
 
                                     <div class="edit-icon" (click)="openDeleteModal(ed.educational_background_id)"
-                                        data-bs-toggle="modal" data-bs-target="#confirmationModal">
+                                        data-bs-toggle="modal" data-bs-target="#educonfirmationModal">
                                         <i class="fas fa-trash"></i>
                                     </div>
                                 </div>
                             </div>
 
 
-                            <div class="modal fade" id="confirmationModal" #education data-bs-backdrop="static"
+                            <div class="modal fade" id="educonfirmationModal" #education data-bs-backdrop="static"
                                 data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
                                 aria-hidden="true">
                                 <div class="modal-dialog">
@@ -942,7 +942,7 @@
                                                 <div class="row">
                                                     <div class="col-6">
                                                         <div class="span edu-content city">Delete Educational
-                                                            Information ?</div>
+                                                            Information <b>"{{ educationInfoById.degree_name}}"</b> ?</div>
 
 
                                                     </div>
@@ -1406,7 +1406,7 @@
                                     </div>
 
                                     <div class="edit-icon" (click)="openDeleteModal1(wk.work_experience_id )"
-                                        data-bs-toggle="modal" data-bs-target="#confirmationModal1">
+                                        data-bs-toggle="modal" data-bs-target="#workconfirmationModal1">
                                         <i class="fas fa-trash"></i>
                                     </div>
 
@@ -1416,7 +1416,7 @@
                             </div>
 
 
-                            <div class="modal fade" id="confirmationModal1" #education data-bs-backdrop="static"
+                            <div class="modal fade" id="workconfirmationModal1" #education data-bs-backdrop="static"
                                 data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
                                 aria-hidden="true">
                                 <div class="modal-dialog">
@@ -1432,7 +1432,7 @@
                                                 (ngSubmit)="deleteTeacherWorkInfo(workInfoById.work_experience_id)">
                                                 <div class="row">
                                                     <div class="col-6">
-                                                        <div class="span edu-content city">Delete Work Experience Info ?
+                                                        <div class="span edu-content city">Delete Work Experience <b>"{{ workInfoById.job_title}}"</b> ? Info ?
                                                         </div>
 
 
@@ -1622,7 +1622,7 @@
                                             (ngSubmit)="deleteLanguageInfo(languageInfoById.language_proficiency_id)">
                                             <div class="row">
                                                 <div class="col-6">
-                                                    <div class="span edu-content city">Delete Language ?
+                                                    <div class="span edu-content city">Delete Language <b>" {{ languageInfoById.language}} "</b>  ?
                                                     </div>
 
 
@@ -1888,7 +1888,7 @@
                                             (ngSubmit)="deleteTeacherCertificateInfo(certificateInfoById.additional_certificate_id)">
                                             <div class="row">
                                                 <div class="col-6">
-                                                    <div class="span edu-content city">Delete Certificate Details ?
+                                                    <div class="span edu-content city">Delete Certificate <b>"{{ certificateInfoById.certificate_name}}"</b> Details ?
                                                     </div>
 
 
