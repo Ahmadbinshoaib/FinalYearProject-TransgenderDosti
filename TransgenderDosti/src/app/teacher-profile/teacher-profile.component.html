@@ -259,10 +259,64 @@
                                                                 {{ so.platform_name}}
                                                             </div>
                                                             <div class="delete-icon"
-                                                                (click)="openEditModal(so.educational_background_id)"
-                                                                data-bs-toggle="modal" data-bs-target="#editeducation">
+                                                                (click)="openDeleteModal4(so.social_media_profile_id )"
+                                                                data-bs-toggle="modal" data-bs-target="#confirmationModal">
                                                                 <i class="fas fa-times-circle"></i>
                                                             </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+
+                                            <div class="modal fade" id="confirmationModal" #education
+                                                data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                                                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h1 class="modal-title fs-5" id="staticBackdropLabel">
+                                                                Confirmation </h1>
+                                                            <button type="button" class="btn-close"
+                                                                data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+
+                                                            <form #confermForm="ngForm"
+                                                                (ngSubmit)="deleteTeacherSocialInfo(socialInfoById.social_media_profile_id)">
+                                                                <div class="row">
+                                                                    <div class="col-6">
+                                                                        <div class="span edu-content city">Delete
+                                                                            Social Media 
+                                                                            Link ?</div>
+
+
+                                                                    </div>
+
+                                                                    <div class="modal-footer" style="margin-top: 10px;">
+
+
+                                                                        <button type="button" data-bs-dismiss="modal"
+                                                                            style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                                                                            class="btn btn-danger"
+                                                                            (click)="closeModal()">Close</button>
+                                                                        <button type="submit"
+                                                                            style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                                                                            class="btn btn-success"
+                                                                            data-bs-dismiss="modal"
+                                                                            [disabled]="!languageForm.valid">Delete</button>
+
+
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+
+
+
+
+
                                                         </div>
 
                                                     </div>
@@ -395,10 +449,63 @@
                                                                 {{ web.website_name}}
                                                             </div>
                                                             <div class="delete-icon"
-                                                                (click)="openEditModal(web.website_id )"
-                                                                data-bs-toggle="modal" data-bs-target="#editeducation">
+                                                                (click)="openDeleteModal5(web.website_id)"
+                                                                data-bs-toggle="modal" data-bs-target="#confirmationModal1">
                                                                 <i class="fas fa-times-circle"></i>
                                                             </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="modal fade" id="confirmationModal1" #education
+                                                data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                                                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h1 class="modal-title fs-5" id="staticBackdropLabel">
+                                                                Confirmation </h1>
+                                                            <button type="button" class="btn-close"
+                                                                data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+
+                                                            <form #confermForm="ngForm"
+                                                                (ngSubmit)="deleteTeacherWebsiteInfo(websiteInfoById.website_id)">
+                                                                <div class="row">
+                                                                    <div class="col-6">
+                                                                        <div class="span edu-content city">Delete
+                                                                            Website  
+                                                                            Link ?</div>
+
+
+                                                                    </div>
+
+                                                                    <div class="modal-footer" style="margin-top: 10px;">
+
+
+                                                                        <button type="button" data-bs-dismiss="modal"
+                                                                            style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                                                                            class="btn btn-danger"
+                                                                            (click)="closeModal()">Close</button>
+                                                                        <button type="submit"
+                                                                            style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                                                                            class="btn btn-success"
+                                                                            data-bs-dismiss="modal"
+                                                                            [disabled]="!languageForm.valid">Delete</button>
+
+
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+
+
+
+
+
                                                         </div>
 
                                                     </div>

@@ -928,6 +928,77 @@ def get_work_info_by_id():
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+
+
+
+@app.route('/get_social_info_by_id', methods=['GET'])
+def get_social_info_by_id():
+    try:
+        social_id = request.args.get('social_id')
+
+        cursor = mysql.connection.cursor()
+
+        # Get educational information based on educational_id
+        cursor.execute("""
+            SELECT *
+            FROM teachersocialmediaprofile
+            WHERE social_media_profile_id = %s
+        """, (social_id,))
+        social_info = cursor.fetchone()
+
+        if not social_info:
+            return jsonify({'error': 'Educational information not found for the given ID'}), 404
+
+        social_data = {
+            'social_media_profile_id': social_info[0],
+            'platform_name': social_info[2],
+            'profile_url': social_info[3],
+            
+
+        }
+
+        cursor.close()
+
+        return jsonify({'success': True, 'social_info': social_data}), 200
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+    
+
+
+
+@app.route('/get_website_info_by_id', methods=['GET'])
+def get_website_info_by_id():
+    try:
+        website_id = request.args.get('website_id')
+
+        cursor = mysql.connection.cursor()
+
+        # Get educational information based on educational_id
+        cursor.execute("""
+            SELECT *
+            FROM teacherwebsite
+            WHERE website_id = %s
+        """, (website_id,))
+        website_info = cursor.fetchone()
+
+        if not website_info:
+            return jsonify({'error': 'Educational information not found for the given ID'}), 404
+
+        website_data = {
+            'website_id': website_info[0],
+            'website_name': website_info[2],
+            'website_url': website_info[3],
+            
+
+        }
+
+        cursor.close()
+
+        return jsonify({'success': True, 'website_info': website_data}), 200
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
     
 
 
@@ -1151,6 +1222,72 @@ def delete_work_info():
         cursor.close()
 
         return jsonify({'success': True, 'message': 'Work information deleted successfully'}), 200
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
+
+@app.route('/delete_social_info', methods=['DELETE'])
+def delete_social_info():
+    try:
+        user_id = request.args.get('userId')
+        social_media_profile_id = request.args.get('socialId')
+
+        cursor = mysql.connection.cursor()
+
+        # Get teacher_id based on user_id
+        cursor.execute("SELECT teacher_id FROM teacher WHERE user_id = %s", (user_id,))
+        teacher_result = cursor.fetchone()
+
+        if not teacher_result:
+            return jsonify({'error': 'Teacher not found for the given user ID'}), 404
+
+        teacher_id = teacher_result[0]
+
+        # Delete work information from the workexperience table
+        cursor.execute("""
+            DELETE FROM teachersocialmediaprofile
+            WHERE teacher_id = %s AND social_media_profile_id = %s
+        """, (teacher_id, social_media_profile_id))
+
+        mysql.connection.commit()
+        cursor.close()
+
+        return jsonify({'success': True, 'message': 'social information deleted successfully'}), 200
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+    
+
+
+@app.route('/delete_website_info', methods=['DELETE'])
+def delete_website_info():
+    try:
+        user_id = request.args.get('userId')
+        website_id = request.args.get('websiteId')
+
+        cursor = mysql.connection.cursor()
+
+        # Get teacher_id based on user_id
+        cursor.execute("SELECT teacher_id FROM teacher WHERE user_id = %s", (user_id,))
+        teacher_result = cursor.fetchone()
+
+        if not teacher_result:
+            return jsonify({'error': 'Teacher not found for the given user ID'}), 404
+
+        teacher_id = teacher_result[0]
+
+        # Delete work information from the workexperience table
+        cursor.execute("""
+            DELETE FROM teacherwebsite
+            WHERE teacher_id = %s AND website_id = %s
+        """, (teacher_id, website_id))
+
+        mysql.connection.commit()
+        cursor.close()
+
+        return jsonify({'success': True, 'message': 'Website information deleted successfully'}), 200
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500

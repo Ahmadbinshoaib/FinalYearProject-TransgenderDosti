@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { NgbDateStruct, NgbTimeStruct } from '@ng-bootstrap/ng-bootstrap';
 import { TeacherProfileService } from '../Services/teacher-profile.service';
 import { Observable } from 'rxjs/internal/Observable';
-import { TeacherProfileData, educationData,workData,languageData,certificateData } from '../datatypes';
+import { TeacherProfileData, educationData,workData,languageData,certificateData,socialData,websiteData } from '../datatypes';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -32,6 +32,8 @@ export class TeacherProfileComponent implements OnInit {
   partWorkId: any
   partLanguageId: any
   partCertificateId: any
+  partSocialId: any
+  partWebsiteId: any
   educationInfoById: educationData ={
     educational_background_id: '',
     institution_name: '',
@@ -70,6 +72,17 @@ export class TeacherProfileComponent implements OnInit {
   languageInfoById: languageData ={
     language_proficiency_id: '',
     language:'',
+  }
+  socialInfoById: socialData ={
+    social_media_profile_id: '',
+    platform_name:'',
+    profile_url:'',
+
+  }
+  websiteInfoById: websiteData ={
+    website_id: '',
+    website_name:'',
+    website_url:'',
   }
 
   countries: any[] = [];
@@ -833,6 +846,34 @@ export class TeacherProfileComponent implements OnInit {
       }
     );
   }
+  fetchSocialInfo(socialId: string) {
+    // Use your data service to fetch educational information based on teacher ID
+    this.teacherProfileService.getTeacherSocialInfoById(socialId).subscribe(
+      (data) => {
+        
+        this.socialInfoById = data.social_info;
+        
+        
+      },
+      (error) => {
+        console.error('Error fetching educational information', error);
+      }
+    );
+  }
+  fetchWebsiteInfo(websiteId: string) {
+    // Use your data service to fetch educational information based on teacher ID
+    this.teacherProfileService.getTeacherWebsiteInfoById(websiteId).subscribe(
+      (data) => {
+        
+        this.websiteInfoById = data.website_info;
+        
+        
+      },
+      (error) => {
+        console.error('Error fetching educational information', error);
+      }
+    );
+  }
 
   openEditModal(educationId: string) {
     this.partEducationId = educationId;
@@ -856,9 +897,19 @@ export class TeacherProfileComponent implements OnInit {
   }
 
   openDeleteModal3(certificateId: string) {
-    console.log("yes commes in modal 3");
+    
     this.partCertificateId = certificateId;
     this.fetchCertificateInfo(this.partCertificateId);
+  }
+  openDeleteModal4(socialId: string) {
+   
+    this.partSocialId = socialId;
+    this.fetchSocialInfo(this.partSocialId);
+  }
+  openDeleteModal5(websiteId: string) {
+    
+    this.partWebsiteId = websiteId;
+    this.fetchWebsiteInfo(this.partWebsiteId);
   }
 
   updateTeacherEducationalInfo(formData: any, educationalBackgroundId: string) {
@@ -983,6 +1034,56 @@ deleteTeacherWorkInfo(workExperienceId: string) {
       if (this.userIdParam) {
         console.warn(this.userIdParam)
         this.loadTeacherWorkInfo(this.userIdParam)
+  
+      }
+    },
+    (error) => {
+      console.error('API error:', error);
+      // Handle errors
+      console.log(error+"")
+    }
+  );
+}
+deleteTeacherSocialInfo(socialId: string) {
+  const userId = this.activeRoute.snapshot.paramMap.get('userId');
+
+  if (!userId) {
+    console.error('UserId is null or undefined');
+    return;
+  }
+
+  this.teacherProfileService.deleteTeacherSocialInfo(userId, socialId).subscribe(
+    (response) => {
+      console.log('Successfully deleted social information');
+      // You can add any additional logic or reload data if needed
+      if (this.userIdParam) {
+        console.warn(this.userIdParam)
+        this.loadTeacherSocialInfo(this.userIdParam)
+  
+      }
+    },
+    (error) => {
+      console.error('API error:', error);
+      // Handle errors
+      console.log(error+"")
+    }
+  );
+}
+deleteTeacherWebsiteInfo(websiteId: string) {
+  const userId = this.activeRoute.snapshot.paramMap.get('userId');
+
+  if (!userId) {
+    console.error('UserId is null or undefined');
+    return;
+  }
+
+  this.teacherProfileService.deleteTeacherWebsiteInfo(userId, websiteId).subscribe(
+    (response) => {
+      console.log('Successfully deleted website information');
+      // You can add any additional logic or reload data if needed
+      if (this.userIdParam) {
+        console.warn(this.userIdParam)
+        this.loadTeacherWebsiteInfo(this.userIdParam)
   
       }
     },

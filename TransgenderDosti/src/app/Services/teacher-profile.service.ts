@@ -170,6 +170,26 @@ export class TeacherProfileService {
     return this.http.get(url);
   }
 
+  getTeacherSocialInfoById(socialId: string): Observable<any> {
+    const endpoint = `/get_social_info_by_id?social_id=${socialId}`;
+    const url = this.serverUrl + endpoint;
+
+    // Assume you need to send the userId as a query parameter
+    const params = { socialId };
+
+    return this.http.get(url);
+  }
+
+  getTeacherWebsiteInfoById(websiteId: string): Observable<any> {
+    const endpoint = `/get_website_info_by_id?website_id=${websiteId}`;
+    const url = this.serverUrl + endpoint;
+
+    // Assume you need to send the userId as a query parameter
+    const params = { websiteId };
+
+    return this.http.get(url);
+  }
+
   getTeacherCertificateInfoById(certificateId: string): Observable<any> {
     console.log("yes commes in api call  3");
     const endpoint = `/get_certificate_info_by_id?certificate_id=${certificateId}`;
@@ -239,6 +259,24 @@ export class TeacherProfileService {
       'Content-Type': 'application/json',
     };
     const params = new HttpParams().set('userId', userId).set('languageId', languageId.toString());
+    return this.http.delete(endpoint, { headers, params });
+  }
+
+  deleteTeacherSocialInfo(userId: string, socialId: string): Observable<any> {
+    const endpoint = `${this.serverUrl}/delete_social_info`;
+    const headers = {
+      'Content-Type': 'application/json',
+    };
+    const params = new HttpParams().set('userId', userId).set('socialId', socialId.toString());
+    return this.http.delete(endpoint, { headers, params });
+  }
+
+  deleteTeacherWebsiteInfo(userId: string, websiteId: string): Observable<any> {
+    const endpoint = `${this.serverUrl}/delete_website_info`;
+    const headers = {
+      'Content-Type': 'application/json',
+    };
+    const params = new HttpParams().set('userId', userId).set('websiteId', websiteId.toString());
     return this.http.delete(endpoint, { headers, params });
   }
   
