@@ -1163,6 +1163,51 @@ def update_work_info():
         return jsonify({'error': str(e)}), 500
     
 
+
+@app.route('/update_certificate_info', methods=['PUT'])
+def update_certificate_info():
+    try:
+        data = request.json
+        user_id = data.get('user_id')
+        additional_certificate_id  = data.get('additional_certificate_id')
+
+        cursor = mysql.connection.cursor()
+
+        # Get teacher_id based on user_id
+        cursor.execute("SELECT teacher_id FROM teacher WHERE user_id = %s", (user_id,))
+        teacher_result = cursor.fetchone()
+
+        if not teacher_result:
+            return jsonify({'error': 'Teacher not found for the given user ID'}), 404
+
+        teacher_id = teacher_result[0]
+
+        # Extract work information from the request data
+        certificate_name = data.get('certificate_name')
+        description = data.get('description')
+        issuing_organization = data.get('issuing_organization')
+        issue_date = data.get('issue_date')
+        credential_id = data.get('credential_id')
+        credential_url = data.get('credential_url')
+        
+
+        # Update work information in the workexperience table
+        cursor.execute("""
+            UPDATE additionalcertificate
+            SET certificate_name = %s, description = %s, issuing_organization = %s, issue_date = %s,
+                credential_id = %s, credential_url = %s
+            WHERE teacher_id = %s AND additional_certificate_id = %s
+        """, (certificate_name, description, issuing_organization, issue_date, credential_id, credential_url, teacher_id, additional_certificate_id))
+
+        mysql.connection.commit()
+        cursor.close()
+
+        return jsonify({'success': True, 'message': 'Certificate information updated successfully'}), 200
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+    
+
 @app.route('/delete_educational_info', methods=['DELETE'])
 def delete_educational_info():
     try:

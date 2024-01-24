@@ -883,6 +883,10 @@ export class TeacherProfileComponent implements OnInit {
     this.partWorkId = workId;
     this.fetchWorkInfo(this.partWorkId);
   }
+  openEditModal3(certificateId: string) {
+    this.partCertificateId = certificateId;
+    this.fetchCertificateInfo(this.partCertificateId);
+  }
   openDeleteModal(educationId: string) {
     this.partEducationId = educationId;
     this.fetchEducationalInfo(this.partEducationId);
@@ -978,6 +982,44 @@ export class TeacherProfileComponent implements OnInit {
         if (this.userIdParam) {
           console.warn(this.userIdParam)
           this.loadTeacherWorkInfo(this.userIdParam)
+    
+        }
+        
+      },
+      (error) => {
+        console.error('API error:', error);
+        // Handle errors
+        console.log(error+"")
+      }
+    );
+  }
+
+  updateTeacherCertificateInfo(formData: any, certificateId: string) {
+    const userId = this.activeRoute.snapshot.paramMap.get('userId');
+  
+    if (!userId) {
+      console.error('UserId is null or undefined');
+      return;
+    }
+  
+    const requestData = {
+      user_id: userId,
+      additional_certificate_id : certificateId,
+      certificate_name: formData.certificate_name,
+      description: formData.description,
+      issuing_organization: formData.issuing_organization,
+      issue_date: formData.issue_date,
+      credential_id: formData.credential_id,
+      credential_url: formData.credential_url,
+    };
+     
+    this.teacherProfileService.updateTeacherCertificateInfo(requestData).subscribe(
+      (response) => {
+        console.log('Successfully updated work information');
+        // You can add any additional logic or reload data if needed
+        if (this.userIdParam) {
+          console.warn(this.userIdParam)
+          this.loadTeacherCertificateInfo(this.userIdParam)
     
         }
         

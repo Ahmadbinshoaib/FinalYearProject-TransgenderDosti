@@ -225,6 +225,13 @@ export class TeacherProfileService {
     };
     return this.http.put(endpoint, data, { headers });
   }
+  updateTeacherCertificateInfo(data: any): Observable<any> {
+    const endpoint = `${this.serverUrl}/update_certificate_info`;
+    const headers = {
+      'Content-Type': 'application/json',
+    };
+    return this.http.put(endpoint, data, { headers });
+  }
 
   
   deleteTeacherEducationInfo(userId: string, educationalBackgroundId: string): Observable<any> {
