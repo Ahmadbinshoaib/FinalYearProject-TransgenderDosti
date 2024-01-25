@@ -219,9 +219,10 @@
 }
 
 .profile-img {
-    margin-top: 10px;
-    height: 116px;
-    width: 144px;
+
+    height: 55px;
+    width: 100px;
+    margin-bottom: 10px;
 }
 
 .row-picture {
@@ -251,6 +252,79 @@
     font-size: 14px;
 }
 
+.educational {
+    color: #464444;
+
+    font-family: Karla;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 550;
+    line-height: normal;
+}
+
+.circle3 {
+    width: 21px;
+    height: 21px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(255, 255, 255);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.circle3 i {
+    color: #060606;
+    /* Choose your desired text color */
+    font-size: 10px;
+}
+
+.line2 {
+    width: 500px;
+    height: 1px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    background: #848282;
+}
+
+
+.outer-pic-border {
+    background-color: #FFF;
+    border-radius: 15px;
+    height: 66px;
+    width: 223px;
+    margin-left: 0px;
+
+}
+
+.outer-video-border {
+    background-color: #FFF;
+    border-radius: 15px;
+    height: 120px;
+    width: 223px;
+    margin-left: 0px;
+
+}
+
+.profile-video {
+    height: 119px;
+    width: 200px;
+    margin-bottom: 10px;
+
+}
+
+.page-link {
+
+    cursor: pointer;
+}
+
+.course-img-db {
+    border-radius: 9px;
+    margin-right: 0px;
+    height: 78px;
+    width: 80px;
+}
 
 
 
@@ -283,6 +357,11 @@
         margin-bottom: 10px;
         background: #E1DCDC;
     }
+
+
+
+
+
 
 
 

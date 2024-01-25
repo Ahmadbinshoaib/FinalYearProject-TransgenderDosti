@@ -69,11 +69,18 @@ export interface languageData{
     language: string;
 
 }
-export interface socialData{
-    social_media_profile_id : string;
-    platform_name: string;
-    profile_url:string;
-    
+
+
+export interface courseData{
+    course_id: string;
+    title: string;
+    course_code: string;
+    details: string;
+    course_for: string;
+    course_fee: string;
+    course_duration: string;
+    course_video_url: string;
+    course_picture:string;
 
 }
   
@@ -83,4 +90,10 @@ export interface websiteData{
     website_url:string;
     
 
+}
+
+export interface socialData{
+    social_media_profile_id: string;
+    platform_name:string;
+    profile_url:string;
 }

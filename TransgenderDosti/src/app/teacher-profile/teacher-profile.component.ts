@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { NgbDateStruct, NgbTimeStruct } from '@ng-bootstrap/ng-bootstrap';
 import { TeacherProfileService } from '../Services/teacher-profile.service';
 import { Observable } from 'rxjs/internal/Observable';
-import { TeacherProfileData, educationData,workData,languageData,certificateData,socialData,websiteData } from '../datatypes';
+import { TeacherProfileData, educationData,workData,languageData,certificateData,websiteData, socialData } from '../datatypes';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({

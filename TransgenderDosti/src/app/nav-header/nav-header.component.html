@@ -59,7 +59,8 @@
 
 
 
-<nav *ngIf="menuType==='default'" class="navbar navbar-expand-lg navbar-dark ">
+<nav *ngIf="menuType==='default' || menuType==='teachereducation' || menuType==='learnereducation'"
+    class="navbar navbar-expand-lg navbar-dark ">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">Transgender Dosti.</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02"
@@ -101,12 +102,45 @@
 
 
                     </li>
-                    <li class="nav-item" routerLink="user-authentication">
+                    <li *ngIf="menuType === 'default'" class="nav-item" routerLink="user-authentication">
                         <button type="button" class="btn btn-outline-secondary btn-white-stroke fontstyle">
-
                             Log In
                         </button>
                     </li>
+
+                    <div *ngIf="menuType === 'teachereducation' " class="dropdown">
+                        <button class="btn btn-transparent dropdown-toggle fontstyle" type="button"
+                            style="color:white; padding-top: 8px;" id="dropdownMenuButton" data-bs-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            <!-- Add the image with a circular shape -->
+                            <img [src]="profilePictureUrl || 'assets/Ellipse 6.png'"
+                                style="border-radius: 50%; width: 30px; height: 25px; margin-right: 5px;">
+                            {{teacherEmail}}
+                        </button>
+                        <div class="dropdown-menu fontstyle" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" [routerLink]="['/teacher-mainpage', userId]">Dashboard</a>
+                            <a class="dropdown-item" [routerLink]="['/teacher-profile', userId]">User Profile</a>
+                            <a class="dropdown-item" href="#">Settings</a>
+                            <a class="dropdown-item" (click)="teacherLogout()" href="#">Logout</a>
+                        </div>
+                    </div>
+
+                    <div *ngIf="menuType === 'learnereducation' " class="dropdown">
+                        <button class="btn btn-transparent dropdown-toggle fontstyle" type="button"
+                            style="color:white; padding-top: 8px;" id="dropdownMenuButton" data-bs-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            <!-- Add the image with a circular shape -->
+                            <img [src]="profilePictureUrl || 'assets/Ellipse 6.png'" alt="assets/Ellipse 6.png"
+                                style="border-radius: 50%; width: 30px; height: 25px; margin-right: 5px;">
+                            {{learnerEmail}}
+                        </button>
+                        <div class="dropdown-menu fontstyle" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="#">User Profile</a>
+                            <a class="dropdown-item" href="#">Settings</a>
+                            <a class="dropdown-item" (click)="learnerLogout()" href="#">Logout</a>
+                        </div>
+                    </div>
+
                 </ul>
             </div>
 
@@ -169,6 +203,7 @@
                                 {{teacherEmail}}
                             </button>
                             <div class="dropdown-menu fontstyle" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" [routerLink]="['/teacher-mainpage', userId]">Dashboard</a>
                                 <a class="dropdown-item" [routerLink]="['/teacher-profile', userId]">User Profile</a>
                                 <a class="dropdown-item" href="#">Settings</a>
                                 <a class="dropdown-item" (click)="teacherLogout()" href="#">Logout</a>
