@@ -69,4 +69,18 @@ export interface languageData{
     language: string;
 
 }
+
+
+export interface courseData{
+    course_id: string;
+    title: string;
+    course_code: string;
+    details: string;
+    course_for: string;
+    course_fee: string;
+    course_duration: string;
+    course_video_url: string;
+    course_picture:string;
+
+}
   

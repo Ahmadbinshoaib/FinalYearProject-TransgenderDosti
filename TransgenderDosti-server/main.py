@@ -25,11 +25,6 @@ mysql = MySQL(app)
 CLIENT_ID = '874616982007-pvupdujpjic356kk9cmteqjicfvf47f4.apps.googleusercontent.com'
 
 
-
-
-
-
-
 @app.route('/authenticate', methods=['POST'])
 def authenticate_user():
     try:
@@ -97,7 +92,6 @@ def authenticate_user():
         # Invalid token
         return jsonify({'error': 'Invalid token'}), 400
 
-
 @app.route('/signup', methods=['POST'])
 def signup():
     try:
@@ -136,7 +130,6 @@ def signup():
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
-
 
 @app.route('/signin', methods=['POST'])
 def signin():
@@ -215,6 +208,7 @@ def get_courses():
                 'course_fee': course[6],
                 'course_duration': course[7],
                 'course_video_url': course[8],
+                'course_picture':course[9]
             }
             course_list.append(course_data)
 
@@ -299,7 +293,6 @@ def get_teacher_data():
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
-
 
 @app.route('/save_educational_info', methods=['POST'])
 def save_educational_info():
@@ -389,8 +382,6 @@ def save_work_info():
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
-    
-
 
 @app.route('/save_certificate_info', methods=['POST'])
 def save_certificate_info():
@@ -439,10 +430,6 @@ def save_certificate_info():
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
-    
-
-
-
 
 @app.route('/save_language_info', methods=['POST'])
 def save_language_info():
@@ -485,9 +472,6 @@ def save_language_info():
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
-
-
-
 
 @app.route('/get_educational_info', methods=['GET'])
 def get_educational_info():
@@ -532,8 +516,6 @@ def get_educational_info():
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
-    
-
 
 @app.route('/get_work_info', methods=['GET'])
 def get_work_info():
@@ -581,8 +563,6 @@ def get_work_info():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-
-
 @app.route('/get_certificate_info', methods=['GET'])
 def get_certificate_info():
     try:
@@ -627,12 +607,6 @@ def get_certificate_info():
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
-
-
-
-        
-    
-
 
 @app.route('/get_language_info', methods=['GET'])
 def get_language_info():
@@ -707,9 +681,6 @@ def get_educational_info_by_id():
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
-    
-
-
 
 @app.route('/get_work_info_by_id', methods=['GET'])
 def get_work_info_by_id():
@@ -748,10 +719,6 @@ def get_work_info_by_id():
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
-    
-
-
-
 
 @app.route('/get_certificate_info_by_id', methods=['GET'])
 def get_certificate_info_by_id():
@@ -788,8 +755,6 @@ def get_certificate_info_by_id():
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
-    
-
 
 @app.route('/get_language_info_by_id', methods=['GET'])
 def get_language_info_by_id():
@@ -822,7 +787,6 @@ def get_language_info_by_id():
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
-
 
 @app.route('/update_educational_info', methods=['PUT'])
 def update_educational_info():
@@ -865,7 +829,6 @@ def update_educational_info():
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
-
 
 @app.route('/update_work_info', methods=['PUT'])
 def update_work_info():
@@ -910,7 +873,6 @@ def update_work_info():
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
-    
 
 @app.route('/delete_educational_info', methods=['DELETE'])
 def delete_educational_info():
@@ -942,7 +904,6 @@ def delete_educational_info():
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
-
 
 @app.route('/delete_work_info', methods=['DELETE'])
 def delete_work_info():
@@ -1006,8 +967,6 @@ def delete_certificate_info():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-
-
 @app.route('/delete_language_info', methods=['DELETE'])
 def delete_language_info():
     try:
@@ -1038,6 +997,161 @@ def delete_language_info():
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+
+@app.route('/create_course', methods=['POST'])
+def create_course():
+    try:
+        data = request.json
+        user_id = data.get('user_id')
+        title = data.get('title')
+        details = data.get('details')
+        course_for = data.get('course_for')
+        course_fee = data.get('course_fee')
+        course_duration = data.get('course_duration')
+        course_video_url = data.get('course_video_url')
+        course_picture = data.get('course_picture')
+
+        cursor = mysql.connection.cursor()
+
+        # Get teacher_id based on user_id
+        cursor.execute("SELECT teacher_id FROM teacher WHERE user_id = %s", (user_id,))
+        teacher_result = cursor.fetchone()
+
+        if not teacher_result:
+            return jsonify({'error': 'Teacher not found for the given user ID'}), 404
+
+        teacher_id = teacher_result[0]
+
+        # Save course information in the course table
+        cursor.execute("""
+            INSERT INTO course
+            (teacher_id, title, details, course_for, course_fee, course_duration, course_video_url, course_picture)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+        """, (teacher_id, title, details, course_for, course_fee, course_duration, course_video_url, course_picture))
+
+        mysql.connection.commit()
+        cursor.close()
+
+        return jsonify({'success': True, 'message': 'Course created successfully'}), 200
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/get_course_info_byid/<int:course_id>', methods=['GET'])
+def get_course_info(course_id):
+    try:
+        cursor = mysql.connection.cursor()
+
+        # Get course information based on course_id
+        cursor.execute("SELECT * FROM course WHERE course_id = %s", (course_id,))
+        course_info = cursor.fetchone()
+
+        if not course_info:
+            return jsonify({'error': 'Course not found for the given course ID'}), 404
+
+        course_data = {
+            'course_id': course_info[0],
+            'teacher_id': course_info[1],
+            'title': course_info[2],
+            'course_code': course_info[3],
+            'details': course_info[4],
+            'course_for': course_info[5],
+            'course_fee': course_info[6],
+            'course_duration': course_info[7],
+            'course_video_url': course_info[8],
+            'course_picture': course_info[9],
+        }
+
+        cursor.close()
+
+        return jsonify({'success': True, 'course_data': course_data}), 200
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/update_course', methods=['PUT'])
+def update_course():
+    try:
+        data = request.json
+        user_id = data.get('user_id')
+        course_id = data.get('course_id')
+
+        cursor = mysql.connection.cursor()
+
+        # Get teacher_id based on user_id
+        cursor.execute("SELECT teacher_id FROM teacher WHERE user_id = %s", (user_id,))
+        teacher_result = cursor.fetchone()
+
+        if not teacher_result:
+            return jsonify({'error': 'Teacher not found for the given user ID'}), 404
+
+        teacher_id = teacher_result[0]
+
+        # Check if the course exists and belongs to the given teacher
+        cursor.execute("SELECT * FROM course WHERE course_id = %s AND teacher_id = %s", (course_id, teacher_id))
+        course_result = cursor.fetchone()
+
+        if not course_result:
+            return jsonify({'error': 'Course not found for the given course ID and teacher ID'}), 404
+
+        # Update course information based on the provided data
+        cursor.execute("""
+            UPDATE course
+            SET title = %s, details = %s, course_for = %s, course_fee = %s,
+                course_duration = %s, course_video_url = %s, course_picture = %s
+            WHERE course_id = %s AND teacher_id = %s
+        """, (
+            data.get('title'), data.get('details'), data.get('course_for'),
+            data.get('course_fee'), data.get('course_duration'), data.get('course_video_url'),
+            data.get('course_picture'), course_id, teacher_id
+        ))
+
+        mysql.connection.commit()
+        cursor.close()
+
+        return jsonify({'success': True, 'message': 'Course updated successfully'}), 200
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/delete_course', methods=['DELETE'])
+def delete_course():
+    try:
+        user_id = request.args.get('user_id')
+        course_id = request.args.get('course_id')
+
+        cursor = mysql.connection.cursor()
+
+        # Get teacher_id based on user_id
+        cursor.execute("SELECT teacher_id FROM teacher WHERE user_id = %s", (user_id,))
+        teacher_result = cursor.fetchone()
+
+        if not teacher_result:
+            return jsonify({'error': 'Teacher not found for the given user ID'}), 404
+
+        teacher_id = teacher_result[0]
+
+        # Check if the course exists and belongs to the given teacher
+        cursor.execute("SELECT * FROM course WHERE course_id = %s AND teacher_id = %s", (course_id, teacher_id))
+        course_result = cursor.fetchone()
+
+        if not course_result:
+            return jsonify({'error': 'Course not found for the given course ID and teacher ID'}), 404
+
+        # Delete the course
+        cursor.execute("""
+            DELETE FROM course
+            WHERE course_id = %s AND teacher_id = %s
+        """, (course_id, teacher_id))
+
+        mysql.connection.commit()
+        cursor.close()
+
+        return jsonify({'success': True, 'message': 'Course deleted successfully'}), 200
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
 
 
 
