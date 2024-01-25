@@ -84,3 +84,16 @@ export interface courseData{
 
 }
   
+export interface websiteData{
+    website_id: string;
+    website_name: string;
+    website_url:string;
+    
+
+}
+
+export interface socialData{
+    social_media_profile_id: string;
+    platform_name:string;
+    profile_url:string;
+}

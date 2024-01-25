@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { NgbDateStruct, NgbTimeStruct } from '@ng-bootstrap/ng-bootstrap';
 import { TeacherProfileService } from '../Services/teacher-profile.service';
 import { Observable } from 'rxjs/internal/Observable';
-import { TeacherProfileData, educationData,workData,languageData,certificateData } from '../datatypes';
+import { TeacherProfileData, educationData,workData,languageData,certificateData,socialData,websiteData } from '../datatypes';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -21,6 +21,8 @@ export class TeacherProfileComponent implements OnInit {
   isCurrentChecked2: boolean = false;
   editEducationinfo: any 
   educationalInfo: any[] = [];
+  socialInfo: any[] = [];
+  websiteInfo: any[] = [];
   languageInfo: any[] = [];
   certificateInfo: any[] = [];
   languages: any[] = [];
@@ -30,6 +32,8 @@ export class TeacherProfileComponent implements OnInit {
   partWorkId: any
   partLanguageId: any
   partCertificateId: any
+  partSocialId: any
+  partWebsiteId: any
   educationInfoById: educationData ={
     educational_background_id: '',
     institution_name: '',
@@ -68,6 +72,17 @@ export class TeacherProfileComponent implements OnInit {
   languageInfoById: languageData ={
     language_proficiency_id: '',
     language:'',
+  }
+  socialInfoById: socialData ={
+    social_media_profile_id: '',
+    platform_name:'',
+    profile_url:'',
+
+  }
+  websiteInfoById: websiteData ={
+    website_id: '',
+    website_name:'',
+    website_url:'',
   }
 
   countries: any[] = [];
@@ -197,6 +212,8 @@ export class TeacherProfileComponent implements OnInit {
       this.fetchLanguages()
       this.loadTeacherLanguageInfo(this.userIdParam)
       this.loadTeacherCertificateInfo(this.userIdParam)
+      this.loadTeacherSocialInfo(this.userIdParam)
+      this.loadTeacherWebsiteInfo(this.userIdParam)
     }
 
 
@@ -432,6 +449,77 @@ export class TeacherProfileComponent implements OnInit {
   }
 
 
+  saveTeacherSocialInfo(data: any) {
+    // console.log(data)
+
+    const userId = this.activeRoute.snapshot.paramMap.get('userId');
+
+    if (!userId) {
+      console.error('UserId is null or undefined');
+      return;
+    }
+    const requestData = {
+      user_id: userId,
+      platform_name	: data.platform_name,
+      profile_url: data.profile_url,
+      
+    };
+    // Make API call using the service
+    this.teacherProfileService.saveTeacherSocialInfo(requestData).subscribe(
+      response => {
+        console.log(this.userIdParam)
+        if (this.userIdParam) {
+          console.warn(this.userIdParam)
+          this.loadTeacherSocialInfo(this.userIdParam)
+
+        }
+
+
+        // console.error('Sucessfully');
+      },
+      error => {
+        console.error('API error:', error);
+        // Handle errors
+      }
+    );
+  }
+
+  saveTeacherWebsiteInfo(data: any) {
+    // console.log(data)
+
+    const userId = this.activeRoute.snapshot.paramMap.get('userId');
+
+    if (!userId) {
+      console.error('UserId is null or undefined');
+      return;
+    }
+    const requestData = {
+      user_id: userId,
+      website_name	: data.website_name,
+      website_url: data.website_url,
+      
+    };
+    // Make API call using the service
+    this.teacherProfileService.saveTeacherWebsiteInfo(requestData).subscribe(
+      response => {
+        console.log(this.userIdParam)
+        if (this.userIdParam) {
+          console.warn(this.userIdParam)
+          this.loadTeacherWebsiteInfo(this.userIdParam)
+
+        }
+
+
+        // console.error('Sucessfully');
+      },
+      error => {
+        console.error('API error:', error);
+        // Handle errors
+      }
+    );
+  }
+
+
 
 
   saveTeacherCertificateInfo(data: any) {
@@ -599,6 +687,44 @@ export class TeacherProfileComponent implements OnInit {
 
   }
 
+  loadTeacherSocialInfo(userId: string) {
+    console.warn('load')
+    if (userId) {
+      this.teacherProfileService.getTeacherSocialInfo(userId).subscribe(
+        (response) => {
+          // Assuming the response structure has a 'courses' property
+          this.socialInfo = response.social_info;
+          console.log(this.socialInfo)
+        },
+        (error) => {
+          console.error('Error loading educational info', error);
+        }
+      );
+    } else {
+      console.error('UserId is null or undefined');
+    }
+
+  }
+
+  loadTeacherWebsiteInfo(userId: string) {
+    console.warn('load')
+    if (userId) {
+      this.teacherProfileService.getTeacherWebsiteInfo(userId).subscribe(
+        (response) => {
+          // Assuming the response structure has a 'courses' property
+          this.websiteInfo = response.website_info;
+          console.log(this.websiteInfo)
+        },
+        (error) => {
+          console.error('Error loading educational info', error);
+        }
+      );
+    } else {
+      console.error('UserId is null or undefined');
+    }
+
+  }
+
   loadTeacherCertificateInfo(userId: string) {
     console.warn('load')
     if (userId) {
@@ -720,6 +846,34 @@ export class TeacherProfileComponent implements OnInit {
       }
     );
   }
+  fetchSocialInfo(socialId: string) {
+    // Use your data service to fetch educational information based on teacher ID
+    this.teacherProfileService.getTeacherSocialInfoById(socialId).subscribe(
+      (data) => {
+        
+        this.socialInfoById = data.social_info;
+        
+        
+      },
+      (error) => {
+        console.error('Error fetching educational information', error);
+      }
+    );
+  }
+  fetchWebsiteInfo(websiteId: string) {
+    // Use your data service to fetch educational information based on teacher ID
+    this.teacherProfileService.getTeacherWebsiteInfoById(websiteId).subscribe(
+      (data) => {
+        
+        this.websiteInfoById = data.website_info;
+        
+        
+      },
+      (error) => {
+        console.error('Error fetching educational information', error);
+      }
+    );
+  }
 
   openEditModal(educationId: string) {
     this.partEducationId = educationId;
@@ -728,6 +882,10 @@ export class TeacherProfileComponent implements OnInit {
   openEditModal1(workId: string) {
     this.partWorkId = workId;
     this.fetchWorkInfo(this.partWorkId);
+  }
+  openEditModal3(certificateId: string) {
+    this.partCertificateId = certificateId;
+    this.fetchCertificateInfo(this.partCertificateId);
   }
   openDeleteModal(educationId: string) {
     this.partEducationId = educationId;
@@ -743,9 +901,19 @@ export class TeacherProfileComponent implements OnInit {
   }
 
   openDeleteModal3(certificateId: string) {
-    console.log("yes commes in modal 3");
+    
     this.partCertificateId = certificateId;
     this.fetchCertificateInfo(this.partCertificateId);
+  }
+  openDeleteModal4(socialId: string) {
+   
+    this.partSocialId = socialId;
+    this.fetchSocialInfo(this.partSocialId);
+  }
+  openDeleteModal5(websiteId: string) {
+    
+    this.partWebsiteId = websiteId;
+    this.fetchWebsiteInfo(this.partWebsiteId);
   }
 
   updateTeacherEducationalInfo(formData: any, educationalBackgroundId: string) {
@@ -826,6 +994,44 @@ export class TeacherProfileComponent implements OnInit {
     );
   }
 
+  updateTeacherCertificateInfo(formData: any, certificateId: string) {
+    const userId = this.activeRoute.snapshot.paramMap.get('userId');
+  
+    if (!userId) {
+      console.error('UserId is null or undefined');
+      return;
+    }
+  
+    const requestData = {
+      user_id: userId,
+      additional_certificate_id : certificateId,
+      certificate_name: formData.certificate_name,
+      description: formData.description,
+      issuing_organization: formData.issuing_organization,
+      issue_date: formData.issue_date,
+      credential_id: formData.credential_id,
+      credential_url: formData.credential_url,
+    };
+     
+    this.teacherProfileService.updateTeacherCertificateInfo(requestData).subscribe(
+      (response) => {
+        console.log('Successfully updated work information');
+        // You can add any additional logic or reload data if needed
+        if (this.userIdParam) {
+          console.warn(this.userIdParam)
+          this.loadTeacherCertificateInfo(this.userIdParam)
+    
+        }
+        
+      },
+      (error) => {
+        console.error('API error:', error);
+        // Handle errors
+        console.log(error+"")
+      }
+    );
+  }
+
 // Assuming your imports are correctly set up
 
 deleteTeacherEducationInfo(educationalBackgroundId: string) {
@@ -870,6 +1076,56 @@ deleteTeacherWorkInfo(workExperienceId: string) {
       if (this.userIdParam) {
         console.warn(this.userIdParam)
         this.loadTeacherWorkInfo(this.userIdParam)
+  
+      }
+    },
+    (error) => {
+      console.error('API error:', error);
+      // Handle errors
+      console.log(error+"")
+    }
+  );
+}
+deleteTeacherSocialInfo(socialId: string) {
+  const userId = this.activeRoute.snapshot.paramMap.get('userId');
+
+  if (!userId) {
+    console.error('UserId is null or undefined');
+    return;
+  }
+
+  this.teacherProfileService.deleteTeacherSocialInfo(userId, socialId).subscribe(
+    (response) => {
+      console.log('Successfully deleted social information');
+      // You can add any additional logic or reload data if needed
+      if (this.userIdParam) {
+        console.warn(this.userIdParam)
+        this.loadTeacherSocialInfo(this.userIdParam)
+  
+      }
+    },
+    (error) => {
+      console.error('API error:', error);
+      // Handle errors
+      console.log(error+"")
+    }
+  );
+}
+deleteTeacherWebsiteInfo(websiteId: string) {
+  const userId = this.activeRoute.snapshot.paramMap.get('userId');
+
+  if (!userId) {
+    console.error('UserId is null or undefined');
+    return;
+  }
+
+  this.teacherProfileService.deleteTeacherWebsiteInfo(userId, websiteId).subscribe(
+    (response) => {
+      console.log('Successfully deleted website information');
+      // You can add any additional logic or reload data if needed
+      if (this.userIdParam) {
+        console.warn(this.userIdParam)
+        this.loadTeacherWebsiteInfo(this.userIdParam)
   
       }
     },

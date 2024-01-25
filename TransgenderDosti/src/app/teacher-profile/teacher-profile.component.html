@@ -137,7 +137,7 @@
 
                         </div>
 
-
+                        <!--links addition working starts here-->
                         <div class="row">
                             <span class="additional">Additional</span>
                         </div>
@@ -154,13 +154,95 @@
 
                                         <div class="row">
                                             <div class="col-3" style="padding-top: 10px; padding-left: 20px;">
-                                                <div class="circle2">
+                                                <div class="circle2" data-bs-toggle="modal" data-bs-target="#social">
                                                     <i class="fas fa-plus">
 
                                                     </i>
                                                 </div>
 
                                             </div>
+
+                                            <!--creating social modal here-->
+
+                                            <div class="modal modal-lg fade" id="social" #education
+                                                data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                                                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h1 class="modal-title fs-5" id="staticBackdropLabel">
+                                                                Social Profile Link
+                                                            </h1>
+                                                            <button type="button" class="btn-close"
+                                                                data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+
+                                                            <form #socialForm="ngForm"
+                                                                (ngSubmit)="saveTeacherSocialInfo(socialForm.value)">
+                                                                <div class="row">
+
+
+                                                                    <div class="col-6">
+                                                                        <div class="span edu-content country">
+                                                                            Platform Name</div>
+                                                                        <div class="form-group small-input">
+                                                                            <input type="text" name="platform_name"
+                                                                                class="form-control form-control-sm"
+                                                                                placeholder="Enter Social Media Platform"
+                                                                                ngModel required>
+                                                                        </div>
+
+
+
+                                                                    </div>
+
+                                                                    <div class="col-6">
+
+                                                                        <div class="span edu-content city">Profile URL
+                                                                        </div>
+                                                                        <div class="form-group small-input">
+                                                                            <input type="text" name="profile_url"
+                                                                                class="form-control form-control-sm"
+                                                                                placeholder="Enter URL of your Social Profile"
+                                                                                ngModel required>
+                                                                        </div>
+
+
+
+                                                                    </div>
+
+
+
+                                                                </div>
+
+                                                                <div class="modal-footer" style="margin-top: 10px;">
+
+
+
+
+                                                                    <button type="button" data-bs-dismiss="modal"
+                                                                        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                                                                        class="btn btn-danger"
+                                                                        (click)="closeModal()">Close</button>
+
+                                                                    <button type="submit"
+                                                                        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                                                                        class="btn btn-success" data-bs-dismiss="modal"
+                                                                        [disabled]="!socialForm.valid">Save</button>
+
+
+                                                                </div>
+                                                            </form>
+
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+
                                             <div class="col-2 sf">
                                                 <span class="social-profile">Social's</span>
 
@@ -170,30 +252,75 @@
                                         <div class="row">
 
                                             <div class="social-boundary">
-                                                <div class="row">
-                                                    <div class="col-6 overflow-hidden ">
-                                                        <div class="truncate-text">
-                                                            ahmad's long content goes here and it exceeds the area limit
+                                                <div *ngIf="socialInfo.length > 0; else noDataMessage">
+                                                    <div class="row" *ngFor="let so of socialInfo">
+                                                        <div class="col-6 overflow-hidden ">
+                                                            <div class="truncate-text">
+                                                                {{ so.platform_name}}
+                                                            </div>
+                                                            <div class="delete-icon"
+                                                                (click)="openDeleteModal4(so.social_media_profile_id )"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#confirmationModal">
+                                                                <i class="fas fa-times-circle"></i>
+                                                            </div>
                                                         </div>
-                                                        <div class="delete-icon">
-                                                            <i class="fas fa-times-circle"></i>
-                                                        </div>
+
                                                     </div>
-                                                    <div class="col-6  overflow-hidden">
-                                                        <div class="truncate-text">
-                                                            ahmad
+                                                </div>
+                                            </div>
+
+
+
+                                            <div class="modal fade" id="confirmationModal" #education
+                                                data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                                                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h1 class="modal-title fs-5" id="staticBackdropLabel">
+                                                                Confirmation </h1>
+                                                            <button type="button" class="btn-close"
+                                                                data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
-                                                        <div class="delete-icon">
-                                                            <i class="fas fa-times-circle"></i>
+                                                        <div class="modal-body">
+
+                                                            <form #confermForm="ngForm"
+                                                                (ngSubmit)="deleteTeacherSocialInfo(socialInfoById.social_media_profile_id)">
+                                                                <div class="row">
+                                                                    <div class="col-6">
+                                                                        <div class="span edu-content city">Delete
+                                                                            Social Media <b>" {{
+                                                                                socialInfoById.platform_name}} "</b>
+                                                                            ?</div>
+
+
+                                                                    </div>
+
+                                                                    <div class="modal-footer" style="margin-top: 10px;">
+
+
+                                                                        <button type="button" data-bs-dismiss="modal"
+                                                                            style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                                                                            class="btn btn-danger"
+                                                                            (click)="closeModal()">Close</button>
+                                                                        <button type="submit"
+                                                                            style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                                                                            class="btn btn-success"
+                                                                            data-bs-dismiss="modal"
+                                                                            [disabled]="!languageForm.valid">Delete</button>
+
+
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+
+
+
+
+
                                                         </div>
-                                                    </div>
-                                                    <div class="col-6  overflow-hidden">
-                                                        <div class="truncate-text">
-                                                            ahmad
-                                                        </div>
-                                                        <div class="delete-icon">
-                                                            <i class="fas fa-times-circle"></i>
-                                                        </div>
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -219,13 +346,95 @@
 
                                         <div class="row">
                                             <div class="col-3" style="padding-top: 10px; padding-left: 20px;">
-                                                <div class="circle2">
+                                                <div class="circle2" data-bs-toggle="modal" data-bs-target="#website">
                                                     <i class="fas fa-plus">
 
                                                     </i>
                                                 </div>
 
+
                                             </div>
+
+                                            <!--creating  Website modal here-->
+
+                                            <div class="modal modal-lg fade" id="website" #education
+                                                data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                                                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h1 class="modal-title fs-5" id="staticBackdropLabel">
+                                                                Personal Website
+                                                            </h1>
+                                                            <button type="button" class="btn-close"
+                                                                data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+
+                                                            <form #websiteForm="ngForm"
+                                                                (ngSubmit)="saveTeacherWebsiteInfo(websiteForm.value)">
+                                                                <div class="row">
+
+
+                                                                    <div class="col-6">
+                                                                        <div class="span edu-content country">
+                                                                            Website Name</div>
+                                                                        <div class="form-group small-input">
+                                                                            <input type="text" name="website_name"
+                                                                                class="form-control form-control-sm"
+                                                                                placeholder="Enter your Website Name"
+                                                                                ngModel required>
+                                                                        </div>
+
+
+
+                                                                    </div>
+
+                                                                    <div class="col-6">
+
+                                                                        <div class="span edu-content city">Website URL
+                                                                        </div>
+                                                                        <div class="form-group small-input">
+                                                                            <input type="text" name="website_url"
+                                                                                class="form-control form-control-sm"
+                                                                                placeholder="Enter URL of your Website"
+                                                                                ngModel required>
+                                                                        </div>
+
+
+
+                                                                    </div>
+
+
+
+                                                                </div>
+
+                                                                <div class="modal-footer" style="margin-top: 10px;">
+
+
+
+
+                                                                    <button type="button" data-bs-dismiss="modal"
+                                                                        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                                                                        class="btn btn-danger"
+                                                                        (click)="closeModal()">Close</button>
+
+                                                                    <button type="submit"
+                                                                        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                                                                        class="btn btn-success" data-bs-dismiss="modal"
+                                                                        [disabled]="!websiteForm.valid">Save</button>
+
+
+                                                                </div>
+                                                            </form>
+
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
                                             <div class="col-2 sf">
                                                 <span class="social-profile">Website</span>
 
@@ -235,31 +444,74 @@
                                         <div class="row">
 
                                             <div class="social-boundary">
-                                                <div class="row">
-                                                    <div class="col-6 overflow-hidden ">
-                                                        <div class="truncate-text">
-                                                            ahmad's long content goes here and it exceeds the area
-                                                            limit
+                                                <div *ngIf="websiteInfo.length > 0; else noDataMessage">
+                                                    <div class="row" *ngFor="let web of websiteInfo">
+                                                        <div class="col-6 overflow-hidden ">
+                                                            <div class="truncate-text">
+                                                                {{ web.website_name}}
+                                                            </div>
+                                                            <div class="delete-icon"
+                                                                (click)="openDeleteModal5(web.website_id)"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#confirmationModal1">
+                                                                <i class="fas fa-times-circle"></i>
+                                                            </div>
                                                         </div>
-                                                        <div class="delete-icon">
-                                                            <i class="fas fa-times-circle"></i>
-                                                        </div>
+
                                                     </div>
-                                                    <div class="col-6  overflow-hidden">
-                                                        <div class="truncate-text">
-                                                            ahmad
+                                                </div>
+                                            </div>
+
+
+                                            <div class="modal fade" id="confirmationModal1" #education
+                                                data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                                                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h1 class="modal-title fs-5" id="staticBackdropLabel">
+                                                                Confirmation </h1>
+                                                            <button type="button" class="btn-close"
+                                                                data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
-                                                        <div class="delete-icon">
-                                                            <i class="fas fa-times-circle"></i>
+                                                        <div class="modal-body">
+
+                                                            <form #confermForm="ngForm"
+                                                                (ngSubmit)="deleteTeacherWebsiteInfo(websiteInfoById.website_id)">
+                                                                <div class="row">
+                                                                    <div class="col-6">
+                                                                        <div class="span edu-content city">Delete
+                                                                            Website <b>" {{
+                                                                                websiteInfoById.website_name}} "</b>
+                                                                            ?</div>
+
+
+                                                                    </div>
+
+                                                                    <div class="modal-footer" style="margin-top: 10px;">
+
+
+                                                                        <button type="button" data-bs-dismiss="modal"
+                                                                            style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                                                                            class="btn btn-danger"
+                                                                            (click)="closeModal()">Close</button>
+                                                                        <button type="submit"
+                                                                            style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                                                                            class="btn btn-success"
+                                                                            data-bs-dismiss="modal"
+                                                                            [disabled]="!languageForm.valid">Delete</button>
+
+
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+
+
+
+
+
                                                         </div>
-                                                    </div>
-                                                    <div class="col-6  overflow-hidden">
-                                                        <div class="truncate-text">
-                                                            ahmad
-                                                        </div>
-                                                        <div class="delete-icon">
-                                                            <i class="fas fa-times-circle"></i>
-                                                        </div>
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -674,14 +926,14 @@
                                     </div>
 
                                     <div class="edit-icon" (click)="openDeleteModal(ed.educational_background_id)"
-                                        data-bs-toggle="modal" data-bs-target="#confirmationModal">
+                                        data-bs-toggle="modal" data-bs-target="#educonfirmationModal">
                                         <i class="fas fa-trash"></i>
                                     </div>
                                 </div>
                             </div>
 
 
-                            <div class="modal fade" id="confirmationModal" #education data-bs-backdrop="static"
+                            <div class="modal fade" id="educonfirmationModal" #education data-bs-backdrop="static"
                                 data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
                                 aria-hidden="true">
                                 <div class="modal-dialog">
@@ -698,7 +950,8 @@
                                                 <div class="row">
                                                     <div class="col-6">
                                                         <div class="span edu-content city">Delete Educational
-                                                            Information ?</div>
+                                                            Information <b>"{{ educationInfoById.degree_name}}"</b> ?
+                                                        </div>
 
 
                                                     </div>
@@ -1162,7 +1415,7 @@
                                     </div>
 
                                     <div class="edit-icon" (click)="openDeleteModal1(wk.work_experience_id )"
-                                        data-bs-toggle="modal" data-bs-target="#confirmationModal1">
+                                        data-bs-toggle="modal" data-bs-target="#workconfirmationModal1">
                                         <i class="fas fa-trash"></i>
                                     </div>
 
@@ -1172,7 +1425,7 @@
                             </div>
 
 
-                            <div class="modal fade" id="confirmationModal1" #education data-bs-backdrop="static"
+                            <div class="modal fade" id="workconfirmationModal1" #education data-bs-backdrop="static"
                                 data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
                                 aria-hidden="true">
                                 <div class="modal-dialog">
@@ -1188,7 +1441,8 @@
                                                 (ngSubmit)="deleteTeacherWorkInfo(workInfoById.work_experience_id)">
                                                 <div class="row">
                                                     <div class="col-6">
-                                                        <div class="span edu-content city">Delete Work Experience Info ?
+                                                        <div class="span edu-content city">Delete Work Experience <b>"{{
+                                                                workInfoById.job_title}}"</b> ? Info ?
                                                         </div>
 
 
@@ -1378,7 +1632,8 @@
                                             (ngSubmit)="deleteLanguageInfo(languageInfoById.language_proficiency_id)">
                                             <div class="row">
                                                 <div class="col-6">
-                                                    <div class="span edu-content city">Delete Language ?
+                                                    <div class="span edu-content city">Delete Language <b>" {{
+                                                            languageInfoById.language}} "</b> ?
                                                     </div>
 
 
@@ -1601,8 +1856,9 @@
                                 <div style="margin-bottom: 5px;" *ngFor="let cer of certificateInfo"
                                     class="col-2 lang-border">
                                     <div class="row">
-                                        <div class="col-8"
-                                            style="padding-left: 6px; padding-top: 4px; padding-bottom: 4px;">
+                                        <div class="col-8" data-bs-toggle="modal" data-bs-target="#certificateEdit"
+                                            style="padding-left: 6px; padding-top: 4px; padding-bottom: 4px;"
+                                            (click)="openEditModal3(cer.additional_certificate_id)">
                                             {{cer.certificate_name}}
                                         </div>
                                         <div class="col-4">
@@ -1644,7 +1900,8 @@
                                             (ngSubmit)="deleteTeacherCertificateInfo(certificateInfoById.additional_certificate_id)">
                                             <div class="row">
                                                 <div class="col-6">
-                                                    <div class="span edu-content city">Delete Certificate Details ?
+                                                    <div class="span edu-content city">Delete Certificate <b>"{{
+                                                            certificateInfoById.certificate_name}}"</b> Details ?
                                                     </div>
 
 
@@ -1669,6 +1926,172 @@
 
 
 
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+                        <div class="modal modal-lg fade" id="certificateEdit" #education data-bs-backdrop="static"
+                            data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Update Additional
+                                            Certificate
+                                        </h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+
+
+
+
+                                        <form #CertificateEditForm="ngForm"
+                                            (ngSubmit)="updateTeacherCertificateInfo(CertificateEditForm.value,certificateInfoById.additional_certificate_id)">
+                                            <div class="row">
+
+
+
+                                                <div class="col-6">
+                                                    <div class="span edu-content country">Certificate</div>
+                                                    <div class="form-group small-input">
+                                                        <input type="text" name="certificate_name"
+                                                            class="form-control form-control-sm"
+                                                            placeholder="Enter your Certificate Title"
+                                                            [(ngModel)]="certificateInfoById.certificate_name" required>
+                                                    </div>
+
+
+
+                                                </div>
+
+                                                <div class="col-6">
+                                                    <div class="span edu-content country">Issuing Oranization</div>
+                                                    <div class="form-group small-input">
+                                                        <input type="text" name="issuing_organization"
+                                                            class="form-control form-control-sm"
+                                                            placeholder="Enter name of Oranization "
+                                                            [(ngModel)]="certificateInfoById.issuing_organization"
+                                                            required>
+                                                    </div>
+
+
+
+                                                </div>
+
+                                                <div class="col-6">
+
+                                                    <div class="span edu-content city">Credential ID</div>
+                                                    <div class="form-group small-input">
+                                                        <input type="text" name="credential_id"
+                                                            class="form-control form-control-sm"
+                                                            placeholder="Enter your Credential ID "
+                                                            [(ngModel)]="certificateInfoById.credential_id" required>
+
+
+
+                                                    </div>
+                                                    </div>
+
+                                                    <div class="col-6">
+
+                                                        <div class="span edu-content city">Credential URL</div>
+                                                        <div class="form-group small-input">
+                                                            <input type="text" name="credential_url"
+                                                                class="form-control form-control-sm"
+                                                                placeholder="Enter your Credential URL "
+                                                                [(ngModel)]="certificateInfoById.credential_url"
+                                                                required>
+                                                        </div>
+
+
+
+                                                    </div>
+
+
+                                                    <div class="col-6">
+                                                        <div class="span edu-content city">Description</div>
+                                                        <div class="form-group small-input">
+                                                            <textarea name="description"
+                                                                class="form-control form-control-sm"
+                                                                placeholder="Write 160 to 200 words description of your experience "
+                                                                [(ngModel)]="certificateInfoById.description"
+                                                                required></textarea>
+                                                        </div>
+                                                    </div>
+
+
+
+
+
+
+
+                                                    <div class="col-6" style="padding-left: 15px;">
+
+                                                        <div class="row">
+                                                            <div class="col-6">
+
+                                                                <div class="span edu-content city">Issue Date</div>
+                                                                <input type="date" name="issue_date"
+                                                                    class="form-control form-control-sm"
+                                                                    [(ngModel)]="educationInfoById.end_date" required>
+
+                                                            </div>
+                                                        </div>
+
+
+
+                                                    </div>
+
+
+                                                    <div class="col-6">
+                                                        <div class="row justify-content-end">
+                                                            <div class="col-4 sf text-right">
+                                                                <span class="social-profile">relevant document</span>
+                                                            </div>
+                                                            <div class="col-2"
+                                                                style="padding-top: 10px; padding-right: 0px;">
+                                                                <div class="circle2" (click)="openFileInput2()">
+                                                                    <i class="fa-solid fa-upload"></i>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+
+
+
+
+
+
+
+
+
+
+                                                    <div class="modal-footer" style="margin-top: 10px;">
+
+
+                                                        <button type="button" data-bs-dismiss="modal"
+                                                            style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                                                            class="btn btn-danger" (click)="closeModal()">Close</button>
+                                                        <button type="submit"
+                                                            style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                                                            class="btn btn-success" data-bs-dismiss="modal"
+                                                            [disabled]="!CertificateEditForm.valid">Save</button>
+
+
+                                                    </div>
+                                                </div>
+
+                                        </form>
 
                                     </div>
 
