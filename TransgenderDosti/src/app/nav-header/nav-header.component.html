@@ -10,12 +10,14 @@
             <div class="modal-body">
                 <div class="container-fluid">
                     <div class="row">
+                        
                         <div class="row custom-row3">
 
                             <div class="col cross" data-bs-dismiss="modal">
                                 <i class="fa-solid fa-xmark fa-shake fa-2xl" style="color: #ffffff;"></i>
                             </div>
                         </div>
+                        
 
                         <div class="row custom-row2">
 
@@ -34,9 +36,17 @@
                             </div>
                         </div>
                     </div>
+                    <div *ngIf="transcription">
+                        <h2>Transcription:</h2>
+                        <p>{{ transcription }}</p>
+                      </div>
+
+                    <button (click)="startFunction()" [disabled]="isRecording">Start</button>
+                    <button (click)="stopFunction()" [disabled]="!isRecording">Stop</button>
+                    
                 </div>
-
-
+                
+                
 
             </div>
             <!-- <div class="modal-footer">

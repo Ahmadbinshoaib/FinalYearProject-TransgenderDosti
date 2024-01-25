@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component , ChangeDetectorRef, OnDestroy, NgZone } from '@angular/core';
 import { Route, Router } from '@angular/router';
+import { AudioService } from '../Services/audio.service';
 
 @Component({
   selector: 'app-nav-header',
@@ -13,9 +14,15 @@ export class NavHeaderComponent {
   profilePictureUrl: string = ''
   userId:string=''
 
-  constructor(private router: Router) {
+  mediaRecorder: any;
+  chunks: any[] = [];
+  isRecording = false;
+  transcription: string = '';
 
-  }
+  constructor(private router: Router,
+    private audioService: AudioService,
+    private cdr: ChangeDetectorRef,
+    private zone: NgZone) {}
 
   ngOnInit() {
 
@@ -97,6 +104,54 @@ export class NavHeaderComponent {
   learnerLogout() {
     localStorage.removeItem('learner');
     this.router.navigate(['/'])
+  }
+
+
+
+  startFunction() {
+    this.transcription = '';
+
+    navigator.mediaDevices.getUserMedia({ audio: true })
+      .then((stream) => {
+        this.mediaRecorder = new MediaRecorder(stream);
+
+        this.mediaRecorder.ondataavailable = (e: BlobEvent) => {
+          if (e.data.size > 0) {
+            this.chunks.push(e.data);
+          }
+        };
+
+        this.mediaRecorder.onstop = () => {
+          const audioBlob = new Blob(this.chunks, { type: 'audio/wav' });
+          this.chunks = [];
+
+          const audioFile = new File([audioBlob], 'recorded.wav', { type: 'audio/wav' });
+
+          this.audioService.uploadAudio(audioFile).subscribe(
+            (response) => {
+              console.log('Transcription:', response.transcription);
+              this.transcription = response.transcription;
+              this.cdr.detectChanges(); // Manually trigger change detection
+            },
+            (error) => {
+              console.error('Error transcribing audio:', error);
+            }
+          );
+        };
+
+        this.mediaRecorder.start();
+        this.isRecording = true;
+      })
+      .catch((error) => {
+        console.error('Error accessing microphone:', error);
+      });
+  }
+
+  stopFunction() {
+    if (this.isRecording) {
+      this.mediaRecorder.stop();
+      this.isRecording = false;
+    }
   }
 
 }
