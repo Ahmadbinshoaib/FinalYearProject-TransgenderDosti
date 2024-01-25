@@ -11,7 +11,7 @@ export class NavHeaderComponent {
   teacherEmail: String = '';
   learnerEmail: String = '';
   profilePictureUrl: string = ''
-  userId:string=''
+  userId: string = ''
 
   constructor(private router: Router) {
 
@@ -20,6 +20,80 @@ export class NavHeaderComponent {
   ngOnInit() {
 
     this.router.events.subscribe((val: any) => {
+      console.warn(val)
+      if (val.url) {
+        if (localStorage.getItem('teacher') && val.url.includes('educationhomepage')) {
+          console.warn('in tecaher area')
+          this.menuType = 'teachereducation'
+
+          if (localStorage.getItem('teacher')) {
+            const teacherStore = localStorage.getItem('teacher');
+
+            try {
+              const teacherData = JSON.parse(teacherStore!);
+
+              if (teacherData && teacherData.email && teacherData.user_id) {
+                this.userId = teacherData.user_id
+                console.log(teacherData.email);
+                this.teacherEmail = teacherData.email.split('@')[0];
+                if (teacherData.profile_picture) {
+
+
+                  this.profilePictureUrl = teacherData.profile_picture
+                }
+
+              } else {
+                console.error('Invalid teacher data format or missing email property');
+              }
+            } catch (error) {
+              console.error('Error parsing teacher data:', error);
+            }
+          }
+
+
+
+
+
+        }
+        else if (localStorage.getItem('learner') && val.url.includes('educationhomepage')) {
+          console.warn('in learner area')
+          this.menuType = 'learnereducation'
+
+          if (localStorage.getItem('learner')) {
+            const learnerStore = localStorage.getItem('learner');
+
+            try {
+              const learnerData = JSON.parse(learnerStore!);
+
+              if (learnerData && learnerData.email) {
+                console.log(learnerData.email);
+                this.learnerEmail = learnerData.email.split('@')[0];
+                if (learnerData.profile_picture) {
+
+
+                  this.profilePictureUrl = learnerData.profile_picture
+                }
+              } else {
+                console.error('Invalid learner data format or missing email property');
+              }
+            } catch (error) {
+              console.error('Error parsing teacher data:', error);
+            }
+          }
+        }
+        else {
+          console.warn('outside teacher')
+          // this.menuType = 'default'
+
+        }
+      }
+
+    })
+    console.warn(this.menuType)
+
+    
+    this.router.events.subscribe((val: any) => {
+      console.warn(val)
       if (val.url) {
         if (localStorage.getItem('teacher') && val.url.includes('teacher')) {
           console.warn('in tecaher area')
@@ -48,6 +122,8 @@ export class NavHeaderComponent {
               console.error('Error parsing teacher data:', error);
             }
           }
+
+
 
 
 
@@ -80,7 +156,7 @@ export class NavHeaderComponent {
         }
         else {
           console.warn('outside teacher')
-          this.menuType = 'default'
+          // this.menuType = 'default'
 
         }
       }
