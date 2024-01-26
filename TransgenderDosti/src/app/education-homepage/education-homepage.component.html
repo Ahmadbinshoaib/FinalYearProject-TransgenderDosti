@@ -252,7 +252,7 @@
                         </div>
 
                         <div style="padding-top: 37px; padding-left: 20px;">
-                            <button type="button" class="btn custombtn2" style="margin-right: 10px; ">Teachers, start
+                            <button type="button" class="btn custombtn2t" style="margin-right: 10px; ">Teachers, start
                                 here</button>
 
                         </div>
@@ -341,6 +341,201 @@
                 </div>
             </div>
         </div>
+    </div>
+
+
+    <div class="container-fluid ">
+        <div class="row cf">
+            <div class="row courses">
+                <span>Popular Courses</span>
+            </div>
+            <div class="row heading">
+                <span>Explore Our Most Sought-After Courses: Embark </span>
+                <span>
+                    on a Journey of Knowledge and Empowerment.
+
+                </span>
+
+            </div>
+            <div class="container">
+                <div class="row search align-items-center">
+                    <div class="col-1"></div>
+                    <div class="col-10">
+                        <nav class="navbar bg-white">
+                            <form class="container-fluid">
+                                <div class="input-group">
+                                    <i class="fa-solid fa-magnifying-glass input-group-text" id="basic-addon1"></i>
+                                    <input type="text" class="form-control" placeholder="Search" aria-label="Username"
+                                        aria-describedby="basic-addon1">
+                                </div>
+                            </form>
+                        </nav>
+                    </div>
+                    <div class="col-1"></div>
+                </div>
+                <div class="row suggestion align-items-center">
+
+                    <div class="col-10 sug">
+                        <ul class="tab-container">
+                            <li class="tab">Machine Learning</li>
+                            <li class="tab active">Media</li>
+                            <li class="tab">Programming</li>
+                            <li class="tab">Developer</li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+            <div class="container">
+                <div class="row sorting align-items-center">
+                    <div class="col-9"></div>
+                    <div class="col-2 sort">
+                        <div class="select-with-icon">
+                            <i class="fa-solid fa-arrow-down-wide-short dropdown-icon"></i>
+                            <select class="form-select form-group small-input form-control form-control-sm"
+                                aria-label="Default select example">
+                                <option selected>Sort By</option>
+                                <option value="1">Newest</option>
+                                <option value="2">Price: Low to High</option>
+                                <option value="3">Price: High to Low</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-1"></div>
+
+                </div>
+            </div>
+            <div class="row view-courses">
+                <div *ngFor="let course of getDisplayedCourses()" class="col-lg-4 col-md-6 col-sm-6 course1">
+                    <div class="row course-data">
+                        <div class="col-7">
+                            <div class="row sub-name">
+                                <span class="truncate">{{ course.title }}</span>
+                            </div>
+                            <div class="row teacher-name">
+                                <div class="col-2">
+                                    <img style="border-radius: 50px;"
+                                        [src]="course.teacher.profile_picture || 'assets/Group.png'" alt="Teacher"
+                                        class="profile-image">
+
+
+                                </div>
+                                <div class="col-10">
+                                    <span class="ml-2" style="padding-left: 5px;">{{ course.teacher.full_name }}</span>
+                                </div>
+                            </div>
+                            <div class="row info">
+                                <p class="truncate-3-lines">{{ course.details }}</p>
+                            </div>
+                            <div class="row rating">
+                                <div class="profile-footer">
+                                    <span class="profile-rating">★★★★☆</span> 4.7 (100 reviews)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div class="row">
+                                <img [src]="course.course_picture || 'assets/Rectangle 42.png'" alt="Teacher"
+                                    class="course-image">
+                            </div>
+                            <div class="row profile-rs">
+                                <span>{{ course.course_fee.split(' ')[0] }}</span>
+
+                            </div>
+                            <div class="row profile-price">
+                                <span>
+                                    {{
+                                    course.course_fee.split(' ')[1]>= 1000000
+                                    ? (course.course_fee.split(' ')[1] / 1000000).toFixed(1) + 'M'
+                                    : course.course_fee.split(' ')[1] >= 1000
+                                    ? (course.course_fee.split(' ')[1]/ 1000).toFixed(0) + 'k'
+                                    : course.course_fee.split(' ')[1]
+                                    }}
+                                </span>
+
+
+
+                            </div>
+                            <div class="row">
+                                <div class="btn-signup"
+                                    style="display: flex; justify-content: center; align-items: center;">
+                                    <button type="submit" class="btn custombtn2">Enroll </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <nav *ngIf="courses.length > 0" aria-label="...">
+                    <ul class="pagination pagination-sm justify-content-end" style="margin-top: 25px;">
+                      <li class="page-item" (click)="setPage(currentPage - 1)" [class.disabled]="currentPage === 1">
+                        <span class="page-link" style="cursor: pointer;">Previous</span>
+                      </li>
+                      <li class="page-item" *ngFor="let page of getPageNumbers()" (click)="setPage(page)"
+                        [class.active]="page === currentPage">
+                        <ng-container *ngIf="page !== -1; else ellipsis">
+                          <span class="page-link" style="cursor: pointer;">{{ page }}</span>
+                        </ng-container>
+                        <ng-template #ellipsis><span class="page-link">...</span></ng-template>
+                      </li>
+                      <li class="page-item" (click)="setPage(currentPage + 1)" [class.disabled]="currentPage === totalPages">
+                        <span class="page-link" style="cursor: pointer;">Next</span>
+                      </li>
+                    </ul>
+                  </nav>
+                  
+
+
+
+                <!-- <div class="col-4">sdhsjdh</div>
+                <div class="col-4">sjdsldj</div>
+                <div class="col-4">sjdls</div> -->
+                <!-- <div class="col">
+                    <div class="profile-pic"></div> 
+                    <div class="title">Backend Developer</div>
+                    <div class="price">Rs 2k - 3k per hour</div>
+                    <div class="rating">★★★★☆ 4.0</div>
+                    <div class="description">Experienced backend developer proficient in designing and implementing
+                        reliable solutions. Skilled in database management, API integration, and full-stack user
+                        experience.</div>
+                    <div class="location">Remote - Islamabad, Pakistan</div>
+                </div>
+                <div class="col">
+                    <div class="title">Backend Developer</div>
+                    <div class="price">Rs 2k - 3k per hour</div>
+                    <div class="rating">★★★★☆ 4.0</div>
+                    <div class="description">Experienced backend developer proficient in designing and implementing
+                        reliable solutions. Skilled in database management, API integration, and full-stack user
+                        experience.</div>
+                    <div class="location">Remote - Islamabad, Pakistan</div>
+                </div>
+
+                <div class="col">
+                    <div class="title">Database Programmer</div>
+                    <div class="price">Rs 3k - 5k per hour</div>
+                    <div class="rating">★★★★☆ 4.0</div>
+                    <div class="description">Seasoned database programmer proficient in SQL and information management.
+                        Skilled in developing efficient database solutions for complex data retrieval and analysis.
+                    </div>
+                    <div class="location">Remote - Lahore, Pakistan</div>
+                </div>
+
+                <div class="col">
+                    <div class="title">PHP Programmer</div>
+                    <div class="price">Rs 1k - 5k per hour</div>
+                    <div class="rating">★★★☆☆ 3.0</div>
+                    <div class="description">Expert web PHP programmer adept at developing robust web applications.
+                        Proficient in PHP, MySQL, and MVC frameworks. Highly skillful at ensuring efficient and
+                        user-friendly digital solutions.</div>
+                    <div class="location">Remote - Rawalpindi, Pakistan</div>
+                </div>
+                <div class="col">
+                    skdk
+                </div> -->
+            </div>
+        </div>
+
     </div>
 
 

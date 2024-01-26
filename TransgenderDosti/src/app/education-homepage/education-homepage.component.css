@@ -240,7 +240,7 @@
     line-height: normal;
 }
 
-.custombtn2 {
+.custombtn2t {
     color: rgb(255, 255, 255);
     font-weight: 400;
     font-family: Karla;
@@ -256,8 +256,8 @@
     /* Adding a smooth transition effect */
 }
 
-.custombtn2:hover,
-.custombtn2:focus {
+.custombtn2t:hover,
+.custombtn2t:focus {
     background-color: rgba(11, 47, 226, 0.527);
     border: none
 }
@@ -903,7 +903,7 @@
 
     }
 
-    button.btn.custombtn2 {
+    button.btn.custombtn2t {
         margin-bottom: 40px;
     }
 
@@ -979,4 +979,427 @@
     .row.justify-content-center {
         padding-bottom: 50px;
     }
+
+    /* Course */
+    /* Course */
+    /* Course */
+    /* Course */
+    /* Course */
+    /* Course */
+    /* Course */
+    /* Course */
+    /* Course */
+    /* Course */
+    /* Course */
+    /* Course */
+    /* Course */
+    /* Course */
+
+
+
+
+
+
+}
+
+.cf {
+    padding-top: 10px;
+    margin-left: 10px;
+}
+
+.fa-magnifying-glass {
+    padding-top: 10px;
+}
+
+.courses {
+    color: #5D5959;
+    font-family: Karla;
+    font-size: 47px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    display: block;
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+.heading {
+    padding-top: 3px;
+    color: #5D5959;
+    text-align: center;
+    font-family: Karla;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+    padding-bottom: 20px;
+}
+
+.search-bar {
+    background-color: white;
+}
+
+.suggestion {
+    color: #5D5959;
+    font-family: Karla;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.sug {
+    padding-left: 116px;
+}
+
+.tab-container {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+    overflow: auto;
+    white-space: nowrap;
+    background-color: white;
+    margin: 0;
+}
+
+.tab {
+    display: inline-block;
+    padding: 5px 15px;
+    margin: 5px;
+    background-color: #d3d3d3;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.tab:hover {
+    background-color: #a9a9a9;
+}
+
+/* Active class for the selected tab */
+.tab.active {
+    background: #606060;
+    color: white;
+}
+
+.dropdown-icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+.select-with-icon select {
+    padding-left: 36px;
+    /* Make room for the icon */
+}
+
+.select-with-icon {
+    position: relative;
+}
+
+.form-control-sm {
+    color: #717171;
+    font-family: Karla;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.sort {
+    padding-left: 59px;
+    padding-right: 22px;
+
+}
+
+.sorting {
+    padding-bottom: 15px;
+    padding-top: 15px;
+}
+
+.view-courses {
+    padding-left: 129px;
+    padding-right: 87px;
+}
+
+.course-data {
+    border-radius: 18px;
+    border: 1px solid #E1DCDC;
+    background: #FFF;
+    padding-top: 7px;
+    padding-bottom: 10px;
+    margin-right: 5px;
+    margin-bottom: 15px;
+}
+
+.sub-name {
+    color: #717171;
+    font-family: Karla;
+    font-size: 1.1rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    padding-top: 7px;
+    padding-bottom: 10px;
+    padding-right: 0px;
+}
+
+.teacher-name {
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+.profile-image {
+    width: 26px;
+    /* Adjust the size as needed */
+}
+
+.ml-2 {
+    color: #5D5959;
+    font-family: Karla;
+    font-size: 0.8rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.info {
+    padding-top: 13px;
+    color: #5D5959;
+    font-family: Karla;
+    font-size: 0.7rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.profile-rating {
+    color: #ffc107;
+    /* Bootstrap yellow for stars */
+}
+
+.profile-footer {
+    color: #999;
+    font-size: 0.8rem;
+}
+
+.course-image {
+    padding-top: 3px;
+    height: 91px;
+    border-radius: 32px;
+    margin-bottom: 5px;
+}
+
+.profile-rs {
+    color: #535354;
+    font-family: Karla;
+    font-size: 0.7rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    padding-top: 5px;
+    padding-left: 5px;
+}
+
+.profile-price {
+    color: #313030;
+    font-family: Karla;
+    font-size: 4rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin-top: -4px;
+}
+
+.custombtn2 {
+    color: rgb(255, 255, 255);
+    font-weight: 100;
+    font-size: 0.7rem;
+    font-family: Karla;
+    background: #606060;
+    border: 1px solid #606060;
+    border-radius: 25px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    padding-left: 3px;
+    padding-right: 3px;
+    /* Adding a border to match the grey background on hover/focus */
+    transition: background-color 0.3s ease;
+    /* Adding a smooth transition effect */
+    width: 20vw;
+}
+
+.custombtn2:hover,
+.custombtn2:focus {
+    background-color: #606060ab;
+    border: none
+}
+
+.truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    /* This is necessary to apply text-overflow to inline elements */
+    max-width: 200px;
+    /* Set the maximum width to your desired value */
+}
+
+.truncate-3-lines {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 7;
+    /* Limit the content to 3 lines */
+    max-height: 7 * 1.2em;
+    /* Adjust based on line height if needed */
+}
+
+@media (max-width: 800px) {
+
+    .profile-price {
+        font-size: 3rem;
+    }
+
+    .custombtn2 {
+        padding-left: 3px;
+    }
+
+    .sub-name {
+        font-size: 0.7rem;
+    }
+
+    .ml-2 {
+        font-size: 0.7rem;
+    }
+
+    /* .profile-image{
+      display: none;
+    } */
+}
+
+@media (max-width: 1154px) {
+    .profile-price {
+        font-size: 3rem;
+    }
+
+    .custombtn2t {
+        font-size: 0.6rem;
+    }
+
+    .profile-footer {
+        font-size: 0.6rem;
+    }
+
+    .sub-name {
+        font-size: 0.8rem;
+    }
+
+    .view-courses {
+        padding-left: 125px;
+        padding-right: 110px;
+    }
+}
+
+@media(max-width: 990px) {
+    .view-courses {
+        padding-left: 115px;
+        padding-right: 98px;
+    }
+
+    .sorting {
+        padding-bottom: 15px;
+        padding-right: 24px;
+    }
+
+}
+
+@media(max-width: 810px) {
+    .sorting {
+        padding-bottom: 15px;
+        padding-right: 55px;
+    }
+
+    .view-courses {
+        padding-left: 98px;
+        padding-right: 87px;
+    }
+}
+
+@media(max-width: 741px) {
+    .view-courses {
+        padding-left: 92px;
+        padding-right: 75px;
+    }
+
+    .sorting {
+        padding-bottom: 15px;
+        padding-right: 61px;
+        padding-top: 15px;
+    }
+
+    .profile-image {
+        width: 20px;
+    }
+
+}
+
+@media (max-width: 715px) {
+    .sorting {
+        padding-bottom: 15px;
+        padding-right: 83px;
+        padding-top: 15px;
+    }
+
+    .sub-name {
+        font-size: 0.7rem;
+    }
+
+    .profile-image {
+        width: 18px;
+    }
+
+}
+
+@media (max-width: 700px) {
+    .view-courses {
+        padding-left: 76px;
+        padding-right: 50px;
+    }
+}
+
+@media (max-width: 500px) {
+    .view-courses {
+        padding-left: 74px;
+        padding-right: 57px;
+    }
+
+    .profile-image {
+        width: 20px;
+    }
+
+    .sorting {
+        padding-bottom: 15px;
+        padding-right: 125px;
+        padding-top: 15px;
+    }
+}
+
+@media (max-width: 385px) {
+    .view-courses {
+        padding-left: 65px;
+        padding-right: 44px;
+    }
+
+}
+
+@media (max-width: 360px) {
+    view-courses {
+        padding-left: 59px;
+        padding-right: 45px;
+    }
+
 }

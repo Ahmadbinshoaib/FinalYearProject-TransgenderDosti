@@ -1371,44 +1371,88 @@ def delete_language_info():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-@app.route('/create_course', methods=['POST'])
-def create_course():
+# @app.route('/create_course', methods=['POST'])
+# def create_course():
+#     try:
+#         data = request.json
+#         user_id = data.get('user_id')
+#         title = data.get('title')
+#         details = data.get('details')
+#         course_for = data.get('course_for')
+#         course_fee = data.get('course_fee')
+#         course_duration = data.get('course_duration')
+#         course_video_url = data.get('course_video_url')
+#         course_picture = data.get('course_picture')
+#
+#         cursor = mysql.connection.cursor()
+#
+#         # Get teacher_id based on user_id
+#         cursor.execute("SELECT teacher_id FROM teacher WHERE user_id = %s", (user_id,))
+#         teacher_result = cursor.fetchone()
+#
+#         if not teacher_result:
+#             return jsonify({'error': 'Teacher not found for the given user ID'}), 404
+#
+#         teacher_id = teacher_result[0]
+#
+#         # Save course information in the course table
+#         cursor.execute("""
+#             INSERT INTO course
+#             (teacher_id, title, details, course_for, course_fee, course_duration, course_video_url, course_picture)
+#             VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+#         """, (teacher_id, title, details, course_for, course_fee, course_duration, course_video_url, course_picture))
+#
+#         mysql.connection.commit()
+#         cursor.close()
+#
+#         return jsonify({'success': True, 'message': 'Course created successfully'}), 200
+#
+#     except Exception as e:
+#         return jsonify({'error': str(e)}), 500
+
+import random
+
+@app.route('/create_courses', methods=['POST'])
+def create_courses():
     try:
-        data = request.json
-        user_id = data.get('user_id')
-        title = data.get('title')
-        details = data.get('details')
-        course_for = data.get('course_for')
-        course_fee = data.get('course_fee')
-        course_duration = data.get('course_duration')
-        course_video_url = data.get('course_video_url')
-        course_picture = data.get('course_picture')
+        teacher_ids = [13, 27, 28]
+        user_ids = [18, 40, 41]
+        course_titles = ['Programming', 'English Language', 'CS Courses', 'OOP', 'Opearting System', 'Chinese Langauge', 'Graphic Designing']
 
         cursor = mysql.connection.cursor()
 
-        # Get teacher_id based on user_id
-        cursor.execute("SELECT teacher_id FROM teacher WHERE user_id = %s", (user_id,))
-        teacher_result = cursor.fetchone()
+        for _ in range(50):
+            # Randomly choose teacher and user IDs
+            teacher_id = random.choice(teacher_ids)
+            user_id = random.choice(user_ids)
 
-        if not teacher_result:
-            return jsonify({'error': 'Teacher not found for the given user ID'}), 404
+            # Get course title and details randomly
+            title = random.choice(course_titles)
+            details = "\n".join([f"Line {i + 1} of details for {title}" for i in range(5)])
 
-        teacher_id = teacher_result[0]
+            # Generate random course_fee (e.g., PKR 10000 to PKR 50000)
+            course_fee = f"PKR {random.randint(10000, 50000)}"
 
-        # Save course information in the course table
-        cursor.execute("""
-            INSERT INTO course
-            (teacher_id, title, details, course_for, course_fee, course_duration, course_video_url, course_picture)
-            VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
-        """, (teacher_id, title, details, course_for, course_fee, course_duration, course_video_url, course_picture))
+            # Generate other random data or use default values
+            course_for = 'Some Course For'
+            course_duration = '4 Months'
+
+
+            # Save course information in the course table
+            cursor.execute("""
+                INSERT INTO course
+                (teacher_id, title, details, course_for, course_fee, course_duration)
+                VALUES (%s, %s, %s, %s, %s, %s)
+            """, (teacher_id, title, details, course_for, course_fee, course_duration))
 
         mysql.connection.commit()
         cursor.close()
 
-        return jsonify({'success': True, 'message': 'Course created successfully'}), 200
+        return jsonify({'success': True, 'message': 'Courses created successfully'}), 200
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+
 
 @app.route('/get_course_info_byid/<int:course_id>', methods=['GET'])
 def get_course_info(course_id):
@@ -1521,6 +1565,57 @@ def delete_course():
         cursor.close()
 
         return jsonify({'success': True, 'message': 'Course deleted successfully'}), 200
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/courses', methods=['GET'])
+def get_all_courses():
+    try:
+        # Establish a database connection
+        cursor = mysql.connection.cursor()
+
+        # Fetch all courses with teacher and user information
+        query = """
+            SELECT 
+                c.course_id, c.title, c.course_code, c.details, c.course_for, c.course_fee,
+                c.course_duration, c.course_video_url, c.course_picture,
+                t.teacher_id, t.user_id AS teacher_user_id, t.phone_number, t.bio,
+                t.city_town, t.gender, t.cnic_picture, t.country, t.profile_picture AS teacher_profile_picture,
+                u.full_name AS teacher_full_name
+            FROM course c
+            JOIN teacher t ON c.teacher_id = t.teacher_id
+            JOIN user u ON t.user_id = u.id
+        """
+        cursor.execute(query)
+        courses = cursor.fetchall()
+
+        # Close the database connection
+        cursor.close()
+
+        # Prepare the response
+        result = []
+        for course in courses:
+            course_data = {
+                "course_id": course[0],
+                "title": course[1],
+                "course_code": course[2],
+                "details": course[3],
+                "course_for": course[4],
+                "course_fee": course[5],
+                "course_duration": course[6],
+                "course_video_url": course[7],
+                "course_picture": course[8],
+                "teacher": {
+                    "teacher_id": course[9],
+                    "user_id": course[10],
+                    "profile_picture": course[17],
+                    "full_name": course[18],
+                }
+            }
+            result.append(course_data)
+
+        return jsonify({'success': True, 'courses': result}), 200
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
