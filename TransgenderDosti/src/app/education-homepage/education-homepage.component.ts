@@ -1,5 +1,6 @@
 import { Component, HostListener } from '@angular/core';
 import { EducationPageServicesService } from '../Services/education-page-services.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-education-homepage',
@@ -13,6 +14,23 @@ export class EducationHomepageComponent {
   totalPages!: number;
   isLargeScreen = true;
   pagesToShow = 4;
+
+  sortOptions = [
+    { value: '1', label: 'Newest' },
+    { value: '2', label: 'Price: Low to High' },
+    { value: '3', label: 'Price: High to Low' }
+  ];
+
+  selectedSortOption: { value: string, label: string } = { value: '1', label: 'Newest' };
+
+  filteredCourses: any[] = []; // Array to store filtered courses
+  selectedCourseFor: string | null = null;
+  // Inside your component class
+  searchTerm: string = '';
+
+
+
+
 
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
@@ -35,17 +53,30 @@ export class EducationHomepageComponent {
 
         this.courses = response.courses; // Assuming the API response has a 'courses' property
         this.calculateTotalPages();
+        this.sortCourses();
+        this.selectedSortOption = this.sortOptions.find(option => option.value === '1')!;
       },
       (error) => {
         console.error(error);
         // Handle error here
       }
     );
+
+
   }
 
+  // calculateTotalPages() {
+  //   this.totalPages = Math.ceil(this.courses.length / this.pageSize);
+  // }
+
   calculateTotalPages() {
-    this.totalPages = Math.ceil(this.courses.length / this.pageSize);
+    const filteredCourses = this.selectedCourseFor
+      ? this.courses.filter(course => course.course_for === this.selectedCourseFor)
+      : this.courses;
+
+    this.totalPages = Math.ceil(filteredCourses.length / this.pageSize);
   }
+
 
   setPage(page: number) {
     if (page >= 1 && page <= this.totalPages) {
@@ -86,9 +117,138 @@ export class EducationHomepageComponent {
     return pages;
   }
 
+  // getDisplayedCourses(): any[] {
+  //   const startIndex = (this.currentPage - 1) * this.pageSize;
+  //   const endIndex = startIndex + this.pageSize;
+  //   return this.courses.slice(startIndex, endIndex);
+  // }
+
+  // getDisplayedCourses(): any[] {
+  //   const filteredCourses = this.selectedCourseFor
+  //     ? this.courses.filter(course => course.course_for === this.selectedCourseFor)
+  //     : this.courses;
+
+  //   const startIndex = (this.currentPage - 1) * this.pageSize;
+  //   const endIndex = startIndex + this.pageSize;
+  //   return filteredCourses.slice(startIndex, endIndex);
+  // }
   getDisplayedCourses(): any[] {
+    const isDefaultDisplay = !this.selectedCourseFor && !this.searchTerm;
+  
+    if (isDefaultDisplay) {
+      const startIndex = (this.currentPage - 1) * this.pageSize;
+      const endIndex = startIndex + this.pageSize;
+      return this.courses.slice(startIndex, endIndex);
+    }
+  
+    const courseForFilter = this.selectedCourseFor;
+    const filteredCourses = courseForFilter
+      ? this.courses.filter(course => course.course_for === courseForFilter)
+      : this.courses;
+  
+    const searchTerm = this.searchTerm.toLowerCase();
+    const searchedCourses = searchTerm
+      ? filteredCourses.filter(course =>
+          course.title.toLowerCase().includes(searchTerm) ||
+          course.teacher.full_name.toLowerCase().includes(searchTerm) ||
+          course.details.toLowerCase().includes(searchTerm)
+        )
+      : filteredCourses;
+  
     const startIndex = (this.currentPage - 1) * this.pageSize;
     const endIndex = startIndex + this.pageSize;
-    return this.courses.slice(startIndex, endIndex);
+    return searchedCourses.slice(startIndex, endIndex);
   }
+  
+  
+  
+
+  // getDisplayedCourses(): any[] {
+  //   const startIndex = (this.currentPage - 1) * this.pageSize;
+  //   const endIndex = startIndex + this.pageSize;
+  //   return this.filteredCourses.slice(startIndex, endIndex);
+  // }
+  
+
+
+
+  sortCourses() {
+    switch (this.selectedSortOption.value) {
+      case '1':
+        // Newest (default order)
+        break;
+      case '2':
+        // Price: Low to High
+        this.courses.sort((a, b) => a.course_fee.split(' ')[1] - b.course_fee.split(' ')[1]);
+        break;
+      case '3':
+        // Price: High to Low
+        this.courses.sort((a, b) => b.course_fee.split(' ')[1] - a.course_fee.split(' ')[1]);
+        break;
+      default:
+        // Default case (Newest)
+        break;
+    }
+  }
+
+  setSortOption(event: any) {
+    const optionValue: string = event.target.value;
+    const option = this.sortOptions.find(opt => opt.value === optionValue);
+    if (option) {
+      this.selectedSortOption = option;
+      this.sortCourses();
+      this.setPage(1); // Reset to the first page after sorting
+    }
+  }
+  filterByCourseFor(courseFor: string) {
+    this.selectedCourseFor = courseFor;
+    this.calculateTotalPages();
+    this.setPage(1); // Reset to the first page after filtering
+  }
+
+
+
+  // Inside your component class
+  getUniqueCourseForValues(): string[] {
+    const uniqueCourseForValues: string[] = [];
+
+    this.courses.forEach(course => {
+      if (!uniqueCourseForValues.includes(course.course_for)) {
+        uniqueCourseForValues.push(course.course_for);
+      }
+    });
+
+    return uniqueCourseForValues;
+  }
+
+  // Inside your component class
+  updateSearchResults() {
+    // You can use this.searchTerm to filter your courses
+    this.filterCourses();
+  }
+
+  // Inside your component class
+filterCourses() {
+  const searchTerm = this.searchTerm.toLowerCase();
+  console.warn(searchTerm)
+
+  // Filter courses based on the search term
+  this.filteredCourses = this.courses.filter(course =>
+    course.title.toLowerCase().includes(searchTerm) ||
+    course.teacher.full_name.toLowerCase().includes(searchTerm) ||
+    course.details.toLowerCase().includes(searchTerm)
+    // Add more fields as needed
+  );
+
+  // Recalculate total pages and update displayed courses
+  this.calculateTotalPages();
+  this.setPage(1); // Reset to the first page after filtering
+}
+
+
+
+
+
+
+
 }
