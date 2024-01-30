@@ -1,11 +1,11 @@
 import os
 
-import speech as speech
+# import speech as speech
 from flask import Flask, request, jsonify
 from flask_cors import CORS  # Import CORS
 
 from google.oauth2 import service_account
-from pydub import AudioSegment
+# from pydub import AudioSegment
 from flask import Flask, request, jsonify
 from flask_mysqldb import MySQL
 from google.oauth2 import id_token
@@ -1371,87 +1371,87 @@ def delete_language_info():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-# @app.route('/create_course', methods=['POST'])
-# def create_course():
-#     try:
-#         data = request.json
-#         user_id = data.get('user_id')
-#         title = data.get('title')
-#         details = data.get('details')
-#         course_for = data.get('course_for')
-#         course_fee = data.get('course_fee')
-#         course_duration = data.get('course_duration')
-#         course_video_url = data.get('course_video_url')
-#         course_picture = data.get('course_picture')
-#
-#         cursor = mysql.connection.cursor()
-#
-#         # Get teacher_id based on user_id
-#         cursor.execute("SELECT teacher_id FROM teacher WHERE user_id = %s", (user_id,))
-#         teacher_result = cursor.fetchone()
-#
-#         if not teacher_result:
-#             return jsonify({'error': 'Teacher not found for the given user ID'}), 404
-#
-#         teacher_id = teacher_result[0]
-#
-#         # Save course information in the course table
-#         cursor.execute("""
-#             INSERT INTO course
-#             (teacher_id, title, details, course_for, course_fee, course_duration, course_video_url, course_picture)
-#             VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
-#         """, (teacher_id, title, details, course_for, course_fee, course_duration, course_video_url, course_picture))
-#
-#         mysql.connection.commit()
-#         cursor.close()
-#
-#         return jsonify({'success': True, 'message': 'Course created successfully'}), 200
-#
-#     except Exception as e:
-#         return jsonify({'error': str(e)}), 500
-
-import random
-
-@app.route('/create_courses', methods=['POST'])
-def create_courses():
+@app.route('/create_course', methods=['POST'])
+def create_course():
     try:
-        teacher_ids = [13, 27, 28]
-        user_ids = [18, 40, 41]
-        course_titles = ['Programming', 'English Language', 'CS Courses', 'OOP', 'Opearting System', 'Chinese Langauge', 'Graphic Designing']
+        data = request.json
+        user_id = data.get('user_id')
+        title = data.get('title')
+        details = data.get('details')
+        course_for = data.get('course_for')
+        course_fee = data.get('course_fee')
+        course_duration = data.get('course_duration')
+        course_video_url = data.get('course_video_url')
+        course_picture = data.get('course_picture')
 
         cursor = mysql.connection.cursor()
 
-        for _ in range(50):
-            # Randomly choose teacher and user IDs
-            teacher_id = random.choice(teacher_ids)
-            user_id = random.choice(user_ids)
+        # Get teacher_id based on user_id
+        cursor.execute("SELECT teacher_id FROM teacher WHERE user_id = %s", (user_id,))
+        teacher_result = cursor.fetchone()
 
-            # Get course title and details randomly
-            title = random.choice(course_titles)
-            details = "\n".join([f"Line {i + 1} of details for {title}" for i in range(5)])
+        if not teacher_result:
+            return jsonify({'error': 'Teacher not found for the given user ID'}), 404
 
-            # Generate random course_fee (e.g., PKR 10000 to PKR 50000)
-            course_fee = f"PKR {random.randint(10000, 50000)}"
+        teacher_id = teacher_result[0]
 
-            # Generate other random data or use default values
-            course_for = 'Some Course For'
-            course_duration = '4 Months'
-
-
-            # Save course information in the course table
-            cursor.execute("""
-                INSERT INTO course
-                (teacher_id, title, details, course_for, course_fee, course_duration)
-                VALUES (%s, %s, %s, %s, %s, %s)
-            """, (teacher_id, title, details, course_for, course_fee, course_duration))
+        # Save course information in the course table
+        cursor.execute("""
+            INSERT INTO course
+            (teacher_id, title, details, course_for, course_fee, course_duration, course_video_url, course_picture)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+        """, (teacher_id, title, details, course_for, course_fee, course_duration, course_video_url, course_picture))
 
         mysql.connection.commit()
         cursor.close()
 
-        return jsonify({'success': True, 'message': 'Courses created successfully'}), 200
+        return jsonify({'success': True, 'message': 'Course created successfully'}), 200
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+
+import random
+
+# @app.route('/create_courses', methods=['POST'])
+# def create_courses():
+#     try:
+#         teacher_ids = [13, 27, 28]
+#         user_ids = [18, 40, 41]
+#         course_titles = ['Programming', 'English Language', 'CS Courses', 'OOP', 'Opearting System', 'Chinese Langauge', 'Graphic Designing']
+
+#         cursor = mysql.connection.cursor()
+
+#         for _ in range(50):
+#             # Randomly choose teacher and user IDs
+#             teacher_id = random.choice(teacher_ids)
+#             user_id = random.choice(user_ids)
+
+#             # Get course title and details randomly
+#             title = random.choice(course_titles)
+#             details = "\n".join([f"Line {i + 1} of details for {title}" for i in range(5)])
+
+#             # Generate random course_fee (e.g., PKR 10000 to PKR 50000)
+#             course_fee = f"PKR {random.randint(10000, 50000)}"
+
+#             # Generate other random data or use default values
+#             course_for = 'Some Course For'
+#             course_duration = '4 Months'
+
+
+#             # Save course information in the course table
+#             cursor.execute("""
+#                 INSERT INTO course
+#                 (teacher_id, title, details, course_for, course_fee, course_duration)
+#                 VALUES (%s, %s, %s, %s, %s, %s)
+#             """, (teacher_id, title, details, course_for, course_fee, course_duration))
+
+#         mysql.connection.commit()
+#         cursor.close()
+
+#         return jsonify({'success': True, 'message': 'Courses created successfully'}), 200
+
+#     except Exception as e:
+#         return jsonify({'error': str(e)}), 500
 
 
 @app.route('/get_course_info_byid/<int:course_id>', methods=['GET'])
