@@ -1,1 +1,56 @@
-<p>learner-mainpage works!</p>
+<div class="welcomeUsername">
+    <img src="assets/username.png" alt="Book Image" style="margin-right: 0px;">
+    <span style="padding-top: 10px;">
+        <span class="welcomeusernamecontent">
+            Welcome, {{learnerEmail}}!
+        </span>
+    </span>
+</div>
+
+<ul class="nav nav-tabs mb-3" id="ex1" role="tablist" style="padding-left: 63px;">
+    <li class="nav-item" role="presentation">
+        <a class="nav-link" style="cursor: pointer;" [class.active]="activeTab === 'ex1-tabs-1'"
+            (click)="activeTab = 'ex1-tabs-1'">
+            <span class="tab-label">Courses</span>
+        </a>
+    </li>
+    <li class="nav-item" role="presentation">
+        <a class="nav-link" style="cursor: pointer;" [class.active]="activeTab === 'ex1-tabs-2'"
+            (click)="activeTab = 'ex1-tabs-2'">
+            <span class="tab-label">Status</span>
+        </a>
+    </li>
+   
+</ul>
+
+<div class="tab-content" id="ex1-content" style="padding-left: 52px; padding-top: 15px;">
+
+    <!-- Courses -->
+    <!-- Courses -->
+    <!-- Courses -->
+    <!-- Courses -->
+
+    <div class="tab-pane" [class.active]="activeTab === 'ex1-tabs-1'" id="ex1-tabs-1" role="tabpanel"
+        aria-labelledby="ex1-tab-1">
+
+        <!-- Do work here -->
+
+        
+    </div>
+
+
+    <!-- Status -->
+    <!-- Students -->
+    <!-- Students -->
+    <!-- Students -->
+
+
+    <div class="tab-pane" [class.active]="activeTab === 'ex1-tabs-2'" id="ex1-tabs-2" role="tabpanel"
+        aria-labelledby="ex1-tab-2">
+        Tab 2 content
+    </div>
+
+
+ 
+</div>
+

@@ -13,7 +13,7 @@ from google.auth.transport import requests
 from flask_cors import CORS  # Import CORS
 import base64
 from io import BytesIO
-from PIL import Image
+
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes in your app
