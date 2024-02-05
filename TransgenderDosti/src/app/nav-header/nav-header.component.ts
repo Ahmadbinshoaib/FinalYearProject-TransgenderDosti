@@ -27,10 +27,10 @@ export class NavHeaderComponent {
   ngOnInit() {
 
     this.router.events.subscribe((val: any) => {
-      console.warn(val)
+      // console.warn(val)
       if (val.url) {
         if (localStorage.getItem('teacher') && val.url.includes('educationhomepage')) {
-          console.warn('in tecaher area')
+          // console.warn('in tecaher area')
           this.menuType = 'teachereducation'
 
           if (localStorage.getItem('teacher')) {
@@ -41,7 +41,7 @@ export class NavHeaderComponent {
 
               if (teacherData && teacherData.email && teacherData.user_id) {
                 this.userId = teacherData.user_id
-                console.log(teacherData.email);
+                // console.log(teacherData.email);
                 this.teacherEmail = teacherData.email.split('@')[0];
                 if (teacherData.profile_picture) {
 
@@ -63,7 +63,7 @@ export class NavHeaderComponent {
 
         }
         else if (localStorage.getItem('learner') && val.url.includes('educationhomepage')) {
-          console.warn('in learner area')
+          // console.warn('in learner area')
           this.menuType = 'learnereducation'
 
           if (localStorage.getItem('learner')) {
@@ -73,7 +73,7 @@ export class NavHeaderComponent {
               const learnerData = JSON.parse(learnerStore!);
 
               if (learnerData && learnerData.email) {
-                console.log(learnerData.email);
+                // console.log(learnerData.email);
                 this.learnerEmail = learnerData.email.split('@')[0];
                 if (learnerData.profile_picture) {
 
@@ -89,7 +89,7 @@ export class NavHeaderComponent {
           }
         }
         else {
-          console.warn('outside teacher')
+          // console.warn('outside teacher')
           // this.menuType = 'default'
 
         }
@@ -100,10 +100,10 @@ export class NavHeaderComponent {
 
     
     this.router.events.subscribe((val: any) => {
-      console.warn(val)
+      // console.warn(val)
       if (val.url) {
         if (localStorage.getItem('teacher') && val.url.includes('teacher')) {
-          console.warn('in tecaher area')
+          // console.warn('in tecaher area')
           this.menuType = 'teacher'
 
           if (localStorage.getItem('teacher')) {
@@ -114,7 +114,7 @@ export class NavHeaderComponent {
 
               if (teacherData && teacherData.email && teacherData.user_id) {
                 this.userId = teacherData.user_id
-                console.log(teacherData.email);
+                // console.log(teacherData.email);
                 this.teacherEmail = teacherData.email.split('@')[0];
                 if (teacherData.profile_picture) {
 
@@ -136,7 +136,7 @@ export class NavHeaderComponent {
 
         }
         else if (localStorage.getItem('learner') && val.url.includes('learner')) {
-          console.warn('in learner area')
+          // console.warn('in learner area')
           this.menuType = 'learner'
 
           if (localStorage.getItem('learner')) {
@@ -146,7 +146,7 @@ export class NavHeaderComponent {
               const learnerData = JSON.parse(learnerStore!);
 
               if (learnerData && learnerData.email) {
-                console.log(learnerData.email);
+                // console.log(learnerData.email);
                 this.learnerEmail = learnerData.email.split('@')[0];
                 if (learnerData.profile_picture) {
 
@@ -162,7 +162,7 @@ export class NavHeaderComponent {
           }
         }
         else {
-          console.warn('outside teacher')
+          // console.warn('outside teacher')
           // this.menuType = 'default'
 
         }

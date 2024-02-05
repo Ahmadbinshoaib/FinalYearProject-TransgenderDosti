@@ -1,0 +1,390 @@
+<div class="container-fluid cf">
+    <!-- main-row -->
+    <div class="row main-row">
+        <div class="row course-info">
+            <div class="col-12">
+                <div class="row course-image">
+                    <div class="col-2">
+                        <div class="row row-picture " style="display: flex; border-radius: 50px;">
+                            <img [src]="course?.course_picture  || 'assets/Rectangle 42.png'" class="profile-img"
+                                alt="ID">
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="row course-name">{{course?.title}}</div>
+                        <div class="row course-code">
+                            <div class="col-8">
+
+                                <i class="fa-regular fa-clock fa-sm" style="color: #949dad; padding-right: 8px;"></i>
+                                <span>{{course?.course_duration}}</span>
+                            </div>
+                        </div>
+                        <div class="row reviews">
+                            <span class="profile-rating">★★★★☆ 4.3  (100 reviews)</span>
+                        </div>
+                        <!-- Course-description row -->
+                        <div class="row course-description">
+                            <span> {{course?.details}}
+                                <span style="font-weight: bold;">Read More ...</span> </span>
+                        </div>
+                        <div class="row teacher-name">
+                            <div class="col-1">
+                                <img [src]="course?.teacher.profile_picture || 'assets/Group.png'" alt="Teacher"
+                                    class="profile-image" style="border-radius: 50px;">
+                            </div>
+                            <div class="col-10" style="padding-left: 0px;">
+                                <span class="ml-2">{{ course?.teacher.full_name }}</span>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="col-4 cll">
+                        <button class="btn btn-primary custom-btn">Buy {{course?.course_fee}}</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="row course-data">
+            <div class="col-12 course-profile">
+                <div class="row">
+                    <div class="col-9">
+
+                        <!-- course main video row -->
+                        <div class="row demo-video">
+                            <span>Course Demo Video</span>
+                            <div class="row">
+                                <ng-container *ngIf="videoData">
+                                    <video controls class="profile-video" style="
+                                    padding-right: 0px;
+                                    padding-left: 0px;
+                                    margin-bottom: 0px;
+                                    padding-bottom: 6px;
+                                ">
+                                        <source [src]="videoData" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                </ng-container>
+
+                            </div>
+                        </div>
+                        <!-- Course Outline row -->
+                        <div class="row course-outline">
+                            <span>Course Outline</span>
+                            <div class="row outline-details">
+                                <div class="col-4 course1">
+                                    <div class="row course-data">
+                                        <div class="col-3 cl">
+                                            <div class="row course-play-button">
+                                                <i class="fa-solid fa-circle-play fa-2xl" style="color: #FFD43B;"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col-9 colu">
+                                            <div class="row">
+                                                <span class="text-course">Introduction to Graphic Designing</span>
+                                            </div>
+                                            <div class="row text-course-desc">
+                                                <span>Lorem ipsum dolor sit, amet consectetur adipisicing elit. In,
+                                                    officiis inventore.</span>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-4 course1">
+                                    <div class="row course-data">
+                                        <div class="col-3 cl">
+                                            <div class="row course-play-button">
+                                                <i class="fa-solid fa-circle-play fa-2xl" style="color: #b4b4c0;"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col-9 colu">
+                                            <div class="row">
+                                                <span class="text-course">Introduction to Graphic Designing</span>
+                                            </div>
+                                            <div class="row text-course-desc">
+                                                <span>Lorem ipsum dolor sit, amet consectetur adipisicing elit. In,
+                                                    officiis inventore.</span>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-4 course1">
+                                    <div class="row course-data">
+                                        <div class="col-3 cl">
+                                            <div class="row course-play-button">
+                                                <i class="fa-solid fa-circle-play fa-2xl" style="color: #b4b4c0;"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col-9 colu">
+                                            <div class="row">
+                                                <span class="text-course">Introduction to Graphic Designing</span>
+                                            </div>
+                                            <div class="row text-course-desc">
+                                                <span>Lorem ipsum dolor sit, amet consectetur adipisicing elit. In,
+                                                    officiis inventore.</span>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-4 course1">
+                                    <div class="row course-data">
+                                        <div class="col-3 cl">
+                                            <div class="row course-play-button">
+                                                <i class="fa-solid fa-circle-play fa-2xl" style="color: #b4b4c0;"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col-9 colu">
+                                            <div class="row">
+                                                <span class="text-course">Introduction to Graphic Designing</span>
+                                            </div>
+                                            <div class="row text-course-desc">
+                                                <span>Lorem ipsum dolor sit, amet consectetur adipisicing elit. In,
+                                                    officiis inventore.</span>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-4 course1">
+                                    <div class="row course-data">
+                                        <div class="col-3 cl">
+                                            <div class="row course-play-button">
+                                                <i class="fa-solid fa-circle-play fa-2xl" style="color: #b4b4c0;"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col-9 colu">
+                                            <div class="row">
+                                                <span class="text-course">Introduction to Graphic Designing</span>
+                                            </div>
+                                            <div class="row text-course-desc">
+                                                <span>Lorem ipsum dolor sit, amet consectetur adipisicing elit. In,
+                                                    officiis inventore.</span>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-4 course1">
+                                    <div class="row course-data">
+                                        <div class="col-3 cl">
+                                            <div class="row course-play-button">
+                                                <i class="fa-solid fa-circle-play fa-2xl" style="color: #b4b4c0;"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col-9 colu">
+                                            <div class="row">
+                                                <span class="text-course">Introduction to Graphic Designing</span>
+                                            </div>
+                                            <div class="row text-course-desc">
+                                                <span>Lorem ipsum dolor sit, amet consectetur adipisicing elit. In,
+                                                    officiis inventore.</span>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-4 course1">
+                                    <div class="row course-data">
+                                        <div class="col-3 cl">
+                                            <div class="row course-play-button">
+                                                <i class="fa-solid fa-circle-play fa-2xl" style="color: #b4b4c0;"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col-9 colu">
+                                            <div class="row">
+                                                <span class="text-course">Introduction to Graphic Designing</span>
+                                            </div>
+                                            <div class="row text-course-desc">
+                                                <span>Lorem ipsum dolor sit, amet consectetur adipisicing elit. In,
+                                                    officiis inventore.</span>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-4 course1">
+                                    <div class="row course-data">
+                                        <div class="col-3 cl">
+                                            <div class="row course-play-button">
+                                                <i class="fa-solid fa-circle-play fa-2xl" style="color: #b4b4c0;"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col-9 colu">
+                                            <div class="row">
+                                                <span class="text-course">Introduction to Graphic Designing</span>
+                                            </div>
+                                            <div class="row text-course-desc">
+                                                <span>Lorem ipsum dolor sit, amet consectetur adipisicing elit. In,
+                                                    officiis inventore.</span>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-4 course1">
+                                    <div class="row course-data">
+                                        <div class="col-3 cl">
+                                            <div class="row course-play-button">
+                                                <i class="fa-solid fa-circle-play fa-2xl" style="color: #b4b4c0;"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col-9 colu">
+                                            <div class="row">
+                                                <span class="text-course">Introduction to Graphic Designing</span>
+                                            </div>
+                                            <div class="row text-course-desc">
+                                                <span>Lorem ipsum dolor sit, amet consectetur adipisicing elit. In,
+                                                    officiis inventore.</span>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="row ratings">
+                            <div class="row review-list">
+                                <span class="rate">Ratings</span>
+                                <div class="row person-name">
+                                    <div class="col-1">
+                                        <img src="Images\Group.png" alt="Teacher" class="profile-image">
+                                    </div>
+                                    <div class="col-8" style="padding-left: 25px;">
+                                        <span class="ml-2">User Name</span>
+                                        <div class="row review">
+                                            <span>Lorem, ipsum dolor sit amet conse adipisicing elit. Ducimus beatae
+                                                recusandae aliquam facere totam iure?</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <span class="profile-rating">★★★★☆</span>
+                                    </div>
+                                </div>
+                                <div class="row person-name">
+                                    <div class="col-1">
+                                        <img src="Images\Group.png" alt="Teacher" class="profile-image">
+                                    </div>
+                                    <div class="col-8" style="padding-left: 25px;">
+                                        <span class="ml-2">User Name</span>
+                                        <div class="row review">
+                                            <span>Lorem, ipsum dolor sit amet conse adipisicing elit. Ducimus beatae
+                                                recusandae aliquam facere totam iure?</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <span class="profile-rating">★★★★☆</span>
+                                    </div>
+                                </div>
+                                <div class="row person-name">
+                                    <div class="col-1">
+                                        <img src="Images\Group.png" alt="Teacher" class="profile-image">
+                                    </div>
+                                    <div class="col-8" style="padding-left: 25px;">
+                                        <span class="ml-2">User Name</span>
+                                        <div class="row review">
+                                            <span>Lorem, ipsum dolor sit amet conse adipisicing elit. Ducimus beatae
+                                                recusandae aliquam facere totam iure?</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <span class="profile-rating">★★★★☆</span>
+                                    </div>
+                                </div>
+                                <div class="row person-name">
+                                    <div class="col-1">
+                                        <img src="Images\Group.png" alt="Teacher" class="profile-image">
+                                    </div>
+                                    <div class="col-8" style="padding-left: 25px;">
+                                        <span class="ml-2">User Name</span>
+                                        <div class="row review">
+                                            <span>Lorem, ipsum dolor sit amet conse adipisicing elit. Ducimus beatae
+                                                recusandae aliquam facere totam iure?</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <span class="profile-rating">★★★★☆</span>
+                                    </div>
+                                </div>
+                                <div class="row person-name">
+                                    <div class="col-1">
+                                        <img src="Images\Group.png" alt="Teacher" class="profile-image">
+                                    </div>
+                                    <div class="col-8" style="padding-left: 25px;">
+                                        <span class="ml-2">User Name</span>
+                                        <div class="row review">
+                                            <span>Lorem, ipsum dolor sit amet conse adipisicing elit. Ducimus beatae
+                                                recusandae aliquam facere totam iure?</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <span class="profile-rating">★★★★☆</span>
+                                    </div>
+                                </div>
+                                <div class="row person-name">
+                                    <div class="col-1">
+                                        <img src="Images\Group.png" alt="Teacher" class="profile-image">
+                                    </div>
+                                    <div class="col-8" style="padding-left: 25px;">
+                                        <span class="ml-2">User Name</span>
+                                        <div class="row review">
+                                            <span>Lorem, ipsum dolor sit amet conse adipisicing elit. Ducimus beatae
+                                                recusandae aliquam facere totam iure?</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <span class="profile-rating">★★★★☆</span>
+                                    </div>
+                                </div>
+                                <div class="row person-name">
+                                    <div class="col-1">
+                                        <img src="Images\Group.png" alt="Teacher" class="profile-image">
+                                    </div>
+                                    <div class="col-8" style="padding-left: 25px;">
+                                        <span class="ml-2">User Name</span>
+                                        <div class="row review">
+                                            <span>Lorem, ipsum dolor sit amet conse adipisicing elit. Ducimus beatae
+                                                recusandae aliquam facere totam iure?</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <span class="profile-rating">★★★★☆</span>
+                                    </div>
+                                </div>
+                                <div class="row person-name">
+                                    <div class="col-1">
+                                        <img src="Images\Group.png" alt="Teacher" class="profile-image">
+                                    </div>
+                                    <div class="col-8" style="padding-left: 25px;">
+                                        <span class="ml-2">User Name</span>
+                                        <div class="row review">
+                                            <span>Lorem, ipsum dolor sit amet conse adipisicing elit. Ducimus beatae
+                                                recusandae aliquam facere totam iure?</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <span class="profile-rating">★★★★☆</span>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+</div>

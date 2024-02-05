@@ -1,6 +1,7 @@
 import { Component, HostListener } from '@angular/core';
 import { EducationPageServicesService } from '../Services/education-page-services.service';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-education-homepage',
@@ -37,7 +38,8 @@ export class EducationHomepageComponent {
     this.updateScreenSize();
   }
 
-  constructor(private educationService: EducationPageServicesService) {
+  constructor(private educationService: EducationPageServicesService,
+    private router: Router) {
     this.updateScreenSize();
     console.log(this.isLargeScreen);
   }
@@ -134,41 +136,41 @@ export class EducationHomepageComponent {
   // }
   getDisplayedCourses(): any[] {
     const isDefaultDisplay = !this.selectedCourseFor && !this.searchTerm;
-  
+
     if (isDefaultDisplay) {
       const startIndex = (this.currentPage - 1) * this.pageSize;
       const endIndex = startIndex + this.pageSize;
       return this.courses.slice(startIndex, endIndex);
     }
-  
+
     const courseForFilter = this.selectedCourseFor;
     const filteredCourses = courseForFilter
       ? this.courses.filter(course => course.course_for === courseForFilter)
       : this.courses;
-  
+
     const searchTerm = this.searchTerm.toLowerCase();
     const searchedCourses = searchTerm
       ? filteredCourses.filter(course =>
-          course.title.toLowerCase().includes(searchTerm) ||
-          course.teacher.full_name.toLowerCase().includes(searchTerm) ||
-          course.details.toLowerCase().includes(searchTerm)
-        )
+        course.title.toLowerCase().includes(searchTerm) ||
+        course.teacher.full_name.toLowerCase().includes(searchTerm) ||
+        course.details.toLowerCase().includes(searchTerm)
+      )
       : filteredCourses;
-  
+
     const startIndex = (this.currentPage - 1) * this.pageSize;
     const endIndex = startIndex + this.pageSize;
     return searchedCourses.slice(startIndex, endIndex);
   }
-  
-  
-  
+
+
+
 
   // getDisplayedCourses(): any[] {
   //   const startIndex = (this.currentPage - 1) * this.pageSize;
   //   const endIndex = startIndex + this.pageSize;
   //   return this.filteredCourses.slice(startIndex, endIndex);
   // }
-  
+
 
 
 
@@ -228,22 +230,27 @@ export class EducationHomepageComponent {
   }
 
   // Inside your component class
-filterCourses() {
-  const searchTerm = this.searchTerm.toLowerCase();
-  console.warn(searchTerm)
+  filterCourses() {
+    const searchTerm = this.searchTerm.toLowerCase();
+    console.warn(searchTerm)
 
-  // Filter courses based on the search term
-  this.filteredCourses = this.courses.filter(course =>
-    course.title.toLowerCase().includes(searchTerm) ||
-    course.teacher.full_name.toLowerCase().includes(searchTerm) ||
-    course.details.toLowerCase().includes(searchTerm)
-    // Add more fields as needed
-  );
+    // Filter courses based on the search term
+    this.filteredCourses = this.courses.filter(course =>
+      course.title.toLowerCase().includes(searchTerm) ||
+      course.teacher.full_name.toLowerCase().includes(searchTerm) ||
+      course.details.toLowerCase().includes(searchTerm)
+      // Add more fields as needed
+    );
 
-  // Recalculate total pages and update displayed courses
-  this.calculateTotalPages();
-  this.setPage(1); // Reset to the first page after filtering
-}
+    // Recalculate total pages and update displayed courses
+    this.calculateTotalPages();
+    this.setPage(1); // Reset to the first page after filtering
+  }
+
+  navigateToCourseDetails(courseId: string) {
+    this.router.navigate(['/course-detail', courseId]);
+  }
+
 
 
 

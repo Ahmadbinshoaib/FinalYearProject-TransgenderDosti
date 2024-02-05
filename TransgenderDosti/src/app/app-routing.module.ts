@@ -13,6 +13,7 @@ import { TeacherCourseDashboardComponent } from './teacher-course-dashboard/teac
 import { TeacherCourseMaterialComponent } from './teacher-course-material/teacher-course-material.component';
 import { TeacherCourseAssignmentComponent } from './teacher-course-assignment/teacher-course-assignment.component';
 import { TeacherCourseAssignmentViewresponsesComponent } from './teacher-course-assignment-viewresponses/teacher-course-assignment-viewresponses.component';
+import { CourseDetailComponent } from './course-detail/course-detail.component';
 
 const routes: Routes = [
 
@@ -40,19 +41,23 @@ const routes: Routes = [
     path: 'teacher-profile/:userId', component: TeacherProfileComponent,
     canActivate: [AuthGuard]
   },
+  {
+    path: 'course-detail/:courseId', component: CourseDetailComponent,
+
+  },
 
   {
     path: 'teacher-course-details', component: TeacherSidebarComponent,
-    
+
     canActivate: [AuthGuard],
     children: [
-      {path: 'teacher-course-dashboard', component: TeacherCourseDashboardComponent },
-      {path: 'teacher-course-assignment', component: TeacherCourseAssignmentComponent},
-      {path: 'teacher-course-material', component: TeacherCourseMaterialComponent },
-      {path:'teacher-course-assignment-viewresponses', component: TeacherCourseAssignmentViewresponsesComponent}
+      { path: 'teacher-course-dashboard', component: TeacherCourseDashboardComponent },
+      { path: 'teacher-course-assignment', component: TeacherCourseAssignmentComponent },
+      { path: 'teacher-course-material', component: TeacherCourseMaterialComponent },
+      { path: 'teacher-course-assignment-viewresponses', component: TeacherCourseAssignmentViewresponsesComponent }
     ]
   },
- 
+
 
 
 

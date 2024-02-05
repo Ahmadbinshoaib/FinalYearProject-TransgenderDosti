@@ -17,4 +17,9 @@ export class EducationPageServicesService {
       const url = `${this.serverUrl}/courses`;
       return this.http.get(url);
     }
+
+    getCourseDetails(courseId: string): Observable<any> {
+      const url = `${this.serverUrl}/get_speccourses_detail_byId?course_id=${courseId}`;
+      return this.http.get(url);
+    }
 }

@@ -1620,6 +1620,67 @@ def get_all_courses():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
+from flask import request
+
+@app.route('/get_speccourses_detail_byId', methods=['GET'])
+def get_course_details():
+    try:
+        # Get course_id from the request parameters
+        course_id = request.args.get('course_id')
+
+        if not course_id:
+            return jsonify({'error': 'Course ID parameter is missing.'}), 400
+
+        # Establish a database connection
+        cursor = mysql.connection.cursor()
+
+        # Fetch the details for the specified course
+        query = """
+            SELECT 
+                c.course_id, c.title, c.course_code, c.details, c.course_for, c.course_fee,
+                c.course_duration, c.course_video_url, c.course_picture,
+                t.teacher_id, t.user_id AS teacher_user_id, t.phone_number, t.bio,
+                t.city_town, t.gender, t.cnic_picture, t.country, t.profile_picture AS teacher_profile_picture,
+                u.full_name AS teacher_full_name
+            FROM course c
+            JOIN teacher t ON c.teacher_id = t.teacher_id
+            JOIN user u ON t.user_id = u.id
+            WHERE c.course_id = %s
+        """
+        cursor.execute(query, (course_id,))
+        course = cursor.fetchone()
+
+        # Close the database connection
+        cursor.close()
+
+        if not course:
+            return jsonify({'error': 'Course not found.'}), 404
+
+        # Prepare the response
+        course_data = {
+            "course_id": course[0],
+            "title": course[1],
+            "course_code": course[2],
+            "details": course[3],
+            "course_for": course[4],
+            "course_fee": course[5],
+            "course_duration": course[6],
+            "course_video_url": course[7],
+            "course_picture": course[8],
+            "teacher": {
+                "teacher_id": course[9],
+                "user_id": course[10],
+                "profile_picture": course[17],
+                "full_name": course[18],
+            }
+        }
+
+        return jsonify({'success': True, 'course': course_data}), 200
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
 ####################################################################################################################################
 #voice                                                                                                                             #
 ####################################################################################################################################

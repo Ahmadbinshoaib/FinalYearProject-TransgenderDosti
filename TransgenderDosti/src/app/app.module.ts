@@ -31,6 +31,7 @@ import { ComponentNameComponent } from './component-name/component-name.componen
 import { TeacherCourseAssignmentComponent } from './teacher-course-assignment/teacher-course-assignment.component';
 import { TeacherCourseAssignmentViewresponsesComponent } from './teacher-course-assignment-viewresponses/teacher-course-assignment-viewresponses.component';
 import { TeacherCourseDetailComponent } from './teacher-course-detail/teacher-course-detail.component';
+import { CourseDetailComponent } from './course-detail/course-detail.component';
 
 
 @NgModule({
@@ -51,6 +52,7 @@ import { TeacherCourseDetailComponent } from './teacher-course-detail/teacher-co
     TeacherCourseAssignmentComponent,
     TeacherCourseAssignmentViewresponsesComponent,
     TeacherCourseDetailComponent,
+    CourseDetailComponent,
 
   ],
   imports: [
