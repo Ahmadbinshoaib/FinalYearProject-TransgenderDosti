@@ -34,7 +34,7 @@
 
 
                 <div class="row">
-                    <form #personalInfo="ngForm" (ngSubmit)="createTeacherProfilePersonal(personalInfo.value)">
+                    <form #personalInfo="ngForm" (ngSubmit)="createLearnerProfilePersonal(personalInfo.value)">
 
                         <div class="row">
                             <div class="span content bio">Bio</div>
@@ -43,7 +43,7 @@
                         <div class="form-group small-input">
                             <input type="text" name="bio" class="form-control form-control-sm"
                                 placeholder="Tell Transgender Dosti about yourself in 150 characters or less."
-                                [(ngModel)]="teacherData.bio" required>
+                                [(ngModel)]="learnerData.bio" required>
                         </div>
 
                         <div class="row">
@@ -75,7 +75,7 @@
 
                                 <select class="form-select form-group small-input form-control form-control-sm"
                                     aria-label="Default select example" name="city" style="padding-left: 14px;"
-                                    [(ngModel)]="teacherData.city_town" required>
+                                    [(ngModel)]="learnerData.city_town" required>
                                     <option value="" disabled selected>Select a city</option>
                                     <option *ngFor="let city of selectedCountry?.cities" [ngValue]="city">{{ city }}
                                     </option>
@@ -108,7 +108,7 @@
                                         </div>
                                         <!-- Input field with ngModel and required -->
                                         <input type="number" name="phonenumber" class="form-control form-control-sm"
-                                            placeholder="Enter your phone number" [(ngModel)]="teacherData.phone_number"
+                                            placeholder="Enter your phone number" [(ngModel)]="learnerData.phone_number"
                                             required>
                                     </div>
                                 </div>
@@ -125,7 +125,7 @@
 
                                 <select class="form-select form-group small-input form-control form-control-sm"
                                     aria-label="Default select example" name="gender" style="padding-left: 14px;"
-                                    [(ngModel)]="teacherData.gender" required>
+                                    [(ngModel)]="learnerData.gender" required>
                                     <option value="" disabled selected>Select gender</option>
                                     <option value="Male">Male</option>
                                     <option value="Female">Female</option>
