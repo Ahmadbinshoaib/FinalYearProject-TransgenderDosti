@@ -13,7 +13,12 @@ from google.auth.transport import requests
 from flask_cors import CORS  # Import CORS
 import base64
 from io import BytesIO
-
+#voice libraries 
+from flask import Flask, request, jsonify
+from flask_cors import CORS  # Import CORS
+from google.cloud import speech_v1p1beta1 as speech
+from google.oauth2 import service_account
+from pydub import AudioSegment
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes in your app
@@ -1736,60 +1741,60 @@ def add_course_request():
 #voice                                                                                                                             #
 ####################################################################################################################################
 
-# credentials = service_account.Credentials.from_service_account_file('C:/voice/voice_navigation server/credentials.json')
-# client = speech.SpeechClient(credentials=credentials)
-#
-#
-# def convert_wav_file(input_path, output_path, target_sample_rate=16000, target_sample_width=2):
-#     sound = AudioSegment.from_file(input_path)
-#
-#     if sound.channels > 1:
-#         sound = sound.set_channels(1)
-#
-#     if sound.frame_rate != target_sample_rate:
-#         sound = sound.set_frame_rate(target_sample_rate)
-#
-#     sound = sound.set_sample_width(target_sample_width)
-#
-#     sound.export(output_path, format="wav")
-#
-# @app.route('/transcribe', methods=['POST'])
-# def transcribe_audio():
-#     try:
-#         uploaded_file = request.files.get('audio')
-#
-#         if not uploaded_file:
-#             return jsonify({'error': 'No audio file provided'})
-#
-#         # Save the uploaded file to a temporary location
-#         input_path = 'temp_input.wav'
-#         uploaded_file.save(input_path)
-#
-#         # Convert the audio file to the target format
-#         output_path = 'temp_output.wav'
-#         convert_wav_file(input_path, output_path)
-#
-#         # Read the converted audio content
-#         audio_content = AudioSegment.from_file(output_path).raw_data
-#
-#         audio = speech.RecognitionAudio(content=audio_content)
-#
-#         config = speech.RecognitionConfig(
-#             encoding=speech.RecognitionConfig.AudioEncoding.LINEAR16,
-#             sample_rate_hertz=16000,
-#             language_code='ur-PK',
-#         )
-#
-#         response = client.recognize(config=config, audio=audio)
-#
-#         transcription = ""
-#         for result in response.results:
-#             transcription += result.alternatives[0].transcript + "\n"
-#
-#         return jsonify({'transcription': transcription})
-#
-#     except Exception as e:
-#         return jsonify({'error': str(e)})
+credentials = service_account.Credentials.from_service_account_file('C:/voice/voice_navigation server/credentials.json')
+client = speech.SpeechClient(credentials=credentials)
+
+
+def convert_wav_file(input_path, output_path, target_sample_rate=16000, target_sample_width=2):
+    sound = AudioSegment.from_file(input_path)
+
+    if sound.channels > 1:
+        sound = sound.set_channels(1)
+
+    if sound.frame_rate != target_sample_rate:
+        sound = sound.set_frame_rate(target_sample_rate)
+
+    sound = sound.set_sample_width(target_sample_width)
+
+    sound.export(output_path, format="wav")
+
+@app.route('/transcribe', methods=['POST'])
+def transcribe_audio():
+    try:
+        uploaded_file = request.files.get('audio')
+
+        if not uploaded_file:
+            return jsonify({'error': 'No audio file provided'})
+
+        # Save the uploaded file to a temporary location
+        input_path = 'temp_input.wav'
+        uploaded_file.save(input_path)
+
+        # Convert the audio file to the target format
+        output_path = 'temp_output.wav'
+        convert_wav_file(input_path, output_path)
+
+        # Read the converted audio content
+        audio_content = AudioSegment.from_file(output_path).raw_data
+
+        audio = speech.RecognitionAudio(content=audio_content)
+
+        config = speech.RecognitionConfig(
+            encoding=speech.RecognitionConfig.AudioEncoding.LINEAR16,
+            sample_rate_hertz=16000,
+            language_code='ur-PK',
+        )
+
+        response = client.recognize(config=config, audio=audio)
+
+        transcription = ""
+        for result in response.results:
+            transcription += result.alternatives[0].transcript + "\n"
+        print(transcription+"hahahah")
+        return jsonify({'transcription': transcription})
+
+    except Exception as e:
+        return jsonify({'error': str(e)})
 
 if __name__ == '__main__':
     app.run(debug=True)

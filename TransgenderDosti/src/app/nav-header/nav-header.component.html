@@ -135,7 +135,7 @@
                             {{learnerEmail}}
                         </button>
                         <div class="dropdown-menu fontstyle" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">User Profile</a>
+                            <a class="dropdown-item" [routerLink]="['/learner-profile', userId]">User Profile</a>
                             <a class="dropdown-item" href="#">Settings</a>
                             <a class="dropdown-item" (click)="learnerLogout()" href="#">Logout</a>
                         </div>
@@ -273,7 +273,7 @@
                                 {{learnerEmail}}
                             </button>
                             <div class="dropdown-menu fontstyle" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#">User Profile</a>
+                                <a class="dropdown-item" [routerLink]="['/learner-profile', userId]">User Profile</a>
                                 <a class="dropdown-item" href="#">Settings</a>
                                 <a class="dropdown-item" (click)="learnerLogout()" href="#">Logout</a>
                             </div>
