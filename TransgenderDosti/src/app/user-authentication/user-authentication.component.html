@@ -393,7 +393,7 @@
 
 
                         <div class="row">
-                            <form #signInform="ngForm" (ngSubmit)="SignIn(signInform.value)">
+                            <form #signInformTeacher="ngForm" (ngSubmit)="SignIn(signInform.value)">
 
                                 <div class="row">
                                     <div class="span content">Email Address</div>
@@ -429,7 +429,7 @@
 
                                 <div class="btn-signup">
                                     <button type="submit" class="btn custombtn2" style="margin-right: 10px; "
-                                        [disabled]="!signInform.valid">Sign In </button>
+                                        [disabled]="!signInformTeacher.valid">Sign In </button>
 
                                 </div>
 
