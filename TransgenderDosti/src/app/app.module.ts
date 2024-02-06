@@ -33,6 +33,7 @@ import { TeacherCourseAssignmentViewresponsesComponent } from './teacher-course-
 import { TeacherCourseDetailComponent } from './teacher-course-detail/teacher-course-detail.component';
 import { CourseDetailComponent } from './course-detail/course-detail.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { LearnerPaymentScreenComponent } from './learner-payment-screen/learner-payment-screen.component';
 
 
 @NgModule({
@@ -54,6 +55,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     TeacherCourseAssignmentViewresponsesComponent,
     TeacherCourseDetailComponent,
     CourseDetailComponent,
+    LearnerPaymentScreenComponent,
 
   ],
   imports: [

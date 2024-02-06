@@ -1,5 +1,6 @@
 
 import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-learner-mainpage',
@@ -11,6 +12,8 @@ export class LearnerMainpageComponent {
   learnerEmail: any
   activeTab: string = 'ex1-tabs-1';
   isSmallScreen: boolean = false;
+  constructor(
+    private router: Router) { }
 
 
   @HostListener('window:resize', ['$event'])
@@ -25,6 +28,10 @@ export class LearnerMainpageComponent {
 
   changeTab(tabId: string) {
     this.activeTab = tabId;
+  }
+
+  navigateToPayment(){
+    this.router.navigate(['/course-payment']);
   }
 
   ngOnInit() {

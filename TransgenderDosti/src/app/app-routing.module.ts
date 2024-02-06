@@ -14,6 +14,7 @@ import { TeacherCourseMaterialComponent } from './teacher-course-material/teache
 import { TeacherCourseAssignmentComponent } from './teacher-course-assignment/teacher-course-assignment.component';
 import { TeacherCourseAssignmentViewresponsesComponent } from './teacher-course-assignment-viewresponses/teacher-course-assignment-viewresponses.component';
 import { CourseDetailComponent } from './course-detail/course-detail.component';
+import { LearnerPaymentScreenComponent } from './learner-payment-screen/learner-payment-screen.component';
 
 const routes: Routes = [
 
@@ -43,6 +44,10 @@ const routes: Routes = [
   },
   {
     path: 'course-detail/:courseId', component: CourseDetailComponent,
+
+  },
+  {
+    path: 'course-payment', component: LearnerPaymentScreenComponent,
 
   },
 
