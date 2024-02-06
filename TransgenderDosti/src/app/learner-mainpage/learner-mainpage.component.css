@@ -85,6 +85,11 @@
     padding-left: 12px;
 
 }
+.course-content2 {
+    padding-top: 0px;
+    padding-left: 12px;
+
+}
 
 .students-no {
     color: #5D5959;
@@ -163,5 +168,64 @@
     font-weight: 100;
     line-height: normal;
     padding: 0px;
+
+}
+
+.status{
+    color: #ffffff;
+    font-family: Karla;
+    font-size: 11px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    padding-left: 0px;
+    padding-left: 12px;
+    background-color: red;
+    border-radius: 20px;
+    padding-right: 12px;
+
+}
+.custombtn2t {
+    color: rgb(255, 255, 255);
+    
+    font-family: Karla;
+    background: rgba(11, 46, 226, 0.72);
+    border: 1px solid rgba(11, 46, 226, 0.72);
+    border-radius: 18px;
+   font-size: 10px;
+    /* Adding a border to match the grey background on hover/focus */
+    transition: background-color 0.3s ease;
+    /* Adding a smooth transition effect */
+}
+
+.custombtn2t:hover,
+.custombtn2t:focus {
+    background-color: rgba(11, 47, 226, 0.527);
+    border: none
+}
+
+@media (max-width: 1154px) {
+   
+    .custombtn2t {
+        font-size: 0.6rem;
+    }
+
+   
+}
+
+@media (max-width: 576px) {
+
+
+
+
+    
+
+    button.btn.custombtn2t {
+        margin-bottom: 40px;
+    }
+
+
+
+
 
 }

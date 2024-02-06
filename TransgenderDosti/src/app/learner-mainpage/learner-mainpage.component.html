@@ -169,16 +169,15 @@
                             <div class="col-sm-7 col-md-7 col-lg-7">
                                 <div class="row">
                                     <span class="hello-text" style="padding-top: 40px;">
-                                        Courses in demand
+                                        Hello!
                                     </span>
 
                                     <span class="hello-text">
-                                        Hunt the courses right there.
+                                        Welcome to TransgenderDosti.
                                     </span>
 
                                     <span class="hello-subtext" style="padding-top: 40px;">
-                                        Teachers stand as beacons of inspiration, shaping a brighter future through
-                                        dedicated expertise and education.
+                                        Experience the joy of learning, the power of knowledge, and the thrill of progress. Welcome to a world of endless possibilities.
                                     </span>
                                 </div>
                             </div>
@@ -206,14 +205,200 @@
 
 
     <!-- Status -->
-    <!-- Students -->
-    <!-- Students -->
-    <!-- Students -->
+
 
 
     <div class="tab-pane" [class.active]="activeTab === 'ex1-tabs-2'" id="ex1-tabs-2" role="tabpanel"
         aria-labelledby="ex1-tab-2">
-        Tab 2 content
+
+        <div class="container-fluid">
+            <div class="row">
+                <!-- Left Side -->
+                <!-- Left Side -->
+                <div class="col-sm-12 col-md-6 col-lg-6">
+
+                    <!-- Start and end text -->
+                    <div class="row">
+                        <div class="col-6 text-start">
+                            <!-- Text aligned to the left (start) -->
+                            Requested courses
+                        </div>
+                       
+
+                     
+
+                     
+
+
+
+
+                    </div>
+
+                    <!-- Line -->
+
+                    <div class="line" [ngClass]="{'custom-class': isSmallScreen}"
+                        [ngStyle]="{'width.px': isSmallScreen ? 230 : null}"></div>
+
+
+
+                    <!-- Course Data -->
+                    <div >
+                        <div>
+                            <div class="row" style="padding-top: 0px; padding-bottom: 7px;">
+                               
+
+                                <div id="ok" class="col-sm-3 col-md-3 col-lg-2" >
+                                    <img   src="assets/Rectangle 42.png" 
+                                        class="course-img course-img-db" alt="Course Image"
+                                        style="margin-right: 0px; margin-top: 8px;" />
+                                    <!-- <ng-template #defaultImage>
+                                        <img class="course-img" alt="Default Image"
+                                            style="margin-right: 0px;" />
+                                    </ng-template> -->
+                                </div>
+                               
+                                <div class="col-sm-9 col-md-9 col-lg-10">
+                                    <span class="status">
+                                        Accept
+                                    </span>
+                                    <div class="row course-content2">
+                                        
+                                        <div class="col-sm-6 col-md-6 col-lg-5"
+                                            style="padding-left: 0px; padding-right: 0px;">
+                                           
+                                            <span class="course-name">
+                                                Course Title
+                                            </span>
+                                        </div>
+                                       
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-8">
+                                            <div class="" style="    display: flex;
+                                    flex-direction: row-reverse;
+                                    align-content: stretch;
+                                    justify-content: flex-end;">
+                                      
+                                    </div>
+                                    <div class="row">
+                                        <span class="students-no">
+                                            You request has been accepted.
+                                        </span>
+                                    </div>
+                                    <div class="row">
+                                        <span class="students-no">
+                                            Proceed to payment for confirming your enrollment.
+                                        </span>
+                                    </div>
+                                        </div>
+                                        <div class="col-4" >
+                                            <div class="d-flex justify-content-end">
+                                                <button type="button" class="btn custombtn2t" >Proceed to payment</button>
+                                            </div>
+                                          
+                                               
+                                           
+                                            
+                                        </div>
+                                    </div>
+
+                                    
+                                </div>
+
+                                
+                            </div>
+
+                            <!--Bottom Line-->
+                            <div class="line" [ngClass]="{'custom-class': isSmallScreen}"
+                                [ngStyle]="{'width.px': isSmallScreen ? 230 : null}"></div>
+                        </div>
+                    </div>
+
+                    <ng-template #noCoursesMessage>
+                        <p class="nolist">No courses to display.</p>
+                    </ng-template>
+<!-- 
+                    <nav *ngIf="courses.length > 0" aria-label="...">
+                        <ul class="pagination pagination-sm justify-content-end" style="margin-top: 25px;">
+                            <li class="page-item" (click)="setPage(currentPage - 1)"
+                                [class.disabled]="currentPage === 1">
+                                <span class="page-link" style="cursor: pointer;">Previous</span>
+                            </li>
+                            <li class="page-item" *ngFor="let page of getPageNumbers()" (click)="setPage(page)"
+                                [class.active]="page === currentPage">
+                                <span class="page-link" style="cursor: pointer;">{{ page }}</span>
+                            </li>
+                            <li class="page-item" (click)="setPage(currentPage + 1)"
+                                [class.disabled]="currentPage === totalPages">
+                                <span class="page-link" style="cursor: pointer;">Next</span>
+                            </li>
+                        </ul>
+                    </nav> -->
+
+
+
+
+                </div>
+
+
+                <!-- Right Side -->
+                <!-- Right Side -->
+                <div class="col-sm-12 col-md-6 col-lg-6">
+
+
+
+
+                    <!--Courses-->
+                    <!--Courses-->
+
+                    <div class="row hello-row" style=" margin-bottom: 30px;">
+                        <div class="row"
+                            style="padding-right: 0px;margin-right: 0px;margin-left: 0px;padding-left: 0px;">
+                            <img src="assets/courses.jpg" class="helloimg" alt="Book Image">
+                        </div>
+
+
+
+                        <div class="row">
+
+
+                            <div class="col-sm-7 col-md-7 col-lg-7">
+                                <div class="row">
+                                    <span class="hello-text" style="padding-top: 40px;">
+                                        Hello!
+                                    </span>
+
+                                    <span class="hello-text">
+                                        Welcome to TransgenderDosti.
+                                    </span>
+
+                                    <span class="hello-subtext" style="padding-top: 40px;">
+                                        Experience the joy of learning, the power of knowledge, and the thrill of progress. Welcome to a world of endless possibilities.
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4 col-md-4 col-lg-4">
+
+                                <img src="assets/3dicons.png" class="fire-img" alt="Book Image">
+
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+        
+        
+        
     </div>
 
 
