@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+
+import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-learner-mainpage',
@@ -9,6 +10,17 @@ export class LearnerMainpageComponent {
 
   learnerEmail: any
   activeTab: string = 'ex1-tabs-1';
+  isSmallScreen: boolean = false;
+
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.checkScreenSize();
+  }
+
+  checkScreenSize() {
+    this.isSmallScreen = window.innerWidth < 576;
+  }
 
 
   changeTab(tabId: string) {

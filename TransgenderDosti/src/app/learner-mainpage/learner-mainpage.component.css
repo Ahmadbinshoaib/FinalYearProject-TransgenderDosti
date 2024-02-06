@@ -69,3 +69,89 @@
     margin-bottom: 10px;
     background: #E1DCDC;
 }
+
+
+.course-name {
+    color: #5D5959;
+    font-family: Karla;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.course-content {
+    padding-top: 15px;
+    padding-left: 12px;
+
+}
+
+.students-no {
+    color: #5D5959;
+
+    font-family: Karla;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    padding-left: 0px;
+    padding-left: 12px;
+
+}
+
+.hello-row {
+    border: 1px rgb(164, 160, 160) solid;
+    margin-left: 90px;
+    margin-right: 40px;
+    border-radius: 14px;
+
+}
+
+.helloimg {
+    height: 43px;
+    border-top-left-radius: 14px;
+    border-top-right-radius: 14px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.hello-text {
+    color: #5D5959;
+    font-family: Karla;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.hello-subtext {
+    padding-top: 20px;
+    color: #5D5959;
+    font-family: Karla;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+}
+
+.star-img {
+    height: 222px;
+    padding-top: 10px;
+    padding-left: 17px;
+}
+
+.fire-img {
+    height: 222px;
+    padding-top: 10px;
+    padding-left: 17px;
+}
+
+.nolist {
+    color: #7c7c7c;
+    font-family: Karla;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 100;
+    line-height: normal;
+
+}

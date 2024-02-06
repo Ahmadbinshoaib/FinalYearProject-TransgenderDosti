@@ -33,7 +33,191 @@
     <div class="tab-pane" [class.active]="activeTab === 'ex1-tabs-1'" id="ex1-tabs-1" role="tabpanel"
         aria-labelledby="ex1-tab-1">
 
-        <!-- Do work here -->
+        <div class="container-fluid">
+            <div class="row">
+                <!-- Left Side -->
+                <!-- Left Side -->
+                <div class="col-sm-12 col-md-6 col-lg-6">
+
+                    <!-- Start and end text -->
+                    <div class="row">
+                        <div class="col-6 text-start">
+                            <!-- Text aligned to the left (start) -->
+                            Your courses
+                        </div>
+                       
+
+                     
+
+                     
+
+
+
+
+                    </div>
+
+                    <!-- Line -->
+
+                    <div class="line" [ngClass]="{'custom-class': isSmallScreen}"
+                        [ngStyle]="{'width.px': isSmallScreen ? 230 : null}"></div>
+
+
+
+                    <!-- Course Data -->
+                    <div >
+                        <div>
+                            <div class="row" style="padding-top: 0px; padding-bottom: 7px;">
+
+                                <div id="ok" class="col-sm-3 col-md-3 col-lg-2" >
+                                    <img   src="assets/Rectangle 42.png" 
+                                        class="course-img course-img-db" alt="Course Image"
+                                        style="margin-right: 0px;" />
+                                    <!-- <ng-template #defaultImage>
+                                        <img class="course-img" alt="Default Image"
+                                            style="margin-right: 0px;" />
+                                    </ng-template> -->
+                                </div>
+                                <div class="col-sm-6 col-md-6 col-lg-5">
+                                    <div class="row course-content">
+                                        <div class="col-sm-6 col-md-6 col-lg-5"
+                                            style="padding-left: 0px; padding-right: 0px;">
+                                            <span class="course-name">
+                                                Course Title
+                                            </span>
+                                        </div>
+                                      
+                                    </div>
+
+                                    <div class="row">
+                                        <span class="students-no">
+                                            0 Students
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--Bottom Line-->
+                            <div class="line" [ngClass]="{'custom-class': isSmallScreen}"
+                                [ngStyle]="{'width.px': isSmallScreen ? 230 : null}"></div>
+                        </div>
+                    </div>
+
+                    <ng-template #noCoursesMessage>
+                        <p class="nolist">No courses to display.</p>
+                    </ng-template>
+<!-- 
+                    <nav *ngIf="courses.length > 0" aria-label="...">
+                        <ul class="pagination pagination-sm justify-content-end" style="margin-top: 25px;">
+                            <li class="page-item" (click)="setPage(currentPage - 1)"
+                                [class.disabled]="currentPage === 1">
+                                <span class="page-link" style="cursor: pointer;">Previous</span>
+                            </li>
+                            <li class="page-item" *ngFor="let page of getPageNumbers()" (click)="setPage(page)"
+                                [class.active]="page === currentPage">
+                                <span class="page-link" style="cursor: pointer;">{{ page }}</span>
+                            </li>
+                            <li class="page-item" (click)="setPage(currentPage + 1)"
+                                [class.disabled]="currentPage === totalPages">
+                                <span class="page-link" style="cursor: pointer;">Next</span>
+                            </li>
+                        </ul>
+                    </nav> -->
+
+
+
+
+                </div>
+
+
+                <!-- Right Side -->
+                <!-- Right Side -->
+                <div class="col-sm-12 col-md-6 col-lg-6">
+
+                    <!--Hello-->
+                    <!--Hello-->
+
+                    <div class="row hello-row">
+                        <div class="row"
+                            style="padding-right: 0px;margin-right: 0px;margin-left: 0px;padding-left: 0px;">
+                            <img src="assets/hello.jpg" class="helloimg" alt="Book Image">
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-7 col-md-7 col-lg-7">
+                                <div class="row">
+                                    <span class="hello-text" style="padding-top: 40px;">
+                                        Hello
+                                    </span>
+
+                                    <span class="hello-text">
+                                        Welcome to Transgender Dosti.
+                                    </span>
+
+                                    <span class="hello-subtext" style="padding-top: 40px;">
+                                        Teachers stand as beacons of inspiration, shaping a brighter future through
+                                        dedicated expertise and education.
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-sm-5 col-md-5 col-lg-5">
+
+                                <img src="assets/3dicons (5).png" class="star-img" alt="Book Image">
+
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                    <!--Courses-->
+                    <!--Courses-->
+
+                    <div class="row hello-row" style="margin-top: 20px;">
+                        <div class="row"
+                            style="padding-right: 0px;margin-right: 0px;margin-left: 0px;padding-left: 0px;">
+                            <img src="assets/courses.jpg" class="helloimg" alt="Book Image">
+                        </div>
+
+
+
+                        <div class="row">
+
+
+                            <div class="col-sm-7 col-md-7 col-lg-7">
+                                <div class="row">
+                                    <span class="hello-text" style="padding-top: 40px;">
+                                        Courses in demand
+                                    </span>
+
+                                    <span class="hello-text">
+                                        Hunt the courses right there.
+                                    </span>
+
+                                    <span class="hello-subtext" style="padding-top: 40px;">
+                                        Teachers stand as beacons of inspiration, shaping a brighter future through
+                                        dedicated expertise and education.
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4 col-md-4 col-lg-4">
+
+                                <img src="assets/fire.png" class="fire-img" alt="Book Image">
+
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+
+
+
+                </div>
+            </div>
+        </div>
 
         
     </div>
