@@ -8,6 +8,7 @@ import { LearnerMainpageComponent } from './learner-mainpage/learner-mainpage.co
 import { AuthGuard } from './teacherauth-guard.guard';
 import { AuthGuard1 } from './learnerauth-guard.guard';
 import { TeacherProfileComponent } from './teacher-profile/teacher-profile.component';
+import { LearnerProfileComponent } from './learner-profile/learner-profile.component';
 import { TeacherSidebarComponent } from './teacher-sidebar/teacher-sidebar.component';
 import { TeacherCourseDashboardComponent } from './teacher-course-dashboard/teacher-course-dashboard.component';
 import { TeacherCourseMaterialComponent } from './teacher-course-material/teacher-course-material.component';
@@ -49,6 +50,10 @@ const routes: Routes = [
   {
     path: 'course-payment', component: LearnerPaymentScreenComponent,
 
+  },
+  {
+    path: 'learner-profile/:userId', component: LearnerProfileComponent,
+    canActivate: [AuthGuard1]
   },
 
   {

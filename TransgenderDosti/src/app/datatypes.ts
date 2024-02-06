@@ -29,6 +29,18 @@ export interface TeacherProfileData {
     teacher_id: string;
   }
 
+  export interface LearnerProfileData {
+    user_id: string;
+    phone_number: number;
+    bio: string;
+    city_town: string;
+    gender: string;
+    cnic_picture: string;
+    profile_picture: string;
+    country: string;
+    learner_id : string;
+  }
+
 export interface educationData{
     educational_background_id: string;
     institution_name: string;
@@ -93,6 +105,20 @@ export interface websiteData{
 }
 
 export interface socialData{
+    social_media_profile_id: string;
+    platform_name:string;
+    profile_url:string;
+}
+
+export interface LearnerwebsiteData{
+    website_id: string;
+    website_name: string;
+    website_url:string;
+    
+
+}
+
+export interface LearnersocialData{
     social_media_profile_id: string;
     platform_name:string;
     profile_url:string;

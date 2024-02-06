@@ -1,4 +1,4 @@
-import { Component , ChangeDetectorRef, OnDestroy, NgZone } from '@angular/core';
+import { Component, ChangeDetectorRef, OnDestroy, NgZone } from '@angular/core';
 import { Route, Router } from '@angular/router';
 import { AudioService } from '../Services/audio.service';
 
@@ -22,7 +22,7 @@ export class NavHeaderComponent {
   constructor(private router: Router,
     private audioService: AudioService,
     private cdr: ChangeDetectorRef,
-    private zone: NgZone) {}
+    private zone: NgZone) { }
 
   ngOnInit() {
 
@@ -72,7 +72,8 @@ export class NavHeaderComponent {
             try {
               const learnerData = JSON.parse(learnerStore!);
 
-              if (learnerData && learnerData.email) {
+              if (learnerData && learnerData.email && learnerData.user_id) {
+                this.userId = learnerData.user_id
                 // console.log(learnerData.email);
                 this.learnerEmail = learnerData.email.split('@')[0];
                 if (learnerData.profile_picture) {
@@ -98,7 +99,7 @@ export class NavHeaderComponent {
     })
     console.warn(this.menuType)
 
-    
+
     this.router.events.subscribe((val: any) => {
       // console.warn(val)
       if (val.url) {
@@ -145,7 +146,8 @@ export class NavHeaderComponent {
             try {
               const learnerData = JSON.parse(learnerStore!);
 
-              if (learnerData && learnerData.email) {
+              if (learnerData && learnerData.email && learnerData.user_id) {
+                this.userId = learnerData.user_id
                 // console.log(learnerData.email);
                 this.learnerEmail = learnerData.email.split('@')[0];
                 if (learnerData.profile_picture) {

@@ -20,7 +20,7 @@
             <span class="tab-label">Status</span>
         </a>
     </li>
-   
+
 </ul>
 
 <div class="tab-content" id="ex1-content" style="padding-left: 52px; padding-top: 15px;">
@@ -45,11 +45,11 @@
                             <!-- Text aligned to the left (start) -->
                             Your courses
                         </div>
-                       
 
-                     
 
-                     
+
+
+
 
 
 
@@ -64,21 +64,20 @@
 
 
                     <!-- Course Data -->
-                    <div >
+                    <div>
                         <div>
                             <div class="row" style="padding-top: 0px; padding-bottom: 7px;">
                                 <div class="row flex justify-content-end date">Enrolled On 12 August, 2022</div>
 
-                                <div id="ok" class="col-sm-3 col-md-3 col-lg-2" >
-                                    <img   src="assets/Rectangle 42.png" 
-                                        class="course-img course-img-db" alt="Course Image"
-                                        style="margin-right: 0px;" />
+                                <div id="ok" class="col-sm-3 col-md-3 col-lg-2">
+                                    <img src="assets/Rectangle 42.png" class="course-img course-img-db"
+                                        alt="Course Image" style="margin-right: 0px;" />
                                     <!-- <ng-template #defaultImage>
                                         <img class="course-img" alt="Default Image"
                                             style="margin-right: 0px;" />
                                     </ng-template> -->
                                 </div>
-                               
+
                                 <div class="col-sm-6 col-md-6 col-lg-5">
                                     <div class="row course-content">
                                         <div class="col-sm-6 col-md-6 col-lg-5"
@@ -88,11 +87,11 @@
                                             </span>
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6" style="padding-left: 0px;">
-                                           
+
 
                                             <i class="fa-solid fa-trash fa-sm"
-                                            
-                                                style="color: #e1143d; padding-left: 5px;"  data-bs-toggle="modal" data-bs-target="#confirmationModal"></i>
+                                                style="color: #e1143d; padding-left: 5px;" data-bs-toggle="modal"
+                                                data-bs-target="#confirmationModal"></i>
                                             <!-- Replace "fa-icon-class" with the actual icon class -->
                                         </div>
                                     </div>
@@ -121,7 +120,7 @@
                     <ng-template #noCoursesMessage>
                         <p class="nolist">No courses to display.</p>
                     </ng-template>
-<!-- 
+                    <!-- 
                     <nav *ngIf="courses.length > 0" aria-label="...">
                         <ul class="pagination pagination-sm justify-content-end" style="margin-top: 25px;">
                             <li class="page-item" (click)="setPage(currentPage - 1)"
@@ -177,7 +176,8 @@
                                     </span>
 
                                     <span class="hello-subtext" style="padding-top: 40px;">
-                                        Experience the joy of learning, the power of knowledge, and the thrill of progress. Welcome to a world of endless possibilities.
+                                        Experience the joy of learning, the power of knowledge, and the thrill of
+                                        progress. Welcome to a world of endless possibilities.
                                     </span>
                                 </div>
                             </div>
@@ -200,7 +200,7 @@
             </div>
         </div>
 
-        
+
     </div>
 
 
@@ -223,11 +223,11 @@
                             <!-- Text aligned to the left (start) -->
                             Requested courses
                         </div>
-                       
 
-                     
 
-                     
+
+
+
 
 
 
@@ -242,35 +242,37 @@
 
 
                     <!-- Course Data -->
-                    <div >
-                        <div>
+                    <div *ngIf="requestCourses.length > 0; else noCoursesMessage">
+                        <div *ngFor="let course of getDisplayedCourses()">
                             <div class="row" style="padding-top: 0px; padding-bottom: 7px;">
-                               
 
-                                <div id="ok" class="col-sm-3 col-md-3 col-lg-2" >
-                                    <img   src="assets/Rectangle 42.png" 
-                                        class="course-img course-img-db" alt="Course Image"
-                                        style="margin-right: 0px; margin-top: 8px;" />
-                                    <!-- <ng-template #defaultImage>
-                                        <img class="course-img" alt="Default Image"
+
+                                <div id="ok" class="col-sm-3 col-md-3 col-lg-2">
+                                    <img *ngIf="course.course_picture; else defaultImage" [src]="course.course_picture"
+                                        src="assets/Rectangle 42.png" class="course-img course-img-db"
+                                        alt="Course Image" style="margin-right: 0px; margin-top: 8px;" />
+                                    <ng-template #defaultImage>
+                                        <img src="assets/Rectangle 42.png" class="course-img" alt="Default Image"
                                             style="margin-right: 0px;" />
-                                    </ng-template> -->
+                                    </ng-template>
                                 </div>
-                               
+
                                 <div class="col-sm-9 col-md-9 col-lg-10">
-                                    <span class="status">
-                                        Accept
+                                    <span class="status"
+                                        [ngStyle]="{'background-color': course.status === 'Accepted' ? 'green' : ''}">
+                                        {{course.status}}
                                     </span>
+
                                     <div class="row course-content2">
-                                        
+
                                         <div class="col-sm-6 col-md-6 col-lg-5"
                                             style="padding-left: 0px; padding-right: 0px;">
-                                           
+
                                             <span class="course-name">
-                                                Course Title
+                                                {{course.title}}
                                             </span>
                                         </div>
-                                       
+
                                     </div>
 
                                     <div class="row">
@@ -279,34 +281,38 @@
                                     flex-direction: row-reverse;
                                     align-content: stretch;
                                     justify-content: flex-end;">
-                                      
-                                    </div>
-                                    <div class="row">
-                                        <span class="students-no">
-                                            You request has been accepted.
-                                        </span>
-                                    </div>
-                                    <div class="row">
-                                        <span class="students-no">
-                                            Proceed to payment for confirming your enrollment.
-                                        </span>
-                                    </div>
-                                        </div>
-                                        <div class="col-4" >
-                                            <div class="d-flex justify-content-end">
-                                                <button type="button" class="btn custombtn2t" (click)="navigateToPayment()" >Proceed to payment</button>
+
                                             </div>
-                                          
-                                               
-                                           
-                                            
+                                            <div class="row">
+                                                <span class="students-no">
+                                                    You request is {{course.status}}.
+                                                </span>
+                                            </div>
+                                            <div class="row">
+                                                <span class="students-no" *ngIf="course.status === 'Accepted'">
+                                                    Proceed to payment for confirming your enrollment.
+
+                                                </span>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div *ngIf="course.status === 'Accepted'"
+                                                class="d-flex justify-content-end">
+                                                <button type="button" class="btn custombtn2t"
+                                                    (click)="navigateToPayment()">Proceed to payment</button>
+                                            </div>
+
+
+
+
                                         </div>
                                     </div>
 
-                                    
+
                                 </div>
 
-                                
+
                             </div>
 
                             <!--Bottom Line-->
@@ -316,10 +322,10 @@
                     </div>
 
                     <ng-template #noCoursesMessage>
-                        <p class="nolist">No courses to display.</p>
+                        <p class="nolist">No courses request.</p>
                     </ng-template>
-<!-- 
-                    <nav *ngIf="courses.length > 0" aria-label="...">
+
+                    <nav *ngIf="requestCourses.length > 0" aria-label="...">
                         <ul class="pagination pagination-sm justify-content-end" style="margin-top: 25px;">
                             <li class="page-item" (click)="setPage(currentPage - 1)"
                                 [class.disabled]="currentPage === 1">
@@ -334,7 +340,7 @@
                                 <span class="page-link" style="cursor: pointer;">Next</span>
                             </li>
                         </ul>
-                    </nav> -->
+                    </nav>
 
 
 
@@ -374,7 +380,8 @@
                                     </span>
 
                                     <span class="hello-subtext" style="padding-top: 40px;">
-                                        Experience the joy of learning, the power of knowledge, and the thrill of progress. Welcome to a world of endless possibilities.
+                                        Experience the joy of learning, the power of knowledge, and the thrill of
+                                        progress. Welcome to a world of endless possibilities.
                                     </span>
                                 </div>
                             </div>
@@ -396,12 +403,11 @@
                 </div>
             </div>
         </div>
-        
-        
-        
+
+
+
     </div>
 
 
- 
-</div>
 
+</div>

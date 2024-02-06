@@ -13,7 +13,12 @@ from google.auth.transport import requests
 from flask_cors import CORS  # Import CORS
 import base64
 from io import BytesIO
-
+#voice libraries 
+from flask import Flask, request, jsonify
+from flask_cors import CORS  # Import CORS
+# from google.cloud import speech_v1p1beta1 as speech
+from google.oauth2 import service_account
+from pydub import AudioSegment
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes in your app
@@ -265,6 +270,50 @@ def teacher_profile_personalinfo():
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+    
+
+@app.route('/learner_profile_personalinfo', methods=['POST'])
+def learner_profile_personalinfo():
+    try:
+        data = request.json
+        userid = data.get('user_id')
+        print(userid)
+        phone_number = data.get('phonenumber')
+        bio = data.get('bio')
+        print(bio)
+        city_town = data.get('city')
+        gender = data.get('gender')
+        cnic_picture = data.get('cnic_picture')  # Assuming this is a file path or base64 encoded image
+        country = data.get('country')
+        profile_picture = data.get('profile_picture')  # Assuming this is a file path or base64 encoded image
+        print(profile_picture)
+
+        cursor = mysql.connection.cursor()
+
+        # Check if the teacher exists based on the provided user ID
+        cursor.execute("SELECT * FROM learner WHERE user_id = %s", (userid,))
+        learner = cursor.fetchone()
+
+        if not learner:
+            return jsonify({'error': 'Teacher not found for the given user ID'}), 404
+
+        # Update the teacher's profile personal information
+        cursor.execute("""
+            UPDATE learner
+            SET phone_number = %s, bio = %s, city_town = %s, gender = %s,
+                cnic_picture = %s, country = %s, profile_picture = %s
+            WHERE user_id = %s
+        """, (phone_number, bio, city_town, gender, cnic_picture, country, profile_picture, userid))
+
+        mysql.connection.commit()
+        cursor.close()
+
+        return jsonify({'success': True, 'message': 'learner profile personal information updated successfully'}), 200
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+    
+
 
 @app.route('/get_teacherprofile_personalinfo', methods=['GET'])
 def get_teacher_data():
@@ -296,6 +345,41 @@ def get_teacher_data():
         cursor.close()
 
         return jsonify({'success': True, 'teacher_data': teacher_data}), 200
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+    
+@app.route('/get_learnerprofile_personalinfo', methods=['GET'])
+def get_learner_data():
+    try:
+        user_id = request.args.get('user_id')
+        print("here user id is "+user_id)
+        cursor = mysql.connection.cursor()
+
+        # Check if the teacher exists based on the provided user ID
+        cursor.execute("SELECT * FROM learner WHERE user_id = %s", (user_id,))
+        learner = cursor.fetchone()
+
+        if not learner:
+            return jsonify({'error': 'Learner not found for the given user ID'}), 404
+
+        # Extract teacher data
+        learner_data = {
+            'learner_id': learner[0],
+            'user_id': learner[1],
+            'phone_number': learner[2],
+            'cnic_picture': learner[3],
+            'bio': learner[4],
+            'city_town': learner[5],
+            'country': learner[6],
+            'gender': learner[7],
+            'profile_picture': learner[8],
+        }
+        print (learner_data)
+
+        cursor.close()
+
+        return jsonify({'success': True, 'learner_data': learner_data}), 200
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
@@ -1680,7 +1764,7 @@ def get_course_details():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-# Import other necessary modules and classes
+
 
 @app.route('/add_course_request', methods=['POST'])
 def add_course_request():
@@ -1689,9 +1773,10 @@ def add_course_request():
 
         user_id = data.get('user_id')
         course_id = data.get('course_id')
+        teacher_id = data.get('teacher_id')  # Add teacher_id
 
-        if not user_id or not course_id:
-            return jsonify({'error': 'Both user_id and course_id are required'}), 400
+        if not user_id or not course_id or not teacher_id:
+            return jsonify({'error': 'user_id, course_id, and teacher_id are required'}), 400
 
         cursor = mysql.connection.cursor()
 
@@ -1718,9 +1803,9 @@ def add_course_request():
         if existing_request:
             return jsonify({'error': 'Learner has already enrolled in this course'}), 400
 
-        # Add to courserequest table with status as 'pending'
-        cursor.execute("INSERT INTO courserequest (course_id, learner_id, status) VALUES (%s, %s, %s)",
-                       (course_id, learner_id, 'pending'))
+        # Add to courserequest table with status as 'pending' and teacher_id
+        cursor.execute("INSERT INTO courserequest (course_id, learner_id, status, teacher_id) VALUES (%s, %s, %s, %s)",
+                       (course_id, learner_id, 'Pending', teacher_id))
 
         mysql.connection.commit()
         cursor.close()
@@ -1730,12 +1815,63 @@ def add_course_request():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
+@app.route('/get_learner_requestcourses', methods=['GET'])
+def get_learner_requestcourses():
+    try:
+        user_id = request.args.get('user_id')
+
+        if not user_id:
+            return jsonify({'error': 'user_id is required'}), 400
+
+        cursor = mysql.connection.cursor()
+
+        # Extract learner_id from user_id
+        cursor.execute("SELECT learner_id FROM learner WHERE user_id = %s", (user_id,))
+        learner_id_result = cursor.fetchone()
+
+        if not learner_id_result:
+            return jsonify({'error': 'Learner not found for the given user_id'}), 404
+
+        learner_id = learner_id_result[0]
+
+        # Retrieve all courses for the learner with request status
+        cursor.execute("""
+            SELECT c.course_id, c.title, c.details, c.course_for, c.course_fee,
+                   c.course_duration, c.teacher_id, cr.status, c.course_picture
+            FROM course c
+            JOIN courserequest cr ON c.course_id = cr.course_id
+            WHERE cr.learner_id = %s
+            """, (learner_id,))
+
+        courses = cursor.fetchall()
+
+        formatted_courses = []
+        for course in courses:
+            course_data = {
+                "course_id": course[0],
+                "title": course[1],
+                "details": course[2],
+                "course_for": course[3],
+                "course_fee": course[4],
+                "course_duration": course[5],
+                "teacher_id": course[6],
+                "status": course[7],
+                "course_picture": course[8]
+            }
+            formatted_courses.append(course_data)
+
+        cursor.close()
+
+        return jsonify({'success': True, 'courses': formatted_courses}), 200
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 
 ####################################################################################################################################
 #voice                                                                                                                             #
 ####################################################################################################################################
-
+#
 # credentials = service_account.Credentials.from_service_account_file('C:/voice/voice_navigation server/credentials.json')
 # client = speech.SpeechClient(credentials=credentials)
 #
@@ -1785,7 +1921,7 @@ def add_course_request():
 #         transcription = ""
 #         for result in response.results:
 #             transcription += result.alternatives[0].transcript + "\n"
-#
+#         print(transcription+"hahahah")
 #         return jsonify({'transcription': transcription})
 #
 #     except Exception as e:

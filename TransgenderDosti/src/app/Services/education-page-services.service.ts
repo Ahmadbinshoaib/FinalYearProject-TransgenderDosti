@@ -23,14 +23,19 @@ export class EducationPageServicesService {
       return this.http.get(url);
     }
 
-    addCourseRequest(userid: number, courseId: number): Observable<any> {
+    addCourseRequest(userid: number, courseId: number, teacherid: any): Observable<any> {
       const url = `${this.serverUrl}/add_course_request`;
-      const body = { user_id: userid, course_id: courseId };
+      const body = { user_id: userid, course_id: courseId, teacher_id: teacherid };
   
       const headers = new HttpHeaders({
         'Content-Type': 'application/json'
       });
   
       return this.http.post(url, body, { headers });
+    }
+
+    getLearnerRequestCourses(userId: string): Observable<any> {
+      const url = `${this.serverUrl}/get_learner_requestcourses?user_id=${userId}`;
+      return this.http.get(url);
     }
 }
