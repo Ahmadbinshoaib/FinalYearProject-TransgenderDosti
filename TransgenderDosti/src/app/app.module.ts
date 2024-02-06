@@ -32,6 +32,7 @@ import { TeacherCourseAssignmentComponent } from './teacher-course-assignment/te
 import { TeacherCourseAssignmentViewresponsesComponent } from './teacher-course-assignment-viewresponses/teacher-course-assignment-viewresponses.component';
 import { TeacherCourseDetailComponent } from './teacher-course-detail/teacher-course-detail.component';
 import { CourseDetailComponent } from './course-detail/course-detail.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -72,7 +73,8 @@ import { CourseDetailComponent } from './course-detail/course-detail.component';
     BrowserAnimationsModule,
     NgSelectModule,
     MatSidenavModule,
-    MatListModule
+    MatListModule,
+    NgbModule
 
 
   ],

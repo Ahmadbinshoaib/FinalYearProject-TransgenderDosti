@@ -40,7 +40,7 @@
 
                     </div>
                     <div class="col-4 cll">
-                        <button class="btn btn-primary custom-btn">Buy {{course?.course_fee}}</button>
+                        <button (click)="enrollmentRequest()" class="btn btn-primary custom-btn">Request & Buy {{course?.course_fee}}</button>
                     </div>
                 </div>
 
@@ -387,4 +387,44 @@
 
 
     </div>
+
+    <!-- Button trigger modal -->
+
+  
+  <!-- Modal -->
+  <div class="modal fade" #staticBackdrop id="teacher" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Enrollment Request</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          You are currently logged in as Teacher. Try switching to learner account.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Understood</button>
+        </div>
+      </div>
+    </div>
+  </div>
+ <!-- None -->
+  <div class="modal fade" #staticBackdrop id="none" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Enrollment Request</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <a href="/user-authentication">Log In</a> as learner to proceed.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Understood</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

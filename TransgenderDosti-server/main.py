@@ -1680,6 +1680,57 @@ def get_course_details():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
+# Import other necessary modules and classes
+
+@app.route('/add_course_request', methods=['POST'])
+def add_course_request():
+    try:
+        data = request.get_json()
+
+        user_id = data.get('user_id')
+        course_id = data.get('course_id')
+
+        if not user_id or not course_id:
+            return jsonify({'error': 'Both user_id and course_id are required'}), 400
+
+        cursor = mysql.connection.cursor()
+
+        # Extract learner_id from user_id
+        cursor.execute("SELECT learner_id FROM learner WHERE user_id = %s", (user_id,))
+        learner_id_result = cursor.fetchone()
+
+        if not learner_id_result:
+            return jsonify({'error': 'Learner not found for the given user_id'}), 404
+
+        learner_id = learner_id_result[0]
+
+        # Check if course exists
+        cursor.execute("SELECT * FROM course WHERE course_id = %s", (course_id,))
+        course = cursor.fetchone()
+
+        if not course:
+            return jsonify({'error': 'Course not found for the given course ID'}), 404
+
+        # Check if the learner has already enrolled in the course
+        cursor.execute("SELECT * FROM courserequest WHERE learner_id = %s AND course_id = %s", (learner_id, course_id))
+        existing_request = cursor.fetchone()
+
+        if existing_request:
+            return jsonify({'error': 'Learner has already enrolled in this course'}), 400
+
+        # Add to courserequest table with status as 'pending'
+        cursor.execute("INSERT INTO courserequest (course_id, learner_id, status) VALUES (%s, %s, %s)",
+                       (course_id, learner_id, 'pending'))
+
+        mysql.connection.commit()
+        cursor.close()
+
+        return jsonify({'success': True, 'message': 'Course request added successfully'}), 200
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
 
 ####################################################################################################################################
 #voice                                                                                                                             #
