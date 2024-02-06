@@ -16,7 +16,7 @@ from io import BytesIO
 #voice libraries 
 from flask import Flask, request, jsonify
 from flask_cors import CORS  # Import CORS
-from google.cloud import speech_v1p1beta1 as speech
+# from google.cloud import speech_v1p1beta1 as speech
 from google.oauth2 import service_account
 from pydub import AudioSegment
 
@@ -1685,7 +1685,7 @@ def get_course_details():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-# Import other necessary modules and classes
+
 
 @app.route('/add_course_request', methods=['POST'])
 def add_course_request():
@@ -1694,9 +1694,10 @@ def add_course_request():
 
         user_id = data.get('user_id')
         course_id = data.get('course_id')
+        teacher_id = data.get('teacher_id')  # Add teacher_id
 
-        if not user_id or not course_id:
-            return jsonify({'error': 'Both user_id and course_id are required'}), 400
+        if not user_id or not course_id or not teacher_id:
+            return jsonify({'error': 'user_id, course_id, and teacher_id are required'}), 400
 
         cursor = mysql.connection.cursor()
 
@@ -1723,9 +1724,9 @@ def add_course_request():
         if existing_request:
             return jsonify({'error': 'Learner has already enrolled in this course'}), 400
 
-        # Add to courserequest table with status as 'pending'
-        cursor.execute("INSERT INTO courserequest (course_id, learner_id, status) VALUES (%s, %s, %s)",
-                       (course_id, learner_id, 'pending'))
+        # Add to courserequest table with status as 'pending' and teacher_id
+        cursor.execute("INSERT INTO courserequest (course_id, learner_id, status, teacher_id) VALUES (%s, %s, %s, %s)",
+                       (course_id, learner_id, 'Pending', teacher_id))
 
         mysql.connection.commit()
         cursor.close()
@@ -1735,66 +1736,117 @@ def add_course_request():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
+@app.route('/get_learner_requestcourses', methods=['GET'])
+def get_learner_requestcourses():
+    try:
+        user_id = request.args.get('user_id')
+
+        if not user_id:
+            return jsonify({'error': 'user_id is required'}), 400
+
+        cursor = mysql.connection.cursor()
+
+        # Extract learner_id from user_id
+        cursor.execute("SELECT learner_id FROM learner WHERE user_id = %s", (user_id,))
+        learner_id_result = cursor.fetchone()
+
+        if not learner_id_result:
+            return jsonify({'error': 'Learner not found for the given user_id'}), 404
+
+        learner_id = learner_id_result[0]
+
+        # Retrieve all courses for the learner with request status
+        cursor.execute("""
+            SELECT c.course_id, c.title, c.details, c.course_for, c.course_fee,
+                   c.course_duration, c.teacher_id, cr.status, c.course_picture
+            FROM course c
+            JOIN courserequest cr ON c.course_id = cr.course_id
+            WHERE cr.learner_id = %s
+            """, (learner_id,))
+
+        courses = cursor.fetchall()
+
+        formatted_courses = []
+        for course in courses:
+            course_data = {
+                "course_id": course[0],
+                "title": course[1],
+                "details": course[2],
+                "course_for": course[3],
+                "course_fee": course[4],
+                "course_duration": course[5],
+                "teacher_id": course[6],
+                "status": course[7],
+                "course_picture": course[8]
+            }
+            formatted_courses.append(course_data)
+
+        cursor.close()
+
+        return jsonify({'success': True, 'courses': formatted_courses}), 200
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 
 ####################################################################################################################################
 #voice                                                                                                                             #
 ####################################################################################################################################
-
-credentials = service_account.Credentials.from_service_account_file('C:/voice/voice_navigation server/credentials.json')
-client = speech.SpeechClient(credentials=credentials)
-
-
-def convert_wav_file(input_path, output_path, target_sample_rate=16000, target_sample_width=2):
-    sound = AudioSegment.from_file(input_path)
-
-    if sound.channels > 1:
-        sound = sound.set_channels(1)
-
-    if sound.frame_rate != target_sample_rate:
-        sound = sound.set_frame_rate(target_sample_rate)
-
-    sound = sound.set_sample_width(target_sample_width)
-
-    sound.export(output_path, format="wav")
-
-@app.route('/transcribe', methods=['POST'])
-def transcribe_audio():
-    try:
-        uploaded_file = request.files.get('audio')
-
-        if not uploaded_file:
-            return jsonify({'error': 'No audio file provided'})
-
-        # Save the uploaded file to a temporary location
-        input_path = 'temp_input.wav'
-        uploaded_file.save(input_path)
-
-        # Convert the audio file to the target format
-        output_path = 'temp_output.wav'
-        convert_wav_file(input_path, output_path)
-
-        # Read the converted audio content
-        audio_content = AudioSegment.from_file(output_path).raw_data
-
-        audio = speech.RecognitionAudio(content=audio_content)
-
-        config = speech.RecognitionConfig(
-            encoding=speech.RecognitionConfig.AudioEncoding.LINEAR16,
-            sample_rate_hertz=16000,
-            language_code='ur-PK',
-        )
-
-        response = client.recognize(config=config, audio=audio)
-
-        transcription = ""
-        for result in response.results:
-            transcription += result.alternatives[0].transcript + "\n"
-        print(transcription+"hahahah")
-        return jsonify({'transcription': transcription})
-
-    except Exception as e:
-        return jsonify({'error': str(e)})
+#
+# credentials = service_account.Credentials.from_service_account_file('C:/voice/voice_navigation server/credentials.json')
+# client = speech.SpeechClient(credentials=credentials)
+#
+#
+# def convert_wav_file(input_path, output_path, target_sample_rate=16000, target_sample_width=2):
+#     sound = AudioSegment.from_file(input_path)
+#
+#     if sound.channels > 1:
+#         sound = sound.set_channels(1)
+#
+#     if sound.frame_rate != target_sample_rate:
+#         sound = sound.set_frame_rate(target_sample_rate)
+#
+#     sound = sound.set_sample_width(target_sample_width)
+#
+#     sound.export(output_path, format="wav")
+#
+# @app.route('/transcribe', methods=['POST'])
+# def transcribe_audio():
+#     try:
+#         uploaded_file = request.files.get('audio')
+#
+#         if not uploaded_file:
+#             return jsonify({'error': 'No audio file provided'})
+#
+#         # Save the uploaded file to a temporary location
+#         input_path = 'temp_input.wav'
+#         uploaded_file.save(input_path)
+#
+#         # Convert the audio file to the target format
+#         output_path = 'temp_output.wav'
+#         convert_wav_file(input_path, output_path)
+#
+#         # Read the converted audio content
+#         audio_content = AudioSegment.from_file(output_path).raw_data
+#
+#         audio = speech.RecognitionAudio(content=audio_content)
+#
+#         config = speech.RecognitionConfig(
+#             encoding=speech.RecognitionConfig.AudioEncoding.LINEAR16,
+#             sample_rate_hertz=16000,
+#             language_code='ur-PK',
+#         )
+#
+#         response = client.recognize(config=config, audio=audio)
+#
+#         transcription = ""
+#         for result in response.results:
+#             transcription += result.alternatives[0].transcript + "\n"
+#         print(transcription+"hahahah")
+#         return jsonify({'transcription': transcription})
+#
+#     except Exception as e:
+#         return jsonify({'error': str(e)})
 
 if __name__ == '__main__':
     app.run(debug=True)

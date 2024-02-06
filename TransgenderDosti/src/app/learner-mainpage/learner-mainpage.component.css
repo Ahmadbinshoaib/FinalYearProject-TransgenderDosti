@@ -85,6 +85,7 @@
     padding-left: 12px;
 
 }
+
 .course-content2 {
     padding-top: 0px;
     padding-left: 12px;
@@ -160,7 +161,8 @@
     line-height: normal;
 
 }
-.date{
+
+.date {
     color: #7c7c7c;
     font-family: Karla;
     font-size: 8px;
@@ -171,7 +173,7 @@
 
 }
 
-.status{
+.status {
     color: #ffffff;
     font-family: Karla;
     font-size: 11px;
@@ -185,14 +187,15 @@
     padding-right: 12px;
 
 }
+
 .custombtn2t {
     color: rgb(255, 255, 255);
-    
+
     font-family: Karla;
     background: rgba(11, 46, 226, 0.72);
     border: 1px solid rgba(11, 46, 226, 0.72);
     border-radius: 18px;
-   font-size: 10px;
+    font-size: 10px;
     /* Adding a border to match the grey background on hover/focus */
     transition: background-color 0.3s ease;
     /* Adding a smooth transition effect */
@@ -204,13 +207,24 @@
     border: none
 }
 
+.course-img-db {
+    border-radius: 9px;
+    margin-right: 0px;
+    height: 78px;
+    width: 80px;
+}
+
+.status.accepted {
+    background-color: green;
+}
+
 @media (max-width: 1154px) {
-   
+
     .custombtn2t {
         font-size: 0.6rem;
     }
 
-   
+
 }
 
 @media (max-width: 576px) {
@@ -218,7 +232,7 @@
 
 
 
-    
+
 
     button.btn.custombtn2t {
         margin-bottom: 40px;

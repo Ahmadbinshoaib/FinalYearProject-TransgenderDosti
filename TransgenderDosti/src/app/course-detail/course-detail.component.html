@@ -40,7 +40,7 @@
 
                     </div>
                     <div class="col-4 cll">
-                        <button (click)="enrollmentRequest()" class="btn btn-primary custom-btn">Request & Buy {{course?.course_fee}}</button>
+                        <button (click)="enrollmentRequest(course?.teacher.teacher_id)" class="btn btn-primary custom-btn">Request & Buy {{course?.course_fee}}</button>
                     </div>
                 </div>
 
