@@ -5,7 +5,6 @@ import { HttpClient } from '@angular/common/http';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { NgbDateStruct, NgbTimeStruct } from '@ng-bootstrap/ng-bootstrap';
-import { TeacherProfileService } from '../Services/teacher-profile.service';
 import { LearnerProfileService } from '../Services/learner-profile.service';
 
 import { Observable } from 'rxjs/internal/Observable';
@@ -163,7 +162,9 @@ export class LearnerProfileComponent implements OnInit{
   // Image
 
   ngOnInit() {
+    this.userIdParam = this.activeRoute.snapshot.paramMap.get('userId')
     this.imagePath = 'assets/Group.png';
+    console.log("current user id is "+this.userIdParam)
 
     this.fetchCountries();
     if (this.userIdParam) {
@@ -172,7 +173,8 @@ export class LearnerProfileComponent implements OnInit{
     }
 
 
-    const userId = this.activeRoute.snapshot.paramMap.get('userId');
+    const userId = this.activeRoute.snapshot.paramMap.get('userId')
+    console.log("current user id is "+userId)
 
     if (userId) {
 
@@ -271,8 +273,7 @@ export class LearnerProfileComponent implements OnInit{
   createLearnerProfilePersonal(data: any) {
 
 
-    const userId = this.activeRoute.snapshot.paramMap.get('userId');
-
+    const userId = this.userIdParam
     if (!userId) {
       console.error('UserId is null or undefined');
       return;
@@ -384,9 +385,10 @@ export class LearnerProfileComponent implements OnInit{
 
 
   loadLearnerData(userId: string): void {
+    
     this.learnerProfileService.getLearnerPersonalProfile(userId).subscribe(
       (response) => {
-        this.learnerData = response.teacher_data;
+        this.learnerData = response.learner_data;
 
         if (this.learnerData.bio) {
 
@@ -447,7 +449,7 @@ export class LearnerProfileComponent implements OnInit{
           console.log(this.websiteInfo)
         },
         (error) => {
-          console.error('Error loading educational info', error);
+          console.error('Error loading website info', error);
         }
       );
     } else {
@@ -468,13 +470,7 @@ export class LearnerProfileComponent implements OnInit{
     }
   }
 
-  formatDate(date: any): string {
-    return new Date(date).toLocaleDateString('en-US', {
-      day: 'numeric',
-      month: 'short',
-      year: 'numeric'
-    });
-  }
+  
 
   
 

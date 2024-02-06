@@ -270,6 +270,50 @@ def teacher_profile_personalinfo():
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+    
+
+@app.route('/learner_profile_personalinfo', methods=['POST'])
+def learner_profile_personalinfo():
+    try:
+        data = request.json
+        userid = data.get('user_id')
+        print(userid)
+        phone_number = data.get('phonenumber')
+        bio = data.get('bio')
+        print(bio)
+        city_town = data.get('city')
+        gender = data.get('gender')
+        cnic_picture = data.get('cnic_picture')  # Assuming this is a file path or base64 encoded image
+        country = data.get('country')
+        profile_picture = data.get('profile_picture')  # Assuming this is a file path or base64 encoded image
+        print(profile_picture)
+
+        cursor = mysql.connection.cursor()
+
+        # Check if the teacher exists based on the provided user ID
+        cursor.execute("SELECT * FROM learner WHERE user_id = %s", (userid,))
+        learner = cursor.fetchone()
+
+        if not learner:
+            return jsonify({'error': 'Teacher not found for the given user ID'}), 404
+
+        # Update the teacher's profile personal information
+        cursor.execute("""
+            UPDATE learner
+            SET phone_number = %s, bio = %s, city_town = %s, gender = %s,
+                cnic_picture = %s, country = %s, profile_picture = %s
+            WHERE user_id = %s
+        """, (phone_number, bio, city_town, gender, cnic_picture, country, profile_picture, userid))
+
+        mysql.connection.commit()
+        cursor.close()
+
+        return jsonify({'success': True, 'message': 'learner profile personal information updated successfully'}), 200
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+    
+
 
 @app.route('/get_teacherprofile_personalinfo', methods=['GET'])
 def get_teacher_data():
@@ -301,6 +345,41 @@ def get_teacher_data():
         cursor.close()
 
         return jsonify({'success': True, 'teacher_data': teacher_data}), 200
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+    
+@app.route('/get_learnerprofile_personalinfo', methods=['GET'])
+def get_learner_data():
+    try:
+        user_id = request.args.get('user_id')
+        print("here user id is "+user_id)
+        cursor = mysql.connection.cursor()
+
+        # Check if the teacher exists based on the provided user ID
+        cursor.execute("SELECT * FROM learner WHERE user_id = %s", (user_id,))
+        learner = cursor.fetchone()
+
+        if not learner:
+            return jsonify({'error': 'Learner not found for the given user ID'}), 404
+
+        # Extract teacher data
+        learner_data = {
+            'learner_id': learner[0],
+            'user_id': learner[1],
+            'phone_number': learner[2],
+            'cnic_picture': learner[3],
+            'bio': learner[4],
+            'city_town': learner[5],
+            'country': learner[6],
+            'gender': learner[7],
+            'profile_picture': learner[8],
+        }
+        print (learner_data)
+
+        cursor.close()
+
+        return jsonify({'success': True, 'learner_data': learner_data}), 200
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
