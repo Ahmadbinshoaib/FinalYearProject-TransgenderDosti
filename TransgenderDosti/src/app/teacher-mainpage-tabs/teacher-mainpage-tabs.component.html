@@ -706,8 +706,9 @@
                                             </span>
 
                                             <i class="fa-solid fa-trash fa-sm"
-                                            (click)="openDeleteModal(course.course_id)"
-                                                style="color: #e1143d; padding-left: 5px;"  data-bs-toggle="modal" data-bs-target="#confirmationModal"></i>
+                                                (click)="openDeleteModal(course.course_id)"
+                                                style="color: #e1143d; padding-left: 5px;" data-bs-toggle="modal"
+                                                data-bs-target="#confirmationModal"></i>
                                             <!-- Replace "fa-icon-class" with the actual icon class -->
                                         </div>
                                     </div>
@@ -853,7 +854,242 @@
 
     <div class="tab-pane" [class.active]="activeTab === 'ex1-tabs-2'" id="ex1-tabs-2" role="tabpanel"
         aria-labelledby="ex1-tab-2">
-        Tab 2 content
+
+        <div class="container-fluid">
+            <div class="row">
+                <!-- Left Side -->
+                <!-- Left Side -->
+                <div class="col-sm-12 col-md-6 col-lg-6">
+
+                    <!-- Start and end text -->
+                    <div class="row">
+                        <div class="col-6 text-start">
+                            <!-- Text aligned to the left (start) -->
+                            Student Requests
+                        </div>
+                        <div class="col-6 text-end" style="cursor: pointer;">
+                            <!-- Text aligned to the right (end) -->
+                            Add new student
+                        </div>
+
+
+
+
+
+
+
+
+                    </div>
+
+                    <!-- Line -->
+
+                    <div class="line" [ngClass]="{'custom-class': isSmallScreen}"
+                        [ngStyle]="{'width.px': isSmallScreen ? 230 : null}"></div>
+
+                    <table class="table" *ngIf="requestCourses; else noCoursesMessage">
+                        <thead>
+                            <tr class="text-start">
+                                <th scope=" col">Student Name</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Course Name</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-start">
+                            <tr
+                                *ngFor="let course of requestCourses.slice((currentPage - 1) * itemsPerPage2, currentPage * itemsPerPage2)">
+                                <td scope="row">{{course.learner_name}}</td>
+                                <td>{{course.learner_email}}</td>
+                                <td>{{course.course_name}}</td>
+                                <td>
+                                    <i class="fa-solid fa-check fa-xl" style="color: #047c12; padding-right: 5px;"></i>
+                                    <i class="fa-solid fa-xmark fa-xl" style="color: #e60000;"></i>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                            <li class="page-item" *ngFor="let page of getPages()">
+                                <a class="page-link" (click)="setCurrentPage(page)">{{ page }}</a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <!-- 
+                    <table datatable class="row-border hover">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>First name</th>
+                                <th>Last name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Foo</td>
+                                <td>Bar</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Someone</td>
+                                <td>Youknow</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Iamout</td>
+                                <td>Ofinspiration</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>Yoda</td>
+                                <td>Skywalker</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>Patrick</td>
+                                <td>Dupont</td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td>Barack</td>
+                                <td>Obama</td>
+                            </tr>
+                            <tr>
+                                <td>7</td>
+                                <td>François</td>
+                                <td>Holland</td>
+                            </tr>
+                            <tr>
+                                <td>8</td>
+                                <td>Michel</td>
+                                <td>Popo</td>
+                            </tr>
+                            <tr>
+                                <td>9</td>
+                                <td>Chuck</td>
+                                <td>Norris</td>
+                            </tr>
+                            <tr>
+                                <td>10</td>
+                                <td>Simon</td>
+                                <td>Robin</td>
+                            </tr>
+                            <tr>
+                                <td>11</td>
+                                <td>Louis</td>
+                                <td>Lin</td>
+                            </tr>
+                            <tr>
+                                <td>12</td>
+                                <td>Zelda</td>
+                                <td>Link</td>
+                            </tr>
+                        </tbody>
+                    </table> -->
+
+
+
+
+
+
+
+
+                </div>
+
+
+                <!-- Right Side -->
+                <!-- Right Side -->
+                <div class="col-sm-12 col-md-6 col-lg-6">
+
+                    <!--Hello-->
+                    <!--Hello-->
+
+                    <div class="row hello-row">
+                        <div class="row"
+                            style="padding-right: 0px;margin-right: 0px;margin-left: 0px;padding-left: 0px;">
+                            <img src="assets/hello.jpg" class="helloimg" alt="Book Image">
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-7 col-md-7 col-lg-7">
+                                <div class="row">
+                                    <span class="hello-text" style="padding-top: 40px;">
+                                        Hello
+                                    </span>
+
+                                    <span class="hello-text">
+                                        Welcome to Transgender Dosti.
+                                    </span>
+
+                                    <span class="hello-subtext" style="padding-top: 40px;">
+                                        Teachers stand as beacons of inspiration, shaping a brighter future through
+                                        dedicated expertise and education.
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-sm-5 col-md-5 col-lg-5">
+
+                                <img src="assets/3dicons (5).png" class="star-img" alt="Book Image">
+
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                    <!--Courses-->
+                    <!--Courses-->
+
+                    <div class="row hello-row" style="margin-top: 20px;">
+                        <div class="row"
+                            style="padding-right: 0px;margin-right: 0px;margin-left: 0px;padding-left: 0px;">
+                            <img src="assets/courses.jpg" class="helloimg" alt="Book Image">
+                        </div>
+
+
+
+                        <div class="row">
+
+
+                            <div class="col-sm-7 col-md-7 col-lg-7">
+                                <div class="row">
+                                    <span class="hello-text" style="padding-top: 40px;">
+                                        Courses in demand
+                                    </span>
+
+                                    <span class="hello-text">
+                                        Hunt the courses right there.
+                                    </span>
+
+                                    <span class="hello-subtext" style="padding-top: 40px;">
+                                        Teachers stand as beacons of inspiration, shaping a brighter future through
+                                        dedicated expertise and education.
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4 col-md-4 col-lg-4">
+
+                                <img src="assets/fire.png" class="fire-img" alt="Book Image">
+
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+
+
     </div>
 
 
@@ -867,5 +1103,3 @@
         Tab 3 content
     </div>
 </div>
-
-

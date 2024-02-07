@@ -2042,6 +2042,63 @@ def get_learner_requestcourses():
         return jsonify({'error': str(e)}), 500
 
 
+@app.route('/get_teacher_requestcourses', methods=['POST'])
+def get_teacher_request_courses():
+    try:
+        data = request.get_json()
+        user_id = data.get('user_id')
+
+        if not user_id:
+            return jsonify({'error': 'user_id is required'}), 400
+
+        cursor = mysql.connection.cursor()
+
+        # Extract teacher_id from teacher table
+        cursor.execute("SELECT teacher_id FROM teacher WHERE user_id = %s", (user_id,))
+        teacher_id_result = cursor.fetchone()
+
+        if not teacher_id_result:
+            return jsonify({'error': 'Teacher not found for the given user_id'}), 404
+
+        teacher_id = teacher_id_result[0]
+
+        # Extract all courses from courserequest table with respect to teacher_id
+        cursor.execute("SELECT * FROM courserequest WHERE teacher_id = %s", (teacher_id,))
+        courses = cursor.fetchall()
+
+        learner_info = []
+
+        for course in courses:
+            # Extract learner information from user table using learner_id
+            cursor.execute("SELECT learner.user_id, user.full_name, user.email FROM learner JOIN user ON learner.user_id = user.id WHERE learner_id = %s", (course[2],))
+            learner_data = cursor.fetchone()
+
+            if learner_data:
+                # Extract course_name from course table using course_id
+                cursor.execute("SELECT title FROM course WHERE course_id = %s", (course[1],))
+                course_name_result = cursor.fetchone()
+
+                if course_name_result:
+                    course_name = course_name_result[0]
+                else:
+                    course_name = 'Unknown Course'
+
+                learner_info.append({
+                    'learner_user_id': learner_data[0],
+                    'learner_name': learner_data[1],
+                    'learner_email': learner_data[2],
+                    'course_name': course_name
+                })
+
+        cursor.close()
+
+        return jsonify({'success': True, 'learner_info': learner_info}), 200
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
+
 ####################################################################################################################################
 #voice                                                                                                                             #
 ####################################################################################################################################

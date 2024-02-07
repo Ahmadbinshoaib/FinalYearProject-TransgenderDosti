@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { UserAuthenticationService } from '../Services/user-authentication.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TeacherCoursesService } from '../Services/teacher-courses.service';
@@ -6,19 +6,23 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TeacherProfileService } from '../Services/teacher-profile.service';
 import { TeacherProfileData, courseData, educationData } from '../datatypes';
 import { ToastrService } from 'ngx-toastr';
+import { EducationPageServicesService } from '../Services/education-page-services.service';
+
 
 @Component({
   selector: 'app-teacher-mainpage-tabs',
   templateUrl: './teacher-mainpage-tabs.component.html',
   styleUrls: ['./teacher-mainpage-tabs.component.css']
 })
-export class TeacherMainpageTabsComponent {
+export class TeacherMainpageTabsComponent implements OnInit, AfterViewInit {
   userId = this.activeRoute.snapshot.paramMap.get('userId')
   // console.warn(userId);
   courses: any[] = []; // Assuming your course array has a certain structure
   pageSize = 5; // Number of courses to show per page
   currentPage = 1; // Current page number
   totalPages!: number;
+  currentPage2: number = 1;
+  itemsPerPage2: number = 2;
 
 
   public imagePath: string = '';
@@ -28,6 +32,7 @@ export class TeacherMainpageTabsComponent {
   userIdParam = this.activeRoute.snapshot.paramMap.get('userId')
   activeTab: string = 'ex1-tabs-1';
   teacherEmail: string = ''
+  requestCourses: any[] = []
 
   currencies: any[] = [];
   selectedCurrency: any = '';
@@ -60,6 +65,9 @@ export class TeacherMainpageTabsComponent {
 
   partCourseId: any;
 
+  dtOptions: DataTables.Settings = {};
+
+
   changeTab(tabId: string) {
     this.activeTab = tabId;
   }
@@ -70,7 +78,8 @@ export class TeacherMainpageTabsComponent {
     private courseService: TeacherCoursesService,
     private router: Router, private http: HttpClient,
     private teacherProfileService: TeacherProfileService,
-    private toastr: ToastrService) {
+    private toastr: ToastrService,
+    private courseRequest: EducationPageServicesService) {
 
 
   }
@@ -78,11 +87,23 @@ export class TeacherMainpageTabsComponent {
   @ViewChild('fileInput2') fileInput2!: ElementRef;
   isSmallScreen: boolean = false;
 
+  ngAfterViewInit() {
+    // $(document).ready(function () {
+    //   $('#yourDataTableId').DataTable();
+    // });
+  }
 
   ngOnInit() {
     if (this.userIdParam) {
       this.loadTeacherData(this.userIdParam);
     }
+    this.loadTeacherRequestCourses();
+
+    // this.dtOptions = {
+    //   pagingType: 'full_numbers',
+    //   pageLength: 5,
+    //   processing: true
+    // };
 
 
     this.checkScreenSize();
@@ -106,6 +127,9 @@ export class TeacherMainpageTabsComponent {
     }
 
     this.loadCourses();
+
+
+
 
 
 
@@ -478,6 +502,34 @@ export class TeacherMainpageTabsComponent {
       }
     );
   }
+
+
+  // Teacher Request Courses 
+
+  loadTeacherRequestCourses() {
+    if (this.userId) {
+      this.courseRequest.getTeacherRequestCourses(this.userId).subscribe(
+        (response) => {
+          this.requestCourses = response.learner_info;
+          console.log(this.requestCourses);
+        },
+        (error) => {
+          console.error('Error fetching courses:', error);
+        }
+      );
+    }
+  }
+
+  // Inside YourComponent class
+  setCurrentPage(page: number) {
+    this.currentPage2 = page;
+  }
+
+  getPages(): number[] {
+    const pageCount2 = Math.ceil(this.requestCourses.length / this.itemsPerPage2);
+    return Array.from({ length: pageCount2 }, (_, index) => index + 1);
+  }
+
 
 
 

@@ -12,30 +12,41 @@ export class EducationPageServicesService {
 
   }
 
-    // Example method to get all courses
-    getAllCourses(): Observable<any> {
-      const url = `${this.serverUrl}/courses`;
-      return this.http.get(url);
-    }
+  // Example method to get all courses
+  getAllCourses(): Observable<any> {
+    const url = `${this.serverUrl}/courses`;
+    return this.http.get(url);
+  }
 
-    getCourseDetails(courseId: string): Observable<any> {
-      const url = `${this.serverUrl}/get_speccourses_detail_byId?course_id=${courseId}`;
-      return this.http.get(url);
-    }
+  getCourseDetails(courseId: string): Observable<any> {
+    const url = `${this.serverUrl}/get_speccourses_detail_byId?course_id=${courseId}`;
+    return this.http.get(url);
+  }
 
-    addCourseRequest(userid: number, courseId: number, teacherid: any): Observable<any> {
-      const url = `${this.serverUrl}/add_course_request`;
-      const body = { user_id: userid, course_id: courseId, teacher_id: teacherid };
-  
-      const headers = new HttpHeaders({
-        'Content-Type': 'application/json'
-      });
-  
-      return this.http.post(url, body, { headers });
-    }
+  addCourseRequest(userid: number, courseId: number, teacherid: any): Observable<any> {
+    const url = `${this.serverUrl}/add_course_request`;
+    const body = { user_id: userid, course_id: courseId, teacher_id: teacherid };
 
-    getLearnerRequestCourses(userId: string): Observable<any> {
-      const url = `${this.serverUrl}/get_learner_requestcourses?user_id=${userId}`;
-      return this.http.get(url);
-    }
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+
+    return this.http.post(url, body, { headers });
+  }
+
+  getLearnerRequestCourses(userId: string): Observable<any> {
+    const url = `${this.serverUrl}/get_learner_requestcourses?user_id=${userId}`;
+    return this.http.get(url);
+  }
+
+  getTeacherRequestCourses(userId: string): Observable<any> {
+    const url = `${this.serverUrl}/get_teacher_requestcourses`;
+    const body = { user_id: userId };
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+
+    return this.http.post(url, body, { headers });
+  }
 }

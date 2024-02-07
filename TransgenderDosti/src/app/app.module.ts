@@ -35,7 +35,7 @@ import { CourseDetailComponent } from './course-detail/course-detail.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LearnerPaymentScreenComponent } from './learner-payment-screen/learner-payment-screen.component';
 import { LearnerProfileComponent } from './learner-profile/learner-profile.component';
-
+import { DataTablesModule } from 'angular-datatables';
 
 @NgModule({
   declarations: [
@@ -78,7 +78,8 @@ import { LearnerProfileComponent } from './learner-profile/learner-profile.compo
     NgSelectModule,
     MatSidenavModule,
     MatListModule,
-    NgbModule
+    NgbModule,
+    DataTablesModule,
 
 
   ],
