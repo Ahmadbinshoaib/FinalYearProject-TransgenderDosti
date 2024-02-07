@@ -480,7 +480,7 @@ export class LearnerProfileComponent implements OnInit{
   
   fetchSocialInfo(socialId: string) {
     // Use your data service to fetch educational information based on teacher ID
-    this.learnerProfileService.getTeacherSocialInfoById(socialId).subscribe(
+    this.learnerProfileService.getLearnerSocialInfoById(socialId).subscribe(
       (data) => {
         
         this.socialInfoById = data.social_info;
@@ -494,7 +494,7 @@ export class LearnerProfileComponent implements OnInit{
   }
   fetchWebsiteInfo(websiteId: string) {
     // Use your data service to fetch educational information based on teacher ID
-    this.learnerProfileService.getTeacherWebsiteInfoById(websiteId).subscribe(
+    this.learnerProfileService.getLearnerWebsiteInfoById(websiteId).subscribe(
       (data) => {
         
         this.websiteInfoById = data.website_info;
@@ -522,7 +522,7 @@ export class LearnerProfileComponent implements OnInit{
  
 
 
-deleteTeacherSocialInfo(socialId: string) {
+deleteLearnerSocialInfo(socialId: string) {
   const userId = this.activeRoute.snapshot.paramMap.get('userId');
 
   if (!userId) {
@@ -530,7 +530,7 @@ deleteTeacherSocialInfo(socialId: string) {
     return;
   }
 
-  this.learnerProfileService.deleteTeacherSocialInfo(userId, socialId).subscribe(
+  this.learnerProfileService.deleteLearnerSocialInfo(userId, socialId).subscribe(
     (response) => {
       console.log('Successfully deleted social information');
       // You can add any additional logic or reload data if needed
@@ -547,7 +547,7 @@ deleteTeacherSocialInfo(socialId: string) {
     }
   );
 }
-deleteTeacherWebsiteInfo(websiteId: string) {
+deleteLearnerWebsiteInfo(websiteId: string) {
   const userId = this.activeRoute.snapshot.paramMap.get('userId');
 
   if (!userId) {
@@ -555,7 +555,7 @@ deleteTeacherWebsiteInfo(websiteId: string) {
     return;
   }
 
-  this.learnerProfileService.deleteTeacherWebsiteInfo(userId, websiteId).subscribe(
+  this.learnerProfileService.deleteLearnerWebsiteInfo(userId, websiteId).subscribe(
     (response) => {
       console.log('Successfully deleted website information');
       // You can add any additional logic or reload data if needed
