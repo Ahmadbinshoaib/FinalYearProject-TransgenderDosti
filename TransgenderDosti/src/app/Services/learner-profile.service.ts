@@ -71,8 +71,8 @@ export class LearnerProfileService {
     return this.http.get(url);
   }
 
-  getTeacherSocialInfoById(socialId: string): Observable<any> {
-    const endpoint = `/get_social_info_by_id?social_id=${socialId}`;
+  getLearnerSocialInfoById(socialId: string): Observable<any> {
+    const endpoint = `/get_socialLearner_info_by_id?social_id=${socialId}`;
     const url = this.serverUrl + endpoint;
 
     // Assume you need to send the userId as a query parameter
@@ -81,8 +81,8 @@ export class LearnerProfileService {
     return this.http.get(url);
   }
 
-  getTeacherWebsiteInfoById(websiteId: string): Observable<any> {
-    const endpoint = `/get_website_info_by_id?website_id=${websiteId}`;
+  getLearnerWebsiteInfoById(websiteId: string): Observable<any> {
+    const endpoint = `/get_websiteLearner_info_by_id?website_id=${websiteId}`;
     const url = this.serverUrl + endpoint;
 
     // Assume you need to send the userId as a query parameter
@@ -91,8 +91,8 @@ export class LearnerProfileService {
     return this.http.get(url);
   }
 
-  deleteTeacherSocialInfo(userId: string, socialId: string): Observable<any> {
-    const endpoint = `${this.serverUrl}/delete_social_info`;
+  deleteLearnerSocialInfo(userId: string, socialId: string): Observable<any> {
+    const endpoint = `${this.serverUrl}/delete_socialLearner_info`;
     const headers = {
       'Content-Type': 'application/json',
     };
@@ -100,8 +100,8 @@ export class LearnerProfileService {
     return this.http.delete(endpoint, { headers, params });
   }
 
-  deleteTeacherWebsiteInfo(userId: string, websiteId: string): Observable<any> {
-    const endpoint = `${this.serverUrl}/delete_website_info`;
+  deleteLearnerWebsiteInfo(userId: string, websiteId: string): Observable<any> {
+    const endpoint = `${this.serverUrl}/delete_websiteLearner_info`;
     const headers = {
       'Content-Type': 'application/json',
     };
