@@ -168,8 +168,8 @@ export class LearnerProfileComponent implements OnInit{
 
     this.fetchCountries();
     if (this.userIdParam) {
-      this.loadTeacherSocialInfo(this.userIdParam)
-      this.loadTeacherWebsiteInfo(this.userIdParam)
+      this.loadLearnerSocialInfo(this.userIdParam)
+      this.loadLearnerWebsiteInfo(this.userIdParam)
     }
 
 
@@ -307,7 +307,7 @@ export class LearnerProfileComponent implements OnInit{
 
 
 
-  saveTeacherSocialInfo(data: any) {
+  saveLearnerSocialInfo(data: any) {
     // console.log(data)
 
     const userId = this.activeRoute.snapshot.paramMap.get('userId');
@@ -323,12 +323,12 @@ export class LearnerProfileComponent implements OnInit{
       
     };
     // Make API call using the service
-    this.learnerProfileService.saveTeacherSocialInfo(requestData).subscribe(
+    this.learnerProfileService.saveLearnerSocialInfo(requestData).subscribe(
       response => {
         console.log(this.userIdParam)
         if (this.userIdParam) {
           console.warn(this.userIdParam)
-          this.loadTeacherSocialInfo(this.userIdParam)
+          this.loadLearnerSocialInfo(this.userIdParam)
 
         }
 
@@ -342,7 +342,7 @@ export class LearnerProfileComponent implements OnInit{
     );
   }
 
-  saveTeacherWebsiteInfo(data: any) {
+  saveLearnerWebsiteInfo(data: any) {
     // console.log(data)
 
     const userId = this.activeRoute.snapshot.paramMap.get('userId');
@@ -358,12 +358,12 @@ export class LearnerProfileComponent implements OnInit{
       
     };
     // Make API call using the service
-    this.learnerProfileService.saveTeacherWebsiteInfo(requestData).subscribe(
+    this.learnerProfileService.saveLearnerWebsiteInfo(requestData).subscribe(
       response => {
         console.log(this.userIdParam)
         if (this.userIdParam) {
           console.warn(this.userIdParam)
-          this.loadTeacherWebsiteInfo(this.userIdParam)
+          this.loadLearnerWebsiteInfo(this.userIdParam)
 
         }
 
@@ -420,17 +420,17 @@ export class LearnerProfileComponent implements OnInit{
 
   
 
-  loadTeacherSocialInfo(userId: string) {
+  loadLearnerSocialInfo(userId: string) {
     console.warn('load')
     if (userId) {
-      this.learnerProfileService.getTeacherSocialInfo(userId).subscribe(
+      this.learnerProfileService.getLearnerSocialInfo(userId).subscribe(
         (response) => {
           // Assuming the response structure has a 'courses' property
           this.socialInfo = response.social_info;
           console.log(this.socialInfo)
         },
         (error) => {
-          console.error('Error loading educational info', error);
+          console.error('Error loading social info', error);
         }
       );
     } else {
@@ -439,10 +439,10 @@ export class LearnerProfileComponent implements OnInit{
 
   }
 
-  loadTeacherWebsiteInfo(userId: string) {
+  loadLearnerWebsiteInfo(userId: string) {
     console.warn('load')
     if (userId) {
-      this.learnerProfileService.getTeacherWebsiteInfo(userId).subscribe(
+      this.learnerProfileService.getLearnerWebsiteInfo(userId).subscribe(
         (response) => {
           // Assuming the response structure has a 'courses' property
           this.websiteInfo = response.website_info;
@@ -536,7 +536,7 @@ deleteTeacherSocialInfo(socialId: string) {
       // You can add any additional logic or reload data if needed
       if (this.userIdParam) {
         console.warn(this.userIdParam)
-        this.loadTeacherSocialInfo(this.userIdParam)
+        this.loadLearnerSocialInfo(this.userIdParam)
   
       }
     },
@@ -561,7 +561,7 @@ deleteTeacherWebsiteInfo(websiteId: string) {
       // You can add any additional logic or reload data if needed
       if (this.userIdParam) {
         console.warn(this.userIdParam)
-        this.loadTeacherWebsiteInfo(this.userIdParam)
+        this.loadLearnerWebsiteInfo(this.userIdParam)
   
       }
     },

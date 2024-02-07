@@ -33,8 +33,8 @@ export class LearnerProfileService {
     return this.http.get(url);
   }
 
-  saveTeacherSocialInfo(data: any): Observable<any> {
-    const endpoint = `${this.serverUrl}/save_social_info`;
+  saveLearnerSocialInfo(data: any): Observable<any> {
+    const endpoint = `${this.serverUrl}/save_socialLearner_info`;
     // Adjust the headers based on your API requirements
     const headers = {
       'Content-Type': 'application/json',
@@ -42,8 +42,8 @@ export class LearnerProfileService {
     };
     return this.http.post(endpoint, data, { headers });
   }
-  saveTeacherWebsiteInfo(data: any): Observable<any> {
-    const endpoint = `${this.serverUrl}/save_website_info`;
+  saveLearnerWebsiteInfo(data: any): Observable<any> {
+    const endpoint = `${this.serverUrl}/save_websiteLearner_info`;
     // Adjust the headers based on your API requirements
     const headers = {
       'Content-Type': 'application/json',
@@ -52,8 +52,8 @@ export class LearnerProfileService {
     return this.http.post(endpoint, data, { headers });
   }
 
-  getTeacherSocialInfo(userId: string): Observable<any> {
-    const endpoint = `/get_social_info?user_id=${userId}`;
+  getLearnerSocialInfo(userId: string): Observable<any> {
+    const endpoint = `/get_socialLearner_info?user_id=${userId}`;
     const url = this.serverUrl + endpoint;
 
     // Assume you need to send the userId as a query parameter
@@ -61,8 +61,8 @@ export class LearnerProfileService {
 
     return this.http.get(url);
   }
-  getTeacherWebsiteInfo(userId: string): Observable<any> {
-    const endpoint = `/get_website_info?user_id=${userId}`;
+  getLearnerWebsiteInfo(userId: string): Observable<any> {
+    const endpoint = `/get_websiteLearner_info?user_id=${userId}`;
     const url = this.serverUrl + endpoint;
 
     // Assume you need to send the userId as a query parameter
