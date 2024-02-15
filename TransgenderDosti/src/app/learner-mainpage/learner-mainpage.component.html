@@ -259,7 +259,7 @@
 
                                 <div class="col-sm-9 col-md-9 col-lg-10">
                                     <span class="status"
-                                        [ngStyle]="{'background-color': course.status === 'Accepted' ? 'green' : ''}">
+                                        [ngStyle]="{'background-color': (course.status === 'Accepted' ? 'green' : (course.status === 'Rejected' ? 'red' : '')) }">
                                         {{course.status}}
                                     </span>
 

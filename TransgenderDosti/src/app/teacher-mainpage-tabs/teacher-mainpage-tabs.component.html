@@ -896,20 +896,23 @@
                             </tr>
                         </thead>
                         <tbody class="text-start">
-                            <tr *ngFor="let course of getDisplayedCoursest()">
+                            <tr *ngFor="let course of getDisplayedCoursest()" >
                                 <td scope="row">{{course.learner_name}}</td>
                                 <td>{{course.learner_email}}</td>
                                 <td>{{course.course_name}}</td>
                                 <td>
-                                    <i class="fa-solid fa-check fa-xl" style="color: #047c12; padding-right: 5px;"></i>
-                                    <i class="fa-solid fa-xmark fa-xl" style="color: #e60000;"></i>
+                                    <i class="fa-solid fa-check fa-xl" style="color: #047c12; padding-right: 5px; cursor: pointer;"
+                                        (click)="acceptCourseRequest(course.request_id)"></i>
+                                    <i class="fa-solid fa-xmark fa-xl" style="color: #e60000; cursor: pointer;"
+                                        (click)="rejectCourseRequest(course.request_id)"></i>
                                 </td>
                             </tr>
 
                         </tbody>
                     </table>
                     <div class="row">
-                        <div class="col-6 paginate">Showing {{ getStartIndex() + 1 }} to {{ getEndIndex() }} of {{ requestCourses.length }} entries</div>
+                        <div class="col-6 paginate">Showing {{ getStartIndex() + 1 }} to {{ getEndIndex() }} of {{
+                            requestCourses.length }} entries</div>
 
                         <div class="col-6 d-flex justify-content-end">
                             <nav *ngIf="getDisplayedCoursest().length > 0" aria-label="...">

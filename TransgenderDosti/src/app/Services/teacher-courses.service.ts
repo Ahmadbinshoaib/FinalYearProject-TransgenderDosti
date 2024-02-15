@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { SignInResponse, signIn, userTeacher } from '../datatypes';
@@ -57,6 +57,19 @@ export class TeacherCoursesService {
     };
     const params = new HttpParams().set('user_id', userId).set('course_id', courseId.toString());
     return this.http.delete(endpoint, { headers, params });
+  }
+
+  updateCourseRequestStatus(status: string, requestId: number): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+
+    const body = {
+      status: status,
+      request_id: requestId,
+    };
+
+    return this.http.post(`${this.serverUrl}/update_courserequest_status`, body, { headers: headers });
   }
 
 }

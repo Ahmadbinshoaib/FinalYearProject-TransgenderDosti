@@ -2216,15 +2216,43 @@ def get_teacher_request_courses():
                     course_name = 'Unknown Course'
 
                 learner_info.append({
+                    'request_id': course[0],
                     'learner_user_id': learner_data[0],
                     'learner_name': learner_data[1],
                     'learner_email': learner_data[2],
-                    'course_name': course_name
+                    'course_name': course_name,
+                    'status': course[3]  # Add status to the response
                 })
 
         cursor.close()
 
         return jsonify({'success': True, 'learner_info': learner_info}), 200
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
+@app.route('/update_courserequest_status', methods=['POST'])
+def update_courserequest_status():
+    try:
+        data = request.get_json()
+        status = data.get('status')
+        request_id = data.get('request_id')
+
+        if not status or not request_id:
+            return jsonify({'error': 'Both status and request_id are required'}), 400
+
+        cursor = mysql.connection.cursor()
+
+        # Update the status in the courserequest table based on request_id
+        cursor.execute("UPDATE courserequest SET status = %s WHERE request_id = %s", (status, request_id))
+
+        # Commit the changes
+        mysql.connection.commit()
+
+        cursor.close()
+
+        return jsonify({'success': True, 'message': f'Status updated for request_id {request_id}'}), 200
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500

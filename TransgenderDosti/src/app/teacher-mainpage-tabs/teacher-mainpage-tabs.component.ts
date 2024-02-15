@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TeacherCoursesService } from '../Services/teacher-courses.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TeacherProfileService } from '../Services/teacher-profile.service';
-import { TeacherProfileData, courseData, educationData } from '../datatypes';
+import { LearnerInfo, TeacherProfileData, courseData, educationData } from '../datatypes';
 import { ToastrService } from 'ngx-toastr';
 import { EducationPageServicesService } from '../Services/education-page-services.service';
 
@@ -65,9 +65,7 @@ export class TeacherMainpageTabsComponent implements OnInit, AfterViewInit {
 
   profile: string = '';
   video: string = ''
-
   partCourseId: any;
-
   dtOptions: DataTables.Settings = {};
 
 
@@ -82,7 +80,8 @@ export class TeacherMainpageTabsComponent implements OnInit, AfterViewInit {
     private router: Router, private http: HttpClient,
     private teacherProfileService: TeacherProfileService,
     private toastr: ToastrService,
-    private courseRequest: EducationPageServicesService) {
+    private courseRequest: EducationPageServicesService,
+  ) {
 
 
   }
@@ -508,13 +507,16 @@ export class TeacherMainpageTabsComponent implements OnInit, AfterViewInit {
 
 
   // Teacher Request Courses Table
+
+
   loadTeacherRequestCourses() {
     if (this.userId) {
       this.courseRequest.getTeacherRequestCourses(this.userId).subscribe(
         (response) => {
-          this.requestCourses = response.learner_info;
+          // Filter courses with status "Pending"
+          this.requestCourses = response.learner_info.filter((course: LearnerInfo) => course.status === 'Pending');
           console.log(this.requestCourses);
-          this.calculateTotalPagest();
+          this.calculateTotalPages();
         },
         (error) => {
           console.error('Error fetching courses:', error);
@@ -551,6 +553,38 @@ export class TeacherMainpageTabsComponent implements OnInit, AfterViewInit {
   getEndIndex(): number {
     const endIndex = this.currentPaget * this.pageSizet;
     return endIndex > this.requestCourses.length ? this.requestCourses.length : endIndex;
+  }
+
+  acceptCourseRequest(requestId: number): void {
+    let status = "Accepted"
+    this.courseService.updateCourseRequestStatus(status, requestId)
+      .subscribe(
+        response => {
+          console.log('Success:', response);
+          this.loadTeacherRequestCourses()
+          // Handle success, if needed
+        },
+        error => {
+          console.error('Error:', error);
+          // Handle error, if needed
+        }
+      );
+  }
+
+  rejectCourseRequest(requestId: number): void {
+    let status = "Rejected"
+    this.courseService.updateCourseRequestStatus(status, requestId)
+      .subscribe(
+        response => {
+          console.log('Success:', response);
+          this.loadTeacherRequestCourses()
+          // Handle success, if needed
+        },
+        error => {
+          console.error('Error:', error);
+          // Handle error, if needed
+        }
+      );
   }
 
 

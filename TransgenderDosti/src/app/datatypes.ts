@@ -123,3 +123,12 @@ export interface LearnersocialData{
     platform_name:string;
     profile_url:string;
 }
+
+export interface LearnerInfo {
+    request_id: number;
+    learner_user_id: number;
+    learner_name: string;
+    learner_email: string;
+    course_name: string;
+    status: string; // Add the status property here
+  }
