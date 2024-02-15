@@ -19,6 +19,20 @@
     line-height: normal;
 }
 
+.paginate {
+
+    color: #5D5959;
+    font-family: Karla;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    padding-top: 29px;
+
+
+
+}
+
 
 /* Tabs Area */
 /* Red line under active tab name */

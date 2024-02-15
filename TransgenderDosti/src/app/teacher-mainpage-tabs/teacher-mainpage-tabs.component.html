@@ -886,7 +886,7 @@
                     <div class="line" [ngClass]="{'custom-class': isSmallScreen}"
                         [ngStyle]="{'width.px': isSmallScreen ? 230 : null}"></div>
 
-                    <table class="table" *ngIf="requestCourses; else noCoursesMessage">
+                    <table class="table" *ngIf="getDisplayedCoursest().length > 0; else noCoursesMessage">
                         <thead>
                             <tr class="text-start">
                                 <th scope=" col">Student Name</th>
@@ -896,8 +896,7 @@
                             </tr>
                         </thead>
                         <tbody class="text-start">
-                            <tr
-                                *ngFor="let course of requestCourses.slice((currentPage - 1) * itemsPerPage2, currentPage * itemsPerPage2)">
+                            <tr *ngFor="let course of getDisplayedCoursest()">
                                 <td scope="row">{{course.learner_name}}</td>
                                 <td>{{course.learner_email}}</td>
                                 <td>{{course.course_name}}</td>
@@ -909,13 +908,30 @@
 
                         </tbody>
                     </table>
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination">
-                            <li class="page-item" *ngFor="let page of getPages()">
-                                <a class="page-link" (click)="setCurrentPage(page)">{{ page }}</a>
-                            </li>
-                        </ul>
-                    </nav>
+                    <div class="row">
+                        <div class="col-6 paginate">Showing {{ getStartIndex() + 1 }} to {{ getEndIndex() }} of {{ requestCourses.length }} entries</div>
+
+                        <div class="col-6 d-flex justify-content-end">
+                            <nav *ngIf="getDisplayedCoursest().length > 0" aria-label="...">
+                                <ul class="pagination pagination-sm justify-content-end" style="margin-top: 25px;">
+                                    <li class="page-item" (click)="setPaget(currentPaget - 1)"
+                                        [class.disabled]="currentPaget === 1">
+                                        <span class="page-link" style="cursor: pointer;">Previous</span>
+                                    </li>
+                                    <li class="page-item" *ngFor="let page of getPageNumberst()"
+                                        (click)="setPaget(page)" [class.active]="page === currentPaget">
+                                        <span class="page-link" style="cursor: pointer;">{{ page }}</span>
+                                    </li>
+                                    <li class="page-item" (click)="setPaget(currentPage + 1)"
+                                        [class.disabled]="currentPaget === totalPagest">
+                                        <span class="page-link" style="cursor: pointer;">Next</span>
+                                    </li>
+                                </ul>
+                            </nav>
+
+                        </div>
+                    </div>
+
                     <!-- 
                     <table datatable class="row-border hover">
                         <thead>

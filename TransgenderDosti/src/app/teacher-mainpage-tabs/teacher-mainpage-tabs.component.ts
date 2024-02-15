@@ -21,8 +21,11 @@ export class TeacherMainpageTabsComponent implements OnInit, AfterViewInit {
   pageSize = 5; // Number of courses to show per page
   currentPage = 1; // Current page number
   totalPages!: number;
-  currentPage2: number = 1;
-  itemsPerPage2: number = 2;
+
+  pageSizet = 5; // Number of courses to show per page
+  currentPaget = 1; // Current page number
+  totalPagest!: number;
+
 
 
   public imagePath: string = '';
@@ -504,14 +507,14 @@ export class TeacherMainpageTabsComponent implements OnInit, AfterViewInit {
   }
 
 
-  // Teacher Request Courses 
-
+  // Teacher Request Courses Table
   loadTeacherRequestCourses() {
     if (this.userId) {
       this.courseRequest.getTeacherRequestCourses(this.userId).subscribe(
         (response) => {
           this.requestCourses = response.learner_info;
           console.log(this.requestCourses);
+          this.calculateTotalPagest();
         },
         (error) => {
           console.error('Error fetching courses:', error);
@@ -520,14 +523,34 @@ export class TeacherMainpageTabsComponent implements OnInit, AfterViewInit {
     }
   }
 
-  // Inside YourComponent class
-  setCurrentPage(page: number) {
-    this.currentPage2 = page;
+
+  calculateTotalPagest() {
+    this.totalPagest = Math.ceil(this.requestCourses.length / this.pageSizet);
   }
 
-  getPages(): number[] {
-    const pageCount2 = Math.ceil(this.requestCourses.length / this.itemsPerPage2);
-    return Array.from({ length: pageCount2 }, (_, index) => index + 1);
+  setPaget(page: number) {
+    if (page >= 1 && page <= this.totalPagest) {
+      this.currentPaget = page;
+    }
+  }
+
+  getPageNumberst(): number[] {
+    return Array(this.totalPagest).fill(0).map((x, i) => i + 1);
+  }
+
+  getDisplayedCoursest(): any[] {
+    const startIndex = (this.currentPaget - 1) * this.pageSizet;
+    const endIndex = startIndex + this.pageSizet;
+    return this.requestCourses.slice(startIndex, endIndex);
+  }
+
+  getStartIndex(): number {
+    return (this.currentPaget - 1) * this.pageSizet;
+  }
+
+  getEndIndex(): number {
+    const endIndex = this.currentPaget * this.pageSizet;
+    return endIndex > this.requestCourses.length ? this.requestCourses.length : endIndex;
   }
 
 
