@@ -208,6 +208,10 @@ export class NavHeaderComponent {
           this.audioService.uploadAudio(audioFile).subscribe(
             (response) => {
               console.log('Transcription:', response.transcription);
+              if (response.transcription.toLowerCase().includes('hello')) {
+                // Navigate to the 'teacher-profile' route
+                this.router.navigate(['/educationhomepage']);
+              }
               this.transcription = response.transcription;
               this.cdr.detectChanges(); // Manually trigger change detection
             },
@@ -215,6 +219,8 @@ export class NavHeaderComponent {
               console.error('Error transcribing audio:', error);
             }
           );
+
+          
         };
 
         this.mediaRecorder.start();
@@ -229,6 +235,7 @@ export class NavHeaderComponent {
     if (this.isRecording) {
       this.mediaRecorder.stop();
       this.isRecording = false;
+      
     }
   }
 
