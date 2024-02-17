@@ -27,7 +27,14 @@
                                 <span style="padding-right: 7px;"> to</span>
                                 <span style="color: #73369f;  font-weight: 600"> Flourish</span>
                             </div>
+                            
                         </div>
+                    <div>
+                        <div class="col speechtext" *ngIf="transcription">
+                            <span style="padding-right: 5px;">{{ transcription }} </span>
+                        </div>
+                    </div>
+
 
                         <div class="row custom-row">
 
@@ -36,12 +43,12 @@
                             </div>
                         </div>
                     </div>
-                    <div *ngIf="transcription">
+                    <!--<div *ngIf="transcription">
                         <h2>Transcription:</h2>
                         <p>{{ transcription }}</p>
-                    </div>
+                    </div>-->
 
-                    <button (click)="startFunction()" [disabled]="isRecording">Start</button>
+                    <!--<button (click)="startFunction()" [disabled]="isRecording">Start</button>-->
                     <button (click)="stopFunction()" [disabled]="!isRecording">Stop</button>
 
                 </div>
@@ -94,7 +101,7 @@
                     </li>
                     <li class="nav-item">
                         <button type="button" class="btn btn-outline-secondary btn-white-stroke fontstyle"
-                            data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                            data-bs-toggle="modal" data-bs-target="#staticBackdrop" (click)="startFunction()">
                             <i class="fa-solid fa-microphone fa-beat" style="padding-right: 10px;"></i>
                             Say 'Hi'
                         </button>
