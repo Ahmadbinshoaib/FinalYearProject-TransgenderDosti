@@ -340,6 +340,27 @@
     width: 80px;
 }
 
+.total-earning{
+    border: 1px solid #B9B9B9;
+    border-radius: 1.6rem;
+    margin-bottom: 25px;
+    padding-top: 12px;
+    padding-left: 12px;
+    padding-bottom: 12px;
+    background-color: #F6F5F5;
+}
+.total-e{
+    font-size: 22px;
+    font-family: Karla;
+    color: #5D5959;
+}
+.pkr{
+    font-size: 25px;
+    font-family: Karla;
+    font-weight: bold;
+    color: #5D5959;
+}
+
 
 
 
