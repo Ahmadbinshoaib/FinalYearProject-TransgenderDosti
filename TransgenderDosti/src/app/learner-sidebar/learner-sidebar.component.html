@@ -1,0 +1,189 @@
+<mat-sidenav-container>
+
+    <mat-sidenav mode="side" id="sidenav" #sidenav [class.menu-open]="isMenuOpen" [class.menu-close]="!isMenuOpen"
+        opened>
+        <i class="fa-solid fa-bars" (click)="onToolbarMenuToggle()"></i>
+        <div class="row course-code" [style.display]="isMenuOpen ? 'block' : 'none'">
+            <span>Course Name</span>
+        </div>
+
+        <div class="line">
+
+        </div>
+
+        <div class="row tools" [style.display]="isMenuOpen ? 'block' : 'none'">
+            <span>TOOLS</span>
+        </div>
+
+
+
+        <div>
+            <a [routerLink]="['/learner-course-details/learner-course-dashboard', courseId]"
+                style="text-decoration: none; color: inherit;">
+                <div class="row">
+                    <div class="col-2">
+                        <i class="fa-solid fa-house"></i>
+                    </div>
+                    <div class="col-6 side-text" [style.display]="isMenuOpen ? 'block' : 'none'"
+                        [ngClass]="{ 'bold-text': selectedRoute.includes('/teacher-course-dashboard') }">
+                        Dashboard
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
+            data-bs-target="#home-collapse" aria-expanded="false" (click)="toggleChevron()">
+            <div class="row">
+                <div class="col-2" style="padding-left: 0px;">
+                    <i [ngClass]="{'fa-chevron-right': !isChevronDown, 'fa-chevron-down': isChevronDown}"
+                        class="fa-solid"></i>
+                </div>
+                <div class="col-6 side-text" [style.display]="isMenuOpen ? 'block' : 'none'">
+                    Classwork
+                </div>
+            </div>
+        </div>
+
+
+        <div class="collapse " [class.close-sidebar-p]="isMenuOpen" [class.open-sidebar-p]="!isMenuOpen"
+            id="home-collapse">
+            <div>
+
+                <a [routerLink]="['/teacher-course-details/teacher-course-assignment', courseId]"
+                    style="text-decoration: none; color: inherit;">
+                    <div class="row">
+                        <div class="col-2">
+                            <i class="fa-solid fa-clipboard fa-sm"></i>
+                        </div>
+                        <div class="col-6 side-inner-text" [style.display]="isMenuOpen ? 'block' : 'none'"
+                            [ngClass]="{ 'bold-text': selectedRoute.includes('/teacher-course-assignment') }">
+                            Assignment
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div>
+
+                <a [routerLink]="['/teacher-course-details/teacher-course-material', courseId]"
+                    style="text-decoration: none; color: inherit;">
+                    <div class="row">
+                        <div class="col-2">
+                            <i class="fa-solid fa-book-open-reader fa-sm"></i>
+                        </div>
+                        <div class="col-6 side-inner-text" [style.display]="isMenuOpen ? 'block' : 'none'"
+                            [ngClass]="{ 'bold-text': selectedRoute.includes('/teacher-course-material') }">
+                            Quiz Assignment
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div>
+
+                <a [routerLink]="['/teacher-course-details/teacher-course-material', courseId]"
+                    style="text-decoration: none; color: inherit;">
+                    <div class="row">
+                        <div class="col-2">
+                            <i class="fa-solid fa-shapes fa-sm"></i>
+                        </div>
+                        <div class="col-6 side-inner-text" [style.display]="isMenuOpen ? 'block' : 'none'"
+                            [ngClass]="{ 'bold-text': selectedRoute.includes('teacher-course-material') }">
+                            Material
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div>
+
+                <a [routerLink]="['/teacher-course-details/teacher-course-assignment-viewresponses', courseId]"
+                    style="text-decoration: none; color: inherit;">
+                    <div class="row">
+                        <div class="col-2">
+                            <i class="fa-solid fa-shapes fa-sm"></i>
+                        </div>
+                        <div class="col-6 side-inner-text" [style.display]="isMenuOpen ? 'block' : 'none'"
+                            [ngClass]="{ 'bold-text': selectedRoute.includes('teacher-course-assignment-viewresponses') }">
+                            View Responses
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+        </div>
+
+        <div>
+            <a routerLink="/teacher-course-details/teacher-course-dashboard"
+                style="text-decoration: none; color: inherit;">
+                <div class="row">
+                    <div class="col-2">
+                        <i class="fa-solid fa-comment"></i>
+                    </div>
+                    <div class="col-6 side-text" [style.display]="isMenuOpen ? 'block' : 'none'"
+                        [ngClass]="{ 'bold-text': selectedRoute.includes('/teacher-course-dashboard') }">
+                        Chat
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="line" style="margin-top: 25px;">
+
+        </div>
+
+        <div style="margin-bottom: 0px; padding-bottom: 0px;" class="row tools"
+            [style.display]="isMenuOpen ? 'block' : 'none'">
+            <span>ADMIN</span>
+        </div>
+
+        <div style="padding-top: 20px; margin-bottom: 5px;">
+            <a routerLink="/teacher-course-details/teacher-course-dashboard"
+                style="text-decoration: none; color: inherit;">
+                <div class="row">
+                    <div class="col-2">
+                        <i class="fa-solid fa-users"></i>
+                    </div>
+                    <div class="col-6 side-text" [style.display]="isMenuOpen ? 'block' : 'none'"
+                        [ngClass]="{ 'bold-text': selectedRoute.includes('/teacher-course-dashboard') }">
+                        Students
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div style="margin-bottom: 5px;">
+            <a routerLink="/teacher-course-details/teacher-course-dashboard"
+                style="text-decoration: none; color: inherit;">
+                <div class="row">
+                    <div class="col-2">
+                        <i class="fa-solid fa-gear"></i>
+                    </div>
+                    <div class="col-6 side-text" [style.display]="isMenuOpen ? 'block' : 'none'"
+                        [ngClass]="{ 'bold-text': selectedRoute.includes('/teacher-course-dashboard') }">
+                        Settings
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div style="margin-bottom: 5px;">
+            <a style="text-decoration: none; color: inherit;">
+                <div class="row">
+                    <div class="col-2">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                    </div>
+                    <div class="col-6 side-text" [style.display]="isMenuOpen ? 'block' : 'none'">
+                        Log Out
+                    </div>
+                </div>
+            </a>
+        </div>
+
+
+    </mat-sidenav>
+
+    <mat-sidenav-content [ngStyle]="{'margin-left.px' : contentMargin}">
+
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container>

@@ -16,6 +16,8 @@ import { TeacherCourseAssignmentComponent } from './teacher-course-assignment/te
 import { TeacherCourseAssignmentViewresponsesComponent } from './teacher-course-assignment-viewresponses/teacher-course-assignment-viewresponses.component';
 import { CourseDetailComponent } from './course-detail/course-detail.component';
 import { LearnerPaymentScreenComponent } from './learner-payment-screen/learner-payment-screen.component';
+import { LearnerSidebarComponent } from './learner-sidebar/learner-sidebar.component';
+import { LearnerCourseDashboardComponent } from './learner-course-dashboard/learner-course-dashboard.component';
 
 const routes: Routes = [
 
@@ -65,6 +67,15 @@ const routes: Routes = [
       { path: 'teacher-course-assignment/:courseId', component: TeacherCourseAssignmentComponent },
       { path: 'teacher-course-material/:courseId', component: TeacherCourseMaterialComponent },
       { path: 'teacher-course-assignment-viewresponses/:courseId', component: TeacherCourseAssignmentViewresponsesComponent }
+    ]
+  },
+  {
+    path: 'learner-course-details', component: LearnerSidebarComponent,
+
+    canActivate: [AuthGuard1],
+    children: [
+      { path: 'learner-course-dashboard', component: LearnerCourseDashboardComponent },
+
     ]
   },
 

@@ -101,4 +101,12 @@ export class LearnerMainpageComponent {
   }
 
 
+
+  navigateToCourseDetails() {
+
+    this.router.navigate(['/learner-course-details/learner-course-dashboard']);
+
+  }
+
+
 }

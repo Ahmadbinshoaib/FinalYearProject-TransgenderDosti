@@ -37,6 +37,8 @@ import { LearnerPaymentScreenComponent } from './learner-payment-screen/learner-
 import { LearnerProfileComponent } from './learner-profile/learner-profile.component';
 import { DataTablesModule } from 'angular-datatables';
 import { NotificationComponent } from './notification/notification.component';
+import { LearnerSidebarComponent } from './learner-sidebar/learner-sidebar.component';
+import { LearnerCourseDashboardComponent } from './learner-course-dashboard/learner-course-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +62,8 @@ import { NotificationComponent } from './notification/notification.component';
     LearnerPaymentScreenComponent,
     LearnerProfileComponent,
     NotificationComponent,
+    LearnerSidebarComponent,
+    LearnerCourseDashboardComponent,
 
   ],
   imports: [
