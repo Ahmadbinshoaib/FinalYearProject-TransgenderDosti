@@ -20,6 +20,41 @@ export class NavHeaderComponent {
   isRecording = false;
   transcription: string = '';
 
+
+  showNotificationDropdown = false; // Initial state of the dropdown
+  yourNotificationData = [
+    {
+      message: 'John sent you a friend request.',
+      profilePicture: 'assets/Group.png',
+      time: '2 hours ago'
+    },
+    {
+      message: 'You have a new message from Jane.',
+      profilePicture: 'assets/Group.png',
+      time: '1 hour ago'
+    },
+    {
+      message: 'John sent you a friend request.',
+      profilePicture: 'assets/Group.png',
+      time: '2 hours ago'
+    },
+    {
+      message: 'You have a new message from Jane.',
+      profilePicture: 'assets/Group.png',
+      time: '1 hour ago'
+    },
+    {
+      message: 'John sent you a friend request.',
+      profilePicture: 'assets/Group.png',
+      time: '2 hours ago'
+    },
+    {
+      message: 'You have a new message from Jane.',
+      profilePicture: 'assets/Group.png',
+      time: '1 hour ago'
+    },
+  ]
+
   constructor(private router: Router,
     private audioService: AudioService,
     private cdr: ChangeDetectorRef,
@@ -212,20 +247,20 @@ export class NavHeaderComponent {
               if (response.transcription.toLowerCase().includes('education main screen')) {
                 this.router.navigate(['/educationhomepage']);
               }
-              else if(response.transcription.toLowerCase().includes('dashboard')){
-                this.router.navigate(['/teacher-mainpage',this.userId]);
-                
+              else if (response.transcription.toLowerCase().includes('dashboard')) {
+                this.router.navigate(['/teacher-mainpage', this.userId]);
+
               }
-              else if(response.transcription.toLowerCase().includes('mainpage')){
-                this.router.navigate(['/teacher-mainpage',this.userId]);
+              else if (response.transcription.toLowerCase().includes('mainpage')) {
+                this.router.navigate(['/teacher-mainpage', this.userId]);
               }
-              else if(response.transcription.toLowerCase().includes('main page')){
-                this.router.navigate(['/teacher-mainpage',this.userId]);
+              else if (response.transcription.toLowerCase().includes('main page')) {
+                this.router.navigate(['/teacher-mainpage', this.userId]);
               }
-              else if(response.transcription.toLowerCase().includes('teacher profile')){
-                this.router.navigate(['/teacher-profile',this.userId]);
+              else if (response.transcription.toLowerCase().includes('teacher profile')) {
+                this.router.navigate(['/teacher-profile', this.userId]);
               }
-              else if(response.transcription.toLowerCase().includes('logout')){
+              else if (response.transcription.toLowerCase().includes('logout')) {
                 this.router.navigate(['/educationhomepage']);
               }
               this.transcription = response.transcription;
@@ -236,7 +271,7 @@ export class NavHeaderComponent {
             }
           );
 
-          
+
         };
 
         this.mediaRecorder.start();
@@ -252,8 +287,12 @@ export class NavHeaderComponent {
     if (this.isRecording) {
       this.mediaRecorder.stop();
       this.isRecording = false;
-      
+
     }
+  }
+
+  toggleNotificationDropdown() {
+    this.showNotificationDropdown = !this.showNotificationDropdown;
   }
 
 }

@@ -1,0 +1,29 @@
+<div class="notification-dropdown">
+    <div class="container">
+        <div class="row">
+            <div class="col-7 heading">
+                Notifications
+
+            </div>
+            <div class="col-2 d-flex justify-content-end heading-small">
+                <small style="padding-right: 0px;">All</small>
+
+
+            </div>
+            <div class="col-3 d-flex justify-content-end heading-small">
+                <small style="padding-right: 7px;">Unread</small>
+
+
+
+            </div>
+        </div>
+    </div>
+
+    <div *ngFor="let notification of notifications" class="notification-item">
+        <img [src]="notification.profilePicture" alt="Profile Picture">
+        <div class="notification-content">
+            <p class="content">{{ notification.message }} </p>
+            <small class="time">{{ notification.time }}</small>
+        </div>
+    </div>
+</div>

@@ -27,7 +27,7 @@
                                 <span style="color: #73369f; font-weight: 600"> Flourish</span>
                             </div>
                         </div>
-                        
+
                         <div>
                             <div class="col speechtext" *ngIf="transcription">
                                 <span style="padding-right: 5px;">{{ transcription }} </span>
@@ -49,7 +49,7 @@
 
                     <!--<button (click)="startFunction()" [disabled]="isRecording">Start</button>-->
                     <button (click)="stopFunction()" [disabled]="!isRecording">Stop</button>
-                    
+
                 </div>
 
 
@@ -172,11 +172,13 @@
             <div class="content">
                 <ul class="navbar-nav ">
 
-                    <li class="nav-item noti">
+                    <li class="nav-item noti" (click)="toggleNotificationDropdown()">
                         <div class="notification-icon">
                             <i class="fas fa-bell"></i>
                             <span class="notification-count">5</span>
                         </div>
+                        <app-notification *ngIf="showNotificationDropdown"
+                            [notifications]="yourNotificationData"></app-notification>
                     </li>
 
                     <li class="nav-item">

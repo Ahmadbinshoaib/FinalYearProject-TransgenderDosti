@@ -36,6 +36,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LearnerPaymentScreenComponent } from './learner-payment-screen/learner-payment-screen.component';
 import { LearnerProfileComponent } from './learner-profile/learner-profile.component';
 import { DataTablesModule } from 'angular-datatables';
+import { NotificationComponent } from './notification/notification.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { DataTablesModule } from 'angular-datatables';
     CourseDetailComponent,
     LearnerPaymentScreenComponent,
     LearnerProfileComponent,
+    NotificationComponent,
 
   ],
   imports: [
