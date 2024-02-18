@@ -57,12 +57,12 @@ const routes: Routes = [
   },
 
   {
-    path: 'teacher-course-details/:course_id', component: TeacherSidebarComponent,
+    path: 'teacher-course-details', component: TeacherSidebarComponent,
 
     canActivate: [AuthGuard],
     children: [
-      { path: 'teacher-course-dashboard', component: TeacherCourseDashboardComponent },
-      { path: 'teacher-course-assignment', component: TeacherCourseAssignmentComponent },
+      { path: 'teacher-course-dashboard/:courseId', component: TeacherCourseDashboardComponent },
+      { path: 'teacher-course-assignment/:courseId', component: TeacherCourseAssignmentComponent },
       { path: 'teacher-course-material', component: TeacherCourseMaterialComponent },
       { path: 'teacher-course-assignment-viewresponses', component: TeacherCourseAssignmentViewresponsesComponent }
     ]

@@ -186,8 +186,8 @@ export class TeacherMainpageTabsComponent implements OnInit, AfterViewInit {
   }
 
   navigateToCourseDetails(courseId: string) {
-    console.log("sending: "+ courseId)
-    this.router.navigate(['/teacher-course-details',courseId]);
+
+    this.router.navigate(['/teacher-course-details/teacher-course-dashboard', courseId]);
   }
 
   saveCourseInfo(data: any) {
