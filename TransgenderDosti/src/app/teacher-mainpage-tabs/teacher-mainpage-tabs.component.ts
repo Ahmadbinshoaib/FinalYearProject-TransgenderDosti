@@ -185,8 +185,9 @@ export class TeacherMainpageTabsComponent implements OnInit, AfterViewInit {
     this.isSmallScreen = window.innerWidth < 576;
   }
 
-  navigateToCourseDetails() {
-    this.router.navigate(['/teacher-course-details']);
+  navigateToCourseDetails(courseId: string) {
+    console.log("sending: "+ courseId)
+    this.router.navigate(['/teacher-course-details',courseId]);
   }
 
   saveCourseInfo(data: any) {

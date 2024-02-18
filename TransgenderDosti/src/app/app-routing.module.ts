@@ -57,7 +57,7 @@ const routes: Routes = [
   },
 
   {
-    path: 'teacher-course-details', component: TeacherSidebarComponent,
+    path: 'teacher-course-details/:course_id', component: TeacherSidebarComponent,
 
     canActivate: [AuthGuard],
     children: [
