@@ -18,7 +18,7 @@
 
 
         <div>
-            <a routerLink="/teacher-course-details/teacher-course-dashboard"
+            <a [routerLink]="['/teacher-course-details/teacher-course-dashboard', courseId]"
                 style="text-decoration: none; color: inherit;">
                 <div class="row">
                     <div class="col-2">
@@ -49,7 +49,8 @@
         <div class="collapse " [class.close-sidebar-p]="isMenuOpen" [class.open-sidebar-p]="!isMenuOpen"
             id="home-collapse">
             <div>
-                <a routerLink="/teacher-course-details/teacher-course-assignment"
+
+                <a [routerLink]="['/teacher-course-details/teacher-course-assignment', courseId]"
                     style="text-decoration: none; color: inherit;">
                     <div class="row">
                         <div class="col-2">
@@ -63,7 +64,8 @@
                 </a>
             </div>
             <div>
-                <a routerLink="/teacher-course-details/teacher-course-material"
+
+                <a [routerLink]="['/teacher-course-details/teacher-course-material', courseId]"
                     style="text-decoration: none; color: inherit;">
                     <div class="row">
                         <div class="col-2">
@@ -78,7 +80,8 @@
             </div>
 
             <div>
-                <a routerLink="/teacher-course-details/teacher-course-material"
+
+                <a [routerLink]="['/teacher-course-details/teacher-course-material', courseId]"
                     style="text-decoration: none; color: inherit;">
                     <div class="row">
                         <div class="col-2">
@@ -92,7 +95,8 @@
                 </a>
             </div>
             <div>
-                <a routerLink="/teacher-course-details/teacher-course-assignment-viewresponses"
+
+                <a [routerLink]="['/teacher-course-details/teacher-course-assignment-viewresponses', courseId]"
                     style="text-decoration: none; color: inherit;">
                     <div class="row">
                         <div class="col-2">

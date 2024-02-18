@@ -63,8 +63,8 @@ const routes: Routes = [
     children: [
       { path: 'teacher-course-dashboard/:courseId', component: TeacherCourseDashboardComponent },
       { path: 'teacher-course-assignment/:courseId', component: TeacherCourseAssignmentComponent },
-      { path: 'teacher-course-material', component: TeacherCourseMaterialComponent },
-      { path: 'teacher-course-assignment-viewresponses', component: TeacherCourseAssignmentViewresponsesComponent }
+      { path: 'teacher-course-material/:courseId', component: TeacherCourseMaterialComponent },
+      { path: 'teacher-course-assignment-viewresponses/:courseId', component: TeacherCourseAssignmentViewresponsesComponent }
     ]
   },
 
