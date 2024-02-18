@@ -680,8 +680,7 @@
                         <div *ngFor="let course of getDisplayedCourses()">
                             <div class="row" style="padding-top: 0px; padding-bottom: 7px;">
 
-                                <div id="ok" class="col-sm-3 col-md-3 col-lg-2"
-                                    (click)="navigateToCourseDetails(course.course_id)">
+                                <div id="ok" class="col-sm-3 col-md-3 col-lg-2" (click)="navigateToCourseDetails(course.course_id)">
                                     <img *ngIf="course.course_picture; else defaultImage" [src]="course.course_picture"
                                         class="course-img course-img-db" alt="Course Image"
                                         style="margin-right: 0px;" />
@@ -897,13 +896,12 @@
                             </tr>
                         </thead>
                         <tbody class="text-start">
-                            <tr *ngFor="let course of getDisplayedCoursest()">
+                            <tr *ngFor="let course of getDisplayedCoursest()" >
                                 <td scope="row">{{course.learner_name}}</td>
                                 <td>{{course.learner_email}}</td>
                                 <td>{{course.course_name}}</td>
                                 <td>
-                                    <i class="fa-solid fa-check fa-xl"
-                                        style="color: #047c12; padding-right: 5px; cursor: pointer;"
+                                    <i class="fa-solid fa-check fa-xl" style="color: #047c12; padding-right: 5px; cursor: pointer;"
                                         (click)="acceptCourseRequest(course.request_id)"></i>
                                     <i class="fa-solid fa-xmark fa-xl" style="color: #e60000; cursor: pointer;"
                                         (click)="rejectCourseRequest(course.request_id)"></i>
@@ -1158,7 +1156,7 @@
 
                     <!-- Line -->
 
-
+                    
 
                     <table class="table">
                         <thead>
@@ -1175,8 +1173,7 @@
                                 <td></td>
                                 <td></td>
                                 <td>
-                                    <i class="fa-solid fa-check fa-xl"
-                                        style="color: #047c12; padding-right: 5px; cursor: pointer;"></i>
+                                    <i class="fa-solid fa-check fa-xl" style="color: #047c12; padding-right: 5px; cursor: pointer;"></i>
                                     <i class="fa-solid fa-xmark fa-xl" style="color: #e60000; cursor: pointer;"></i>
                                 </td>
                             </tr>

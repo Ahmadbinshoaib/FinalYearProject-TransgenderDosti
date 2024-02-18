@@ -108,4 +108,18 @@ export class LearnerProfileService {
     const params = new HttpParams().set('userId', userId).set('websiteId', websiteId.toString());
     return this.http.delete(endpoint, { headers, params });
   }
+
+  // Showing Accepeted Cousre
+
+  getUserAcceptedCourses(user_id: string): Observable<any> {
+
+   
+    const endpoint = `/get_user_accepted_courses?user_id=${user_id}`;
+    const url = this.serverUrl + endpoint;
+
+    // Assume you need to send the userId as a query parameter
+  
+    const requestData = { user_id };
+    return this.http.post<any>(url, requestData);
+  }
 }

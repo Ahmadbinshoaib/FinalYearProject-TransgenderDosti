@@ -2239,6 +2239,7 @@ def get_teacher_request_courses():
         return jsonify({'error': str(e)}), 500
 
 
+
 @app.route('/update_courserequest_status', methods=['POST'])
 def update_courserequest_status():
     try:
@@ -2264,6 +2265,72 @@ def update_courserequest_status():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
+@app.route('/get_user_accepted_courses', methods=['POST'])
+def get_user_accepted_courses():
+    try:
+        data = request.get_json()
+        user_id = data.get('user_id')
+
+        if not user_id:
+            return jsonify({'error': 'user_id is required'}), 400
+
+        cursor = mysql.connection.cursor()
+
+        # Extract learner_id from learner table using user_id
+        cursor.execute("SELECT learner_id FROM learner WHERE user_id = %s", (user_id,))
+        learner_id_result = cursor.fetchone()
+
+        if not learner_id_result:
+            return jsonify({'error': 'Learner not found for the given user_id'}), 404
+
+        learner_id = learner_id_result[0]
+
+        # Extract all accepted courses from courserequest table with respect to learner_id
+        cursor.execute("SELECT * FROM courserequest WHERE learner_id = %s AND status = 'accepted'", (learner_id,))
+        courses = cursor.fetchall()
+
+        course_info = []
+
+        for course in courses:
+            # Extract course information from course table using course_id
+            cursor.execute("SELECT * FROM course WHERE course_id = %s", (course[1],))
+            course_data = cursor.fetchone()
+
+            if course_data:
+                # Extract teacher information from teacher table using teacher_id
+                cursor.execute("SELECT teacher_id FROM course WHERE course_id = %s", (course[1],))
+                teacher_id_result = cursor.fetchone()
+
+                if teacher_id_result:
+                    teacher_id = teacher_id_result[0]
+                    cursor.execute("SELECT user_id FROM teacher WHERE teacher_id = %s", (teacher_id,))
+                    teacher_user_id_result = cursor.fetchone()
+
+                    if teacher_user_id_result:
+                        teacher_user_id = teacher_user_id_result[0]
+                        cursor.execute("SELECT full_name, email FROM user WHERE id = %s", (teacher_user_id,))
+                        teacher_data = cursor.fetchone()
+
+                        if teacher_data:
+                            course_info.append({
+                                'course_id': course_data[0],
+                                'title': course_data[2],
+                                'course_code': course_data[3],
+                                'details': course_data[4],
+                                'course_for': course_data[5],
+                                'course_fee': course_data[6],
+                                'course_duration': course_data[7],
+                                'teacher_name': teacher_data[0],
+                                'teacher_email': teacher_data[1],
+                                'course_picture': course_data[9]  # Add course_picture to the response
+                            })
+
+        cursor.close()
+
+        return jsonify({'success': True, 'course_info': course_info}), 200
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 
 ####################################################################################################################################

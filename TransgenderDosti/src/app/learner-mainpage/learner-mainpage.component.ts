@@ -3,6 +3,7 @@ import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 
 import { ActivatedRoute, Router } from '@angular/router';
 import { EducationPageServicesService } from '../Services/education-page-services.service';
+import { LearnerProfileService } from '../Services/learner-profile.service';
 
 @Component({
   selector: 'app-learner-mainpage',
@@ -19,10 +20,12 @@ export class LearnerMainpageComponent {
   currentPage = 1; // Current page number
   totalPages!: number;
   requestCourses: any[] = [];
+  userAndCoursesData: any []=[]
   constructor(
     private router: Router,
     private activeRoute: ActivatedRoute,
-    private courseService: EducationPageServicesService) { }
+    private courseService: EducationPageServicesService,
+    private acceptedCourses: LearnerProfileService) { }
 
 
   @HostListener('window:resize', ['$event'])
@@ -44,6 +47,19 @@ export class LearnerMainpageComponent {
   }
 
   ngOnInit() {
+    if(this.userId)
+
+    this.acceptedCourses.getUserAcceptedCourses(this.userId).subscribe(
+      (data) => {
+        this.userAndCoursesData = data.course_info;
+        
+        console.log(data); // Check the console for the API response
+      },
+      (error) => {
+        console.error('Error fetching data:', error);
+      }
+    );
+  
 
     if (localStorage.getItem('learner')) {
       const learnerStore = localStorage.getItem('learner');
@@ -98,6 +114,12 @@ export class LearnerMainpageComponent {
     if (page >= 1 && page <= this.totalPages) {
       this.currentPage = page;
     }
+  }
+
+  getDisplayedCoursesaccepted(): any[] {
+    const startIndex = (this.currentPage - 1) * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+    return this.requestCourses.slice(startIndex, endIndex);
   }
 
 

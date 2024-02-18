@@ -64,18 +64,19 @@
 
 
                     <!-- Course Data -->
-                    <div>
-                        <div>
+                    <div *ngIf="userAndCoursesData.length > 0; else noCoursesMessage">
+                        <div *ngFor="let course of userAndCoursesData">
                             <div class="row" style="padding-top: 0px; padding-bottom: 7px;">
                                 <div class="row flex justify-content-end date">Enrolled On 12 August, 2022</div>
 
                                 <div id="ok" class="col-sm-3 col-md-3 col-lg-2" (click)="navigateToCourseDetails()">
-                                    <img src="assets/Rectangle 42.png" class="course-img course-img-db"
-                                        alt="Course Image" style="margin-right: 0px;" />
-                                    <!-- <ng-template #defaultImage>
-                                        <img class="course-img" alt="Default Image"
+                                    <img *ngIf="course.course_picture; else defaultImage" [src]="course.course_picture"
+                                        class="course-img course-img-db" alt="Course Image"
+                                        style="margin-right: 0px;" />
+                                    <ng-template #defaultImage>
+                                        <img src="assets/Rectangle 42.png" class="course-img" alt="Default Image"
                                             style="margin-right: 0px;" />
-                                    </ng-template> -->
+                                    </ng-template>
                                 </div>
 
                                 <div class="col-sm-6 col-md-6 col-lg-5">
@@ -83,7 +84,7 @@
                                         <div class="col-sm-6 col-md-6 col-lg-5"
                                             style="padding-left: 0px; padding-right: 0px;">
                                             <span class="course-name">
-                                                Course Title
+                                                {{course.title}}
                                             </span>
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6" style="padding-left: 0px;">
@@ -98,12 +99,13 @@
 
                                     <div class="row">
                                         <span class="students-no">
-                                            Description
+                                            {{ course.details.length > 50 ? (course.details | slice:0:120) + '...' :
+                                            course.details }}
                                         </span>
                                     </div>
                                     <div class="row">
-                                        <span class="students-no">
-                                            Instructor Name
+                                        <span class="students-no" style="font-weight: 600;">
+                                            {{course.teacher_name}}
                                         </span>
                                     </div>
                                 </div>
