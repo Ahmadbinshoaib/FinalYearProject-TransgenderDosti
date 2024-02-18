@@ -1,6 +1,7 @@
 import { Component, ChangeDetectorRef, OnDestroy, NgZone } from '@angular/core';
 import { Route, Router } from '@angular/router';
 import { AudioService } from '../Services/audio.service';
+import { ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-nav-header',
@@ -208,8 +209,23 @@ export class NavHeaderComponent {
           this.audioService.uploadAudio(audioFile).subscribe(
             (response) => {
               console.log('Transcription:', response.transcription);
-              if (response.transcription.toLowerCase().includes('hello')) {
-                // Navigate to the 'teacher-profile' route
+              if (response.transcription.toLowerCase().includes('education main screen')) {
+                this.router.navigate(['/educationhomepage']);
+              }
+              else if(response.transcription.toLowerCase().includes('dashboard')){
+                this.router.navigate(['/teacher-mainpage',this.userId]);
+                
+              }
+              else if(response.transcription.toLowerCase().includes('mainpage')){
+                this.router.navigate(['/teacher-mainpage',this.userId]);
+              }
+              else if(response.transcription.toLowerCase().includes('main page')){
+                this.router.navigate(['/teacher-mainpage',this.userId]);
+              }
+              else if(response.transcription.toLowerCase().includes('teacher profile')){
+                this.router.navigate(['/teacher-profile',this.userId]);
+              }
+              else if(response.transcription.toLowerCase().includes('logout')){
                 this.router.navigate(['/educationhomepage']);
               }
               this.transcription = response.transcription;
@@ -229,6 +245,7 @@ export class NavHeaderComponent {
       .catch((error) => {
         console.error('Error accessing microphone:', error);
       });
+
   }
 
   stopFunction() {
