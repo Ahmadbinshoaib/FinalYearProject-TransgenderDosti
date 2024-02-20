@@ -1,0 +1,254 @@
+.text-dashboard {
+    padding-left: 10px;
+    color: #0447AC;
+    font-family: Karla;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    padding-bottom: 0px;
+}
+
+.main-row {
+    padding-top: 10px;
+    padding-left: 21px;
+}
+
+.image {
+    /* margin: 17px;
+    width: 1400px; */
+    height: 200px;
+    flex-shrink: 0;
+    border-radius: 50px;
+    background: url('/assets/dashboard.jpg');
+    background-repeat: repeat;
+    background-size: 40%;
+    opacity: 0.7;
+}
+
+.image-text {
+    padding-top: 130px;
+    padding-left: 20px;
+    text-align: left;
+    color: #FFF;
+    font-family: Karla;
+    font-style: normal;
+    line-height: normal;
+}
+
+.course-name {
+    font-size: 20px;
+
+}
+
+.teacher-name,
+.course-code {
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+
+}
+
+.custom-btn {
+    border-radius: 20px;
+    background: #FFF;
+    color: #5D5959;
+    font-family: Karla;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    position: relative;
+    /* Change to relative positioning */
+    margin-left: auto;
+    /* Remove margin-left */
+    margin-right: auto;
+    /* Add margin-right to center the button horizontally */
+    padding: 15px 30px;
+    /* Use shorthand for padding (top/bottom, left/right) */
+
+}
+
+.cl {
+    padding-right: 25px;
+    text-align: end;
+}
+
+.assignment {
+    margin-top: 15px;
+    padding-left: 25px;
+    margin-bottom: 20px;
+}
+
+.ass {
+    border-radius: 40px;
+    border: 1px solid #B9B9B9;
+    background: rgba(246, 245, 245, 0.62);
+}
+
+.data {
+    border-bottom: 1px solid #E1DCDC;
+    margin-left: 2px;
+}
+
+.heading {
+    color: #5D5959;
+    font-family: Karla;
+    font-size: 19px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin-top: 10px;
+    padding-bottom: 3px;
+}
+
+.heading2 {
+    color: #7281FF;
+    font-family: Karla;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-align: end;
+    margin-top: 11px;
+    padding-bottom: 3px;
+}
+
+.text {
+    margin-top: 10px;
+    padding-left: 25px;
+}
+
+.detail {
+    padding-bottom: 20px;
+    color: #5D5959;
+    font-family: Karla;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.txt {
+    padding-top: 10px;
+    padding-bottom: 5px;
+    color: #606060;
+    font-family: Karla;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+.ass-name{
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.dt {
+    text-align: end;
+    font-size: 0.8rem;
+    padding-right: 15px;
+    padding-top: 0.6rem;
+    color: #606060;
+}
+.graded{
+    border: 1px solid #26970A;
+    border-radius: 15px;
+    background-color: #26970A;
+    color: white;
+    padding-left: 22px;
+    font-size: 13px;
+}
+
+.ungraded{
+    border: 1px solid #af0c0c;
+    border-radius: 15px;
+    background-color: #af0c0c;
+    color: white;
+    padding-left: 22px;
+    font-size: 13px
+
+}
+
+.para {
+    color: #606060;
+    font-family: Karla;
+    font-size: 0.88rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    padding-bottom: 7px;
+}
+.deadline{
+    color: #606060;
+font-family: Karla;
+font-size: 0.77rem;
+font-style: normal;
+font-weight: 300;
+line-height: normal;
+padding-bottom: 8px;
+}
+.custombtn2 {
+    color: #fff;
+    font-size: 0.8rem;
+    font-family: Karla;
+    border-radius: 10px;
+    border: 1px solid #E1DCDC;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 10px;
+    transition: background-color 0.3s ease;
+    width: 8rem;
+    background: #006FF2;
+    margin-bottom: 9px;
+    /* Adjust width as needed */
+}
+.prof {
+    padding-top: 7px;
+    padding-left: 5px;
+    padding-bottom: 15px;
+}
+
+.no {
+    background: #E4E2E2;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    padding-top: 8px;
+}
+
+.info {
+    border: 1px solid #E4E2E2;
+    background: #FFF;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.edit {
+    padding-top: 9px;
+    display: flex;
+    justify-content: flex-end;
+}
+.iconn {
+    display: flex;
+    justify-content: flex-end;
+    
+}
+.edit-icon{
+    padding-right: 3px;
+}
+.iconn {
+    display: flex;
+    justify-content: flex-end; /* This will align the img to the right */
+}
+
+.helloimg {
+    height: 140px;
+    transition: transform 0.2s; /* Smooth transition for the flip effect */
+    transform-style: preserve-3d; /* Necessary for the flip effect */
+    /* Add backface-visibility if you want to hide the back of the image when it's flipped */
+    backface-visibility: visible;
+}
+
+.iconn:hover .helloimg {
+    transform: rotateY(180deg); /* Flip the image 180 degrees on the Y-axis */
+}
