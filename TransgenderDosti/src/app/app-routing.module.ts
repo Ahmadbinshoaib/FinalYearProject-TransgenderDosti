@@ -18,6 +18,7 @@ import { CourseDetailComponent } from './course-detail/course-detail.component';
 import { LearnerPaymentScreenComponent } from './learner-payment-screen/learner-payment-screen.component';
 import { LearnerSidebarComponent } from './learner-sidebar/learner-sidebar.component';
 import { LearnerCourseDashboardComponent } from './learner-course-dashboard/learner-course-dashboard.component';
+import { LearnerCourseAssignmentComponent } from './learner-course-assignment/learner-course-assignment.component';
 
 const routes: Routes = [
 
@@ -75,6 +76,7 @@ const routes: Routes = [
     canActivate: [AuthGuard1],
     children: [
       { path: 'learner-course-dashboard', component: LearnerCourseDashboardComponent },
+      {path: 'learner-course-assignment', component: LearnerCourseAssignmentComponent}
 
     ]
   },

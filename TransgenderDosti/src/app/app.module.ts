@@ -39,6 +39,7 @@ import { DataTablesModule } from 'angular-datatables';
 import { NotificationComponent } from './notification/notification.component';
 import { LearnerSidebarComponent } from './learner-sidebar/learner-sidebar.component';
 import { LearnerCourseDashboardComponent } from './learner-course-dashboard/learner-course-dashboard.component';
+import { LearnerCourseAssignmentComponent } from './learner-course-assignment/learner-course-assignment.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { LearnerCourseDashboardComponent } from './learner-course-dashboard/lear
     NotificationComponent,
     LearnerSidebarComponent,
     LearnerCourseDashboardComponent,
+    LearnerCourseAssignmentComponent,
 
   ],
   imports: [

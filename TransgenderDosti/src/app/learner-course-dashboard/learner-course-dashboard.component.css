@@ -236,8 +236,8 @@
 }
 .ass-col{
     background-color: #E4E2E2;
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
+    border-top-left-radius: 13px;
+    border-bottom-left-radius: 13px;
 }
 .assi{
     margin-left: 3px;
@@ -245,16 +245,19 @@
 }
 .ass-name{
     background-color: #FFFFFF;
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
+    border-top-right-radius: 13px;
+    border-bottom-right-radius: 13px;
 }
 .a-name{
     font-size: 12px;
 }
 .a-inst{
     font-size: 10px;
-    margin-bottom: 7px;
+    margin-bottom: 9px;
 }
 .date-ass{
     font-size: 8px;
+}
+.message{
+    margin-bottom: 50px;
 }
