@@ -26,6 +26,11 @@ from flask_cors import CORS  # Import CORS
 # from google.cloud import speech_v1p1beta1 as speech
 from google.oauth2 import service_account
 from pydub import AudioSegment
+from flask import Flask, request, jsonify
+from flask_cors import CORS  # Import CORS
+from google.cloud import speech_v1p1beta1 as speech
+from google.oauth2 import service_account
+from pydub import AudioSegment
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes in your app
@@ -2337,8 +2342,8 @@ def get_user_accepted_courses():
 #voice                                                                                                                             #
 ####################################################################################################################################
 
-# credentials = service_account.Credentials.from_service_account_file('C:/voice/voice_navigation server/credentials.json')
-# client = speech.SpeechClient(credentials=credentials)
+credentials = service_account.Credentials.from_service_account_file('C:/voice/voice_navigation server/credentials.json')
+client = speech.SpeechClient(credentials=credentials)
 
 
 def convert_wav_file(input_path, output_path, target_sample_rate=16000, target_sample_width=2):

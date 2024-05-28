@@ -132,3 +132,10 @@ export interface LearnerInfo {
     course_name: string;
     status: string; // Add the status property here
   }
+  export interface announcementData {
+    announcement_id: string;
+    for_students: string;
+    description: string;
+    material: string;
+    link: string;
+  }

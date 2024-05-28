@@ -240,9 +240,11 @@ export class NavHeaderComponent {
           this.chunks = [];
 
           const audioFile = new File([audioBlob], 'recorded.wav', { type: 'audio/wav' });
-
+          
           this.audioService.uploadAudio(audioFile).subscribe(
+            
             (response) => {
+              console.log("okkk")
               console.log('Transcription:', response.transcription);
               if (response.transcription.toLowerCase().includes('education main screen')) {
                 this.router.navigate(['/educationhomepage']);
@@ -257,10 +259,16 @@ export class NavHeaderComponent {
               else if (response.transcription.toLowerCase().includes('main page')) {
                 this.router.navigate(['/teacher-mainpage', this.userId]);
               }
-              else if (response.transcription.toLowerCase().includes('teacher profile')) {
+              else if (response.transcription.toLowerCase().includes('profile')) {
+                this.router.navigate(['/teacher-profile', this.userId]);
+              }
+              else if (response.transcription.toLowerCase().includes('back')) {
                 this.router.navigate(['/teacher-profile', this.userId]);
               }
               else if (response.transcription.toLowerCase().includes('logout')) {
+                this.router.navigate(['/educationhomepage']);
+              }
+              else if (response.transcription.toLowerCase().includes('log out')) {
                 this.router.navigate(['/educationhomepage']);
               }
               this.transcription = response.transcription;
